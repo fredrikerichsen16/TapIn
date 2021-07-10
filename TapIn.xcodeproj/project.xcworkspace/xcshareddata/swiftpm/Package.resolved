@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftUIRouter",
+        "repositoryURL": "https://github.com/frzi/SwiftUIRouter.git",
+        "state": {
+          "branch": null,
+          "revision": "433c6214beb3747083e6e1b3f3d7c3f3be16750b",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
