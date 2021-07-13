@@ -4,6 +4,7 @@ import SwiftUIRouter
 struct WorkspaceBrowse: View {
 	@State var pageSelection = "workspace-pomodoro"
 	@EnvironmentObject var navigator: Navigator
+    @EnvironmentObject var workspace: WorkspaceModel
 	
     var body: some View {
 		VStack {
@@ -22,6 +23,8 @@ struct WorkspaceBrowse: View {
 					guard selection != "more" else { return }
 					
 					navigator.navigate("/" + selection, replace: true)
+                    
+                    print(workspace.pomodoro.longBreakFrequency)
 				}
 				.frame(width: 400)
 				

@@ -10,8 +10,7 @@ import SwiftUI
 
 @main
 struct TapinApp: App {
-	
-	let persistenceController = PersistenceController.shared
+    @ObservedObject var workspace = WorkspaceModel(name: "Swift", parent: nil, work: true)
 	
 	@Environment(\.scenePhase) var scenePhase
 	
@@ -19,14 +18,13 @@ struct TapinApp: App {
 		WindowGroup {
 			ContentView()
 				.frame(minWidth: 500, idealWidth: 700, maxWidth: 900, minHeight: 500, idealHeight: 500, maxHeight: 900, alignment: .center)
-				.environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(workspace)
 		}
 		.windowStyle(HiddenTitleBarWindowStyle())
 		.onChange(of: scenePhase) { (newScenePhase) in
 			switch newScenePhase {
 				case .background:
 					print("Scene: Background")
-					persistenceController.save()
 				case .inactive:
 					print("Scene: Inactive")
 				case .active:

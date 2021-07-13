@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftUIRouter
 
 struct ContentView: View {
+    @EnvironmentObject var workspace: WorkspaceModel
 	@State var selection: Set<Int> = [0]
 
 	var body: some View {
@@ -19,7 +20,7 @@ struct ContentView: View {
 					}
 
 					Section(header: Text("Work")) {
-						NavigationLink(destination: WorkspaceBrowse()) {
+                        NavigationLink(destination: WorkspaceBrowse()) {
 							Label("University", systemImage: "folder")
 								.tag(2)
 						}

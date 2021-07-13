@@ -1,71 +1,23 @@
 import SwiftUI
 import SwiftUIRouter
 
-struct SelectedApp {
-	var file: URL
-	var _openWith: URL?
-	var openWith: URL? {
-		get {
-			if _openWith != nil
-			{
-				return _openWith
-			}
-			else
-			{
-				return NSWorkspace.shared.urlForApplication(toOpen: file) ?? nil
-			}
-		}
-		set {
-			_openWith = newValue
-		}
-	}
-	
-	func getIcon(size: Int = 80) -> NSImage {
-		var image = NSWorkspace.shared.icon(forFile: openWith?.path ?? "")
-		
-		if self.openWith != nil
-		{
-			image = NSWorkspace.shared.icon(forFile: file.path)
-		}
-		else
-		{
-			image = NSWorkspace.shared.icon(forFile: openWith!.path)
-		}
-		
-		image.size = NSSize(width: size, height: size)
-		
-		return image
-	}
-	
-	static func getIcon(url: URL, size: Int = 128) -> NSImage {
-		let image: NSImage = NSWorkspace.shared.icon(forFile: url.path)
-		
-		image.size = NSSize(width: size, height: size)
-		
-		return image
-	}
-	
-	func getCompatibleApps() -> [URL] {
-		let cfUrl = file as CFURL
-
-		var URLs: [URL] = []
-		
-		if let appURLs = LSCopyApplicationURLsForURL(cfUrl, .all)?.takeRetainedValue()
-		{
-			for url in appURLs as! [URL] {
-				URLs.append(url)
-			}
-		}
-		
-		return URLs
-	}
-}
-
 struct FileDetail: View {
-	@State var selectedApp: SelectedApp? = nil
 	@State private var openWithSelection: Int = 0
 	@State private var name: String = ""
 	@State private var openableApps: [URL] = []
+    
+    @EnvironmentObject var workspace: WorkspaceModel
+    
+    var selectedApp: LaunchInstance? {
+        if let selected = workspace.launcher.selected
+        {
+            return workspace.launcher.instances[selected]
+        }
+        else
+        {
+            return nil
+        }
+    }
 	
 	var body: some View {
 		VStack(alignment: .center) {
@@ -80,25 +32,10 @@ struct FileDetail: View {
 		
 						if panel.runModal() == .OK {
 							if let url = panel.url {
-								self.selectedApp = SelectedApp(file: url)
-								
-								print("""
-									- Path: \(url.path)
-									- Is directory?: \(url.hasDirectoryPath)
-									- Is file?: \(url.isFileURL)
-									- Scheme: \(url.scheme)
-									- Last Path Component: \(url.lastPathComponent)
-									- Extension: \(url.pathExtension)
-									- File exitsts?: \(FileManager.default.fileExists(atPath: url.path))
-									- urlForApp: \(NSWorkspace.shared.urlForApplication(toOpen: url))
-								""")
-								
-								let cfUrl = url as CFURL
-
-								print("Can Open With:")
-								if let applicationURLs = LSCopyApplicationURLsForURL(cfUrl, .all)?.takeRetainedValue() {
-									print(applicationURLs)
-								}
+                                workspace.launcher.createLaunchInstance(name: url.lastPathComponent, appFirst: false, app: nil, file: url)
+                                workspace.launcher.selected = workspace.launcher.instances.count - 1
+                                
+                                self.openableApps = selectedApp!.getCompatibleApps()
 							}
 						}
 					}
@@ -109,7 +46,7 @@ struct FileDetail: View {
 			}
 			else
 			{
-				Image(nsImage: selectedApp!.getIcon())
+                Image(nsImage: LaunchInstance.getIcon(for: selectedApp!.getApp(), size: 128))
 					.font(.system(size: 80))
 					.onTapGesture {
 						let panel = NSOpenPanel()
@@ -119,26 +56,7 @@ struct FileDetail: View {
 		
 						if panel.runModal() == .OK {
 							if let url = panel.url {
-								self.selectedApp = SelectedApp(file: url)
-								openableApps = selectedApp!.getCompatibleApps()
-								
-								print("""
-									- Path: \(url.path)
-									- Is directory?: \(url.hasDirectoryPath)
-									- Is file?: \(url.isFileURL)
-									- Scheme: \(url.scheme)
-									- Last Path Component: \(url.lastPathComponent)
-									- Extension: \(url.pathExtension)
-									- File exitsts?: \(FileManager.default.fileExists(atPath: url.path))
-									- urlForApp: \(NSWorkspace.shared.urlForApplication(toOpen: url))
-								""")
-								
-								let cfUrl = url as CFURL
-
-								print("Can Open With:")
-								if let applicationURLs = LSCopyApplicationURLsForURL(cfUrl, .all)?.takeRetainedValue() {
-									print(applicationURLs)
-								}
+                                print(url)
 							}
 						}
 					}
@@ -147,15 +65,14 @@ struct FileDetail: View {
 				Picker("", selection: $openWithSelection) {
 					ForEach(Array(zip(openableApps.indices, openableApps)), id: \.0) { index, app in
 						HStack {
-							Image(nsImage: SelectedApp.getIcon(url: app, size: 16))
+							Image(nsImage: LaunchInstance.getIcon(for: app, size: 16))
 							Text(app.lastPathComponent)
 						}.tag(index)
 					}
 				}
 				.pickerStyle(PopUpButtonPickerStyle())
 				.onChange(of: openWithSelection) { appIdx in
-					print("Hei")
-					selectedApp?.openWith = openableApps[appIdx]
+                    workspace.launcher.instances[workspace.launcher.selected!].app = openableApps[appIdx]
 					
 					let url = URL(fileURLWithPath: name)
 					print("""

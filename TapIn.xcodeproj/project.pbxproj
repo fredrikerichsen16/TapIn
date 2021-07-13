@@ -27,8 +27,6 @@
 		35AEA188267F9582000AFE85 /* TimeTrackerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA187267F9582000AFE85 /* TimeTrackerModel.swift */; };
 		35AEA18A267F95B5000AFE85 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA189267F95B5000AFE85 /* LauncherModel.swift */; };
 		35AEA18C267F95D9000AFE85 /* BlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA18B267F95D9000AFE85 /* BlockerModel.swift */; };
-		35AEA18E267F968D000AFE85 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA18D267F968D000AFE85 /* PersistenceController.swift */; };
-		35AEA191267F99B2000AFE85 /* TapInDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA18F267F99B2000AFE85 /* TapInDataModel.xcdatamodeld */; };
 		35AEA194267FA815000AFE85 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA193267FA815000AFE85 /* Color+.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,8 +74,6 @@
 		35AEA187267F9582000AFE85 /* TimeTrackerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerModel.swift; sourceTree = "<group>"; };
 		35AEA189267F95B5000AFE85 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
 		35AEA18B267F95D9000AFE85 /* BlockerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerModel.swift; sourceTree = "<group>"; };
-		35AEA18D267F968D000AFE85 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
-		35AEA190267F99B2000AFE85 /* TapInDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TapInDataModel.xcdatamodel; sourceTree = "<group>"; };
 		35AEA193267FA815000AFE85 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,8 +158,6 @@
 				35AEA15D267F65D2000AFE85 /* Info.plist */,
 				35AEA15E267F65D2000AFE85 /* TapIn.entitlements */,
 				35AEA15A267F65D2000AFE85 /* Preview Content */,
-				35AEA18D267F968D000AFE85 /* PersistenceController.swift */,
-				35AEA18F267F99B2000AFE85 /* TapInDataModel.xcdatamodeld */,
 			);
 			path = TapIn;
 			sourceTree = "<group>";
@@ -349,8 +343,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35AEA191267F99B2000AFE85 /* TapInDataModel.xcdatamodeld in Sources */,
-				35AEA18E267F968D000AFE85 /* PersistenceController.swift in Sources */,
 				3573F150268767FB004B9C21 /* WorkspaceBlocker.swift in Sources */,
 				35AEA18C267F95D9000AFE85 /* BlockerModel.swift in Sources */,
 				3573F14E268767E9004B9C21 /* WorkspaceLauncher.swift in Sources */,
@@ -710,19 +702,6 @@
 			productName = SwiftUIRouter;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		35AEA18F267F99B2000AFE85 /* TapInDataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				35AEA190267F99B2000AFE85 /* TapInDataModel.xcdatamodel */,
-			);
-			currentVersion = 35AEA190267F99B2000AFE85 /* TapInDataModel.xcdatamodel */;
-			path = TapInDataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 35AEA149267F65D0000AFE85 /* Project object */;
 }

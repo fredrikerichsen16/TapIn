@@ -8,49 +8,78 @@
 import SwiftUI
 
 struct LauncherModel {
+    init() {
+        createLaunchInstance(
+            name: "Craft",
+            appFirst: true,
+            app: URL(fileURLWithPath: "/Applications/Craft.app"),
+            file: nil
+        )
+
+        createLaunchInstance(
+            name: "Spotify",
+            appFirst: true,
+            app: URL(fileURLWithPath: "/Applications/Spotify.app"),
+            file: nil
+        )
+    }
+    
+    var selected: Int?
     var instances: [LaunchInstance] = []
     
-    func createLaunchInstance(name: String, app: URL, appFirst: Bool, file: URL?) {
-        let instance = LaunchInstance(name: name, app: app, file: file, appFirst: appFirst)
+    mutating func createLaunchInstance(name: String, appFirst: Bool, app: URL?, file: URL?) {
+        let instance = LaunchInstance(name: name, appFirst: appFirst, app: app, file: file)
         instances.append(instance)
     }
 }
 
-struct LaunchInstance {
+struct LaunchInstance: Identifiable {
+    var id = UUID()
     var name: String
-    var app: URL
+    var app: URL?
     var file: URL?
     var appFirst: Bool = true
+    
+    func getApp() -> URL {
+        if let _app = app
+        {
+            return _app
+        }
+        else
+        {
+            return getDefaultApp()
+        }
+    }
     
     init(name: String, appFirst: Bool, app: URL?, file: URL?) {
         self.name = name
         self.appFirst = appFirst
+        self.app = app
         self.file = file
-        
-        if app != nil
-        {
-            self.app = app
-        }
-        else
-        {
-            self.app = self.getDefaultApp()
-        }
     }
     
-    func getIcon(for url: URL, size: Int = 80) -> NSImage {
-        let image = NSImage = NSWorkspace.shared.icon(for: url.path)
+    static func getIcon(for url: URL, size: Int = 80) -> NSImage {
+        let image: NSImage = NSWorkspace.shared.icon(forFile: url.path)
             image.size = NSSize(width: size, height: size)
         
         return image
     }
     
     func getDefaultApp() -> URL {
-        let compatible = self.getCompatibleApps()
-        return compatible[0]
+        if file != nil, let defaultApp = NSWorkspace.shared.urlForApplication(toOpen: file!)
+        {
+            return defaultApp
+        }
+        else
+        {
+            return URL(fileURLWithPath: "/Applications/Notes.app")
+        }
     }
     
     func getCompatibleApps() -> [URL] {
-        let cfUrl = file as CFURL
+        guard file != nil else { fatalError("File is not defined") }
+        
+        let cfUrl = file! as CFURL
 
         var URLs: [URL] = []
 
@@ -70,13 +99,26 @@ struct LaunchInstance {
             let config = NSWorkspace.OpenConfiguration()
                 config.activates = true
             
-            NSWorkspace.shared.open([file!], withApplicationAt: app, configuration: config) { (app, error) in
+            NSWorkspace.shared.open([file!], withApplicationAt: getApp(), configuration: config) { (app, error) in
                 print(app)
             }
         }
         else
         {
-            NSWorkspace.shared.open(app)
+            NSWorkspace.shared.open(getApp())
         }
+    }
+    
+    func urlInfo(for url: URL) {
+        print("""
+            - Path: \(url.path)
+            - Is directory?: \(url.hasDirectoryPath)
+            - Is file?: \(url.isFileURL)
+            - Scheme: \(url.scheme)
+            - Last Path Component: \(url.lastPathComponent)
+            - Extension: \(url.pathExtension)
+            - File exitsts?: \(FileManager.default.fileExists(atPath: url.path))
+            - urlForApp: \(NSWorkspace.shared.urlForApplication(toOpen: url))
+        """)
     }
 }
