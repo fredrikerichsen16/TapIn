@@ -9,14 +9,19 @@ import SwiftUI
 import CoreData
 
 final class WorkspaceModel: ObservableObject {
-	var name: String
+    @Published var uuid = UUID()
+	@Published var name: String
+    @Published var parent: WorkspaceModel?
+    @Published var work: Bool
 	
-	init(name: String) {
+    init(name: String, parent: WorkspaceModel? = nil, work: Bool = true) {
 		self.name = name
+        self.parent = parent
+        self.work = work
 	}
 	
-//	@Published var pomodoro: PomodoroModel = PomodoroModel()
-//	@Published var timeTracker: TimeTrackerModel = TimeTrackerModel()
-//	@Published var launcher: LauncherModel = LauncherModel()
-//	@Published var blocker: BlockerModel = BlockerModel()
+	@Published var pomodoro: PomodoroModel = PomodoroModel()
+	@Published var timeTracker: TimeTrackerModel = TimeTrackerModel()
+	@Published var launcher: LauncherModel = LauncherModel()
+	@Published var blocker: BlockerModel = BlockerModel()
 }

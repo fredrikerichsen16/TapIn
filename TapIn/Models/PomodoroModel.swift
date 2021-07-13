@@ -7,8 +7,11 @@
 
 import SwiftUI
 
-struct PomodoroModel: Codable, Equatable {
+struct PomodoroModel {
 	
-	var currentTime: TimeInterval = 0
+    var pomodoroDuration: TimeInterval = 60.0 * 25.0
+    var shortBreakDuration: TimeInterval = 60.0 * 5.0
+    var longBreakDuration: TimeInterval = 60.0 * 15.0
+    var longBreakFrequency: Int = 3
 	
 }

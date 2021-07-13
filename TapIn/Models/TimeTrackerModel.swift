@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TimeTrackerModel: Codable, Equatable {
+struct TimeTrackerModel {
 	
 	var trackTime: Bool = true
 	
