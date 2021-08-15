@@ -8,10 +8,19 @@
 import SwiftUI
 
 struct PomodoroModel {
-	
-    var pomodoroDuration: TimeInterval = 60.0 * 25.0
+    
+    var pomodoroDuration: TimeInterval = 60.0 * 30.0
     var shortBreakDuration: TimeInterval = 60.0 * 5.0
     var longBreakDuration: TimeInterval = 60.0 * 15.0
     var longBreakFrequency: Int = 3
-	
+    
+    func readableTime(_ keyPath: KeyPath<PomodoroModel, TimeInterval>) -> String {
+        let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.minute, .second]
+            formatter.unitsStyle = .positional
+            formatter.zeroFormattingBehavior = .pad
+    
+        return formatter.string(from: self[keyPath: keyPath]) ?? "00:00"
+    }
+    
 }

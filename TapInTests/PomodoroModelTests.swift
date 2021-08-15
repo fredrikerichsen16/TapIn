@@ -1,14 +1,7 @@
-//
-//  TapInTests.swift
-//  TapInTests
-//
-//  Created by Fredrik Skjelvik on 20/06/2021.
-//
-
 import XCTest
 @testable import TapIn
 
-class TapInTests: XCTestCase {
+class PomodoroModelTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -16,6 +9,20 @@ class TapInTests: XCTestCase {
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+    
+    func test_readableTime() {
+        let pomodoro = PomodoroModel(pomodoroDuration: 4739, shortBreakDuration: 30, longBreakDuration: 300, longBreakFrequency: 2)
+        
+        let pomodoroDuration = pomodoro.readableTime(\.pomodoroDuration)
+        
+        let shortBreakDuration = pomodoro.readableTime(\.shortBreakDuration)
+        
+        let longBreakDuration = pomodoro.readableTime(\.longBreakDuration)
+        
+        XCTAssertEqual("78:59", pomodoroDuration)
+        XCTAssertEqual("00:30", shortBreakDuration)
+        XCTAssertEqual("05:00", longBreakDuration)
     }
 
     func testExample() throws {

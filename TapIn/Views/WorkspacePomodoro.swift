@@ -8,10 +8,20 @@
 import SwiftUI
 
 struct WorkspacePomodoro: View {
+    @EnvironmentObject var workspaces: Workspaces
+    
+    var pomodoroTime: String {
+        if let ws = workspaces.activeWorkspace {
+            return ws.pomodoro.readableTime(\.pomodoroDuration)
+        }
+        
+        return "00:00"
+    }
+    
     var body: some View {
 		Spacer()
 		
-		Text("25:00")
+		Text(pomodoroTime)
 			.font(.system(size: 36.0))
 			.fixedSize(horizontal: false, vertical: true)
 			.multilineTextAlignment(.center)

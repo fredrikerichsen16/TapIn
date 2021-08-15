@@ -10,12 +10,12 @@ import SwiftUIRouter
 
 struct Popover: View {
 	@EnvironmentObject var navigator: Navigator
-    @EnvironmentObject var workspace: WorkspaceModel
+    @EnvironmentObject var workspaces: Workspaces
 	
 	var body: some View {
 		List {
 			Button(action: {
-                workspace.launcher.selected = nil
+                workspaces.activeWorkspace!.launcher.selected = nil
 				navigator.navigate("/workspace-launcher/file")
 			}, label: {
 				Label("File", systemImage: "doc")
