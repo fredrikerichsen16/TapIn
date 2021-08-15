@@ -11,47 +11,56 @@ import SwiftUIRouter
 struct Popover: View {
 	@EnvironmentObject var navigator: Navigator
     @EnvironmentObject var workspaces: Workspaces
+    
+    @Binding var selection: Int?
+    
+    func createEmptyInstance(type: LauncherType) {
+        if let ws = workspaces.activeWorkspace
+        {
+            ws.launcher.createEmptyLaunchInstance(type: type)
+            self.selection = ws.launcher.instances.count - 1
+        }
+    }
 	
 	var body: some View {
 		List {
 			Button(action: {
-                workspaces.activeWorkspace!.launcher.selected = nil
-				navigator.navigate("/workspace-launcher/file")
+                createEmptyInstance(type: .file)
 			}, label: {
 				Label("File", systemImage: "doc")
 			})
 			.buttonStyle(PlainButtonStyle())
 			
 			Button(action: {
-				navigator.navigate("/workspace-launcher/folder")
+                createEmptyInstance(type: .folder)
 			}, label: {
 				Label("Folder", systemImage: "folder")
 			})
 			.buttonStyle(PlainButtonStyle())
 			
 			Button(action: {
-				navigator.navigate("/workspace-launcher/application")
+                createEmptyInstance(type: .app)
 			}, label: {
 				Label("Application", systemImage: "music.note")
 			})
 			.buttonStyle(PlainButtonStyle())
 			
 			Button(action: {
-				navigator.navigate("/workspace-launcher/website")
+                createEmptyInstance(type: .website)
 			}, label: {
 				Label("Website", systemImage: "link")
 			})
 			.buttonStyle(PlainButtonStyle())
 			
 			Button(action: {
-				navigator.navigate("/workspace-launcher/terminal")
+//                createEmptyInstance(type: .app)
 			}, label: {
 				Label("Terminal", systemImage: "terminal")
 			})
 			.buttonStyle(PlainButtonStyle())
 			
 			Button(action: {
-				navigator.navigate("/workspace-launcher/automation")
+//                createEmptyInstance(type: .app)
 			}, label: {
 				Label("Automation", systemImage: "paperplane")
 			})
@@ -61,8 +70,8 @@ struct Popover: View {
 	}
 }
 
-struct Popover_Previews: PreviewProvider {
-    static var previews: some View {
-		Popover()
-    }
-}
+//struct Popover_Previews: PreviewProvider {
+//    static var previews: some View {
+//		Popover()
+//    }
+//}

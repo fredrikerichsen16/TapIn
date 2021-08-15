@@ -3,68 +3,70 @@ import SwiftUI
 struct WorkspaceLauncher: View {
 	@State private var showingSheet = false
 	@State private var showingPopover = false
-	@State private var appSelection: UUID? = nil
+	@State private var appSelection: Int? = nil
     
     @EnvironmentObject var workspaces: Workspaces
     
-    var instances: [IdentifiableLaunchInstance] {
+    var instances: [LaunchInstance] {
         if let ws = workspaces.activeWorkspace {
             return ws.launcher.instances
         }
         
-        return [IdentifiableLaunchInstance]()
+        return [LaunchInstance]()
     }
 	
     var body: some View {
 		VStack(alignment: .leading) {
 			Spacer().frame(height: 15)
 			
-			HStack {
+			NavigationView {
                 List(selection: $appSelection) {
-                    ForEach(instances, id: \.id) { item in
-                        let instance = item.launchInstance
+                    ForEach(instances.indices, id: \.self) { (index) in
+                        let instance = instances[index]
                         
-                        HStack {
-                            Image(nsImage: instance.mainIcon(size: 34))
-                            
-                            Text(instance.name)
-                            
-                            Spacer()
+                        NavigationLink(destination: navigationLinkDestination(instance: instance, index: index)) {
+                            HStack {
+                                Image(nsImage: instance.mainIcon(size: 34))
+                                
+                                Text(instance.name)
+                                
+                                Spacer()
+                            }
+                            .tag(index)
+//                            .onTapGesture(count: 2) {
+//                                instance.launch()
+//                            }
                         }
-                        .tag(item.id)
-//                        .onTapGesture {
-//                            instance.launch()
-//                        }
                     }
 				}
-				.frame(width: 250, alignment: .topLeading)
-                .onChange(of: appSelection) { selection in
-                    for instance in instances {
-                        print(instance.id)
-                        print("TISSS")
-                        if instance.id == selection {
-                            workspaces.activeWorkspace!.launcher.selected = instance.launchInstance
-                            return
-                        }
-                    }
-                }
-				
-				Spacer()
-				
-                LaunchAppDetail()
-				
-				Spacer()
+				.frame(width: 200, alignment: .topLeading)
+                
+                Text("Select one...").font(.title2)
 			}
 			
 			Button("Add") {				
 				showingPopover.toggle()
 			}
 			.popover(isPresented: $showingPopover) {
-				Popover()
+                Popover(selection: $appSelection)
 			}
 			
 			Spacer()
 		}
+    }
+    
+    @ViewBuilder
+    func navigationLinkDestination(instance: LaunchInstance, index: Int) -> some View {
+        switch instance {
+            case is AppLauncher:
+                AppLauncherView(instanceIndex: index)
+            case is FileLauncher:
+                FileLauncherView(instanceIndex: index)
+            case is EmptyInstance:
+                Text("EmptyInstance")
+            default:
+                Text("Default")
+        }
     }
 }
 

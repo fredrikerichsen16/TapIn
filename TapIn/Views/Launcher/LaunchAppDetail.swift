@@ -103,34 +103,97 @@ import SwiftUIRouter
 struct LaunchAppDetail: View {
 	@EnvironmentObject var navigator: Navigator
     @EnvironmentObject var workspaces: Workspaces
-	
-    var displayName: String {
-        if let ws = workspaces.activeWorkspace,
-           let selected = ws.launcher.selected {
-            return selected.name
+    
+    @State var appIndex: Int
+    @State private var openWithSelection: Int = 0
+    
+    var instance: LaunchInstance {
+        guard let ws = workspaces.activeWorkspace,
+              let instance = ws.launcher.instances[safe: appIndex] else {
+            fatalError("Failed to get active instance")
         }
         
-        return "N/A"
+        return instance
     }
     
     var body: some View {
-        Text(displayName).font(.largeTitle)
-//		SwitchRoutes {
-//			Route(path: "/workspace-launcher/file") {
-//				FileDetail()
-//			}
-//			Route(path: "/workspace-launcher/folder") {
-//				Text("Folder")
-//			}
-//			Route(path: "/workspace-launcher/application") {
-//				Text("Application")
-//			}
-//		}
-    }
-}
+        VStack {
+            Image(nsImage: instance.mainIcon(size: 128))
+                .font(.system(size: 80))
+                .onTapGesture {
+                    let panel = NSOpenPanel()
+                        panel.allowsMultipleSelection = false
+                        panel.canChooseDirectories = false
+                        panel.canChooseFiles = true
 
-struct LaunchAppDetail_Previews: PreviewProvider {
-    static var previews: some View {
-        LaunchAppDetail()
+                    if panel.runModal() == .OK {
+                        if let url = panel.url {
+                            print(url)
+                        }
+                    }
+                }
+                
+            Text(instance.name).font(.title2)
+            
+            if let fileLauncher = instance as? FileLauncher {
+                optionalOpenWith(instance: fileLauncher)
+            }
+        }
+    }
+    
+    func optionalOpenWith(instance: FileLauncher) -> some View {
+        let compatibleApps = instance.getCompatibleApps()
+        
+        return VStack {
+            Text("Open file with app...")
+            Picker("", selection: $openWithSelection) {
+                ForEach(Array(zip(compatibleApps.indices, compatibleApps)), id: \.0) { index, app in
+                    HStack {
+                        Image(nsImage: FileLauncher.iconForApp(app: app, size: 16))
+                        Text(app.lastPathComponent)
+                    }.tag(index)
+                }
+            }
+            .pickerStyle(PopUpButtonPickerStyle())
+            .onChange(of: openWithSelection) { appIndex in
+                let url = compatibleApps[appIndex]
+                print("""
+                    - Path: \(url.path)
+                    - Is directory?: \(url.hasDirectoryPath)
+                    - Is file?: \(url.isFileURL)
+                    - Scheme: \(url.scheme)
+                    - Last Path Component: \(url.lastPathComponent)
+                    - Extension: \(url.pathExtension)
+                    - File exitsts?: \(FileManager.default.fileExists(atPath: url.path))
+                    - urlForApp: \(NSWorkspace.shared.urlForApplication(toOpen: url))
+                """)
+            }
+        }
+        
+        //                Text("Open with...")
+        //                Picker("", selection: $openWithSelection) {
+        //                    ForEach(Array(zip(openableApps.indices, openableApps)), id: \.0) { index, app in
+        //                        HStack {
+        //                            Image(nsImage: LaunchInstance.getIcon(for: app, size: 16))
+        //                            Text(app.lastPathComponent)
+        //                        }.tag(index)
+        //                    }
+        //                }
+        //                .pickerStyle(PopUpButtonPickerStyle())
+        //                .onChange(of: openWithSelection) { appIdx in
+        //                    selectedWorkspace.launcher.instances[selectedWorkspace.launcher.selected!].app = openableApps[appIdx]
+        //
+        //                    let url = URL(fileURLWithPath: name)
+        //                    print("""
+        //                        - Path: \(url.path)
+        //                        - Is directory?: \(url.hasDirectoryPath)
+        //                        - Is file?: \(url.isFileURL)
+        //                        - Scheme: \(url.scheme)
+        //                        - Last Path Component: \(url.lastPathComponent)
+        //                        - Extension: \(url.pathExtension)
+        //                        - File exitsts?: \(FileManager.default.fileExists(atPath: url.path))
+        //                        - urlForApp: \(NSWorkspace.shared.urlForApplication(toOpen: url))
+        //                    """)
+        //                }
     }
 }
