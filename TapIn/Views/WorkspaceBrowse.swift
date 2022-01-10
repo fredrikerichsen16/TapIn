@@ -4,7 +4,7 @@ import SwiftUIRouter
 struct WorkspaceBrowse: View {
 	@State var pageSelection = "workspace-pomodoro"
 	@EnvironmentObject var navigator: Navigator
-    @EnvironmentObject var workspaces: Workspaces
+    @ObservedObject var workspace: Workspace
 	
     var body: some View {
 		VStack {
@@ -35,16 +35,16 @@ struct WorkspaceBrowse: View {
 			
 			SwitchRoutes {
 				Route(path: "workspace-pomodoro") {
-					WorkspacePomodoro()
+                    WorkspacePomodoro(workspace: workspace)
 				}
 				Route(path: "workspace-timetracking") { info in
-					WorkspaceTimeTracking()
+					WorkspaceTimeTracking(workspace: workspace)
 				}
 				Route(path: "workspace-launcher/*") {
-					WorkspaceLauncher()
+					WorkspaceLauncher(workspace: workspace)
 				}
 				Route(path: "workspace-blocker") {
-					WorkspaceBlocker()
+					WorkspaceBlocker(workspace: workspace)
 				}
 			}
 		}

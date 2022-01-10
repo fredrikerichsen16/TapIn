@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct FileLauncherView: View {
-    @EnvironmentObject var workspaces: Workspaces
+    @ObservedObject var workspace: Workspace
     
     @State var instanceIndex: Int
     @State private var openWithSelection: Int = 0
     
     var instance: FileLauncher {
-        if let instance = workspaces.activeWorkspace?.launcher.instances[safe: instanceIndex] as? FileLauncher {
+        if let instance = workspace.launcher.instances[safe: instanceIndex] as? FileLauncher {
             return instance
         } else {
             fatalError("Can't get FileLauncher instance")

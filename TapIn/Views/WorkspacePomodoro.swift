@@ -8,14 +8,10 @@
 import SwiftUI
 
 struct WorkspacePomodoro: View {
-    @EnvironmentObject var workspaces: Workspaces
+    @ObservedObject var workspace: Workspace
     
     var pomodoroTime: String {
-        if let ws = workspaces.activeWorkspace {
-            return ws.pomodoro.readableTime(\.pomodoroDuration)
-        }
-        
-        return "00:00"
+        workspace.pomodoro.readableTime(\.pomodoroDuration)
     }
     
     var body: some View {
@@ -33,8 +29,8 @@ struct WorkspacePomodoro: View {
     }
 }
 
-struct WorkspacePomodoro_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkspacePomodoro()
-    }
-}
+//struct WorkspacePomodoro_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WorkspacePomodoro(workspace: nil)
+//    }
+//}

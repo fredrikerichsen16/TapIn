@@ -10,16 +10,15 @@ import SwiftUIRouter
 
 struct Popover: View {
 	@EnvironmentObject var navigator: Navigator
-    @EnvironmentObject var workspaces: Workspaces
+    @ObservedObject var workspace: Workspace
     
     @Binding var selection: Int?
+    @Binding var showingPopover: Bool
     
     func createEmptyInstance(type: LauncherType) {
-        if let ws = workspaces.activeWorkspace
-        {
-            ws.launcher.createEmptyLaunchInstance(type: type)
-            self.selection = ws.launcher.instances.count - 1
-        }
+        workspace.launcher.createEmptyLaunchInstance(type: type)
+        self.selection = workspace.launcher.instances.count - 1
+        showingPopover = false
     }
 	
 	var body: some View {

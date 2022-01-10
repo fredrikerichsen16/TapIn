@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class Workspace: Identifiable {
+class Workspace: ObservableObject {
     
     @State var isExpanded: Bool = true
     

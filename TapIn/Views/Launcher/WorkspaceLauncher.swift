@@ -5,14 +5,10 @@ struct WorkspaceLauncher: View {
 	@State private var showingPopover = false
 	@State private var appSelection: Int? = nil
     
-    @EnvironmentObject var workspaces: Workspaces
+    @ObservedObject var workspace: Workspace
     
     var instances: [LaunchInstance] {
-        if let ws = workspaces.activeWorkspace {
-            return ws.launcher.instances
-        }
-        
-        return [LaunchInstance]()
+        workspace.launcher.instances
     }
 	
     var body: some View {
@@ -33,9 +29,9 @@ struct WorkspaceLauncher: View {
                                 Spacer()
                             }
                             .tag(index)
-//                            .onTapGesture(count: 2) {
-//                                instance.launch()
-//                            }
+                            .onTapGesture(count: 2) {
+                                instance.launch()
+                            }
                         }
                     }
 				}
@@ -48,7 +44,7 @@ struct WorkspaceLauncher: View {
 				showingPopover.toggle()
 			}
 			.popover(isPresented: $showingPopover) {
-                Popover(selection: $appSelection)
+                Popover(workspace: workspace, selection: $appSelection, showingPopover: $showingPopover)
 			}
 			
 			Spacer()
@@ -59,19 +55,20 @@ struct WorkspaceLauncher: View {
     func navigationLinkDestination(instance: LaunchInstance, index: Int) -> some View {
         switch instance {
             case is AppLauncher:
-                AppLauncherView(instanceIndex: index)
+                AppLauncherView(workspace: workspace, instanceIndex: index)
             case is FileLauncher:
-                FileLauncherView(instanceIndex: index)
+                FileLauncherView(workspace: workspace, instanceIndex: index)
             case is EmptyInstance:
                 Text("EmptyInstance")
             default:
                 Text("Default")
         }
+        Text("Default")
     }
 }
 
-struct WorkspaceLauncher_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkspaceLauncher()
-    }
-}
+//struct WorkspaceLauncher_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WorkspaceLauncher()
+//    }
+//}

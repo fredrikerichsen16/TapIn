@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct WorkspaceTimeTracking: View {
+    @ObservedObject var workspace: Workspace
+    
     var body: some View {
         Text("WorkspaceTimeTracking")
     }
 }
 
-struct WorkspaceTimeTracking_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkspaceTimeTracking()
-    }
-}
+//struct WorkspaceTimeTracking_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WorkspaceTimeTracking()
+//    }
+//}

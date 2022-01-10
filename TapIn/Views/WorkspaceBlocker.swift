@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct WorkspaceBlocker: View {
+    @ObservedObject var workspace: Workspace
+    
     var body: some View {
-        Text("WorkspaceBlocker")
+        Text("WorkspaceBlocker - Workspace: \(workspace.name)")
     }
 }
 
-struct WorkspaceBlocker_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkspaceBlocker()
-    }
-}
+//struct WorkspaceBlocker_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WorkspaceBlocker()
+//    }
+//}

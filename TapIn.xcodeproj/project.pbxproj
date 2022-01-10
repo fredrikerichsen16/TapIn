@@ -22,6 +22,7 @@
 		3573F14E268767E9004B9C21 /* WorkspaceLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F14D268767E9004B9C21 /* WorkspaceLauncher.swift */; };
 		3573F150268767FB004B9C21 /* WorkspaceBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F14F268767FB004B9C21 /* WorkspaceBlocker.swift */; };
 		3573F1542687A16C004B9C21 /* LauncherPopups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F1532687A16C004B9C21 /* LauncherPopups.swift */; };
+		358342B92784459900B7175C /* TopLevelMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358342B82784459900B7175C /* TopLevelMenuItem.swift */; };
 		358ADCC32687A8E900B74F4B /* LaunchAppDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358ADCC22687A8E900B74F4B /* LaunchAppDetail.swift */; };
 		35AD491D26C7062800AEA899 /* LauncherModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD491C26C7062800AEA899 /* LauncherModelTests.swift */; };
 		35AEA155267F65D0000AFE85 /* TapInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA154267F65D0000AFE85 /* TapInApp.swift */; };
@@ -72,6 +73,7 @@
 		3573F14D268767E9004B9C21 /* WorkspaceLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceLauncher.swift; sourceTree = "<group>"; };
 		3573F14F268767FB004B9C21 /* WorkspaceBlocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceBlocker.swift; sourceTree = "<group>"; };
 		3573F1532687A16C004B9C21 /* LauncherPopups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPopups.swift; sourceTree = "<group>"; };
+		358342B82784459900B7175C /* TopLevelMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLevelMenuItem.swift; sourceTree = "<group>"; };
 		358ADCC22687A8E900B74F4B /* LaunchAppDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAppDetail.swift; sourceTree = "<group>"; };
 		35AD491C26C7062800AEA899 /* LauncherModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModelTests.swift; sourceTree = "<group>"; };
 		35AEA151267F65D0000AFE85 /* TapIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +155,7 @@
 				3573F149268767C6004B9C21 /* WorkspacePomodoro.swift */,
 				3573F14B268767DB004B9C21 /* WorkspaceTimeTracking.swift */,
 				3573F14F268767FB004B9C21 /* WorkspaceBlocker.swift */,
+				358342B82784459900B7175C /* TopLevelMenuItem.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				3566A37026B9D35B0064AE00 /* Dataloader.swift in Sources */,
 				35AEA188267F9582000AFE85 /* TimeTrackerModel.swift in Sources */,
 				352A0B8726C9689C00AA256B /* AppLauncherView.swift in Sources */,
+				358342B92784459900B7175C /* TopLevelMenuItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

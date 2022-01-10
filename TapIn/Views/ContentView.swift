@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftUIRouter
 
 struct ContentView: View {
-    @EnvironmentObject var workspaces: Workspaces
+    @ObservedObject var workspaces: Workspaces
 	@State var selection: String? = "home"
 
 	var body: some View {
@@ -66,11 +66,11 @@ struct ContentView: View {
         case .statistics:
             Text("Statistics").font(.largeTitle)
         case .work(let ws):
-            WorkspaceBrowse().onAppear {
+            WorkspaceBrowse(workspace: ws).onAppear {
                 workspaces.activeWorkspace = ws
             }
         case .leisure(let ws):
-            WorkspaceBrowse().onAppear {
+            WorkspaceBrowse(workspace: ws).onAppear {
                 workspaces.activeWorkspace = ws
             }
         }
@@ -123,6 +123,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
-		ContentView()
+		ContentView(workspaces: Workspaces())
 	}
 }

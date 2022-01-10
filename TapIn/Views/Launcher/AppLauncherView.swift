@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct AppLauncherView: View {
-    @EnvironmentObject var workspaces: Workspaces
+    @ObservedObject var workspace: Workspace
     @State var instanceIndex: Int
     
     var instance: AppLauncher {
-        if let instance = workspaces.activeWorkspace?.launcher.instances[safe: instanceIndex] as? AppLauncher {
+        if let instance = workspace.launcher.instances[safe: instanceIndex] as? AppLauncher {
             return instance
         } else {
             fatalError("Can't get AppLauncher instance")
@@ -26,8 +26,8 @@ struct AppLauncherView: View {
                             let name = AppLauncher.applicationName(url: url)
                             
                             let appLaunchInstance = AppLauncher(name: name, app: url, file: nil)
-                            workspaces.activeWorkspace!.launcher.instances.insert(appLaunchInstance, at: instanceIndex)
-                            workspaces.activeWorkspace!.launcher.instances.remove(at: instanceIndex + 1)
+                            workspace.launcher.instances.insert(appLaunchInstance, at: instanceIndex)
+                            workspace.launcher.instances.remove(at: instanceIndex + 1)
                         }
                     }
                 }
