@@ -9,8 +9,6 @@ import SwiftUI
 
 class Workspace: ObservableObject {
     
-    @State var isExpanded: Bool = true
-    
     var uuid: UUID = UUID()
     var name: String
     var work: Bool

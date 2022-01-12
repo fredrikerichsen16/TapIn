@@ -16,7 +16,6 @@
 		3566A37026B9D35B0064AE00 /* Dataloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566A36F26B9D35B0064AE00 /* Dataloader.swift */; };
 		3566A37226B9D63B0064AE00 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566A37126B9D63B0064AE00 /* MenuItem.swift */; };
 		3573F14526875FB7004B9C21 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F14426875FB7004B9C21 /* Settings.swift */; };
-		3573F14826876694004B9C21 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = 3573F14726876694004B9C21 /* SwiftUIRouter */; };
 		3573F14A268767C6004B9C21 /* WorkspacePomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F149268767C6004B9C21 /* WorkspacePomodoro.swift */; };
 		3573F14C268767DB004B9C21 /* WorkspaceTimeTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F14B268767DB004B9C21 /* WorkspaceTimeTracking.swift */; };
 		3573F14E268767E9004B9C21 /* WorkspaceLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F14D268767E9004B9C21 /* WorkspaceLauncher.swift */; };
@@ -38,6 +37,9 @@
 		35AEA18A267F95B5000AFE85 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA189267F95B5000AFE85 /* LauncherModel.swift */; };
 		35AEA18C267F95D9000AFE85 /* BlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA18B267F95D9000AFE85 /* BlockerModel.swift */; };
 		35AEA194267FA815000AFE85 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA193267FA815000AFE85 /* Color+.swift */; };
+		35C2FF20278CE2D70008AA55 /* SidebarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF1F278CE2D70008AA55 /* SidebarSection.swift */; };
+		35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF21278CE3910008AA55 /* SidebarButton.swift */; };
+		35CC0642278CE59300195486 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = 35CC0641278CE59300195486 /* SwiftUIRouter */; };
 		35FBB9AB26BB2E2200140DC0 /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FBB9AA26BB2E2200140DC0 /* Workspace.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +98,8 @@
 		35AEA189267F95B5000AFE85 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
 		35AEA18B267F95D9000AFE85 /* BlockerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerModel.swift; sourceTree = "<group>"; };
 		35AEA193267FA815000AFE85 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		35C2FF1F278CE2D70008AA55 /* SidebarSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSection.swift; sourceTree = "<group>"; };
+		35C2FF21278CE3910008AA55 /* SidebarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButton.swift; sourceTree = "<group>"; };
 		35FBB9AA26BB2E2200140DC0 /* Workspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3573F14826876694004B9C21 /* SwiftUIRouter in Frameworks */,
+				35CC0642278CE59300195486 /* SwiftUIRouter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,10 +151,11 @@
 		3573F14326875F81004B9C21 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				35C2FF1E278CE2750008AA55 /* Sidebar */,
+				35C2FF1D278CE2640008AA55 /* Main */,
 				35608D1626C6FB6C0054FCD2 /* Preferences */,
 				3573F1512687A157004B9C21 /* Launcher */,
 				35AEA180267F6AD4000AFE85 /* WorkspaceBrowse.swift */,
-				35AEA156267F65D0000AFE85 /* ContentView.swift */,
 				3573F14426875FB7004B9C21 /* Settings.swift */,
 				3573F149268767C6004B9C21 /* WorkspacePomodoro.swift */,
 				3573F14B268767DB004B9C21 /* WorkspaceTimeTracking.swift */,
@@ -179,6 +184,7 @@
 				35AEA166267F65D2000AFE85 /* TapInTests */,
 				35AEA171267F65D2000AFE85 /* TapInUITests */,
 				35AEA152267F65D0000AFE85 /* Products */,
+				35CC063F278CE4F900195486 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -257,6 +263,30 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		35C2FF1D278CE2640008AA55 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				35AEA156267F65D0000AFE85 /* ContentView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		35C2FF1E278CE2750008AA55 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				35C2FF1F278CE2D70008AA55 /* SidebarSection.swift */,
+				35C2FF21278CE3910008AA55 /* SidebarButton.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		35CC063F278CE4F900195486 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -274,7 +304,7 @@
 			);
 			name = TapIn;
 			packageProductDependencies = (
-				3573F14726876694004B9C21 /* SwiftUIRouter */,
+				35CC0641278CE59300195486 /* SwiftUIRouter */,
 			);
 			productName = TapIn;
 			productReference = 35AEA151267F65D0000AFE85 /* TapIn.app */;
@@ -348,7 +378,7 @@
 			);
 			mainGroup = 35AEA148267F65D0000AFE85;
 			packageReferences = (
-				3573F14626876694004B9C21 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */,
+				35CC0640278CE59300195486 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */,
 			);
 			productRefGroup = 35AEA152267F65D0000AFE85 /* Products */;
 			projectDirPath = "";
@@ -400,7 +430,9 @@
 				35AEA181267F6AD4000AFE85 /* WorkspaceBrowse.swift in Sources */,
 				35608D1826C6FB7D0054FCD2 /* SettingsView.swift in Sources */,
 				358ADCC32687A8E900B74F4B /* LaunchAppDetail.swift in Sources */,
+				35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */,
 				352A0B8926C96AC000AA256B /* FileLauncherView.swift in Sources */,
+				35C2FF20278CE2D70008AA55 /* SidebarSection.swift in Sources */,
 				35AEA157267F65D0000AFE85 /* ContentView.swift in Sources */,
 				3573F1542687A16C004B9C21 /* LauncherPopups.swift in Sources */,
 				3573F14526875FB7004B9C21 /* Settings.swift in Sources */,
@@ -745,20 +777,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3573F14626876694004B9C21 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */ = {
+		35CC0640278CE59300195486 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/frzi/SwiftUIRouter.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3573F14726876694004B9C21 /* SwiftUIRouter */ = {
+		35CC0641278CE59300195486 /* SwiftUIRouter */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3573F14626876694004B9C21 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */;
+			package = 35CC0640278CE59300195486 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */;
 			productName = SwiftUIRouter;
 		};
 /* End XCSwiftPackageProductDependency section */
