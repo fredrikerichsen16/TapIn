@@ -15,7 +15,7 @@ class Dataloader {
         
         let chess = Workspace(name: "Chess", work: false)
         let reading = Workspace(name: "Reading", work: false)
-        let guitar = Workspace(name: "Guitar", work: false)
+//        let guitar = Workspace(name: "Guitar", work: false)
         
         return [uni, coding, chess, reading]
     }

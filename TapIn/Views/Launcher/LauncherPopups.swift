@@ -10,7 +10,7 @@ import SwiftUIRouter
 
 struct Popover: View {
 	@EnvironmentObject var navigator: Navigator
-    @ObservedObject var workspace: Workspace
+    @EnvironmentObject var workspace: Workspace
     
     @Binding var selection: Int?
     @Binding var showingPopover: Bool

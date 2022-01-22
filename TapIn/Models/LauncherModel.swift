@@ -155,7 +155,7 @@ struct AppLauncher: LaunchInstance {
                 config.activates = true
             
             NSWorkspace.shared.open([file], withApplicationAt: app, configuration: config) { (app, error) in
-                print(app)
+                print(app as Any)
             }
         }
         else

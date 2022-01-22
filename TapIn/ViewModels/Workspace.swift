@@ -33,10 +33,10 @@ class Workspace: ObservableObject {
         children.append(child)
     }
     
-    var pomodoro: PomodoroModel = PomodoroModel()
-    var timeTracker: TimeTrackerModel = TimeTrackerModel()
-    var launcher: LauncherModel = LauncherModel()
-    var blocker: BlockerModel = BlockerModel()
+    @Published var pomodoro: PomodoroModel = PomodoroModel()
+    @Published var timeTracker: TimeTrackerModel = TimeTrackerModel()
+    @Published var launcher: LauncherModel = LauncherModel()
+    @Published var blocker: BlockerModel = BlockerModel()
     
     var hasChildren: Bool {
         return children.count > 0

@@ -40,6 +40,8 @@
 		35C2FF20278CE2D70008AA55 /* SidebarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF1F278CE2D70008AA55 /* SidebarSection.swift */; };
 		35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF21278CE3910008AA55 /* SidebarButton.swift */; };
 		35CC0642278CE59300195486 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = 35CC0641278CE59300195486 /* SwiftUIRouter */; };
+		35EF3DC4279B327D004E2795 /* SwiftUIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF3DC3279B327D004E2795 /* SwiftUIHelpers.swift */; };
+		35EF3DC7279B3607004E2795 /* BottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF3DC6279B3607004E2795 /* BottomMenu.swift */; };
 		35FBB9AB26BB2E2200140DC0 /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FBB9AA26BB2E2200140DC0 /* Workspace.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +71,7 @@
 		35608D1B26C6FBEC0054FCD2 /* AdvancedSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsView.swift; sourceTree = "<group>"; };
 		3566A36F26B9D35B0064AE00 /* Dataloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dataloader.swift; sourceTree = "<group>"; };
 		3566A37126B9D63B0064AE00 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		356A4F77279A191900A6C633 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		3573F14426875FB7004B9C21 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3573F149268767C6004B9C21 /* WorkspacePomodoro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacePomodoro.swift; sourceTree = "<group>"; };
 		3573F14B268767DB004B9C21 /* WorkspaceTimeTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTimeTracking.swift; sourceTree = "<group>"; };
@@ -100,6 +103,8 @@
 		35AEA193267FA815000AFE85 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		35C2FF1F278CE2D70008AA55 /* SidebarSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSection.swift; sourceTree = "<group>"; };
 		35C2FF21278CE3910008AA55 /* SidebarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButton.swift; sourceTree = "<group>"; };
+		35EF3DC3279B327D004E2795 /* SwiftUIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIHelpers.swift; sourceTree = "<group>"; };
+		35EF3DC6279B3607004E2795 /* BottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenu.swift; sourceTree = "<group>"; };
 		35FBB9AA26BB2E2200140DC0 /* Workspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,6 +134,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35521BC9279C3F450047508D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				35FBB9AA26BB2E2200140DC0 /* Workspace.swift */,
+				35AEA183267F814E000AFE85 /* Workspaces.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		35608D1626C6FB6C0054FCD2 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +158,7 @@
 			children = (
 				3566A36F26B9D35B0064AE00 /* Dataloader.swift */,
 				3566A37126B9D63B0064AE00 /* MenuItem.swift */,
+				35EF3DC3279B327D004E2795 /* SwiftUIHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -151,6 +166,7 @@
 		3573F14326875F81004B9C21 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				35EF3DC5279B35EF004E2795 /* BottomMenu */,
 				35C2FF1E278CE2750008AA55 /* Sidebar */,
 				35C2FF1D278CE2640008AA55 /* Main */,
 				35608D1626C6FB6C0054FCD2 /* Preferences */,
@@ -205,8 +221,9 @@
 				3573F14326875F81004B9C21 /* Views */,
 				35AEA192267FA809000AFE85 /* Extensions */,
 				35AEA182267F8132000AFE85 /* Models */,
-				35AEA154267F65D0000AFE85 /* TapInApp.swift */,
+				35521BC9279C3F450047508D /* ViewModels */,
 				35AEA158267F65D2000AFE85 /* Assets.xcassets */,
+				35AEA154267F65D0000AFE85 /* TapInApp.swift */,
 				35AEA15D267F65D2000AFE85 /* Info.plist */,
 				35AEA15E267F65D2000AFE85 /* TapIn.entitlements */,
 				35AEA15A267F65D2000AFE85 /* Preview Content */,
@@ -244,12 +261,10 @@
 		35AEA182267F8132000AFE85 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				35AEA183267F814E000AFE85 /* Workspaces.swift */,
 				35AEA185267F8194000AFE85 /* PomodoroModel.swift */,
 				35AEA187267F9582000AFE85 /* TimeTrackerModel.swift */,
 				35AEA189267F95B5000AFE85 /* LauncherModel.swift */,
 				35AEA18B267F95D9000AFE85 /* BlockerModel.swift */,
-				35FBB9AA26BB2E2200140DC0 /* Workspace.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -283,8 +298,17 @@
 		35CC063F278CE4F900195486 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				356A4F77279A191900A6C633 /* XCTest.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		35EF3DC5279B35EF004E2795 /* BottomMenu */ = {
+			isa = PBXGroup;
+			children = (
+				35EF3DC6279B3607004E2795 /* BottomMenu.swift */,
+			);
+			path = BottomMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,6 +453,7 @@
 				35AEA18A267F95B5000AFE85 /* LauncherModel.swift in Sources */,
 				35AEA181267F6AD4000AFE85 /* WorkspaceBrowse.swift in Sources */,
 				35608D1826C6FB7D0054FCD2 /* SettingsView.swift in Sources */,
+				35EF3DC4279B327D004E2795 /* SwiftUIHelpers.swift in Sources */,
 				358ADCC32687A8E900B74F4B /* LaunchAppDetail.swift in Sources */,
 				35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */,
 				352A0B8926C96AC000AA256B /* FileLauncherView.swift in Sources */,
@@ -448,6 +473,7 @@
 				3566A37226B9D63B0064AE00 /* MenuItem.swift in Sources */,
 				3566A37026B9D35B0064AE00 /* Dataloader.swift in Sources */,
 				35AEA188267F9582000AFE85 /* TimeTrackerModel.swift in Sources */,
+				35EF3DC7279B3607004E2795 /* BottomMenu.swift in Sources */,
 				352A0B8726C9689C00AA256B /* AppLauncherView.swift in Sources */,
 				358342B92784459900B7175C /* TopLevelMenuItem.swift in Sources */,
 			);

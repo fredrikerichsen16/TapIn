@@ -102,42 +102,62 @@ import SwiftUIRouter
 
 struct LaunchAppDetail: View {
 	@EnvironmentObject var navigator: Navigator
-    @EnvironmentObject var workspaces: Workspaces
+    @EnvironmentObject var workspace: Workspace
     
     @State var appIndex: Int
     @State private var openWithSelection: Int = 0
     
-    var instance: LaunchInstance {
-        guard let ws = workspaces.activeWorkspace,
-              let instance = ws.launcher.instances[safe: appIndex] else {
+    var instance: EmptyInstance {
+        guard let instance = workspace.launcher.instances[safe: appIndex] as? EmptyInstance else {
             fatalError("Failed to get active instance")
         }
         
         return instance
     }
     
+//    Image(nsImage: instance.mainIcon(size: 128))
+//        .font(.system(size: 80))
+//        .onTapGesture {
+//            let panel = AppLauncher.panelForLauncherType(type: .app)
+//
+//            if panel.runModal() == .OK
+//            {
+//                if let url = panel.url
+//                {
+//                    let name = AppLauncher.applicationName(url: url)
+//
+//                    let appLaunchInstance = AppLauncher(name: name, app: url, file: nil)
+//                    workspace.launcher.instances.insert(appLaunchInstance, at: instanceIndex)
+//                    workspace.launcher.instances.remove(at: instanceIndex + 1)
+//                }
+//            }
+//        }
+//
+//    Text(instance.name).font(.title2)
+    
     var body: some View {
         VStack {
             Image(nsImage: instance.mainIcon(size: 128))
                 .font(.system(size: 80))
                 .onTapGesture {
-                    let panel = NSOpenPanel()
-                        panel.allowsMultipleSelection = false
-                        panel.canChooseDirectories = false
-                        panel.canChooseFiles = true
-
+                    let panel = EmptyInstance.panelForLauncherType(type: instance.type)
+                    
                     if panel.runModal() == .OK {
                         if let url = panel.url {
-                            print(url)
+                            let name = AppLauncher.applicationName(url: url)
+        
+                            let appLaunchInstance = AppLauncher(name: name, app: url, file: nil)
+                            workspace.launcher.instances.insert(appLaunchInstance, at: appIndex)
+                            workspace.launcher.instances.remove(at: appIndex + 1)
                         }
                     }
                 }
                 
             Text(instance.name).font(.title2)
             
-            if let fileLauncher = instance as? FileLauncher {
-                optionalOpenWith(instance: fileLauncher)
-            }
+//            if let fileLauncher = instance as? FileLauncher {
+//                optionalOpenWith(instance: fileLauncher)
+//            }
         }
     }
     
@@ -161,11 +181,11 @@ struct LaunchAppDetail: View {
                     - Path: \(url.path)
                     - Is directory?: \(url.hasDirectoryPath)
                     - Is file?: \(url.isFileURL)
-                    - Scheme: \(url.scheme)
+                    - Scheme: \(String(describing: url.scheme))
                     - Last Path Component: \(url.lastPathComponent)
                     - Extension: \(url.pathExtension)
                     - File exitsts?: \(FileManager.default.fileExists(atPath: url.path))
-                    - urlForApp: \(NSWorkspace.shared.urlForApplication(toOpen: url))
+                    - urlForApp: \(String(describing: NSWorkspace.shared.urlForApplication(toOpen: url)))
                 """)
             }
         }

@@ -4,19 +4,17 @@ import SwiftUIRouter
 struct WorkspaceBrowse: View {
 	@State var pageSelection = "workspace-pomodoro"
 	@EnvironmentObject var navigator: Navigator
-    @ObservedObject var workspace: Workspace
+    @EnvironmentObject var workspace: Workspace
 	
     var body: some View {
 		VStack {
-			HStack() {
-				Spacer()
-				
+            HStack(alignment: .center) {
 				Picker("", selection: $pageSelection) {
 					Text("Pomodoro").tag("workspace-pomodoro")
 					Text("Time Tracking").tag("workspace-timetracking")
 					Text("Launcher").tag("workspace-launcher")
 					Text("Blocker").tag("workspace-blocker")
-					Image(systemName: "ellipsis")
+//					Image(systemName: "ellipsis")
 				}
 				.pickerStyle(SegmentedPickerStyle())
 				.onChange(of: pageSelection) { selection in
@@ -25,30 +23,28 @@ struct WorkspaceBrowse: View {
 					navigator.navigate("/" + selection, replace: true)
 				}
 				.frame(width: 400)
-				
-				Spacer()
-				
-				Button("Start") {
-					print("Start")
-				}
 			}
 			
 			SwitchRoutes {
-				Route(path: "workspace-pomodoro") {
-                    WorkspacePomodoro(workspace: workspace)
+				Route("workspace-pomodoro") {
+                    WorkspacePomodoro()
 				}
-				Route(path: "workspace-timetracking") { info in
-					WorkspaceTimeTracking(workspace: workspace)
+				Route("workspace-timetracking") { info in
+					WorkspaceTimeTracking()
 				}
-				Route(path: "workspace-launcher/*") {
-					WorkspaceLauncher(workspace: workspace)
+				Route("workspace-launcher/*") {
+					WorkspaceLauncher()
 				}
-				Route(path: "workspace-blocker") {
-					WorkspaceBlocker(workspace: workspace)
+				Route("workspace-blocker") {
+					WorkspaceBlocker()
 				}
 			}
+            
+            Spacer()
+            
+            BottomMenu()
 		}
-		.padding(EdgeInsets(top: 0, leading: 25, bottom: 0, trailing: 25))
+        .edgesIgnoringSafeArea([.bottom, .horizontal])
 		.onAppear {
 			navigator.navigate("/workspace-pomodoro")
 		}

@@ -5,7 +5,7 @@ struct WorkspaceLauncher: View {
 	@State private var showingPopover = false
 	@State private var appSelection: Int? = nil
     
-    @ObservedObject var workspace: Workspace
+    @EnvironmentObject var workspace: Workspace
     
     var instances: [LaunchInstance] {
         workspace.launcher.instances
@@ -44,7 +44,7 @@ struct WorkspaceLauncher: View {
 				showingPopover.toggle()
 			}
 			.popover(isPresented: $showingPopover) {
-                Popover(workspace: workspace, selection: $appSelection, showingPopover: $showingPopover)
+                Popover(selection: $appSelection, showingPopover: $showingPopover)
 			}
 			
 			Spacer()
@@ -59,7 +59,7 @@ struct WorkspaceLauncher: View {
             case is FileLauncher:
                 FileLauncherView(workspace: workspace, instanceIndex: index)
             case is EmptyInstance:
-                Text("EmptyInstance")
+                LaunchAppDetail(appIndex: index)
             default:
                 Text("Default")
         }

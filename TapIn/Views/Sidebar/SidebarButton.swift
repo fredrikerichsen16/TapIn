@@ -28,9 +28,9 @@ struct SidebarButton: View {
         case .home, .statistics:
             Text(item.text).font(.largeTitle)
         case .work(let ws):
-            WorkspaceBrowse(workspace: ws)
+            WorkspaceBrowse().environmentObject(ws)
         case .leisure(let ws):
-            WorkspaceBrowse(workspace: ws)
+            WorkspaceBrowse().environmentObject(ws)
         }
     }
     

@@ -63,11 +63,11 @@ struct FileLauncherView: View {
                     - Path: \(url.path)
                     - Is directory?: \(url.hasDirectoryPath)
                     - Is file?: \(url.isFileURL)
-                    - Scheme: \(url.scheme)
+                    - Scheme: \(String(describing: url.scheme))
                     - Last Path Component: \(url.lastPathComponent)
                     - Extension: \(url.pathExtension)
                     - File exitsts?: \(FileManager.default.fileExists(atPath: url.path))
-                    - urlForApp: \(NSWorkspace.shared.urlForApplication(toOpen: url))
+                    - urlForApp: \(String(describing: NSWorkspace.shared.urlForApplication(toOpen: url)))
                 """)
             }
         }

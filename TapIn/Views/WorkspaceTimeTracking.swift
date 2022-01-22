@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WorkspaceTimeTracking: View {
-    @ObservedObject var workspace: Workspace
+    @EnvironmentObject var workspace: Workspace
     
     var body: some View {
         Text("WorkspaceTimeTracking")
