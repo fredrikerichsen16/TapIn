@@ -4,8 +4,8 @@ struct AppLauncherView: View {
     @ObservedObject var workspace: Workspace
     @State var instanceIndex: Int
     
-    var instance: AppLauncher {
-        if let instance = workspace.launcher.instances[safe: instanceIndex] as? AppLauncher {
+    var instance: LaunchInstanceBridge {
+        if let instance = workspace.launcher.instances[safe: instanceIndex] {
             return instance
         } else {
             fatalError("Can't get AppLauncher instance")
@@ -14,25 +14,30 @@ struct AppLauncherView: View {
     
     var body: some View {
         VStack {
-            Image(nsImage: instance.mainIcon(size: 128))
+            Image(nsImage: instance.appController.iconForApp(size: 128))
                 .font(.system(size: 80))
                 .onTapGesture {
-                    let panel = AppLauncher.panelForLauncherType(type: .app)
+                    let panel = instance.panel.openPanel()
                     
                     if panel.runModal() == .OK
                     {
                         if let url = panel.url
                         {
-                            let name = AppLauncher.applicationName(url: url)
-                            
-                            let appLaunchInstance = AppLauncher(name: name, app: url, file: nil)
-                            workspace.launcher.instances.insert(appLaunchInstance, at: instanceIndex)
+                            let name = applicationReadableName(url: url)
+
+                            let appLauncher = LaunchInstanceBridge.createAppLauncher(name: name, app: url, file: nil)
+
+                            workspace.launcher.instances.insert(appLauncher, at: instanceIndex)
                             workspace.launcher.instances.remove(at: instanceIndex + 1)
                         }
                     }
                 }
                 
             Text(instance.name).font(.title2)
+            
+            Button("Open") {
+                instance.opener.openApp()
+            }
         }
     }
 }

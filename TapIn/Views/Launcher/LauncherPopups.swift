@@ -16,9 +16,9 @@ struct Popover: View {
     @Binding var showingPopover: Bool
     
     func createEmptyInstance(type: LauncherType) {
-        workspace.launcher.createEmptyLaunchInstance(type: type)
-        self.selection = workspace.launcher.instances.count - 1
-        showingPopover = false
+        workspace.launcher.addInstance(instance: LaunchInstanceBridge.createEmptyLauncher(type: type))
+		self.selection = workspace.launcher.instances.count - 1
+		showingPopover = false
     }
 	
 	var body: some View {

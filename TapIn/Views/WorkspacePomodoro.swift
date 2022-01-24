@@ -43,37 +43,8 @@ struct WorkspacePomodoro: View {
                         
                         workspace.pomodoro.timeElapsed += 1
                     }
-                
-                Button("Fetch") {
-                    workspace.pomodoro.startFetch()
-                }
-                
-                Text(workspace.pomodoro.time)
             }
         }
-        
-//        Spacer()
-//        
-//        HStack(spacing: 10) {
-//            Button(workspace.pomodoro.getButtonTitle()) {
-//                if workspace.pomodoro.timerMode == .running {
-//                    workspace.pomodoro.timerMode = .paused
-//                } else {
-//                    workspace.pomodoro.timerMode = .running
-//                }
-//            }
-//            .buttonStyle(FilledButton())
-//
-//            Button("Cancel") {
-//                workspace.pomodoro.timeElapsed = 0.0
-//                workspace.pomodoro.timerMode = .initial
-//            }
-//            .buttonStyle(FilledButton())
-//            .disabled(workspace.pomodoro.timerMode != .paused)
-//        }
-//
-//        Spacer()
-//            .frame(height: 10)
     }
 }
 
@@ -93,7 +64,7 @@ struct ProgressCircleView: View {
             Circle()
                 .trim(from: 0.0, to: CGFloat(circleProgress))
                 .stroke(style: StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .round))
-                .rotationEffect(.degrees(0))//270.0))
+                .rotationEffect(.degrees(270.0))
                 .foregroundColor(.blue)
                 // .foregroundColor(getCircleColor(timerSeconds: timerSeconds))
                 .animation(.linear)

@@ -26,7 +26,7 @@ struct BottomMenu: View {
             }
         }
         .padding()
-        .background(Color.gray)
+        .background(Color(r: 37, g: 37, b: 42, opacity: 1))
     }
 }
 

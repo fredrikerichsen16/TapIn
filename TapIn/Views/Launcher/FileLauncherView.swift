@@ -13,33 +13,50 @@ struct FileLauncherView: View {
     @State var instanceIndex: Int
     @State private var openWithSelection: Int = 0
     
-    var instance: FileLauncher {
-        if let instance = workspace.launcher.instances[safe: instanceIndex] as? FileLauncher {
+    var instance: LaunchInstanceBridge {
+        if let instance = workspace.launcher.instances[safe: instanceIndex] {
             return instance
         } else {
-            fatalError("Can't get FileLauncher instance")
+            fatalError("Can't get AppLauncher instance")
         }
     }
     
     var body: some View {
         VStack {
-            Image(nsImage: instance.mainIcon(size: 128))
+            Image(nsImage: instance.appController.iconForApp(size: 128))
                 .font(.system(size: 80))
                 .onTapGesture {
-                    let panel = AppLauncher.panelForLauncherType(type: .file)
+                    let panel = instance.panel.openPanel()
                     
                     if panel.runModal() == .OK {
                         if let url = panel.url {
-                            print(url)
+                            let name = applicationReadableName(url: url)
+                            let launcher: LaunchInstanceBridge
+                            
+                            if instance.type == .folder {
+                                launcher = LaunchInstanceBridge.createFolderLauncher(name: name, file: url, app: nil)
+                            } else {
+                                launcher = LaunchInstanceBridge.createFileLauncher(name: name, file: url, app: nil)
+                            }
+                            
+                            workspace.launcher.instances.insert(launcher, at: instanceIndex)
+                            workspace.launcher.instances.remove(at: instanceIndex + 1)
+                            
+//                            let name = applicationReadableName(url: url)
+//                            let fileLauncher = LaunchInstanceBridge.createFileLauncher(name: name, file: url, app: nil)
                         }
                     }
                 }
             
             Text(instance.name).font(.title2)
             
-            let compatibleApps = instance.getCompatibleApps()
+            let compatibleApps = instance.fileController.getCompatibleApps()
             
             openWithMenu(compatibleApps)
+            
+            Button("Open") {
+                instance.opener.openApp()
+            }
         }
     }
     
@@ -50,8 +67,8 @@ struct FileLauncherView: View {
             Picker("", selection: $openWithSelection) {
                 ForEach(Array(zip(compatibleApps.indices, compatibleApps)), id: \.0) { index, app in
                     HStack {
-                        Image(nsImage: FileLauncher.iconForApp(app: app, size: 16))
-                        Text(app.lastPathComponent)
+                         Image(nsImage: getAppIcon(for: app, size: 16))
+                        Text(app.fileName)
                     }.tag(index)
                 }
             }
@@ -59,12 +76,15 @@ struct FileLauncherView: View {
             .onChange(of: openWithSelection) { appIndex in
                 let url = compatibleApps[appIndex]
                 
+                instance.appController.app = url
+                
                 print("""
                     - Path: \(url.path)
                     - Is directory?: \(url.hasDirectoryPath)
                     - Is file?: \(url.isFileURL)
                     - Scheme: \(String(describing: url.scheme))
                     - Last Path Component: \(url.lastPathComponent)
+                    - Last Path Component: \(url.fileName)
                     - Extension: \(url.pathExtension)
                     - File exitsts?: \(FileManager.default.fileExists(atPath: url.path))
                     - urlForApp: \(String(describing: NSWorkspace.shared.urlForApplication(toOpen: url)))

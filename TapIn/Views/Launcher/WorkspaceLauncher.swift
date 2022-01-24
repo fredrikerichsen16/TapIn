@@ -7,44 +7,64 @@ struct WorkspaceLauncher: View {
     
     @EnvironmentObject var workspace: Workspace
     
-    var instances: [LaunchInstance] {
+    var instances: [LaunchInstanceBridge] {
         workspace.launcher.instances
     }
 	
     var body: some View {
 		VStack(alignment: .leading) {
-			Spacer().frame(height: 15)
+			Spacer().frame(height: 25)
 			
 			NavigationView {
-                List(selection: $appSelection) {
-                    ForEach(instances.indices, id: \.self) { (index) in
-                        let instance = instances[index]
-                        
-                        NavigationLink(destination: navigationLinkDestination(instance: instance, index: index)) {
-                            HStack {
-                                Image(nsImage: instance.mainIcon(size: 34))
-                                
-                                Text(instance.name)
-                                
-                                Spacer()
-                            }
-                            .tag(index)
-                            .onTapGesture(count: 2) {
-                                instance.launch()
+                VStack(alignment: .leading) {
+                    List(selection: $appSelection) {
+                        ForEach(instances.indices, id: \.self) { (index) in
+                            let instance = instances[index]
+                            
+                            NavigationLink(destination: navigationLinkDestination(instance: instance, index: index)) {
+                                HStack {
+                                    Image(nsImage: instance.appController.iconForApp(size: 34))
+                                    
+                                    Text(instance.name)
+                                    
+                                    Spacer()
+                                }
+                                .tag(index)
+                                .onTapGesture(count: 2) {
+                                    instance.opener.openApp()
+                                }
                             }
                         }
                     }
-				}
-				.frame(width: 200, alignment: .topLeading)
+                    .frame(width: 210, alignment: .center)
+                    
+                    HStack(alignment: .center, spacing: 5) {
+                        Button(action: {
+                            showingPopover.toggle()
+                        }, label: {
+                            Image(systemName: "plus")
+                                .font(.system(size: 16.0))
+                        })
+                        .buttonStyle(PlainButtonStyle())
+                        .popover(isPresented: $showingPopover) {
+                            Popover(selection: $appSelection, showingPopover: $showingPopover)
+                        }
+                        
+                        Button(action: {
+                            if let _appSelection = appSelection {
+                                workspace.launcher.instances.remove(at: _appSelection)
+                                appSelection = min(_appSelection, workspace.launcher.instances.count - 1)
+                            }
+                        }, label: {
+                            Image(systemName: "minus")
+                                .font(.system(size: 16.0))
+                        })
+                        .buttonStyle(PlainButtonStyle())
+                    }
+                }
+                .padding()
                 
                 Text("Select one...").font(.title2)
-			}
-			
-			Button("Add") {				
-				showingPopover.toggle()
-			}
-			.popover(isPresented: $showingPopover) {
-                Popover(selection: $appSelection, showingPopover: $showingPopover)
 			}
 			
 			Spacer()
@@ -52,18 +72,19 @@ struct WorkspaceLauncher: View {
     }
     
     @ViewBuilder
-    func navigationLinkDestination(instance: LaunchInstance, index: Int) -> some View {
-        switch instance {
-            case is AppLauncher:
+    func navigationLinkDestination(instance: LaunchInstanceBridge, index: Int) -> some View {
+        switch instance.type {
+            case .app:
                 AppLauncherView(workspace: workspace, instanceIndex: index)
-            case is FileLauncher:
+            case .file:
                 FileLauncherView(workspace: workspace, instanceIndex: index)
-            case is EmptyInstance:
-                LaunchAppDetail(appIndex: index)
+            case .folder:
+                FileLauncherView(workspace: workspace, instanceIndex: index)
+            case .empty(_):
+                EmptyLauncherView(workspace: workspace, instanceIndex: index)
             default:
                 Text("Default")
         }
-        Text("Default")
     }
 }
 

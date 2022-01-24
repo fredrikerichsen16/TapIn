@@ -10,6 +10,9 @@
 		352A0B8526C94F2C00AA256B /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8426C94F2C00AA256B /* Collection+.swift */; };
 		352A0B8726C9689C00AA256B /* AppLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8626C9689C00AA256B /* AppLauncherView.swift */; };
 		352A0B8926C96AC000AA256B /* FileLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8826C96AC000AA256B /* FileLauncherView.swift */; };
+		352E18AC279CBA3600EC87F2 /* EmptyLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352E18AB279CBA3600EC87F2 /* EmptyLauncherView.swift */; };
+		352E18AF279CCB4100EC87F2 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352E18AE279CCB4100EC87F2 /* URL+.swift */; };
+		35521BCC279C98FA0047508D /* LauncherModelExtra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35521BCB279C98FA0047508D /* LauncherModelExtra.swift */; };
 		35608D1826C6FB7D0054FCD2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35608D1726C6FB7D0054FCD2 /* SettingsView.swift */; };
 		35608D1A26C6FBCB0054FCD2 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35608D1926C6FBCB0054FCD2 /* GeneralSettingsView.swift */; };
 		35608D1C26C6FBEC0054FCD2 /* AdvancedSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35608D1B26C6FBEC0054FCD2 /* AdvancedSettingsView.swift */; };
@@ -66,6 +69,10 @@
 		352A0B8426C94F2C00AA256B /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		352A0B8626C9689C00AA256B /* AppLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncherView.swift; sourceTree = "<group>"; };
 		352A0B8826C96AC000AA256B /* FileLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLauncherView.swift; sourceTree = "<group>"; };
+		352E18AB279CBA3600EC87F2 /* EmptyLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyLauncherView.swift; sourceTree = "<group>"; };
+		352E18AE279CCB4100EC87F2 /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
+		352E18B0279CD18600EC87F2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		35521BCB279C98FA0047508D /* LauncherModelExtra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModelExtra.swift; sourceTree = "<group>"; };
 		35608D1726C6FB7D0054FCD2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		35608D1926C6FBCB0054FCD2 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		35608D1B26C6FBEC0054FCD2 /* AdvancedSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsView.swift; sourceTree = "<group>"; };
@@ -189,6 +196,7 @@
 				358ADCC22687A8E900B74F4B /* LaunchAppDetail.swift */,
 				352A0B8626C9689C00AA256B /* AppLauncherView.swift */,
 				352A0B8826C96AC000AA256B /* FileLauncherView.swift */,
+				352E18AB279CBA3600EC87F2 /* EmptyLauncherView.swift */,
 			);
 			path = Launcher;
 			sourceTree = "<group>";
@@ -227,6 +235,7 @@
 				35AEA15D267F65D2000AFE85 /* Info.plist */,
 				35AEA15E267F65D2000AFE85 /* TapIn.entitlements */,
 				35AEA15A267F65D2000AFE85 /* Preview Content */,
+				352E18B0279CD18600EC87F2 /* README.md */,
 			);
 			path = TapIn;
 			sourceTree = "<group>";
@@ -265,6 +274,7 @@
 				35AEA187267F9582000AFE85 /* TimeTrackerModel.swift */,
 				35AEA189267F95B5000AFE85 /* LauncherModel.swift */,
 				35AEA18B267F95D9000AFE85 /* BlockerModel.swift */,
+				35521BCB279C98FA0047508D /* LauncherModelExtra.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -274,6 +284,7 @@
 			children = (
 				35AEA193267FA815000AFE85 /* Color+.swift */,
 				352A0B8426C94F2C00AA256B /* Collection+.swift */,
+				352E18AE279CCB4100EC87F2 /* URL+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -460,16 +471,19 @@
 				35C2FF20278CE2D70008AA55 /* SidebarSection.swift in Sources */,
 				35AEA157267F65D0000AFE85 /* ContentView.swift in Sources */,
 				3573F1542687A16C004B9C21 /* LauncherPopups.swift in Sources */,
+				352E18AC279CBA3600EC87F2 /* EmptyLauncherView.swift in Sources */,
 				3573F14526875FB7004B9C21 /* Settings.swift in Sources */,
 				35FBB9AB26BB2E2200140DC0 /* Workspace.swift in Sources */,
 				35AEA186267F8194000AFE85 /* PomodoroModel.swift in Sources */,
 				35AEA155267F65D0000AFE85 /* TapInApp.swift in Sources */,
+				352E18AF279CCB4100EC87F2 /* URL+.swift in Sources */,
 				35AEA194267FA815000AFE85 /* Color+.swift in Sources */,
 				352A0B8526C94F2C00AA256B /* Collection+.swift in Sources */,
 				3573F14A268767C6004B9C21 /* WorkspacePomodoro.swift in Sources */,
 				3573F14C268767DB004B9C21 /* WorkspaceTimeTracking.swift in Sources */,
 				35AEA184267F814E000AFE85 /* Workspaces.swift in Sources */,
 				35608D1A26C6FBCB0054FCD2 /* GeneralSettingsView.swift in Sources */,
+				35521BCC279C98FA0047508D /* LauncherModelExtra.swift in Sources */,
 				3566A37226B9D63B0064AE00 /* MenuItem.swift in Sources */,
 				3566A37026B9D35B0064AE00 /* Dataloader.swift in Sources */,
 				35AEA188267F9582000AFE85 /* TimeTrackerModel.swift in Sources */,
