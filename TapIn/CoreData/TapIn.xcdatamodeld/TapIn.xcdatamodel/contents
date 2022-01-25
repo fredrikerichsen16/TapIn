@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21A5268h" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="WorkspaceCD" representedClassName="WorkspaceCD" syncable="YES">
+        <attribute name="isWork" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String" minValueString="2" maxValueString="30" defaultValueString="New Workspace"/>
+        <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="WorkspaceCD" inverseName="parent" inverseEntity="WorkspaceCD"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WorkspaceCD" inverseName="children" inverseEntity="WorkspaceCD"/>
+    </entity>
+    <elements>
+        <element name="WorkspaceCD" positionX="-63" positionY="-9" width="128" height="89"/>
+    </elements>
+</model>
