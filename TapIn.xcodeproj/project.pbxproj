@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3501522F279F8085000EACEB /* TapIn.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3501522D279F8085000EACEB /* TapIn.xcdatamodeld */; };
+		35015232279F851D000EACEB /* Workspace+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35015230279F851D000EACEB /* Workspace+CoreDataClass.swift */; };
+		35015233279F851D000EACEB /* Workspace+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35015231279F851D000EACEB /* Workspace+CoreDataProperties.swift */; };
+		35015255279F87CE000EACEB /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35015254279F87CE000EACEB /* Persistence.swift */; };
+		35015257279F88BB000EACEB /* PersistenceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35015256279F88BB000EACEB /* PersistenceContainer.swift */; };
 		352A0B8526C94F2C00AA256B /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8426C94F2C00AA256B /* Collection+.swift */; };
 		352A0B8726C9689C00AA256B /* AppLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8626C9689C00AA256B /* AppLauncherView.swift */; };
 		352A0B8926C96AC000AA256B /* FileLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8826C96AC000AA256B /* FileLauncherView.swift */; };
@@ -43,6 +48,7 @@
 		35C2FF20278CE2D70008AA55 /* SidebarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF1F278CE2D70008AA55 /* SidebarSection.swift */; };
 		35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF21278CE3910008AA55 /* SidebarButton.swift */; };
 		35CC0642278CE59300195486 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = 35CC0641278CE59300195486 /* SwiftUIRouter */; };
+		35D18EEC279E551300ECA17C /* WebsiteLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D18EEB279E551300ECA17C /* WebsiteLauncherView.swift */; };
 		35EF3DC4279B327D004E2795 /* SwiftUIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF3DC3279B327D004E2795 /* SwiftUIHelpers.swift */; };
 		35EF3DC7279B3607004E2795 /* BottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF3DC6279B3607004E2795 /* BottomMenu.swift */; };
 		35FBB9AB26BB2E2200140DC0 /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FBB9AA26BB2E2200140DC0 /* Workspace.swift */; };
@@ -66,6 +72,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3501522E279F8085000EACEB /* TapIn.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TapIn.xcdatamodel; sourceTree = "<group>"; };
+		35015230279F851D000EACEB /* Workspace+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workspace+CoreDataClass.swift"; sourceTree = "<group>"; };
+		35015231279F851D000EACEB /* Workspace+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Workspace+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		35015254279F87CE000EACEB /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		35015256279F88BB000EACEB /* PersistenceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceContainer.swift; sourceTree = "<group>"; };
 		352A0B8426C94F2C00AA256B /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		352A0B8626C9689C00AA256B /* AppLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncherView.swift; sourceTree = "<group>"; };
 		352A0B8826C96AC000AA256B /* FileLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLauncherView.swift; sourceTree = "<group>"; };
@@ -110,6 +121,7 @@
 		35AEA193267FA815000AFE85 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		35C2FF1F278CE2D70008AA55 /* SidebarSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSection.swift; sourceTree = "<group>"; };
 		35C2FF21278CE3910008AA55 /* SidebarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButton.swift; sourceTree = "<group>"; };
+		35D18EEB279E551300ECA17C /* WebsiteLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteLauncherView.swift; sourceTree = "<group>"; };
 		35EF3DC3279B327D004E2795 /* SwiftUIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIHelpers.swift; sourceTree = "<group>"; };
 		35EF3DC6279B3607004E2795 /* BottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenu.swift; sourceTree = "<group>"; };
 		35FBB9AA26BB2E2200140DC0 /* Workspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
@@ -141,6 +153,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35015229279F8050000EACEB /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				35015230279F851D000EACEB /* Workspace+CoreDataClass.swift */,
+				35015231279F851D000EACEB /* Workspace+CoreDataProperties.swift */,
+				3501522D279F8085000EACEB /* TapIn.xcdatamodeld */,
+				35015254279F87CE000EACEB /* Persistence.swift */,
+				35015256279F88BB000EACEB /* PersistenceContainer.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		35521BC9279C3F450047508D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +221,7 @@
 				352A0B8626C9689C00AA256B /* AppLauncherView.swift */,
 				352A0B8826C96AC000AA256B /* FileLauncherView.swift */,
 				352E18AB279CBA3600EC87F2 /* EmptyLauncherView.swift */,
+				35D18EEB279E551300ECA17C /* WebsiteLauncherView.swift */,
 			);
 			path = Launcher;
 			sourceTree = "<group>";
@@ -225,6 +250,7 @@
 		35AEA153267F65D0000AFE85 /* TapIn */ = {
 			isa = PBXGroup;
 			children = (
+				35015229279F8050000EACEB /* CoreData */,
 				3566A36E26B9D34A0064AE00 /* Helpers */,
 				3573F14326875F81004B9C21 /* Views */,
 				35AEA192267FA809000AFE85 /* Extensions */,
@@ -465,6 +491,7 @@
 				35AEA181267F6AD4000AFE85 /* WorkspaceBrowse.swift in Sources */,
 				35608D1826C6FB7D0054FCD2 /* SettingsView.swift in Sources */,
 				35EF3DC4279B327D004E2795 /* SwiftUIHelpers.swift in Sources */,
+				35D18EEC279E551300ECA17C /* WebsiteLauncherView.swift in Sources */,
 				358ADCC32687A8E900B74F4B /* LaunchAppDetail.swift in Sources */,
 				35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */,
 				352A0B8926C96AC000AA256B /* FileLauncherView.swift in Sources */,
@@ -474,13 +501,17 @@
 				352E18AC279CBA3600EC87F2 /* EmptyLauncherView.swift in Sources */,
 				3573F14526875FB7004B9C21 /* Settings.swift in Sources */,
 				35FBB9AB26BB2E2200140DC0 /* Workspace.swift in Sources */,
+				35015257279F88BB000EACEB /* PersistenceContainer.swift in Sources */,
 				35AEA186267F8194000AFE85 /* PomodoroModel.swift in Sources */,
 				35AEA155267F65D0000AFE85 /* TapInApp.swift in Sources */,
+				3501522F279F8085000EACEB /* TapIn.xcdatamodeld in Sources */,
 				352E18AF279CCB4100EC87F2 /* URL+.swift in Sources */,
 				35AEA194267FA815000AFE85 /* Color+.swift in Sources */,
+				35015232279F851D000EACEB /* Workspace+CoreDataClass.swift in Sources */,
 				352A0B8526C94F2C00AA256B /* Collection+.swift in Sources */,
 				3573F14A268767C6004B9C21 /* WorkspacePomodoro.swift in Sources */,
 				3573F14C268767DB004B9C21 /* WorkspaceTimeTracking.swift in Sources */,
+				35015255279F87CE000EACEB /* Persistence.swift in Sources */,
 				35AEA184267F814E000AFE85 /* Workspaces.swift in Sources */,
 				35608D1A26C6FBCB0054FCD2 /* GeneralSettingsView.swift in Sources */,
 				35521BCC279C98FA0047508D /* LauncherModelExtra.swift in Sources */,
@@ -490,6 +521,7 @@
 				35EF3DC7279B3607004E2795 /* BottomMenu.swift in Sources */,
 				352A0B8726C9689C00AA256B /* AppLauncherView.swift in Sources */,
 				358342B92784459900B7175C /* TopLevelMenuItem.swift in Sources */,
+				35015233279F851D000EACEB /* Workspace+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,6 +866,19 @@
 			productName = SwiftUIRouter;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		3501522D279F8085000EACEB /* TapIn.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3501522E279F8085000EACEB /* TapIn.xcdatamodel */,
+			);
+			currentVersion = 3501522E279F8085000EACEB /* TapIn.xcdatamodel */;
+			path = TapIn.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 35AEA149267F65D0000AFE85 /* Project object */;
 }

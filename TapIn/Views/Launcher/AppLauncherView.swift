@@ -1,42 +1,62 @@
 import SwiftUI
 
+//struct LauncherView<Content>: View where Content: View {
+//    @ObservedObject var workspace: Workspace
+//    private let content: Content
+//
+//    init(@ViewBuilder content: () -> Content) {
+//        self.content = content()
+//    }
+//
+//    var body: some View {
+//        content
+//    }
+//}
+
 struct AppLauncherView: View {
-    @ObservedObject var workspace: Workspace
-    @State var instanceIndex: Int
+    @EnvironmentObject var workspace: Workspace
     
-    var instance: LaunchInstanceBridge {
-        if let instance = workspace.launcher.instances[safe: instanceIndex] {
-            return instance
-        } else {
-            fatalError("Can't get AppLauncher instance")
-        }
+    var instance: LaunchInstanceBridge? {
+        return workspace.launcher.activeInstance
+    }
+    
+    var activeInstance: Int? {
+        return workspace.launcher.selected
     }
     
     var body: some View {
         VStack {
-            Image(nsImage: instance.appController.iconForApp(size: 128))
-                .font(.system(size: 80))
-                .onTapGesture {
-                    let panel = instance.panel.openPanel()
-                    
-                    if panel.runModal() == .OK
-                    {
-                        if let url = panel.url
+            if let instance = instance, let activeInstance = activeInstance
+            {
+                Image(nsImage: instance.appController.iconForApp(size: 128))
+                    .font(.system(size: 80))
+                    .onTapGesture {
+                        let panel = instance.panel.createPanel()
+                        
+                        if instance.panel.openPanel(with: panel), let url = panel.url
                         {
                             let name = applicationReadableName(url: url)
 
                             let appLauncher = LaunchInstanceBridge.createAppLauncher(name: name, app: url, file: nil)
-
-                            workspace.launcher.instances.insert(appLauncher, at: instanceIndex)
-                            workspace.launcher.instances.remove(at: instanceIndex + 1)
+                            
+                            let index = activeInstance
+                            
+                            workspace.launcher.instances.insert(appLauncher, at: index)
+                            workspace.launcher.instances.remove(at: index + 1)
+                            
+                            workspace.launcher.selected = nil
                         }
                     }
-                }
+                    
+                Text(instance.name).font(.title2)
                 
-            Text(instance.name).font(.title2)
-            
-            Button("Open") {
-                instance.opener.openApp()
+                Button("Open") {
+                    instance.opener.openApp()
+                }
+            }
+            else
+            {
+                Text("Failure")
             }
         }
     }

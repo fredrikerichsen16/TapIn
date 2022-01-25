@@ -3,7 +3,7 @@ import SwiftUI
 @main
 struct TapinApp: App {
 	@Environment(\.scenePhase) var scenePhase
-	
+
 	var body: some Scene {
 //        Settings {
 //            SettingsView()

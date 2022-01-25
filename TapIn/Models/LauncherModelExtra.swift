@@ -72,8 +72,8 @@ protocol FileController {
 }
 
 extension FileController {
-    func getCompatibleApps() -> [URL] {
-        guard let cfURL = file as CFURL? else { fatalError("Error 19442") }
+    func getCompatibleApps() -> [URL]? {
+        guard let cfURL = file as CFURL? else { return nil }
         
         var URLs = [URL]()
         
@@ -82,8 +82,6 @@ extension FileController {
                 URLs.append(url)
             }
         }
-        
-        print(URLs)
         
         return URLs
     }
@@ -98,7 +96,17 @@ protocol Opener {
 protocol Panel {
     var parent: LaunchInstanceBridge { get set }
     
-    func openPanel() -> NSOpenPanel
+    func createPanel() -> NSOpenPanel
+    func openPanel(with panel: NSOpenPanel) -> Bool
+}
+
+extension Panel {
+    // Upon further analysis (implementing this in different cases) it seems better to just extend NSOpenPanel and have a thing
+    // .canChooseApps and .canChooseFileFiles instead of just .canChooseFiles without distinguishing
+    // Upon further analysis.. actually not. You can't just extend default classes all the time.. gotta write soem regular code also no?
+    func openPanel(with panel: NSOpenPanel) -> Bool {
+        return panel.runModal() == .OK
+    }
 }
 
 class LaunchInstanceBridge {
@@ -156,6 +164,8 @@ class LaunchInstanceBridge {
                 typeConformingPanel = FileLauncherPanel(parent: emptyLauncher)
             case .folder:
                 typeConformingPanel = FolderLauncherPanel(parent: emptyLauncher)
+            case .website:
+                typeConformingPanel = WebsiteLauncherPanel(parent: emptyLauncher)
             case .empty(_):
                 typeConformingPanel = EmptyLauncherPanel(parent: emptyLauncher)
             default:
@@ -220,6 +230,22 @@ class LaunchInstanceBridge {
         return folderLauncher
     }
     
+    static func createWebsiteLauncher(name: String, file: URL, app: URL?) -> LaunchInstanceBridge {
+        let websiteLauncher = LaunchInstanceBridge(
+            name: name,
+            type: .website
+        )
+
+        websiteLauncher.initializeBridge(
+            appController: WebsiteLauncherAppController(parent: websiteLauncher, app: app),
+            fileController: WebsiteLauncherFileController(parent: websiteLauncher, file: file),
+            opener: WebsiteLauncherOpener(parent: websiteLauncher),
+            panel: WebsiteLauncherPanel(parent: websiteLauncher)
+        )
+        
+        return websiteLauncher
+    }
+    
     // Convert from empty to type basically
     static func createLauncherFromType(type emptyType: LauncherType, name: String, app: URL?, file: URL?) -> LaunchInstanceBridge? {
         guard case let .empty(type) = emptyType else { return nil }
@@ -234,6 +260,9 @@ class LaunchInstanceBridge {
             case .folder:
                 guard let _file = file else { return nil }
                 return createFileLauncher(name: name, file: _file, app: app)
+            case .website:
+                guard let _file = file else { return nil }
+                return createWebsiteLauncher(name: name, file: _file, app: app)
             default:
                 return nil
         }
@@ -311,13 +340,22 @@ struct AppLauncherOpener: Opener {
 struct AppLauncherPanel: Panel {
     var parent: LaunchInstanceBridge
     
-    func openPanel() -> NSOpenPanel {
+    func createPanel() -> NSOpenPanel {
         let panel = NSOpenPanel()
             panel.allowsMultipleSelection = false
             panel.canChooseDirectories = false
             panel.canChooseFiles = true
         
         return panel
+    }
+    
+    func openPanel(with panel: NSOpenPanel) -> Bool {
+        if panel.runModal() == .OK
+        {
+            return panel.url?.pathExtension == "app"
+        }
+        
+        return false
     }
 }
 
@@ -395,12 +433,21 @@ struct FileLauncherOpener: Opener {
 struct FileLauncherPanel: Panel {
     var parent: LaunchInstanceBridge
     
-    func openPanel() -> NSOpenPanel {
+    func createPanel() -> NSOpenPanel {
         let panel = NSOpenPanel()
             panel.canChooseDirectories = false
             panel.canChooseFiles = true
         
         return panel
+    }
+    
+    func openPanel(with panel: NSOpenPanel) -> Bool {
+        if panel.runModal() == .OK
+        {
+            return panel.url?.pathExtension != "app"
+        }
+        
+        return false
     }
 }
 
@@ -410,7 +457,7 @@ struct FileLauncherPanel: Panel {
 struct FolderLauncherPanel: Panel {
     var parent: LaunchInstanceBridge
     
-    func openPanel() -> NSOpenPanel {
+    func createPanel() -> NSOpenPanel {
         let panel = NSOpenPanel()
             panel.canChooseDirectories = true
             panel.canChooseFiles = false
@@ -470,8 +517,91 @@ struct EmptyLauncherOpener: Opener {
 struct EmptyLauncherPanel: Panel {
     var parent: LaunchInstanceBridge
     
-    func openPanel() -> NSOpenPanel {
+    func createPanel() -> NSOpenPanel {
         fatalError("This doesn't work...")
+    }
+}
+
+// ------------------------
+// Website Launcher
+// ------------------------
+
+struct WebsiteLauncherAppController: AppController {
+    var parent: LaunchInstanceBridge
+    
+    var app: URL?
+    
+    func getApp() -> URL? {
+        if let app = app
+        {
+            return app
+        }
+        
+        return getDefaultApp()
+    }
+    
+    func setApp() {
+        print("x")
+    }
+    
+    func iconForApp(size: Int) -> NSImage {
+        var image: NSImage
+        
+        if let _app = getApp() {
+            image = NSWorkspace.shared.icon(forFile: _app.path)
+        } else {
+            image = NSImage(systemSymbolName: "questionmark.square.fill", accessibilityDescription: nil)!
+        }
+        
+        image.size = NSSize(width: size, height: size)
+        
+        return image
+    }
+}
+
+struct WebsiteLauncherFileController: FileController {
+    var parent: LaunchInstanceBridge
+    
+    var file: URL?
+    
+    func getFile() {
+        print("y")
+    }
+    
+    func setFile() {
+        print("y")
+    }
+}
+
+struct WebsiteLauncherOpener: Opener {
+    var parent: LaunchInstanceBridge
+    
+    func openApp() {
+        guard let app = parent.appController.getApp(),
+              let file = parent.fileController.file
+        else
+        {
+            return
+        }
+        
+        let config = NSWorkspace.OpenConfiguration()
+            config.activates = true
+        
+        NSWorkspace.shared.open([file], withApplicationAt: app, configuration: config) { (app, error) in
+            print(app as Any)
+        }
+    }
+}
+
+struct WebsiteLauncherPanel: Panel {
+    var parent: LaunchInstanceBridge
+    
+    func createPanel() -> NSOpenPanel {
+        fatalError("Yeah.. no")
+    }
+    
+    func openPanel(with panel: NSOpenPanel) -> Bool {
+        fatalError("Yeah.. no again")
     }
 }
 

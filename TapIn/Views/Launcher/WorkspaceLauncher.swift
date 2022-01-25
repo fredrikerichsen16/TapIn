@@ -17,11 +17,11 @@ struct WorkspaceLauncher: View {
 			
 			NavigationView {
                 VStack(alignment: .leading) {
-                    List(selection: $appSelection) {
+                    List(selection: $workspace.launcher.selected) {
                         ForEach(instances.indices, id: \.self) { (index) in
                             let instance = instances[index]
                             
-                            NavigationLink(destination: navigationLinkDestination(instance: instance, index: index)) {
+                            NavigationLink(destination: navigationLinkDestination(instance: instance)) {
                                 HStack {
                                     Image(nsImage: instance.appController.iconForApp(size: 34))
                                     
@@ -72,16 +72,18 @@ struct WorkspaceLauncher: View {
     }
     
     @ViewBuilder
-    func navigationLinkDestination(instance: LaunchInstanceBridge, index: Int) -> some View {
+    func navigationLinkDestination(instance: LaunchInstanceBridge) -> some View {
         switch instance.type {
             case .app:
-                AppLauncherView(workspace: workspace, instanceIndex: index)
+                AppLauncherView()
             case .file:
-                FileLauncherView(workspace: workspace, instanceIndex: index)
+                FileLauncherView(workspace: workspace)
             case .folder:
-                FileLauncherView(workspace: workspace, instanceIndex: index)
+                FileLauncherView(workspace: workspace)
+            case .website:
+                WebsiteLauncherView(workspace: workspace)
             case .empty(_):
-                EmptyLauncherView(workspace: workspace, instanceIndex: index)
+                EmptyLauncherView(workspace: workspace)
             default:
                 Text("Default")
         }

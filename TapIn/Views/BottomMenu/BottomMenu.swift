@@ -34,11 +34,11 @@ struct ToggleComponentMenu: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5.0) {
-            ToggleComponentMenuItem(iconSize: 30.0, title: "Start Pomodoro")
-            ToggleComponentMenuItem(iconSize: 30.0, title: "Start Timetracker")
-            ToggleComponentMenuItem(iconSize: 30.0, title: "Start Website Blocker")
-            ToggleComponentMenuItem(iconSize: 30.0, title: "Start Radio")
-            ToggleComponentMenuItem(iconSize: 30.0, title: "Start All")
+            ToggleComponentMenuItem(iconSize: 30.0, title: "Pomodoro")
+            ToggleComponentMenuItem(iconSize: 30.0, title: "Timetracker")
+            ToggleComponentMenuItem(iconSize: 30.0, title: "Website Blocker")
+            ToggleComponentMenuItem(iconSize: 30.0, title: "Radio")
+            ToggleComponentMenuItem(iconSize: 30.0, title: "All")
         }
         .padding(14)
     }
@@ -48,23 +48,30 @@ struct ToggleComponentMenuItem: View {
     let iconSize: Double
     let title: String
     
+    @State private var active = false
+    
+    func getTitle() -> String {
+        let prefix = active ? "Stop" : "Start"
+        return "\(prefix) \(title)"
+    }
+    
     var body: some View {
         Button(action: {
-            print(title)
+            active.toggle()
         }, label: {
             HStack(spacing: 5.0) {
-                Image(systemName: "play.fill")
+                Image(systemName: active ? "pause.fill" : "play.fill")
                     .frame(width: iconSize, height: iconSize, alignment: .center)
                     .clipShape(Circle())
                     .background(Color.blue)
                     .cornerRadius(iconSize / 2)
                     .padding(EdgeInsets(top: 5.0, leading: 5.0, bottom: 5.0, trailing: 5.0))
                 
-                Text(title)
+                Text(getTitle())
                     .font(.system(size: 18.0))
             }
         })
-            .buttonStyle(PlainButtonStyle())
+        .buttonStyle(PlainButtonStyle())
         .padding(5)
     }
 }
