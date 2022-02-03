@@ -36,34 +36,39 @@ struct SidebarButton: View {
     
     @ViewBuilder
     private func menuItemContextMenu(_ ws: Workspace?) -> some View {
-        if ws != nil
-        {
-            Group {
-                Button("Delete") {
-                    print("Delete")
-                }
-                
-                Button("Add Child") {
-                    print("Add Child")
-                }
-                
-                Button("Rename") {
-                    print("Rename")
-                }
+        SwiftUI.Group {
+            Button("Temporary") {
+                print("Whateve")
             }
         }
-        else
-        {
-            Group {
-                Button("Delete") {
-                    print("Delete")
-                }
-
-                Button("Rename") {
-                    print("Rename")
-                }
-            }
-        }
+//        if ws != nil
+//        {
+//            Group {
+//                Button("Delete") {
+//                    print("Delete")
+//                }
+//
+//                Button("Add Child") {
+//                    print("Add Child")
+//                }
+//
+//                Button("Rename") {
+//                    print("Rename")
+//                }
+//            }
+//        }
+//        else
+//        {
+//            Group {
+//                Button("Delete") {
+//                    print("Delete")
+//                }
+//
+//                Button("Rename") {
+//                    print("Rename")
+//                }
+//            }
+//        }
     }
 
 }
