@@ -43,14 +43,15 @@ class Workspace: ObservableObject {
     }
     
     func getChildrenMenuItems() -> [MenuItem] {
-        var menuItems = [MenuItem]()
-        
-        for workspace in children
-        {
-            menuItems.append(MenuItem.init(workspace: workspace, work: work))
-        }
-        
-        return menuItems
+        return []
+//        var menuItems = [MenuItem]()
+//
+//        for workspace in children
+//        {
+//            menuItems.append(MenuItem.init(workspace: workspace, work: work))
+//        }
+//
+//        return menuItems
     }
     
 }

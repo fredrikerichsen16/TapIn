@@ -11,16 +11,17 @@ final class Workspaces: ObservableObject {
     @Published var activeWorkspace: Workspace? = nil
     
     func getTopLevelMenuItems(work: Bool) -> [MenuItem] {
-        var menuItems = [MenuItem]()
-        
-        for workspace in workspaces
-        {
-            if workspace.work == work {
-                menuItems.append(MenuItem.init(workspace: workspace, work: work))
-            }
-        }
-        
-        return menuItems
+        return []
+//        var menuItems = [MenuItem]()
+//
+//        for workspace in workspaces
+//        {
+//            if workspace.work == work {
+//                menuItems.append(MenuItem.init(workspace: workspace, work: work))
+//            }
+//        }
+//
+//        return menuItems
     }
 
 }

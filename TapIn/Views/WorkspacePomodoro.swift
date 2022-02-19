@@ -7,12 +7,56 @@
 
 import SwiftUI
 
+//struct WorkspacePomodoro: View {
+//    @EnvironmentObject var workspace: Workspace
+//
+//    var timeString: String {
+//        let remainingTime = workspace.pomodoro.remainingTime(\.pomodoroDuration)
+//        return workspace.pomodoro.readableTime(seconds: remainingTime)
+//    }
+//
+//    @State var circleProgress = 1.0
+//
+//    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+//
+//    var body: some View {
+//		Spacer()
+//
+//        ZStack {
+//            ProgressCircleView(circleProgress: $circleProgress)
+//                .padding()
+//                .onReceive(timer) { time in
+//                    let pomodoroDuration = workspace.pomodoro.pomodoroDuration
+//                    let timeElapsed = workspace.pomodoro.timeElapsed
+//
+//                    self.circleProgress = (pomodoroDuration - timeElapsed) / pomodoroDuration
+//                }
+//
+//            VStack {
+//                Text(timeString)
+//                    .font(.system(size: 36.0))
+//                    .bold()
+//                    .multilineTextAlignment(.center)
+//                    .padding()
+//                    .onReceive(timer) { time in
+//                        guard workspace.pomodoro.timerMode == .running else { return }
+//
+//                        workspace.pomodoro.timeElapsed += 1
+//                    }
+//            }
+//        }
+//    }
+//}
+
 struct WorkspacePomodoro: View {
-    @EnvironmentObject var workspace: Workspace
+    @EnvironmentObject var workspaceDB: WorkspaceDB
     
     var timeString: String {
-        let remainingTime = workspace.pomodoro.remainingTime(\.pomodoroDuration)
-        return workspace.pomodoro.readableTime(seconds: remainingTime)
+        guard let pomodoro = workspaceDB.pomodoro else { return "Pikk" }
+        
+        let remainingTime = pomodoro.remainingTime(\.pomodoroDuration)
+        
+        return pomodoro.readableTime(seconds: remainingTime)
     }
     
     @State var circleProgress = 1.0
@@ -20,14 +64,14 @@ struct WorkspacePomodoro: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-		Spacer()
+        Spacer()
         
         ZStack {
             ProgressCircleView(circleProgress: $circleProgress)
                 .padding()
                 .onReceive(timer) { time in
-                    let pomodoroDuration = workspace.pomodoro.pomodoroDuration
-                    let timeElapsed = workspace.pomodoro.timeElapsed
+                    let pomodoroDuration = workspaceDB.pomodoro!.pomodoroDuration
+                    let timeElapsed = workspaceDB.pomodoro!.timeElapsed
                     
                     self.circleProgress = (pomodoroDuration - timeElapsed) / pomodoroDuration
                 }
@@ -39,9 +83,9 @@ struct WorkspacePomodoro: View {
                     .multilineTextAlignment(.center)
                     .padding()
                     .onReceive(timer) { time in
-                        guard workspace.pomodoro.timerMode == .running else { return }
+                        guard workspaceDB.pomodoro!.timerMode == .running else { return }
                         
-                        workspace.pomodoro.timeElapsed += 1
+                        workspaceDB.pomodoro!.timeElapsed += 1
                     }
             }
         }
@@ -49,8 +93,6 @@ struct WorkspacePomodoro: View {
 }
 
 struct ProgressCircleView: View {
-
-    @EnvironmentObject var workspace: Workspace
 
     @Binding var circleProgress: Double
 

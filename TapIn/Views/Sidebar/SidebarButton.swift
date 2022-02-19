@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct SidebarButton: View {
     @State var menuItem: MenuItem
@@ -28,14 +29,14 @@ struct SidebarButton: View {
         case .home, .statistics:
             Text(item.text).font(.largeTitle)
         case .work(let ws):
-            WorkspaceBrowse().environmentObject(ws)
+            WorkspaceBrowse(workspaceDB: ws)
         case .leisure(let ws):
-            WorkspaceBrowse().environmentObject(ws)
+            WorkspaceBrowse(workspaceDB: ws)
         }
     }
     
     @ViewBuilder
-    private func menuItemContextMenu(_ ws: Workspace?) -> some View {
+    private func menuItemContextMenu(_ ws: WorkspaceDB?) -> some View {
         SwiftUI.Group {
             Button("Temporary") {
                 print("Whateve")
@@ -71,6 +72,31 @@ struct SidebarButton: View {
 //        }
     }
 
+}
+
+struct TemporaryView: View {
+    @ObservedResults(WorkspaceDB.self) var results
+    
+    let workspace: WorkspaceDB
+    
+    var body: some View {
+        VStack {
+            List {
+                Text("ID: \(workspace.id)")
+                Text(workspace.name)
+                Text(workspace.isWork ? "Is work" : "Is leisure")
+                Text("Pomodoro duration: \(workspace.pomodoro?.pomodoroDuration ?? 6.9)")
+            }
+            
+            Text("Temporary")
+            
+            List {
+                ForEach(results.sorted(byKeyPath: "name"), id: \.id) { ws in
+                    Text(ws.name)
+                }
+            }
+        }
+    }
 }
 
 struct SidebarButton_Previews: PreviewProvider {

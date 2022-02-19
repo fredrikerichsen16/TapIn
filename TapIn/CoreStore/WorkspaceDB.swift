@@ -43,6 +43,21 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
         self.blocker = BlockerDB()
         self.timeTracker = TimeTrackerDB()
     }
+    
+    func isChild() -> Bool {
+        return !parent.isEmpty
+    }
+    
+//    func getChildrenMenuItems() -> [MenuItem] {
+//        var menuItems = [MenuItem]()
+//        
+//        for workspace in children
+//        {
+//            menuItems.append(MenuItem.init(workspace: workspace, work: isWork))
+//        }
+//        
+//        return menuItems
+//    }
 }
 
 //final class Group: Object, ObjectKeyIdentifiable {

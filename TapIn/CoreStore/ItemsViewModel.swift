@@ -9,8 +9,40 @@ import Foundation
 import RealmSwift
 import Combine
 
+class RealmViewModel<T: RealmFetchable>: ObservableObject {
+    @Published var notificationToken: NotificationToken? = nil
+    @Published var realmObjects: Results<T>
+    
+    init() {
+        realmObjects = RealmManager.shared.realm.objects(T.self)
+        
+        notificationToken = realmObjects.observe({ (change) in
+            switch change {
+                case .error(_):
+                    print("Object was deleted")
+                case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+                    self.objectWillChange.send()
+                    print(deletions, insertions, modifications)
+                case .initial(_):
+                    print("Initial run")
+            }
+        })
+    }
+}
+
+class PomodoroVM: RealmViewModel<PomodoroDB> {
+    @Published var active: Bool
+    
+    override init() {
+        active = true
+        
+        super.init()
+    }
+}
+
 class WorkspacesVM: ObservableObject {
     @Published var workspaces: Results<WorkspaceDB>
+    @Published var activeWorkspace: Workspace? = nil
     
     var notificationToken: NotificationToken? = nil
     

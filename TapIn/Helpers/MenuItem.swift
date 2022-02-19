@@ -1,10 +1,10 @@
 enum MenuItem {
     case home
     case statistics
-    case work(Workspace)
-    case leisure(Workspace)
+    case work(WorkspaceDB)
+    case leisure(WorkspaceDB)
     
-    init(workspace: Workspace, work: Bool) {
+    init(workspace: WorkspaceDB, work: Bool) {
         if work
         {
             self = .work(workspace)
@@ -41,7 +41,7 @@ enum MenuItem {
         }
     }
     
-    var workspace: Workspace? {
+    var workspace: WorkspaceDB? {
         get {
             switch self {
                 case .work(let ws):
@@ -52,6 +52,30 @@ enum MenuItem {
                     return nil
             }
         }
+    }
+    
+//    static func getMenuItems(work: Bool, workspaces: [WorkspaceDB]) -> [MenuItem] {
+//        var menuItems = [MenuItem]()
+//
+//        for workspace in workspaces
+//        {
+//            if workspace.isWork == work {
+//                menuItems.append(MenuItem.init(workspace: workspace, work: work))
+//            }
+//        }
+//
+//        return menuItems
+//    }
+    
+    static func getMenuItems(workspaces: [WorkspaceDB]) -> [MenuItem] {
+        var menuItems = [MenuItem]()
+        
+        for workspace in workspaces
+        {
+            menuItems.append(MenuItem.init(workspace: workspace, work: workspace.isWork))
+        }
+        
+        return menuItems
     }
 }
 

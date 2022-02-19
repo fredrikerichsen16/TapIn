@@ -6,21 +6,26 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct SidebarSection: View {
-    @ObservedObject var workspaces: Workspaces
-    @State var work: Bool
+    @ObservedResults(WorkspaceDB.self) private var workspaces
+    
+    var work: Bool
     
     var body: some View {
         Section(header: sectionHeaderView()) {
-            ForEach(workspaces.getTopLevelMenuItems(work: work), id: \.id) { item in
-                if item.workspace!.hasChildren
+            ForEach(MenuItem.getMenuItems(workspaces: getWorkspacesList()), id: \.id) { menuItem in
+                if let ws = menuItem.workspace
                 {
-                    SidebarDisclosure(menuItem: item)
-                }
-                else
-                {
-                    SidebarButton(menuItem: item)
+                    if ws.children.isEmpty
+                    {
+                        SidebarButton(menuItem: menuItem)
+                    }
+                    else
+                    {
+                        SidebarDisclosure(menuItem: menuItem, workspaces: Array(ws.children))
+                    }
                 }
             }
         }
@@ -31,19 +36,25 @@ struct SidebarSection: View {
         let title = work ? "Work" : "Leisure"
         return Text(title).padding(.bottom, 5)
     }
+    
+    func getWorkspacesList() -> [WorkspaceDB] {
+        let workspacesToShow = workspaces.where {
+            ($0.isWork == work) && ($0.parent.count == 0)
+        }
+        
+        return Array(workspacesToShow)
+    }
 }
 
 struct SidebarDisclosure: View {
     var menuItem: MenuItem
-    var workspace: Workspace {
-        menuItem.workspace!
-    }
+    var workspaces: [WorkspaceDB]
     
     @State var isExpanded = false
     
     var body: some View {
         DisclosureGroup(isExpanded: $isExpanded, content: {
-            ForEach(workspace.getChildrenMenuItems(), id: \.id) { item in
+            ForEach(MenuItem.getMenuItems(workspaces: workspaces), id: \.id) { item in
                 SidebarButton(menuItem: item)
             }
         }, label: {

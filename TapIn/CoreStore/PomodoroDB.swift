@@ -26,4 +26,38 @@ final class PomodoroDB: Object, ObjectKeyIdentifiable {
     
     @Persisted(originProperty: "pomodoro")
     var workspace: LinkingObjects<WorkspaceDB>
+    
+    
+    
+    var timeElapsed: TimeInterval = 0.0
+    
+    var timerMode: TimerMode = .initial
+    
+    func getButtonTitle() -> String {
+        return timerMode == .running ? "Pause" : "Start"
+    }
+    
+    func remainingTime(_ keyPath: KeyPath<PomodoroDB, TimeInterval>) -> Double {
+        let startTime = self[keyPath: keyPath]
+        
+        return startTime - timeElapsed
+    }
+    
+    func readableTime(seconds: TimeInterval) -> String {
+        let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.minute, .second]
+            formatter.unitsStyle = .positional
+            formatter.zeroFormattingBehavior = .pad
+        
+        return formatter.string(from: seconds) ?? "FAIL"
+    }
+    
+    func readableTime(_ keyPath: KeyPath<PomodoroDB, TimeInterval>) -> String {
+        let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.minute, .second]
+            formatter.unitsStyle = .positional
+            formatter.zeroFormattingBehavior = .pad
+    
+        return formatter.string(from: self[keyPath: keyPath]) ?? "00:00"
+    }
 }

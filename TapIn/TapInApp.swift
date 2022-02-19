@@ -13,12 +13,12 @@ struct TapinApp: SwiftUI.App {
 //        }
         
 		WindowGroup {
-            DataBridge(workspaces: WorkspacesVM())
-                .environment(\.realm, realmManager.realm)
-            
-//			ContentView(workspaces: Workspaces())
-//				.frame(minWidth: 500, idealWidth: 700, maxWidth: 900, minHeight: 500, idealHeight: 500, maxHeight: 900, alignment: .center)
+//            DataBridge(workspaces: WorkspacesVM())
 //                .environment(\.realm, realmManager.realm)
+            
+			ContentView()
+				.frame(minWidth: 500, idealWidth: 700, maxWidth: 900, minHeight: 500, idealHeight: 500, maxHeight: 900, alignment: .center)
+                .environment(\.realm, realmManager.realm)
 		}
 		.windowStyle(HiddenTitleBarWindowStyle())
 		.onChange(of: scenePhase) { (newScenePhase) in

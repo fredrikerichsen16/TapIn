@@ -1,8 +1,8 @@
 import SwiftUI
 import SwiftUIRouter
+import RealmSwift
 
 struct ContentView: View {
-    @ObservedObject var workspaces: Workspaces
 	@State var selection: String? = "home"
 
 	var body: some View {
@@ -11,9 +11,9 @@ struct ContentView: View {
 				List(selection: $selection) {
                     SidebarButton(menuItem: MenuItem.home)
                     SidebarButton(menuItem: MenuItem.statistics)
-                    
-                    SidebarSection(workspaces: workspaces, work: true)
-                    SidebarSection(workspaces: workspaces, work: false)
+
+                    SidebarSection(work: true)
+                    SidebarSection(work: false)
 				}
 				.listStyle(SidebarListStyle())
 				.frame(minWidth: 180, maxWidth: 300)
@@ -25,6 +25,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
-		ContentView(workspaces: Workspaces())
+		ContentView()
 	}
 }
