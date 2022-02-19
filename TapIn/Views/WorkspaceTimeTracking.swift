@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct WorkspaceTimeTracking: View {
-    @EnvironmentObject var workspace: Workspace
+    @ObservedRealmObject var timeTracker: TimeTrackerDB
     
     var body: some View {
-        Text("WorkspaceTimeTracking")
+        Text("WorkspaceTimeTracking (ID: \(timeTracker.id))")
     }
 }
 

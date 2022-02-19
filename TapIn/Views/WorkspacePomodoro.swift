@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 //struct WorkspacePomodoro: View {
 //    @EnvironmentObject var workspace: Workspace
@@ -49,11 +50,9 @@ import SwiftUI
 //}
 
 struct WorkspacePomodoro: View {
-    @EnvironmentObject var workspaceDB: WorkspaceDB
+    @ObservedRealmObject var pomodoro: PomodoroDB
     
     var timeString: String {
-        guard let pomodoro = workspaceDB.pomodoro else { return "Pikk" }
-        
         let remainingTime = pomodoro.remainingTime(\.pomodoroDuration)
         
         return pomodoro.readableTime(seconds: remainingTime)
@@ -70,8 +69,8 @@ struct WorkspacePomodoro: View {
             ProgressCircleView(circleProgress: $circleProgress)
                 .padding()
                 .onReceive(timer) { time in
-                    let pomodoroDuration = workspaceDB.pomodoro!.pomodoroDuration
-                    let timeElapsed = workspaceDB.pomodoro!.timeElapsed
+                    let pomodoroDuration = pomodoro.pomodoroDuration
+                    let timeElapsed = pomodoro.timeElapsed
                     
                     self.circleProgress = (pomodoroDuration - timeElapsed) / pomodoroDuration
                 }
@@ -83,9 +82,9 @@ struct WorkspacePomodoro: View {
                     .multilineTextAlignment(.center)
                     .padding()
                     .onReceive(timer) { time in
-                        guard workspaceDB.pomodoro!.timerMode == .running else { return }
+                        guard pomodoro.timerMode == .running else { return }
                         
-                        workspaceDB.pomodoro!.timeElapsed += 1
+                        pomodoro.timeElapsed += 1
                     }
             }
         }

@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct WorkspaceBlocker: View {
-    @EnvironmentObject var workspace: Workspace
+    @ObservedRealmObject var blocker: BlockerDB
     
     var body: some View {
-        Text("WorkspaceBlocker - Workspace: \(workspace.name)")
+        Text("WorkspaceBlocker - Workspace: \(blocker.workspace.first!.name)")
     }
 }
 

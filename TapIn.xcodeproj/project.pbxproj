@@ -34,6 +34,7 @@
 		3573F1542687A16C004B9C21 /* LauncherPopups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F1532687A16C004B9C21 /* LauncherPopups.swift */; };
 		358342B92784459900B7175C /* TopLevelMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358342B82784459900B7175C /* TopLevelMenuItem.swift */; };
 		358ADCC32687A8E900B74F4B /* LaunchAppDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358ADCC22687A8E900B74F4B /* LaunchAppDetail.swift */; };
+		358D114827C1AD1200983673 /* SectionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358D114727C1AD1200983673 /* SectionPicker.swift */; };
 		35AD491D26C7062800AEA899 /* LauncherModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD491C26C7062800AEA899 /* LauncherModelTests.swift */; };
 		35AEA155267F65D0000AFE85 /* TapInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA154267F65D0000AFE85 /* TapInApp.swift */; };
 		35AEA157267F65D0000AFE85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA156267F65D0000AFE85 /* ContentView.swift */; };
@@ -106,6 +107,7 @@
 		3573F1532687A16C004B9C21 /* LauncherPopups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPopups.swift; sourceTree = "<group>"; };
 		358342B82784459900B7175C /* TopLevelMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLevelMenuItem.swift; sourceTree = "<group>"; };
 		358ADCC22687A8E900B74F4B /* LaunchAppDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAppDetail.swift; sourceTree = "<group>"; };
+		358D114727C1AD1200983673 /* SectionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPicker.swift; sourceTree = "<group>"; };
 		35AD491C26C7062800AEA899 /* LauncherModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModelTests.swift; sourceTree = "<group>"; };
 		35AEA151267F65D0000AFE85 /* TapIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35AEA154267F65D0000AFE85 /* TapInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInApp.swift; sourceTree = "<group>"; };
@@ -199,13 +201,13 @@
 		3573F14326875F81004B9C21 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				358D114627C1AC9B00983673 /* WorkspaceBrowse */,
 				35BDF6C4279FB2C0008BF50D /* DataBridge */,
 				35EF3DC5279B35EF004E2795 /* BottomMenu */,
 				35C2FF1E278CE2750008AA55 /* Sidebar */,
 				35C2FF1D278CE2640008AA55 /* Main */,
 				35608D1626C6FB6C0054FCD2 /* Preferences */,
 				3573F1512687A157004B9C21 /* Launcher */,
-				35AEA180267F6AD4000AFE85 /* WorkspaceBrowse.swift */,
 				3573F14426875FB7004B9C21 /* Settings.swift */,
 				3573F149268767C6004B9C21 /* WorkspacePomodoro.swift */,
 				3573F14B268767DB004B9C21 /* WorkspaceTimeTracking.swift */,
@@ -227,6 +229,15 @@
 				35D18EEB279E551300ECA17C /* WebsiteLauncherView.swift */,
 			);
 			path = Launcher;
+			sourceTree = "<group>";
+		};
+		358D114627C1AC9B00983673 /* WorkspaceBrowse */ = {
+			isa = PBXGroup;
+			children = (
+				35AEA180267F6AD4000AFE85 /* WorkspaceBrowse.swift */,
+				358D114727C1AD1200983673 /* SectionPicker.swift */,
+			);
+			path = WorkspaceBrowse;
 			sourceTree = "<group>";
 		};
 		35AEA148267F65D0000AFE85 = {
@@ -515,6 +526,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3573F150268767FB004B9C21 /* WorkspaceBlocker.swift in Sources */,
+				358D114827C1AD1200983673 /* SectionPicker.swift in Sources */,
 				35608D1C26C6FBEC0054FCD2 /* AdvancedSettingsView.swift in Sources */,
 				355F84AB279FC114002E77EC /* Item.swift in Sources */,
 				35AEA18C267F95D9000AFE85 /* BlockerModel.swift in Sources */,
