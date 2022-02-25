@@ -9,17 +9,53 @@ import SwiftUI
 import RealmSwift
 
 struct SidebarButton: View {
+    @Environment(\.realm) var realm
+    @ObservedResults(WorkspaceDB.self) var workspaces
+    @EnvironmentObject var stateManager: StateManager
     @State var menuItem: MenuItem
     
+    @State var renameWorkspaceField: String = ""
+    @State var isRenaming = false
+    
+    @Binding var selection: String?
+    
+    @Namespace var mainNamespace
+    
     var body: some View {
-        NavigationLink(destination: viewForMenuItem(menuItem)) {
-            Label(menuItem.text, systemImage: menuItem.icon)
-                .tag(menuItem.id)
-                .padding(.vertical, 5)
+        if isRenaming
+        {
+            if #available(macOS 12.0, *) {
+                TextField("", text: $renameWorkspaceField) // passing it to bind
+                    .textFieldStyle(.roundedBorder) // adds border
+                    .prefersDefaultFocus(in: mainNamespace)
+                    .onSubmit {
+                        guard let currentWorkspace = menuItem.workspace?.thaw(),
+                              let thawedRealm = currentWorkspace.realm
+                            else { return }
+                        
+                        if renameWorkspaceField == "" {
+                            return
+                        }
+                        
+                        try! thawedRealm.write {
+                            currentWorkspace.name = renameWorkspaceField
+                        }
+                        
+                        isRenaming = false
+                    }
+            }
         }
-        .contextMenu(ContextMenu(menuItems: {
-            menuItemContextMenu(menuItem.workspace)
-        }))
+        else
+        {
+            NavigationLink(destination: viewForMenuItem(menuItem)) {
+                Label(menuItem.text, systemImage: menuItem.icon)
+                    .tag(menuItem.id)
+                    .padding(.vertical, 5)
+            }
+            .contextMenu(ContextMenu(menuItems: {
+                menuItemContextMenu(menuItem.workspace)
+            }))
+        }
     }
     
     @ViewBuilder
@@ -38,38 +74,62 @@ struct SidebarButton: View {
     @ViewBuilder
     private func menuItemContextMenu(_ ws: WorkspaceDB?) -> some View {
         SwiftUI.Group {
-            Button("Temporary") {
-                print("Whateve")
+            Button("Add Child Workspace") {
+                guard let currentWorkspace = menuItem.workspace?.thaw(),
+                      let thawedRealm = currentWorkspace.realm
+                    else { return }
+                
+                try! thawedRealm.write {
+                    let newWorkspace = WorkspaceDB(name: "New Workspace", isWork: currentWorkspace.isWork)
+                    
+                    currentWorkspace.children.append(newWorkspace)
+                }
+                
+                selection = "home"
+            }
+            
+            Button("Delete") {
+                guard let currentWorkspace = menuItem.workspace?.thaw(),
+                      let thawedRealm = currentWorkspace.realm
+                    else { return }
+                
+                selection = "home"
+                
+                try! thawedRealm.write {
+                    thawedRealm.delete(currentWorkspace)
+                }
+            }
+            
+            Button("Rename") {
+                selection = "statistics"
+//                beginRenamingWorkspace()
             }
         }
-//        if ws != nil
-//        {
-//            Group {
-//                Button("Delete") {
-//                    print("Delete")
-//                }
-//
-//                Button("Add Child") {
-//                    print("Add Child")
-//                }
-//
-//                Button("Rename") {
-//                    print("Rename")
-//                }
-//            }
-//        }
-//        else
-//        {
-//            Group {
-//                Button("Delete") {
-//                    print("Delete")
-//                }
-//
-//                Button("Rename") {
-//                    print("Rename")
-//                }
-//            }
-//        }
+    }
+    
+    func beginRenamingWorkspace() {
+        guard #available(macOS 12.0, *) else {
+            return
+        }
+        
+        renameWorkspaceField = menuItem.workspace!.name
+        isRenaming = true
+    }
+    
+    func renameWorkspace() {
+        guard let currentWorkspace = menuItem.workspace?.thaw(),
+              let thawedRealm = currentWorkspace.realm
+            else { return }
+        
+        if renameWorkspaceField == "" {
+            return
+        }
+        
+        try! thawedRealm.write {
+            currentWorkspace.name = renameWorkspaceField
+        }
+        
+        isRenaming = false
     }
 
 }
@@ -99,8 +159,10 @@ struct TemporaryView: View {
     }
 }
 
-struct SidebarButton_Previews: PreviewProvider {
-    static var previews: some View {
-        SidebarButton(menuItem: .statistics)
-    }
-}
+//struct SidebarButton_Previews: PreviewProvider {
+//    @State var selection: String? = "statistics"
+//
+//    static var previews: some View {
+//        SidebarButton(menuItem: .statistics, selection: $selection)
+//    }
+//}

@@ -54,19 +54,6 @@ enum MenuItem {
         }
     }
     
-//    static func getMenuItems(work: Bool, workspaces: [WorkspaceDB]) -> [MenuItem] {
-//        var menuItems = [MenuItem]()
-//
-//        for workspace in workspaces
-//        {
-//            if workspace.isWork == work {
-//                menuItems.append(MenuItem.init(workspace: workspace, work: work))
-//            }
-//        }
-//
-//        return menuItems
-//    }
-    
     static func getMenuItems(workspaces: [WorkspaceDB]) -> [MenuItem] {
         var menuItems = [MenuItem]()
         

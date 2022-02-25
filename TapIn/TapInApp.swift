@@ -4,21 +4,18 @@ import RealmSwift
 @main
 struct TapinApp: SwiftUI.App {
 	@Environment(\.scenePhase) var scenePhase
+    @ObservedObject var stateManager = StateManager()
+    
+    @State var selection: String? = "home"
     
     let realmManager = RealmManager()
     
 	var body: some Scene {
-//        Settings {
-//            SettingsView()
-//        }
-        
 		WindowGroup {
-//            DataBridge(workspaces: WorkspacesVM())
-//                .environment(\.realm, realmManager.realm)
-            
-			ContentView()
+            ContentView(selection: $selection)
 				.frame(minWidth: 500, idealWidth: 700, maxWidth: 900, minHeight: 500, idealHeight: 500, maxHeight: 900, alignment: .center)
                 .environment(\.realm, realmManager.realm)
+                .environmentObject(stateManager)
 		}
 		.windowStyle(HiddenTitleBarWindowStyle())
 		.onChange(of: scenePhase) { (newScenePhase) in
@@ -33,6 +30,9 @@ struct TapinApp: SwiftUI.App {
 					print("Scene: Unknown")
 			}
 		}
+        
+        SwiftUI.Settings {
+            SettingsView()
+        }
 	}
-	
 }

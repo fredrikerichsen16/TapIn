@@ -16,6 +16,8 @@
 		3538C2EB27AB5F3700D74044 /* BlockerDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C2EA27AB5F3700D74044 /* BlockerDB.swift */; };
 		3538C2ED27AB60BA00D74044 /* TimeTrackerDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C2EC27AB60BA00D74044 /* TimeTrackerDB.swift */; };
 		35521BCC279C98FA0047508D /* LauncherModelExtra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35521BCB279C98FA0047508D /* LauncherModelExtra.swift */; };
+		355B46E327C97DC2007E0507 /* MenuItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355B46E227C97DC2007E0507 /* MenuItemTests.swift */; };
+		355B46E527C97FAC007E0507 /* LauncherInstanceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355B46E427C97FAC007E0507 /* LauncherInstanceDB.swift */; };
 		355F84A7279FC0F9002E77EC /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 355F84A6279FC0F9002E77EC /* Realm */; };
 		355F84A9279FC0F9002E77EC /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 355F84A8279FC0F9002E77EC /* RealmSwift */; };
 		355F84AB279FC114002E77EC /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355F84AA279FC114002E77EC /* Item.swift */; };
@@ -35,6 +37,7 @@
 		358342B92784459900B7175C /* TopLevelMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358342B82784459900B7175C /* TopLevelMenuItem.swift */; };
 		358ADCC32687A8E900B74F4B /* LaunchAppDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358ADCC22687A8E900B74F4B /* LaunchAppDetail.swift */; };
 		358D114827C1AD1200983673 /* SectionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358D114727C1AD1200983673 /* SectionPicker.swift */; };
+		358D114A27C1DCF600983673 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358D114927C1DCF600983673 /* StateManager.swift */; };
 		35AD491D26C7062800AEA899 /* LauncherModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD491C26C7062800AEA899 /* LauncherModelTests.swift */; };
 		35AEA155267F65D0000AFE85 /* TapInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA154267F65D0000AFE85 /* TapInApp.swift */; };
 		35AEA157267F65D0000AFE85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA156267F65D0000AFE85 /* ContentView.swift */; };
@@ -90,6 +93,8 @@
 		3538C2EA27AB5F3700D74044 /* BlockerDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerDB.swift; sourceTree = "<group>"; };
 		3538C2EC27AB60BA00D74044 /* TimeTrackerDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerDB.swift; sourceTree = "<group>"; };
 		35521BCB279C98FA0047508D /* LauncherModelExtra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModelExtra.swift; sourceTree = "<group>"; };
+		355B46E227C97DC2007E0507 /* MenuItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemTests.swift; sourceTree = "<group>"; };
+		355B46E427C97FAC007E0507 /* LauncherInstanceDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherInstanceDB.swift; sourceTree = "<group>"; };
 		355F84AA279FC114002E77EC /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		355F84AC279FC22A002E77EC /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		355F84AE279FC313002E77EC /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
@@ -108,6 +113,7 @@
 		358342B82784459900B7175C /* TopLevelMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLevelMenuItem.swift; sourceTree = "<group>"; };
 		358ADCC22687A8E900B74F4B /* LaunchAppDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAppDetail.swift; sourceTree = "<group>"; };
 		358D114727C1AD1200983673 /* SectionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPicker.swift; sourceTree = "<group>"; };
+		358D114927C1DCF600983673 /* StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 		35AD491C26C7062800AEA899 /* LauncherModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModelTests.swift; sourceTree = "<group>"; };
 		35AEA151267F65D0000AFE85 /* TapIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35AEA154267F65D0000AFE85 /* TapInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInApp.swift; sourceTree = "<group>"; };
@@ -174,6 +180,7 @@
 			children = (
 				35FBB9AA26BB2E2200140DC0 /* Workspace.swift */,
 				35AEA183267F814E000AFE85 /* Workspaces.swift */,
+				358D114927C1DCF600983673 /* StateManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -294,6 +301,7 @@
 				35AD491C26C7062800AEA899 /* LauncherModelTests.swift */,
 				35AEA167267F65D2000AFE85 /* PomodoroModelTests.swift */,
 				35AEA169267F65D2000AFE85 /* Info.plist */,
+				355B46E227C97DC2007E0507 /* MenuItemTests.swift */,
 			);
 			path = TapInTests;
 			sourceTree = "<group>";
@@ -340,6 +348,7 @@
 				3538C2E827AB5D0800D74044 /* PomodoroDB.swift */,
 				3538C2EA27AB5F3700D74044 /* BlockerDB.swift */,
 				3538C2EC27AB60BA00D74044 /* TimeTrackerDB.swift */,
+				355B46E427C97FAC007E0507 /* LauncherInstanceDB.swift */,
 			);
 			path = CoreStore;
 			sourceTree = "<group>";
@@ -528,6 +537,7 @@
 				3573F150268767FB004B9C21 /* WorkspaceBlocker.swift in Sources */,
 				358D114827C1AD1200983673 /* SectionPicker.swift in Sources */,
 				35608D1C26C6FBEC0054FCD2 /* AdvancedSettingsView.swift in Sources */,
+				355B46E527C97FAC007E0507 /* LauncherInstanceDB.swift in Sources */,
 				355F84AB279FC114002E77EC /* Item.swift in Sources */,
 				35AEA18C267F95D9000AFE85 /* BlockerModel.swift in Sources */,
 				3573F14E268767E9004B9C21 /* WorkspaceLauncher.swift in Sources */,
@@ -543,6 +553,7 @@
 				355F84AD279FC22A002E77EC /* Group.swift in Sources */,
 				358ADCC32687A8E900B74F4B /* LaunchAppDetail.swift in Sources */,
 				35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */,
+				358D114A27C1DCF600983673 /* StateManager.swift in Sources */,
 				352A0B8926C96AC000AA256B /* FileLauncherView.swift in Sources */,
 				35C2FF20278CE2D70008AA55 /* SidebarSection.swift in Sources */,
 				35F5592A27A27D4D0094F2C4 /* RealmManager.swift in Sources */,
@@ -577,6 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35AEA168267F65D2000AFE85 /* PomodoroModelTests.swift in Sources */,
+				355B46E327C97DC2007E0507 /* MenuItemTests.swift in Sources */,
 				35AD491D26C7062800AEA899 /* LauncherModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

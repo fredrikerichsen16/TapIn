@@ -32,7 +32,7 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     
     @Persisted
     var timeTracker: TimeTrackerDB?
-    
+        
     convenience init(name: String, isWork: Bool) {
         self.init()
         self.id = ObjectId.generate()
@@ -46,6 +46,15 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     
     func isChild() -> Bool {
         return !parent.isEmpty
+    }
+    
+    static func getWorkspacesByWorkType(realm: Realm, isWork: Bool) -> Results<WorkspaceDB> {
+        let workspaces = realm.objects(WorkspaceDB.self)
+        let workspacesToShow = workspaces.where {
+            ($0.isWork == isWork) && ($0.parent.count == 0)
+        }
+        
+        return workspacesToShow
     }
     
 //    func getChildrenMenuItems() -> [MenuItem] {

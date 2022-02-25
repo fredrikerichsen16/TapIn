@@ -9,22 +9,27 @@ import SwiftUI
 import RealmSwift
 
 struct SidebarSection: View {
+    @Environment(\.realm) var realm
     @ObservedResults(WorkspaceDB.self) private var workspaces
     
     var work: Bool
     
+    @Binding var selection: String?
+    
     var body: some View {
+        let workspaces = WorkspaceDB.getWorkspacesByWorkType(realm: realm, isWork: work)
+        
         Section(header: sectionHeaderView()) {
-            ForEach(MenuItem.getMenuItems(workspaces: getWorkspacesList()), id: \.id) { menuItem in
+            ForEach(MenuItem.getMenuItems(workspaces: Array(workspaces)), id: \.id) { menuItem in
                 if let ws = menuItem.workspace
                 {
                     if ws.children.isEmpty
                     {
-                        SidebarButton(menuItem: menuItem)
+                        SidebarButton(menuItem: menuItem, selection: $selection)
                     }
                     else
                     {
-                        SidebarDisclosure(menuItem: menuItem, workspaces: Array(ws.children))
+                        SidebarDisclosure(menuItem: menuItem, workspaces: Array(ws.children), selection: $selection)
                     }
                 }
             }
@@ -36,14 +41,6 @@ struct SidebarSection: View {
         let title = work ? "Work" : "Leisure"
         return Text(title).padding(.bottom, 5)
     }
-    
-    func getWorkspacesList() -> [WorkspaceDB] {
-        let workspacesToShow = workspaces.where {
-            ($0.isWork == work) && ($0.parent.count == 0)
-        }
-        
-        return Array(workspacesToShow)
-    }
 }
 
 struct SidebarDisclosure: View {
@@ -52,13 +49,15 @@ struct SidebarDisclosure: View {
     
     @State var isExpanded = false
     
+    @Binding var selection: String?
+    
     var body: some View {
         DisclosureGroup(isExpanded: $isExpanded, content: {
             ForEach(MenuItem.getMenuItems(workspaces: workspaces), id: \.id) { item in
-                SidebarButton(menuItem: item)
+                SidebarButton(menuItem: item, selection: $selection)
             }
         }, label: {
-            SidebarButton(menuItem: menuItem)
+            SidebarButton(menuItem: menuItem, selection: $selection)
         })
     }
 }

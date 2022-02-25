@@ -16,8 +16,21 @@ struct WorkspaceBlocker: View {
     }
 }
 
-//struct WorkspaceBlocker_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WorkspaceBlocker()
+struct WorkspaceBlocker_Previews: PreviewProvider {
+//    let workspace: WorkspaceDB
+//
+//    init() {
+////        let config = Realm.Configuration(inMemoryIdentifier: "PreviewRealm")
+////        let realm = try! Realm(configuration: config)
+//
+//        let workspace = WorkspaceDB(name: "Calculus", isWork: true)
+//
+////        realm.add(blocker)
+//
+//        self.workspace = workspace
 //    }
-//}
+
+    static var previews: some View {
+        WorkspaceBlocker(blocker: BlockerDB())
+    }
+}
