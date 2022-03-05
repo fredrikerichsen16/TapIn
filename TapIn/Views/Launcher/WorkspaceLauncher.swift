@@ -70,25 +70,18 @@ struct WorkspaceLauncher: View {
     
     @ViewBuilder
     func launcherInstanceMenuButton(instance: LauncherInstanceDB) -> some View {
-        if let launcherBridge = instance.launcherBridge
-        {
-            NavigationLink(destination: navigationLinkDestination(instance: instance)) {
-                HStack {
-                    Image(nsImage: launcherBridge.appController.iconForApp(size: 34))
-                    
-                    Text(instance.name)
-                    
-                    Spacer()
-                }
-                .tag(instance.id.stringValue)
-                .onTapGesture(count: 2) {
-                    launcherBridge.opener.openApp()
-                }
+        NavigationLink(destination: navigationLinkDestination(instance: instance)) {
+            HStack {
+                Image(nsImage: instance.appController.iconForApp(size: 34))
+                
+                Text(instance.name)
+                
+                Spacer()
             }
-        }
-        else
-        {
-            Text("Cock and ballz babyy")
+            .tag(instance.id.stringValue)
+            .onTapGesture(count: 2) {
+                instance.opener.openApp()
+            }
         }
     }
 }

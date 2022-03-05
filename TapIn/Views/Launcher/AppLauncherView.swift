@@ -16,43 +16,36 @@ import RealmSwift
 
 struct AppLauncherView: View {
     @ObservedRealmObject var launcherInstance: LauncherInstanceDB
-    
-    var launcherBridge: LaunchInstanceBridge {
-        launcherInstance.launcherBridge!
-    }
-    
-//    var instance: LaunchInstanceBridge? {
-//        return workspace.launcher.activeInstance
-//    }
-//
-//    var activeInstance: Int? {
-//        return workspace.launcher.selected
-//    }
+    @Environment(\.realm) var realm
     
     var body: some View {
         VStack {
-            Image(nsImage: launcherBridge.appController.iconForApp(size: 128))
+            Image(nsImage: launcherInstance.appController.iconForApp(size: 128))
                 .font(.system(size: 80))
                 .onTapGesture {
-                    let panel = launcherBridge.panel.createPanel()
+                    let panel = launcherInstance.panel.createPanel()
                     
-                    if launcherBridge.panel.openPanel(with: panel), let url = panel.url
+                    if launcherInstance.panel.openPanel(with: panel), let url = panel.url
                     {
                         let name = applicationReadableName(url: url)
-
-                        let appLauncher = LaunchInstanceBridge.createAppLauncher(name: name, app: url, file: nil)
                         
-                        print(appLauncher.name)
-                        print(appLauncher.type)
-                        
-//                        launcherInstance.launcher.first!.replaceInstance(launcherInstance, appLauncher)
+                        if let thawed = launcherInstance.thaw() {
+                            try! realm.write {
+                                thawed.name = name
+                                thawed.appPath = url.path
+                                thawed.instantiated = true
+                                
+                                print("Thawed AppPath:")
+                                print(thawed.appPath)
+                            }
+                        }
                     }
                 }
                 
-            Text(launcherBridge.name).font(.title2)
+            Text(launcherInstance.name).font(.title2)
             
             Button("Open") {
-                launcherBridge.opener.openApp()
+                launcherInstance.opener.openApp()
             }
         }
     }

@@ -35,7 +35,7 @@ class Workspace: ObservableObject {
     
     @Published var pomodoro: PomodoroModel = PomodoroModel()
     @Published var timeTracker: TimeTrackerModel = TimeTrackerModel()
-    @Published var launcher: LauncherModel = LauncherModel()
+//    @Published var launcher: LauncherModel = LauncherModel()
     @Published var blocker: BlockerModel = BlockerModel()
     
     var hasChildren: Bool {
