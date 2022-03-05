@@ -8,19 +8,6 @@ struct WorkspaceLauncher: View {
     @State private var selectedInstance: String? = nil
     
     @ObservedRealmObject var launcher: LauncherDB
-    
-//    var body: some View {
-//        List(launcher.launcherInstances, id: \.id) { instance in
-//            Text(instance.name)
-//            Button("Open") {
-//                if let bridge = instance.launcherBridge {
-//                    bridge.opener.openApp()
-//                } else {
-//                    print("FAIL TO GET BRIDGE")
-//                }
-//            }
-//        }
-//    }
 	
     var body: some View {
 		VStack(alignment: .leading) {
@@ -64,10 +51,10 @@ struct WorkspaceLauncher: View {
     }
     
     @ViewBuilder
-    func navigationLinkDestination(instance: LaunchInstanceBridge) -> some View {
+    func navigationLinkDestination(instance: LauncherInstanceDB) -> some View {
         switch instance.type {
             case .app:
-                AppLauncherView()
+                AppLauncherView(launcherInstance: instance)
 //            case .file:
 //                FileLauncherView(workspace: workspace)
 //            case .folder:
@@ -85,7 +72,7 @@ struct WorkspaceLauncher: View {
     func launcherInstanceMenuButton(instance: LauncherInstanceDB) -> some View {
         if let launcherBridge = instance.launcherBridge
         {
-            NavigationLink(destination: navigationLinkDestination(instance: launcherBridge)) {
+            NavigationLink(destination: navigationLinkDestination(instance: instance)) {
                 HStack {
                     Image(nsImage: launcherBridge.appController.iconForApp(size: 34))
                     

@@ -10,4 +10,14 @@ final class LauncherDB: Object, ObjectKeyIdentifiable {
     
     @Persisted
     var launcherInstances = RealmSwift.List<LauncherInstanceDB>()
+    
+    func replaceInstance(_ instance1: LauncherInstanceDB, _ instance2: LauncherInstanceDB) {
+        guard let realm = realm else { return }
+        
+        try! realm.write {
+            realm.delete(instance1)
+            
+            self.launcherInstances.append(instance2)
+        }
+    }
 }

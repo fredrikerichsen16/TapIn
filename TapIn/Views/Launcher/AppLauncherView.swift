@@ -1,4 +1,5 @@
 import SwiftUI
+import RealmSwift
 
 //struct LauncherView<Content>: View where Content: View {
 //    @ObservedObject var workspace: Workspace
@@ -14,49 +15,44 @@ import SwiftUI
 //}
 
 struct AppLauncherView: View {
-    @EnvironmentObject var workspace: Workspace
+    @ObservedRealmObject var launcherInstance: LauncherInstanceDB
     
-    var instance: LaunchInstanceBridge? {
-        return workspace.launcher.activeInstance
+    var launcherBridge: LaunchInstanceBridge {
+        launcherInstance.launcherBridge!
     }
     
-    var activeInstance: Int? {
-        return workspace.launcher.selected
-    }
+//    var instance: LaunchInstanceBridge? {
+//        return workspace.launcher.activeInstance
+//    }
+//
+//    var activeInstance: Int? {
+//        return workspace.launcher.selected
+//    }
     
     var body: some View {
         VStack {
-            if let instance = instance, let activeInstance = activeInstance
-            {
-                Image(nsImage: instance.appController.iconForApp(size: 128))
-                    .font(.system(size: 80))
-                    .onTapGesture {
-                        let panel = instance.panel.createPanel()
-                        
-                        if instance.panel.openPanel(with: panel), let url = panel.url
-                        {
-                            let name = applicationReadableName(url: url)
-
-                            let appLauncher = LaunchInstanceBridge.createAppLauncher(name: name, app: url, file: nil)
-                            
-                            let index = activeInstance
-                            
-                            workspace.launcher.instances.insert(appLauncher, at: index)
-                            workspace.launcher.instances.remove(at: index + 1)
-                            
-                            workspace.launcher.selected = nil
-                        }
-                    }
+            Image(nsImage: launcherBridge.appController.iconForApp(size: 128))
+                .font(.system(size: 80))
+                .onTapGesture {
+                    let panel = launcherBridge.panel.createPanel()
                     
-                Text(instance.name).font(.title2)
-                
-                Button("Open") {
-                    instance.opener.openApp()
+                    if launcherBridge.panel.openPanel(with: panel), let url = panel.url
+                    {
+                        let name = applicationReadableName(url: url)
+
+                        let appLauncher = LaunchInstanceBridge.createAppLauncher(name: name, app: url, file: nil)
+                        
+                        print(appLauncher.name)
+                        print(appLauncher.type)
+                        
+//                        launcherInstance.launcher.first!.replaceInstance(launcherInstance, appLauncher)
+                    }
                 }
-            }
-            else
-            {
-                Text("Failure")
+                
+            Text(launcherBridge.name).font(.title2)
+            
+            Button("Open") {
+                launcherBridge.opener.openApp()
             }
         }
     }
