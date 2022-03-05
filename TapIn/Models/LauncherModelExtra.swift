@@ -6,6 +6,7 @@
 //
 
 import Cocoa
+import RealmSwift
 
 // ------------------------
 // GENERAL PURPOSE
@@ -33,12 +34,23 @@ enum LauncherType: Equatable {
     case website
     case terminal
     indirect case empty(LauncherType)
-    
-//    func label() -> String {
-//        switch self {
-//            case
-//        }
-//    }
+
+    func label() -> String {
+        switch self {
+        case .empty(let type):
+            return type.label()
+        case .app:
+            return "New App"
+        case .file:
+            return "New File"
+        case .folder:
+            return "New Folder"
+        case .website:
+            return "New Website"
+        case .terminal:
+            return "New Terminal"
+        }
+    }
 }
 
 protocol AppController {
@@ -248,7 +260,13 @@ class LaunchInstanceBridge {
     
     // Convert from empty to type basically
     static func createLauncherFromType(type emptyType: LauncherType, name: String, app: URL?, file: URL?) -> LaunchInstanceBridge? {
-        guard case let .empty(type) = emptyType else { return nil }
+//        guard case let .empty(type) = emptyType else { return nil }
+        
+        var type = emptyType
+        
+        if case let .empty(innerType) = emptyType {
+            type = innerType
+        }
         
         switch type {
             case .app:
@@ -267,6 +285,7 @@ class LaunchInstanceBridge {
                 return nil
         }
     }
+
 }
 
 // ------------------------

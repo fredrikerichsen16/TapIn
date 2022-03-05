@@ -32,6 +32,9 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     
     @Persisted
     var timeTracker: TimeTrackerDB?
+    
+    @Persisted
+    var launcher: LauncherDB?
         
     convenience init(name: String, isWork: Bool) {
         self.init()
@@ -42,6 +45,7 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
         self.pomodoro = PomodoroDB()
         self.blocker = BlockerDB()
         self.timeTracker = TimeTrackerDB()
+        self.launcher = LauncherDB()
     }
     
     func isChild() -> Bool {

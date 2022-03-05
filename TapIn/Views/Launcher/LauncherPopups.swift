@@ -7,17 +7,32 @@
 
 import SwiftUI
 import SwiftUIRouter
+import RealmSwift
 
 struct Popover: View {
+    @Environment(\.realm) var realm
 	@EnvironmentObject var navigator: Navigator
-    @EnvironmentObject var workspace: Workspace
     
+    @ObservedRealmObject var launcher: LauncherDB
     @Binding var selection: Int?
     @Binding var showingPopover: Bool
     
-    func createEmptyInstance(type: LauncherType) {
-        workspace.launcher.addInstance(instance: LaunchInstanceBridge.createEmptyLauncher(type: type))
-		self.selection = workspace.launcher.instances.count - 1
+    func createEmptyInstance(type: RealmLauncherType) {
+        let newInstance = LauncherInstanceDB(name: "New Instance", type: type, instantiated: false)
+        
+        $launcher.launcherInstances.append(newInstance)
+        
+//        if let thawed = launcher.thaw() {
+//            try! realm.write {
+//                thawed.launcherInstances.append(newInstance)
+//                print("Number added \(thawed.launcherInstances.count)")
+//            }
+//        } else {
+//            print("FAILED TO ADD NEW EMPTY TING")
+//        }
+//
+        print(launcher.launcherInstances.count)
+        
 		showingPopover = false
     }
 	

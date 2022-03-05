@@ -78,8 +78,7 @@ struct WorkspaceBrowse: View {
                     WorkspaceTimeTracking(timeTracker: workspaceDB.timeTracker!)
 				}
 				Route("workspace-launcher/*") {
-//                    WorkspaceLauncher()
-                    Text("Launcher").font(.largeTitle)
+                    WorkspaceLauncher(launcher: workspaceDB.launcher!)
 				}
 				Route("workspace-blocker") {
                     WorkspaceBlocker(blocker: workspaceDB.blocker!)
