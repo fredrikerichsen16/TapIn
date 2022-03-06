@@ -28,6 +28,7 @@
 		35608D1C26C6FBEC0054FCD2 /* AdvancedSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35608D1B26C6FBEC0054FCD2 /* AdvancedSettingsView.swift */; };
 		3566A37026B9D35B0064AE00 /* Dataloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566A36F26B9D35B0064AE00 /* Dataloader.swift */; };
 		3566A37226B9D63B0064AE00 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566A37126B9D63B0064AE00 /* MenuItem.swift */; };
+		3570158627D42F4F000848B7 /* RealmHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3570158527D42F4F000848B7 /* RealmHelpers.swift */; };
 		3573F14526875FB7004B9C21 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F14426875FB7004B9C21 /* Settings.swift */; };
 		3573F14A268767C6004B9C21 /* WorkspacePomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F149268767C6004B9C21 /* WorkspacePomodoro.swift */; };
 		3573F14C268767DB004B9C21 /* WorkspaceTimeTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F14B268767DB004B9C21 /* WorkspaceTimeTracking.swift */; };
@@ -105,6 +106,7 @@
 		3566A36F26B9D35B0064AE00 /* Dataloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dataloader.swift; sourceTree = "<group>"; };
 		3566A37126B9D63B0064AE00 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		356A4F77279A191900A6C633 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		3570158527D42F4F000848B7 /* RealmHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelpers.swift; sourceTree = "<group>"; };
 		3573F14426875FB7004B9C21 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3573F149268767C6004B9C21 /* WorkspacePomodoro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacePomodoro.swift; sourceTree = "<group>"; };
 		3573F14B268767DB004B9C21 /* WorkspaceTimeTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTimeTracking.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				3566A36F26B9D35B0064AE00 /* Dataloader.swift */,
 				3566A37126B9D63B0064AE00 /* MenuItem.swift */,
 				35EF3DC3279B327D004E2795 /* SwiftUIHelpers.swift */,
+				3570158527D42F4F000848B7 /* RealmHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3573F150268767FB004B9C21 /* WorkspaceBlocker.swift in Sources */,
+				3570158627D42F4F000848B7 /* RealmHelpers.swift in Sources */,
 				358D114827C1AD1200983673 /* SectionPicker.swift in Sources */,
 				35608D1C26C6FBEC0054FCD2 /* AdvancedSettingsView.swift in Sources */,
 				355B46E527C97FAC007E0507 /* LauncherInstanceDB.swift in Sources */,

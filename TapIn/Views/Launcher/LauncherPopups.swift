@@ -17,20 +17,27 @@ struct Popover: View {
     @Binding var selection: Int?
     @Binding var showingPopover: Bool
     
-    func createEmptyInstance(type: RealmLauncherType) {
-        let newInstance = LauncherInstanceDB(name: "New Instance", type: type, instantiated: false)
+    func createEmptyWebsiteInstance() {
+        let newInstance = LauncherInstanceDB(
+            name: RealmLauncherType.website.label(),
+            type: .website,
+            instantiated: true,
+            appPath: nil,
+            filePath: "http://www.facebook.com",
+            launchDelay: 0.0,
+            hideOnLaunch: false
+        )
         
         $launcher.launcherInstances.append(newInstance)
         
-//        if let thawed = launcher.thaw() {
-//            try! realm.write {
-//                thawed.launcherInstances.append(newInstance)
-//                print("Number added \(thawed.launcherInstances.count)")
-//            }
-//        } else {
-//            print("FAILED TO ADD NEW EMPTY TING")
-//        }
-//
+        showingPopover = false
+    }
+    
+    func createEmptyInstance(type: RealmLauncherType) {
+        let newInstance = LauncherInstanceDB(name: type.label(), type: type, instantiated: false)
+        
+        $launcher.launcherInstances.append(newInstance)
+        
         print(launcher.launcherInstances.count)
         
 		showingPopover = false
@@ -60,7 +67,8 @@ struct Popover: View {
 			.buttonStyle(PlainButtonStyle())
 			
 			Button(action: {
-                createEmptyInstance(type: .website)
+                createEmptyWebsiteInstance()
+//                createEmptyInstance(type: .website)
 			}, label: {
 				Label("Website", systemImage: "link")
 			})

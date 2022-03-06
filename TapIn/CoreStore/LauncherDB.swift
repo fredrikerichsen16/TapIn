@@ -11,13 +11,24 @@ final class LauncherDB: Object, ObjectKeyIdentifiable {
     @Persisted
     var launcherInstances = RealmSwift.List<LauncherInstanceDB>()
     
-    func replaceInstance(_ instance1: LauncherInstanceDB, _ instance2: LauncherInstanceDB) {
+    // MARK: CRUD
+    
+    func deleteById(id: ObjectId) {
         guard let realm = realm else { return }
+        guard let instanceToDelete = realm.objects(LauncherInstanceDB.self).where({ ($0.id == id) }).first else { return }
         
-        try! realm.write {
-            realm.delete(instance1)
-            
-            self.launcherInstances.append(instance2)
+        if let thawed = instanceToDelete.thaw() {
+            try! realm.write {
+                realm.delete(thawed)
+            }
         }
     }
+    
+    func openAll() {
+        for launcher in launcherInstances
+        {
+            launcher.opener.openApp()
+        }
+    }
+    
 }

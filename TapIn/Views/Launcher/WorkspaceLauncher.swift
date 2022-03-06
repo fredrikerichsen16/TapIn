@@ -5,9 +5,10 @@ struct WorkspaceLauncher: View {
 	@State private var showingSheet = false
 	@State private var showingPopover = false
 	@State private var appSelection: Int? = nil
-    @State private var selectedInstance: String? = nil
+    @State private var selectedInstance: ObjectId? = nil
     
     @ObservedRealmObject var launcher: LauncherDB
+    @Environment(\.realm) var realm
 	
     var body: some View {
 		VStack(alignment: .leading) {
@@ -33,7 +34,16 @@ struct WorkspaceLauncher: View {
                         }
 
                         Button(action: {
-                            print("Remove selected instance")
+                            guard let deleteId = selectedInstance else { return }
+                            guard let instanceToDelete = realm.objects(LauncherInstanceDB.self).where({ ($0.id == deleteId) }).first else { return }
+
+                            if let thawed = instanceToDelete.thaw() {
+                                try! realm.write {
+                                    realm.delete(thawed)
+                                }
+                            }
+                            
+                            // launcher.deleteById(id: deleteId)
                         }, label: {
                             Image(systemName: "minus")
                                 .font(.system(size: 16.0))
@@ -52,17 +62,17 @@ struct WorkspaceLauncher: View {
     
     @ViewBuilder
     func navigationLinkDestination(instance: LauncherInstanceDB) -> some View {
-        switch instance.type {
+        switch instance.fullType {
             case .app:
                 AppLauncherView(launcherInstance: instance)
-//            case .file:
-//                FileLauncherView(workspace: workspace)
-//            case .folder:
-//                FileLauncherView(workspace: workspace)
-//            case .website:
-//                WebsiteLauncherView(workspace: workspace)
-//            case .empty(_):
-//                EmptyLauncherView(launcher: launcher, instance: instance)
+            case .file:
+                FileLauncherView(launcherInstance: instance)
+            case .folder:
+                FileLauncherView(launcherInstance: instance)
+            case .website:
+                WebsiteLauncherView(launcherInstance: instance)
+            case .empty(_):
+                EmptyLauncherView(launcherInstance: instance)
             default:
                 Text("DEFAULT: \(instance.name)")
         }

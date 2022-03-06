@@ -87,7 +87,7 @@ struct WorkspaceBrowse: View {
 
             Spacer()
 
-            BottomMenu()
+            BottomMenu(launcher: workspaceDB.launcher!)
 		}
         .edgesIgnoringSafeArea([.bottom, .horizontal])
 		.onAppear {

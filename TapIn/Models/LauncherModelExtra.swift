@@ -164,6 +164,7 @@ struct AppLauncherOpener: Opener {
         {
             let config = NSWorkspace.OpenConfiguration()
                 config.activates = true
+                config.hides = parent.hideOnLaunch
             
             NSWorkspace.shared.open([file], withApplicationAt: app, configuration: config) { (app, error) in
                 print(app as Any)
@@ -171,10 +172,11 @@ struct AppLauncherOpener: Opener {
         }
         else
         {
-            let openConfig = NSWorkspace.OpenConfiguration()
-            openConfig.activates = true
+            let config = NSWorkspace.OpenConfiguration()
+                config.activates = true
+                config.hides = parent.hideOnLaunch
             
-            NSWorkspace.shared.openApplication(at: app, configuration: openConfig, completionHandler: { _, _ in
+            NSWorkspace.shared.openApplication(at: app, configuration: config, completionHandler: { _, _ in
                 print("OPENED APP")
             })
         }
@@ -254,7 +256,7 @@ struct FileLauncherOpener: Opener {
     var parent: LauncherInstanceDB
     
     func openApp() {
-        guard let app = parent.appUrl else {
+        guard let app = parent.appController.getApp() else {
             print("ERROR 194324")
             return
         }
@@ -263,6 +265,7 @@ struct FileLauncherOpener: Opener {
         
         let config = NSWorkspace.OpenConfiguration()
             config.activates = true
+            config.hides = parent.hideOnLaunch
         
         NSWorkspace.shared.open([file], withApplicationAt: app, configuration: config) { (app, error) in
             print(file)
@@ -376,6 +379,14 @@ struct WebsiteLauncherAppController: AppController {
         return getDefaultApp()
     }
     
+    func getDefaultApp() -> URL? {
+        if let file = parent.fileController.getFile() {
+            return NSWorkspace.shared.urlForApplication(toOpen: file)
+        }
+        
+        return nil
+    }
+    
     func setApp() {
         print("x")
     }
@@ -383,9 +394,12 @@ struct WebsiteLauncherAppController: AppController {
     func iconForApp(size: Int) -> NSImage {
         var image: NSImage
         
-        if let _app = getApp() {
+        if let _app = getApp()
+        {
             image = NSWorkspace.shared.icon(forFile: _app.path)
-        } else {
+        }
+        else
+        {
             image = NSImage(systemSymbolName: "questionmark.square.fill", accessibilityDescription: nil)!
         }
         
@@ -399,7 +413,12 @@ struct WebsiteLauncherFileController: FileController {
     var parent: LauncherInstanceDB
     
     func getFile() -> URL? {
-        parent.fileUrl
+        if let filePath = parent.filePath
+        {
+            return URL(string: filePath)
+        }
+        
+        return nil
     }
     
     func setFile() {
@@ -411,19 +430,13 @@ struct WebsiteLauncherOpener: Opener {
     var parent: LauncherInstanceDB
     
     func openApp() {
-        guard let app = parent.appUrl,
-              let file = parent.fileUrl
-        else
-        {
-            return
-        }
+        guard let file = parent.fileController.getFile() else { return }
         
         let config = NSWorkspace.OpenConfiguration()
             config.activates = true
+            config.hides = parent.hideOnLaunch
         
-        NSWorkspace.shared.open([file], withApplicationAt: app, configuration: config) { (app, error) in
-            print(app as Any)
-        }
+        NSWorkspace.shared.open(file)
     }
 }
 

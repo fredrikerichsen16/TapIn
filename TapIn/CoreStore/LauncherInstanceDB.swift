@@ -2,6 +2,9 @@ import Foundation
 import RealmSwift
 
 final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
+    
+    // MARK: Persisted properties
+    
     @Persisted(primaryKey: true)
     var id: ObjectId
     
@@ -49,22 +52,7 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
     @Persisted(originProperty: "launcherInstances")
     var launcher: LinkingObjects<LauncherDB>
     
-//    lazy var launcherBridge: LaunchInstanceBridge? = {
-//        let launcherType = type.convertToLauncherType(instantiated: self.instantiated)
-////        let launcherType = LauncherType.empty(LauncherType.app)
-//
-//        let result = LaunchInstanceBridge.createLauncherFromType(type: launcherType, name: name, app: appUrl, file: fileUrl)
-////        let result = LaunchInstanceBridge.createAppLauncher(name: name, app: URL(fileURLWithPath: "/Applications/Craft.app"), file: nil)
-//
-//        if let thawed = self.thaw(),
-//           let thawedRealm = thawed.realm {
-//            try! thawedRealm.write {
-//                thawed.instantiated = true
-//            }
-//        }
-//
-//        return result
-//    }()
+    // MARK: Initialize
     
     convenience init(name: String, type: RealmLauncherType, instantiated: Bool, appPath: String? = nil, filePath: String? = nil, launchDelay: TimeInterval = 0.0, hideOnLaunch: Bool = false) {
         self.init()
@@ -75,8 +63,6 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
         self.filePath = filePath
         self.launchDelay = launchDelay
         self.hideOnLaunch = hideOnLaunch
-        
-//        self.initializeBridge()
     }
     
     convenience init(name: String, type: RealmLauncherType, instantiated: Bool) {
@@ -84,11 +70,9 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
         self.name = name
         self.type = type
         self.instantiated = instantiated
-        
-//        self.initializeBridge()
     }
     
-    // ...
+    // MARK: Set up bridge
     
     lazy var appController: AppController = {
         switch fullType {
@@ -156,124 +140,9 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
         }
     }()
     
-//    var fileController: FileController!
-//    var appController: AppController!
-//    var opener: Opener!
-//    var panel: Panel!
-//
-//    func initializeBridge() {
-//        if !instantiated {
-//            initializeEmptyLauncher(type: type)
-//
-//            return
-//        }
-//
-//        switch type {
-//            case .app:
-//                initializeAppLauncher()
-//            case .file:
-//                initializeFileLauncher()
-//            case .folder:
-//                initializeFolderLauncher()
-//            case .website:
-//                initializeWebsiteLauncher()
-//            default:
-//                fatalError("32489234")
-//        }
-//    }
-//
-//    func initializeEmptyLauncher(type: RealmLauncherType) {
-//        var typeConformingPanel: Panel
-//
-//        switch type {
-//            case .app:
-//                typeConformingPanel = AppLauncherPanel(parent: self)
-//            case .file:
-//                typeConformingPanel = FileLauncherPanel(parent: self)
-//            case .folder:
-//                typeConformingPanel = FolderLauncherPanel(parent: self)
-//            case .website:
-//                typeConformingPanel = WebsiteLauncherPanel(parent: self)
-//            default:
-//                if !instantiated
-//                {
-//                    typeConformingPanel = EmptyLauncherPanel(parent: self)
-//                }
-//                else {
-//                    fatalError("Not yet fully supported type")
-//                }
-//        }
-//
-//        self.appController = EmptyLauncherAppController(parent: self, app: nil)
-//        self.fileController = EmptyLauncherFileController(parent: self, file: nil)
-//        self.opener = EmptyLauncherOpener(parent: self)
-//        self.panel = typeConformingPanel
-//    }
-//
-//    func initializeAppLauncher() {
-//        guard let app = appUrl else { return }
-//        let file = fileUrl
-//
-//        self.appController = AppLauncherAppController(parent: self, app: app)
-//        self.fileController = AppLauncherFileController(parent: self, file: file)
-//        self.opener = AppLauncherOpener(parent: self)
-//        self.panel = AppLauncherPanel(parent: self)
-//    }
-//
-//    func initializeFileLauncher() {
-//        guard let file = fileUrl else { return }
-//        let app = appUrl
-//
-//        self.appController = FileLauncherAppController(parent: self, app: app)
-//        self.fileController = FileLauncherFileController(parent: self, file: file)
-//        self.opener = FileLauncherOpener(parent: self)
-//        self.panel = FileLauncherPanel(parent: self)
-//    }
-//
-//    func initializeFolderLauncher() {
-//        guard let file = fileUrl else { return }
-//        let app = appUrl
-//
-//        self.appController = FileLauncherAppController(parent: self, app: app)
-//        self.fileController = FileLauncherFileController(parent: self, file: file)
-//        self.opener = FileLauncherOpener(parent: self)
-//        self.panel = FolderLauncherPanel(parent: self)
-//    }
-//
-//    func initializeWebsiteLauncher() {
-//        guard let file = fileUrl else { return }
-//        let app = appUrl
-//
-//        self.appController = WebsiteLauncherAppController(parent: self, app: app)
-//        self.fileController = WebsiteLauncherFileController(parent: self, file: file)
-//        self.opener = WebsiteLauncherOpener(parent: self)
-//        self.panel = WebsiteLauncherPanel(parent: self)
-//    }
-//
-//    func convertFromEmpty(type emptyType: LauncherType) {
-//        var type = emptyType
-//
-//        if case let .empty(innerType) = emptyType {
-//            type = innerType
-//
-//            instantiated = true
-//        } else {
-//            return
-//        }
-//
-//        switch type {
-//            case .app:
-//                initializeAppLauncher()
-//            case .file:
-//                initializeFileLauncher()
-//            case .folder:
-//                initializeFolderLauncher()
-//            case .website:
-//                initializeWebsiteLauncher()
-//            default:
-//                return
-//        }
-//    }
+    // MARK: CRUD
+    
+    
 }
 
 enum RealmLauncherType: String, Equatable, PersistableEnum {

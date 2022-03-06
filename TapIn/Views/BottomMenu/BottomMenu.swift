@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct BottomMenu: View {
+    @ObservedRealmObject var launcher: LauncherDB
+    
     @State private var showingPopover = false
     @State private var first = true
     @State private var second = false
@@ -16,6 +19,10 @@ struct BottomMenu: View {
     var body: some View {
         HStack {
             Spacer()
+            
+            Button("Open All") {
+                launcher.openAll()
+            }
             
             Button("Start") {
                 showingPopover.toggle()
