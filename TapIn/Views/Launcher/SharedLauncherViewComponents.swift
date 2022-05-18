@@ -52,8 +52,9 @@ struct TappableAppIconView: View {
             Image(nsImage: launcherInstance.appController.iconForApp(size: 128))
                 .onTapGesture {
                     let panel = launcherInstance.panel.createPanel()
+                    let (url, completed) = launcherInstance.panel.openPanel(with: panel)
                     
-                    if let url = launcherInstance.panel.openPanel(with: panel)
+                    if let url = url
                     {
                         let name = applicationReadableName(url: url)
                         
@@ -77,7 +78,7 @@ struct TappableAppIconView: View {
                             launcherInstance.appController.setApp(name: name, appPath: url.path)
                         }
                     }
-                    else
+                    else if completed == true
                     {
                         errorMessage = "You can only submit \(launcherInstance.type)s!"
                         displayError = true

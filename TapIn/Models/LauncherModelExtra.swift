@@ -105,19 +105,23 @@ protocol Panel {
     var parent: LauncherInstanceDB { get set }
     
     func createPanel() -> NSOpenPanel
-    func openPanel(with panel: NSOpenPanel) -> URL?
+    
+    /// Open a panel for selecting a file, app or directory and return the selected file and whether the operation was completed (as opposed to cancelled by the user)
+    /// - Parameter panel: NSPanel
+    /// - Returns: 1) Selected file/directory's URL 2) Boolean indicating whether the file selection operation was completed
+    func openPanel(with panel: NSOpenPanel) -> (URL?, Bool)
 }
 
 extension Panel {
     // Upon further analysis (implementing this in different cases) it seems better to just extend NSOpenPanel and have a thing
     // .canChooseApps and .canChooseFileFiles instead of just .canChooseFiles without distinguishing
     // Upon further analysis.. actually not. You can't just extend default classes all the time.. gotta write soem regular code also no?
-    func openPanel(with panel: NSOpenPanel) -> URL? {
+    func openPanel(with panel: NSOpenPanel) -> (URL?, Bool) {
         if panel.runModal() == .OK {
-            return panel.url
+            return (panel.url, true)
         }
         
-        return nil
+        return (nil, false)
     }
 }
 
@@ -205,12 +209,18 @@ struct AppLauncherPanel: Panel {
         return panel
     }
     
-    func openPanel(with panel: NSOpenPanel) -> URL? {
-        if panel.runModal() == .OK, let url = panel.url, url.pathExtension == "app" {
-            return url
+    func openPanel(with panel: NSOpenPanel) -> (URL?, Bool) {
+        var completedSelection = false
+        
+        if panel.runModal() == .OK {
+            completedSelection = true
+            
+            if let url = panel.url, url.pathExtension == "app" {
+                return (url, completedSelection)
+            }
         }
         
-        return nil
+        return (nil, completedSelection)
     }
 }
 
@@ -299,13 +309,18 @@ struct FileLauncherPanel: Panel {
         return panel
     }
     
-    func openPanel(with panel: NSOpenPanel) -> URL? {
-        if panel.runModal() == .OK, let url = panel.url, url.pathExtension != "app" && url.hasDirectoryPath == false
-        {
-            return url
+    func openPanel(with panel: NSOpenPanel) -> (URL?, Bool) {
+        var completedSelection = false
+        
+        if panel.runModal() == .OK {
+            completedSelection = true
+            
+            if let url = panel.url, url.pathExtension != "app" && url.hasDirectoryPath == false {
+                return (url, completedSelection)
+            }
         }
         
-        return nil
+        return (nil, completedSelection)
     }
 }
 
@@ -323,15 +338,18 @@ struct FolderLauncherPanel: Panel {
         return panel
     }
     
-    func openPanel(with panel: NSOpenPanel) -> Bool {
-        if panel.runModal() == .OK
-        {
-            guard let url = panel.url else { fatalError("No URL received from the panel") }
+    func openPanel(with panel: NSOpenPanel) -> (URL?, Bool) {
+        var completedSelection = false
+        
+        if panel.runModal() == .OK {
+            completedSelection = true
             
-            return url.hasDirectoryPath == true
+            if let url = panel.url, url.hasDirectoryPath == true {
+                return (url, completedSelection)
+            }
         }
         
-        return false
+        return (nil, completedSelection)
     }
 }
 
@@ -460,7 +478,13 @@ struct WebsiteLauncherFileController: FileController {
     }
     
     func setFile(name: String, filePath: String) {
-        print("y")
+        let (thawed, realm) = parent.easyThaw()
+
+        try! realm.write {
+            thawed.name = name
+            thawed.filePath = filePath
+            thawed.instantiated = true
+        }
     }
 }
 
