@@ -16,6 +16,8 @@
 		3538C2EB27AB5F3700D74044 /* BlockerDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C2EA27AB5F3700D74044 /* BlockerDB.swift */; };
 		3538C2ED27AB60BA00D74044 /* TimeTrackerDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C2EC27AB60BA00D74044 /* TimeTrackerDB.swift */; };
 		35500DF728355D0B00AF9AB5 /* SharedLauncherViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35500DF628355D0B00AF9AB5 /* SharedLauncherViewComponents.swift */; };
+		35500DFA2835A3FC00AF9AB5 /* WebsiteLauncherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35500DF92835A3FC00AF9AB5 /* WebsiteLauncherTests.swift */; };
+		35500DFC2835A8B900AF9AB5 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35500DFB2835A8B900AF9AB5 /* String+.swift */; };
 		35521BCC279C98FA0047508D /* LauncherModelExtra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35521BCB279C98FA0047508D /* LauncherModelExtra.swift */; };
 		355B46E327C97DC2007E0507 /* MenuItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355B46E227C97DC2007E0507 /* MenuItemTests.swift */; };
 		355B46E527C97FAC007E0507 /* LauncherInstanceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355B46E427C97FAC007E0507 /* LauncherInstanceDB.swift */; };
@@ -95,6 +97,8 @@
 		3538C2EA27AB5F3700D74044 /* BlockerDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerDB.swift; sourceTree = "<group>"; };
 		3538C2EC27AB60BA00D74044 /* TimeTrackerDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerDB.swift; sourceTree = "<group>"; };
 		35500DF628355D0B00AF9AB5 /* SharedLauncherViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedLauncherViewComponents.swift; sourceTree = "<group>"; };
+		35500DF92835A3FC00AF9AB5 /* WebsiteLauncherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteLauncherTests.swift; sourceTree = "<group>"; };
+		35500DFB2835A8B900AF9AB5 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		35521BCB279C98FA0047508D /* LauncherModelExtra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModelExtra.swift; sourceTree = "<group>"; };
 		355B46E227C97DC2007E0507 /* MenuItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemTests.swift; sourceTree = "<group>"; };
 		355B46E427C97FAC007E0507 /* LauncherInstanceDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherInstanceDB.swift; sourceTree = "<group>"; };
@@ -308,6 +312,7 @@
 				35AEA167267F65D2000AFE85 /* PomodoroModelTests.swift */,
 				35AEA169267F65D2000AFE85 /* Info.plist */,
 				355B46E227C97DC2007E0507 /* MenuItemTests.swift */,
+				35500DF92835A3FC00AF9AB5 /* WebsiteLauncherTests.swift */,
 			);
 			path = TapInTests;
 			sourceTree = "<group>";
@@ -339,6 +344,7 @@
 				35AEA193267FA815000AFE85 /* Color+.swift */,
 				352A0B8426C94F2C00AA256B /* Collection+.swift */,
 				352E18AE279CCB4100EC87F2 /* URL+.swift */,
+				35500DFB2835A8B900AF9AB5 /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -552,6 +558,7 @@
 				355F84AF279FC313002E77EC /* ItemsViewModel.swift in Sources */,
 				35AEA18A267F95B5000AFE85 /* LauncherModel.swift in Sources */,
 				35A91B4027C9A26E00E94E56 /* LauncherDB.swift in Sources */,
+				35500DFC2835A8B900AF9AB5 /* String+.swift in Sources */,
 				3538C2ED27AB60BA00D74044 /* TimeTrackerDB.swift in Sources */,
 				3538C2EB27AB5F3700D74044 /* BlockerDB.swift in Sources */,
 				35AEA181267F6AD4000AFE85 /* WorkspaceBrowse.swift in Sources */,
@@ -597,6 +604,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35AEA168267F65D2000AFE85 /* PomodoroModelTests.swift in Sources */,
+				35500DFA2835A3FC00AF9AB5 /* WebsiteLauncherTests.swift in Sources */,
 				355B46E327C97DC2007E0507 /* MenuItemTests.swift in Sources */,
 				35AD491D26C7062800AEA899 /* LauncherModelTests.swift in Sources */,
 			);
