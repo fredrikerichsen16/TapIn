@@ -1,13 +1,33 @@
 import SwiftUI
 import RealmSwift
 
+func convertURL(urlString: String) -> String? {
+    var str = urlString.lowercased().trim()
+    
+    if !(str.starts(with: "https://") || str.starts(with: "http://")) {
+        str = "https://" + str
+    }
+    
+        let regex = "^(https?:\\/\\/)?([\\da-z\\.-]+\\.[a-z\\.]{2,6}|[\\d\\.]+)([\\/:?=&#]{1}[\\da-z\\.-]+)*[\\/\\?]?$"
+    // adding [c] after the comparator (MATCHES) makes it case insensitive
+    let predicate = NSPredicate(format:"SELF MATCHES[c] %@", argumentArray:[regex])
+    
+    if predicate.evaluate(with: str) == false {
+        return nil
+    }
+    
+    if URL(string: str) == nil {
+        return nil
+    }
+    
+    return str
+}
+
 struct WebsiteLauncherView: View {
     @ObservedRealmObject var launcherInstance: LauncherInstanceDB
     @Environment(\.realm) var realm
     
-    @State var websiteName: String = ""
-    @State var websiteURL: String = ""
-    @State private var showingSheet = false
+    @State var showingSheet = false
     
     var body: some View {
         VStack {
@@ -16,38 +36,56 @@ struct WebsiteLauncherView: View {
                 .onTapGesture {
                     showingSheet = true
                 }
-                .sheet(isPresented: $showingSheet, onDismiss: {
-                    print("Dismissed")
-                }, content: {
-                    if #available(macOS 12.0, *) {
-                        HStack {
-                            TextField("Website Name", text: $websiteName)
-                                .textFieldStyle(.squareBorder)
-                            TextField("Website URL", text: $websiteURL)
-                                .textFieldStyle(.roundedBorder)
-                        }
-                    } else {
-                        Text("Unavailable")
-                    }
-                    
-                    Button("Submit") {
-                        guard let url = URL(string: websiteURL) else { return }
-                        
-                        if let thawed = launcherInstance.thaw() {
-                            try! realm.write {
-                                thawed.name = websiteName
-                                thawed.filePath = websiteURL
-                                
-                                print("Thawed AppPath:")
-                                print(thawed.filePath)
-                            }
-                        }
-                        showingSheet = false
-                    }
-                })
+                .sheet(isPresented: $showingSheet) {
+                    WebsiteEditSheetView(launcherInstance: launcherInstance)
+                }
             
             Text(launcherInstance.name).font(.title2)
         }
+    }
+}
+
+struct WebsiteEditSheetView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @ObservedRealmObject var launcherInstance: LauncherInstanceDB
+    
+    @State private var websiteName: String = ""
+    @State private var websiteURL: String = ""
+    
+    var body: some View {
+        Section {
+            if #available(macOS 12.0, *)
+            {
+                VStack(alignment: .center, spacing: 5) {
+                    Text("Website Name").font(.body)
+                    TextField("", text: $websiteName)
+                        .textFieldStyle(.roundedBorder)
+                    
+                    Text("Website URL").font(.body)
+                    TextField("", text: $websiteURL)
+                        .textFieldStyle(.roundedBorder)
+                }
+            }
+            else
+            {
+                Text("Unavailable")
+            }
+            
+            HStack(alignment: .center, spacing: 5) {
+                Button("Cancel") {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+                
+                Button(action: onSubmitSheet, label: { Text("Submit") })
+            }
+        }.padding(15)
+    }
+    
+    func onSubmitSheet() {
+        guard let cleanWebsiteUrl = convertURL(urlString: websiteURL) else { return }
+        launcherInstance.fileController.setFile(name: websiteName, filePath: cleanWebsiteUrl)
+        
+        self.presentationMode.wrappedValue.dismiss()
     }
 }
 
