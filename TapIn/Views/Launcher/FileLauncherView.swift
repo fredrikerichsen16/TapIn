@@ -14,26 +14,39 @@ struct FileLauncherView: View {
 
     @State private var openWithSelection: Int = 0
     
+    @State private var isEditingAppName: Bool = false
+    
     var body: some View {
         VStack {
-            Image(nsImage: launcherInstance.appController.iconForApp(size: 128))
-                .font(.system(size: 80))
-                .onTapGesture {
-                    let panel = launcherInstance.panel.createPanel()
-
-                    if launcherInstance.panel.openPanel(with: panel), let url = panel.url {
-                        let name = applicationReadableName(url: url)
-                        
-                        if let thawed = launcherInstance.thaw() {
-                            try! realm.write {
-                                thawed.name = name
-                                thawed.filePath = url.path
-                            }
+            TappableAppIconView(launcherInstance: launcherInstance)
+            
+            if isEditingAppName
+            {
+                if #available(macOS 12.0, *)
+                {
+                    TextField("App Name", text: $launcherInstance.name)
+                        .font(.body)
+                        .frame(width: 120, alignment: .center)
+                        .onSubmit {
+                            isEditingAppName = false
                         }
-                    }
                 }
-
-            Text(launcherInstance.name).font(.title2)
+                else
+                {
+                    TextField("App Name", text: $launcherInstance.name, onCommit: {
+                        isEditingAppName = false
+                    })
+                    .frame(width: 120, alignment: .center)
+                    .font(.body)
+                }
+            }
+            else
+            {
+                Text(launcherInstance.name).font(.title2)
+                    .onTapGesture(count: 2) {
+                        isEditingAppName = true
+                    }
+            }
 
             if let compatibleApps = launcherInstance.fileController.getCompatibleApps() {
                 openWithMenu(compatibleApps)
@@ -49,6 +62,7 @@ struct FileLauncherView: View {
     func openWithMenu(_ compatibleApps: [URL]) -> some View {
         VStack {
             Text("Open file with app...")
+            
             Picker("", selection: $openWithSelection) {
                 ForEach(Array(zip(compatibleApps.indices, compatibleApps)), id: \.0) { index, app in
                     HStack {
@@ -57,6 +71,7 @@ struct FileLauncherView: View {
                     }.tag(index)
                 }
             }
+            .frame(width: 200, alignment: .center)
             .pickerStyle(PopUpButtonPickerStyle())
             .onChange(of: openWithSelection) { appIndex in
                 let url = compatibleApps[appIndex]
@@ -66,18 +81,6 @@ struct FileLauncherView: View {
                         thawed.appPath = url.path
                     }
                 }
-
-                print("""
-                    - Path: \(url.path)
-                    - Is directory?: \(url.hasDirectoryPath)
-                    - Is file?: \(url.isFileURL)
-                    - Scheme: \(String(describing: url.scheme))
-                    - Last Path Component: \(url.lastPathComponent)
-                    - Last Path Component: \(url.fileName)
-                    - Extension: \(url.pathExtension)
-                    - File exitsts?: \(FileManager.default.fileExists(atPath: url.path))
-                    - urlForApp: \(String(describing: NSWorkspace.shared.urlForApplication(toOpen: url)))
-                """)
             }
         }
     }

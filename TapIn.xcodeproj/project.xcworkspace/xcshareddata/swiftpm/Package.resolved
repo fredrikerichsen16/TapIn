@@ -1,43 +1,32 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "CoreStore",
-        "repositoryURL": "https://github.com/JohnEstropia/CoreStore",
-        "state": {
-          "branch": null,
-          "revision": "496145761ab30e8cf1c44220c0882b95e6b41077",
-          "version": "8.1.0"
-        }
-      },
-      {
-        "package": "RealmDatabase",
-        "repositoryURL": "https://github.com/realm/realm-core",
-        "state": {
-          "branch": null,
-          "revision": "6b81f1a7a2d421f9e0b9e7f04e76bcf736a54409",
-          "version": "11.9.0"
-        }
-      },
-      {
-        "package": "Realm",
-        "repositoryURL": "https://github.com/realm/realm-swift",
-        "state": {
-          "branch": null,
-          "revision": "9dff9f2862240d521ad6ad599541269177ddb993",
-          "version": "10.22.0"
-        }
-      },
-      {
-        "package": "SwiftUIRouter",
-        "repositoryURL": "https://github.com/frzi/SwiftUIRouter.git",
-        "state": {
-          "branch": "main",
-          "revision": "a6f6c67fab0f040a72f4416f4173367b57683d46",
-          "version": null
-        }
+  "pins" : [
+    {
+      "identity" : "realm-core",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-core",
+      "state" : {
+        "revision" : "472d325a2e844fcb48c400db74e6b9646f92ca93",
+        "version" : "11.15.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "realm-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/realm/realm-swift.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "e6b31c44951279ec42bf3e2d8f52b89c263c95fb"
+      }
+    },
+    {
+      "identity" : "swiftuirouter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/frzi/SwiftUIRouter.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a6f6c67fab0f040a72f4416f4173367b57683d46"
+      }
+    }
+  ],
+  "version" : 2
 }

@@ -33,6 +33,26 @@ struct SidebarSection: View {
                     }
                 }
             }
+            
+            Spacer()
+            
+//            HStack(spacing: 10) {
+//                Button("Add Workspace") {
+//                    try? realm.write({
+//                        let ws = WorkspaceDB(name: "New Workspace", isWork: true)
+//                        
+//                        realm.add(ws)
+//                    })
+//                }
+//                
+//                Button("Add Leisurespace") {
+//                    try? realm.write({
+//                        let ws = WorkspaceDB(name: "New Workspace", isWork: false)
+//                        
+//                        realm.add(ws)
+//                    })
+//                }
+//            }
         }
         .collapsible(false)
     }

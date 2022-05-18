@@ -57,7 +57,7 @@ protocol AppController {
     var parent: LauncherInstanceDB { get set }
     
     func getApp() -> URL?
-    func setApp()
+    func setApp(name: String, appPath: String)
     
     func iconForApp(size: Int) -> NSImage
     
@@ -76,7 +76,7 @@ protocol FileController {
     var parent: LauncherInstanceDB { get set }
     
     func getFile() -> URL?
-    func setFile()
+    func setFile(name: String, filePath: String)
 }
 
 extension FileController {
@@ -105,15 +105,19 @@ protocol Panel {
     var parent: LauncherInstanceDB { get set }
     
     func createPanel() -> NSOpenPanel
-    func openPanel(with panel: NSOpenPanel) -> Bool
+    func openPanel(with panel: NSOpenPanel) -> URL?
 }
 
 extension Panel {
     // Upon further analysis (implementing this in different cases) it seems better to just extend NSOpenPanel and have a thing
     // .canChooseApps and .canChooseFileFiles instead of just .canChooseFiles without distinguishing
     // Upon further analysis.. actually not. You can't just extend default classes all the time.. gotta write soem regular code also no?
-    func openPanel(with panel: NSOpenPanel) -> Bool {
-        return panel.runModal() == .OK
+    func openPanel(with panel: NSOpenPanel) -> URL? {
+        if panel.runModal() == .OK {
+            return panel.url
+        }
+        
+        return nil
     }
 }
 
@@ -128,10 +132,16 @@ struct AppLauncherAppController: AppController {
         return parent.appUrl
     }
     
-    func setApp() {
-        print("x")
+    func setApp(name: String, appPath: String) {
+        let (thawed, realm) = parent.easyThaw()
+
+        try! realm.write {
+            thawed.name = name
+            thawed.appPath = appPath
+            thawed.instantiated = true
+        }
     }
-    
+  
     func iconForApp(size: Int) -> NSImage {
         guard let app = getApp() else { fatalError("App has to have an app.. duh") }
         
@@ -149,7 +159,7 @@ struct AppLauncherFileController: FileController {
         parent.fileUrl
     }
     
-    func setFile() {
+    func setFile(name: String, filePath: String) {
         print("y")
     }
 }
@@ -195,13 +205,12 @@ struct AppLauncherPanel: Panel {
         return panel
     }
     
-    func openPanel(with panel: NSOpenPanel) -> Bool {
-        if panel.runModal() == .OK
-        {
-            return panel.url?.pathExtension == "app"
+    func openPanel(with panel: NSOpenPanel) -> URL? {
+        if panel.runModal() == .OK, let url = panel.url, url.pathExtension == "app" {
+            return url
         }
         
-        return false
+        return nil
     }
 }
 
@@ -221,7 +230,7 @@ struct FileLauncherAppController: AppController {
         return getDefaultApp()
     }
     
-    func setApp() {
+    func setApp(name: String, appPath: String) {
         print("x")
     }
     
@@ -247,8 +256,14 @@ struct FileLauncherFileController: FileController {
         parent.fileUrl
     }
     
-    func setFile() {
-        print("y")
+    func setFile(name: String, filePath: String) {
+        let (thawed, realm) = parent.easyThaw()
+
+        try! realm.write {
+            thawed.name = name
+            thawed.filePath = filePath
+            thawed.instantiated = true
+        }
     }
 }
 
@@ -284,13 +299,13 @@ struct FileLauncherPanel: Panel {
         return panel
     }
     
-    func openPanel(with panel: NSOpenPanel) -> Bool {
-        if panel.runModal() == .OK
+    func openPanel(with panel: NSOpenPanel) -> URL? {
+        if panel.runModal() == .OK, let url = panel.url, url.pathExtension != "app" && url.hasDirectoryPath == false
         {
-            return panel.url?.pathExtension != "app"
+            return url
         }
         
-        return false
+        return nil
     }
 }
 
@@ -307,6 +322,17 @@ struct FolderLauncherPanel: Panel {
         
         return panel
     }
+    
+    func openPanel(with panel: NSOpenPanel) -> Bool {
+        if panel.runModal() == .OK
+        {
+            guard let url = panel.url else { fatalError("No URL received from the panel") }
+            
+            return url.hasDirectoryPath == true
+        }
+        
+        return false
+    }
 }
 
 // ------------------------
@@ -320,8 +346,14 @@ struct EmptyLauncherAppController: AppController {
         return getDefaultApp()
     }
     
-    func setApp() {
-        print("x")
+    func setApp(name: String, appPath: String) {
+        let (thawed, realm) = parent.easyThaw()
+
+        try! realm.write {
+            thawed.name = name
+            thawed.appPath = appPath
+            thawed.instantiated = true
+        }
     }
     
     func iconForApp(size: Int) -> NSImage {
@@ -340,8 +372,14 @@ struct EmptyLauncherFileController: FileController {
         parent.fileUrl
     }
     
-    func setFile() {
-        print("y")
+    func setFile(name: String, filePath: String) {
+        let (thawed, realm) = parent.easyThaw()
+
+        try! realm.write {
+            thawed.name = name
+            thawed.filePath = filePath
+            thawed.instantiated = true
+        }
     }
 }
 
@@ -387,7 +425,7 @@ struct WebsiteLauncherAppController: AppController {
         return nil
     }
     
-    func setApp() {
+    func setApp(name: String, appPath: String) {
         print("x")
     }
     
@@ -421,7 +459,7 @@ struct WebsiteLauncherFileController: FileController {
         return nil
     }
     
-    func setFile() {
+    func setFile(name: String, filePath: String) {
         print("y")
     }
 }

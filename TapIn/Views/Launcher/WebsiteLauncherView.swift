@@ -47,10 +47,6 @@ struct WebsiteLauncherView: View {
                 })
             
             Text(launcherInstance.name).font(.title2)
-            
-            Button("Open") {
-                launcherInstance.opener.openApp()
-            }
         }
     }
 }

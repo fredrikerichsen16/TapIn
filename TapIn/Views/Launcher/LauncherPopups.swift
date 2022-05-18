@@ -23,7 +23,7 @@ struct Popover: View {
             type: .website,
             instantiated: true,
             appPath: nil,
-            filePath: "http://www.facebook.com",
+            filePath: "http://www.google.com",
             launchDelay: 0.0,
             hideOnLaunch: false
         )
@@ -68,7 +68,6 @@ struct Popover: View {
 			
 			Button(action: {
                 createEmptyWebsiteInstance()
-//                createEmptyInstance(type: .website)
 			}, label: {
 				Label("Website", systemImage: "link")
 			})

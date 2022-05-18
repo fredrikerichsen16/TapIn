@@ -1,5 +1,6 @@
 import SwiftUI
 import RealmSwift
+import QuickLook
 
 struct WorkspaceLauncher: View {
 	@State private var showingSheet = false
@@ -34,16 +35,9 @@ struct WorkspaceLauncher: View {
                         }
 
                         Button(action: {
-                            guard let deleteId = selectedInstance else { return }
-                            guard let instanceToDelete = realm.objects(LauncherInstanceDB.self).where({ ($0.id == deleteId) }).first else { return }
-
-                            if let thawed = instanceToDelete.thaw() {
-                                try! realm.write {
-                                    realm.delete(thawed)
-                                }
-                            }
+                            guard let id = selectedInstance else { return }
                             
-                            // launcher.deleteById(id: deleteId)
+                            let _ = LauncherInstanceDB.deleteById(realm, id: id)
                         }, label: {
                             Image(systemName: "minus")
                                 .font(.system(size: 16.0))
@@ -53,13 +47,17 @@ struct WorkspaceLauncher: View {
                 }
                 .padding()
 
-                Text("Select one...").font(.title2)
+                Text("Select of the workspaces or click \"+\" to create a new one").font(.callout)
 			}
+            .quickLookPreview($quickLookURL)
 
 			Spacer()
 		}
     }
     
+    /// Return a view for editing/opening the app/file/etc. based on the launcher type of the given launcher instance. Is the view that appears on the right when you click a navigation link on the left.
+    /// - Parameter instance: Launcher Instance from the Realm database
+    /// - Returns: Launcher view
     @ViewBuilder
     func navigationLinkDestination(instance: LauncherInstanceDB) -> some View {
         switch instance.fullType {
@@ -78,6 +76,8 @@ struct WorkspaceLauncher: View {
         }
     }
     
+    @State private var quickLookURL: URL? = nil
+    
     @ViewBuilder
     func launcherInstanceMenuButton(instance: LauncherInstanceDB) -> some View {
         NavigationLink(destination: navigationLinkDestination(instance: instance)) {
@@ -89,8 +89,36 @@ struct WorkspaceLauncher: View {
                 Spacer()
             }
             .tag(instance.id.stringValue)
-            .onTapGesture(count: 2) {
+        }
+        .contextMenu(ContextMenu(menuItems: {
+            menuButtonsContextMenu(instance: instance)
+        }))
+    }
+    
+    @ViewBuilder
+    func menuButtonsContextMenu(instance: LauncherInstanceDB) -> some View {
+        SwiftUI.Group {
+            Button("Open") {
                 instance.opener.openApp()
+            }
+            
+            Button("Disable") {
+                print("Disable not implemented yet")
+            }
+            
+            Button("Duplicate") {
+                try! realm.write {
+                    let duplicatedLauncher = LauncherInstanceDB(name: instance.name, type: instance.type, instantiated: instance.instantiated, appPath: instance.appPath, filePath: instance.filePath, launchDelay: instance.launchDelay, hideOnLaunch: instance.hideOnLaunch)
+                    realm.add(duplicatedLauncher)
+                }
+            }
+            
+            Button("Quick Look") {
+                quickLookURL = instance.fileController.getFile() ?? instance.appController.getApp()
+            }
+            
+            Button("Delete") {
+                let _ = LauncherInstanceDB.deleteById(realm, id: instance.id)
             }
         }
     }

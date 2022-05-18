@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreStore
 import RealmSwift
 
 struct DataBridge: View {

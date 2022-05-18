@@ -20,31 +20,13 @@ struct AppLauncherView: View {
     
     @State private var hideOnLaunch: Bool = false
     
+    @State private var isEditingAppName: Bool = false
+    
     var body: some View {
         VStack {
-            Image(nsImage: launcherInstance.appController.iconForApp(size: 128))
-                .font(.system(size: 80))
-                .onTapGesture {
-                    let panel = launcherInstance.panel.createPanel()
-                    
-                    if launcherInstance.panel.openPanel(with: panel), let url = panel.url
-                    {
-                        let name = applicationReadableName(url: url)
-                        
-                        if let thawed = launcherInstance.thaw() {
-                            try! realm.write {
-                                thawed.name = name
-                                thawed.appPath = url.path
-                                thawed.instantiated = true
-                                
-                                print("Thawed AppPath:")
-                                print(thawed.appPath)
-                            }
-                        }
-                    }
-                }
-                
-            Text(launcherInstance.name).font(.title2)
+            TappableAppIconView(launcherInstance: launcherInstance)
+            
+            EditableLauncherNameView(launcherInstance: launcherInstance)
             
             Button("Open") {
                 launcherInstance.opener.openApp()

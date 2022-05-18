@@ -3,6 +3,13 @@ import RealmSwift
 
 final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
     
+    func easyThaw() -> (LauncherInstanceDB, Realm) {
+        guard let thawed = self.thaw(),
+              let realm = thawed.realm else { fatalError("Easythaw failed") }
+        
+        return (thawed, realm)
+    }
+    
     // MARK: Persisted properties
     
     @Persisted(primaryKey: true)
@@ -142,7 +149,23 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
     
     // MARK: CRUD
     
-    
+    static func deleteById(_ realm: Realm, id: ObjectId) -> Bool {
+        guard let instanceToDelete = realm.objects(LauncherInstanceDB.self).where({ ($0.id == id) }).first else {
+            // TODO: Return a double where the second element is the status where it says e.g. that no instance with that id was found
+            return true
+        }
+
+        if let thawed = instanceToDelete.thaw() {
+            try! realm.write {
+                realm.delete(thawed)
+            }
+            
+            return true
+        }
+        
+        return false
+    }
+
 }
 
 enum RealmLauncherType: String, Equatable, PersistableEnum {
