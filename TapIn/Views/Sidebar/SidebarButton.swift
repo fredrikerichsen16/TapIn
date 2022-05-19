@@ -29,29 +29,19 @@ struct SidebarButton: View {
                     .textFieldStyle(.roundedBorder) // adds border
                     .prefersDefaultFocus(in: mainNamespace)
                     .onSubmit {
-                        guard let currentWorkspace = menuItem.workspace?.thaw(),
-                              let thawedRealm = currentWorkspace.realm
-                            else { return }
-                        
-                        if renameWorkspaceField == "" {
-                            return
-                        }
-                        
-                        try! thawedRealm.write {
-                            currentWorkspace.name = renameWorkspaceField
-                        }
-                        
+                        guard let workspace = menuItem.workspace else { return }
+                        workspace.renameWorkspace(realm, name: renameWorkspaceField)
                         isRenaming = false
                     }
             }
         }
         else
         {
-            NavigationLink(destination: viewForMenuItem(menuItem)) {
+            //            NavigationLink(destination: viewForMenuItem(menuItem)) {
+            NavigationLink(tag: menuItem.id, selection: $selection, destination: { viewForMenuItem(menuItem) }, label: {
                 Label(menuItem.text, systemImage: menuItem.icon)
-                    .tag(menuItem.id)
                     .padding(.vertical, 5)
-            }
+            })
             .contextMenu(ContextMenu(menuItems: {
                 menuItemContextMenu(menuItem.workspace)
             }))
@@ -75,34 +65,24 @@ struct SidebarButton: View {
     private func menuItemContextMenu(_ ws: WorkspaceDB?) -> some View {
         SwiftUI.Group {
             Button("Add Child Workspace") {
-                guard let currentWorkspace = menuItem.workspace?.thaw(),
-                      let thawedRealm = currentWorkspace.realm
-                    else { return }
-                
-                try! thawedRealm.write {
-                    let newWorkspace = WorkspaceDB(name: "New Workspace", isWork: currentWorkspace.isWork)
-                    
-                    currentWorkspace.children.append(newWorkspace)
-                }
-                
-                selection = "home"
+                guard let workspace = menuItem.workspace else { return }
+                workspace.addChild(realm)
             }
             
             Button("Delete") {
-                guard let currentWorkspace = menuItem.workspace?.thaw(),
-                      let thawedRealm = currentWorkspace.realm
-                    else { return }
+                guard let workspace = menuItem.workspace else { return }
                 
                 selection = "home"
                 
-                try! thawedRealm.write {
-                    thawedRealm.delete(currentWorkspace)
-                }
+                workspace.deleteWorkspace(realm)
             }
             
             Button("Rename") {
-                selection = "statistics"
-//                beginRenamingWorkspace()
+                beginRenamingWorkspace()
+            }
+            
+            Button("Test") {
+                selection = nil
             }
         }
     }
@@ -115,23 +95,6 @@ struct SidebarButton: View {
         renameWorkspaceField = menuItem.workspace!.name
         isRenaming = true
     }
-    
-    func renameWorkspace() {
-        guard let currentWorkspace = menuItem.workspace?.thaw(),
-              let thawedRealm = currentWorkspace.realm
-            else { return }
-        
-        if renameWorkspaceField == "" {
-            return
-        }
-        
-        try! thawedRealm.write {
-            currentWorkspace.name = renameWorkspaceField
-        }
-        
-        isRenaming = false
-    }
-
 }
 
 struct TemporaryView: View {

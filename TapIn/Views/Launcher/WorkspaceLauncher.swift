@@ -17,6 +17,16 @@ struct WorkspaceLauncher: View {
 
 			NavigationView {
                 VStack(alignment: .leading) {
+                    if let parentInstances = launcher.parentLauncherInstances, parentInstances.count > 0
+                    {
+                        List(parentInstances, id: \.id, selection: $selectedInstance) { instance in
+                            launcherInstanceMenuButton(instance: instance)
+                        }
+                        
+                        Divider()
+                        Spacer()
+                    }
+                    
                     List(launcher.launcherInstances, id: \.id, selection: $selectedInstance) { instance in
                         launcherInstanceMenuButton(instance: instance)
                     }
@@ -47,7 +57,7 @@ struct WorkspaceLauncher: View {
                 }
                 .padding()
 
-                Text("Select of the workspaces or click \"+\" to create a new one").font(.callout)
+                Text("Select one of the launch items or click \"+\" to create a new one").font(.callout)
 			}
             .quickLookPreview($quickLookURL)
 

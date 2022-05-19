@@ -11,6 +11,10 @@ final class LauncherDB: Object, ObjectKeyIdentifiable {
     @Persisted
     var launcherInstances = RealmSwift.List<LauncherInstanceDB>()
     
+    var parentLauncherInstances: RealmSwift.List<LauncherInstanceDB>? {
+        workspace.first?.parent.first?.launcher?.launcherInstances
+    }
+    
     // MARK: CRUD
     
     func deleteById(id: ObjectId) {

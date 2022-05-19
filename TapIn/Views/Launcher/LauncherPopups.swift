@@ -23,7 +23,7 @@ struct Popover: View {
             type: .website,
             instantiated: true,
             appPath: nil,
-            filePath: "http://www.google.com",
+            filePath: nil,
             launchDelay: 0.0,
             hideOnLaunch: false
         )

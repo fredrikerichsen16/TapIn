@@ -9,6 +9,14 @@ import Foundation
 import RealmSwift
 
 final class WorkspaceDB: Object, ObjectKeyIdentifiable {
+    
+    func easyThaw() -> (WorkspaceDB, Realm) {
+        guard let thawed = self.thaw(),
+              let realm = thawed.realm else { fatalError("Easythaw failed") }
+        
+        return (thawed, realm)
+    }
+    
     @Persisted(primaryKey: true)
     var id: ObjectId
     
@@ -61,28 +69,57 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
         return workspacesToShow
     }
     
-//    func getChildrenMenuItems() -> [MenuItem] {
-//        var menuItems = [MenuItem]()
-//        
-//        for workspace in children
-//        {
-//            menuItems.append(MenuItem.init(workspace: workspace, work: isWork))
+    // MARK: CRUD
+    
+    func renameWorkspace(_ realm: Realm, name: String) {
+        guard let thawed = self.thaw() else { return }
+        
+        if name == "" { return }
+                
+        try! realm.write {
+            thawed.name = name
+        }
+    }
+    
+    func addChild(_ realm: Realm) {
+        guard let thawed = self.thaw() else { return }
+        
+        // You can only nest once, i.e. two levels
+        if thawed.isChild() {
+            print("Cannot add more than one level of nesting")
+            return
+        }
+        
+        let childWorkspace = WorkspaceDB(name: "New Workspace", isWork: isWork)
+        
+        try! realm.write {
+            thawed.children.append(childWorkspace)
+        }
+    }
+    
+    func deleteWorkspace(_ realm: Realm) {
+        guard let thawed = self.thaw() else { return }
+        
+        try! realm.write {
+            realm.delete(thawed)
+        }
+    }
+    
+//    static func deleteById(_ realm: Realm, id: ObjectId) -> Bool {
+//        guard let instanceToDelete = realm.objects(LauncherInstanceDB.self).where({ ($0.id == id) }).first else {
+//            // TODO: Return a double where the second element is the status where it says e.g. that no instance with that id was found
+//            return true
 //        }
-//        
-//        return menuItems
+//
+//        if let thawed = instanceToDelete.thaw() {
+//            try! realm.write {
+//                realm.delete(thawed)
+//            }
+//
+//            return true
+//        }
+//
+//        return false
 //    }
+    
 }
-
-//final class Group: Object, ObjectKeyIdentifiable {
-//
-//    @objc dynamic var _id = ObjectId.generate()
-//
-//    @objc dynamic var name: String = "new"
-//
-//    override class func primaryKey() -> String? {
-//        return "_id"
-//    }
-//
-//    var items = RealmSwift.List<Item>()
-//
-//}

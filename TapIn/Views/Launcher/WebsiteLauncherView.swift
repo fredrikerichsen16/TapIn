@@ -78,7 +78,12 @@ struct WebsiteEditSheetView: View {
                 
                 Button(action: onSubmitSheet, label: { Text("Submit") })
             }
-        }.padding(15)
+        }
+        .padding(15)
+        .onAppear {
+            websiteName = launcherInstance.name
+            websiteURL = launcherInstance.filePath ?? ""
+        }
     }
     
     func onSubmitSheet() {
