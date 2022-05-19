@@ -34,8 +34,17 @@ final class SessionDB: Object, ObjectKeyIdentifiable {
     convenience init(stage: PomodoroStageRealm, duration: Double) {
         self.init()
         self.id = ObjectId.generate()
+        self.completedTime = Date.init()
         self.stage = stage
         self.duration = duration
+    }
+    
+    override var description: String {
+        return """
+        completion time: \(completedTime)
+        stage: \(stage.rawValue)
+        duration: \(String(duration))
+        """
     }
     
 }

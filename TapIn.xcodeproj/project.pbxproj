@@ -40,6 +40,9 @@
 		358D114827C1AD1200983673 /* SectionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358D114727C1AD1200983673 /* SectionPicker.swift */; };
 		358D114A27C1DCF600983673 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358D114927C1DCF600983673 /* StateManager.swift */; };
 		3590CA5928360292006A7F92 /* SessionDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590CA5828360292006A7F92 /* SessionDB.swift */; };
+		3590CA5C2836C95B006A7F92 /* PomodoroStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590CA5B2836C95B006A7F92 /* PomodoroStage.swift */; };
+		3590CA5E2836C970006A7F92 /* TimerMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590CA5D2836C970006A7F92 /* TimerMode.swift */; };
+		3590CA602836C988006A7F92 /* PomodoroState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590CA5F2836C988006A7F92 /* PomodoroState.swift */; };
 		35A91B4027C9A26E00E94E56 /* LauncherDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A91B3F27C9A26E00E94E56 /* LauncherDB.swift */; };
 		35AD491D26C7062800AEA899 /* LauncherModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD491C26C7062800AEA899 /* LauncherModelTests.swift */; };
 		35AEA155267F65D0000AFE85 /* TapInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA154267F65D0000AFE85 /* TapInApp.swift */; };
@@ -111,6 +114,9 @@
 		358D114727C1AD1200983673 /* SectionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPicker.swift; sourceTree = "<group>"; };
 		358D114927C1DCF600983673 /* StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 		3590CA5828360292006A7F92 /* SessionDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDB.swift; sourceTree = "<group>"; };
+		3590CA5B2836C95B006A7F92 /* PomodoroStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroStage.swift; sourceTree = "<group>"; };
+		3590CA5D2836C970006A7F92 /* TimerMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerMode.swift; sourceTree = "<group>"; };
+		3590CA5F2836C988006A7F92 /* PomodoroState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroState.swift; sourceTree = "<group>"; };
 		35A91B3F27C9A26E00E94E56 /* LauncherDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherDB.swift; sourceTree = "<group>"; };
 		35AD491C26C7062800AEA899 /* LauncherModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModelTests.swift; sourceTree = "<group>"; };
 		35AEA151267F65D0000AFE85 /* TapIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,7 +176,9 @@
 		35521BC9279C3F450047508D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3590CA5A2836C94E006A7F92 /* Enums */,
 				358D114927C1DCF600983673 /* StateManager.swift */,
+				3590CA5F2836C988006A7F92 /* PomodoroState.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -235,6 +243,15 @@
 				358D114727C1AD1200983673 /* SectionPicker.swift */,
 			);
 			path = WorkspaceBrowse;
+			sourceTree = "<group>";
+		};
+		3590CA5A2836C94E006A7F92 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				3590CA5B2836C95B006A7F92 /* PomodoroStage.swift */,
+				3590CA5D2836C970006A7F92 /* TimerMode.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		35AEA148267F65D0000AFE85 = {
@@ -516,6 +533,7 @@
 			files = (
 				3573F150268767FB004B9C21 /* WorkspaceBlocker.swift in Sources */,
 				3570158627D42F4F000848B7 /* RealmHelpers.swift in Sources */,
+				3590CA5E2836C970006A7F92 /* TimerMode.swift in Sources */,
 				358D114827C1AD1200983673 /* SectionPicker.swift in Sources */,
 				35608D1C26C6FBEC0054FCD2 /* AdvancedSettingsView.swift in Sources */,
 				355B46E527C97FAC007E0507 /* LauncherInstanceDB.swift in Sources */,
@@ -547,11 +565,13 @@
 				35AEA194267FA815000AFE85 /* Color+.swift in Sources */,
 				352A0B8526C94F2C00AA256B /* Collection+.swift in Sources */,
 				3573F14A268767C6004B9C21 /* WorkspacePomodoro.swift in Sources */,
+				3590CA5C2836C95B006A7F92 /* PomodoroStage.swift in Sources */,
 				3573F14C268767DB004B9C21 /* WorkspaceTimeTracking.swift in Sources */,
 				35608D1A26C6FBCB0054FCD2 /* GeneralSettingsView.swift in Sources */,
 				35521BCC279C98FA0047508D /* LauncherModelExtra.swift in Sources */,
 				3566A37226B9D63B0064AE00 /* MenuItem.swift in Sources */,
 				35500DF728355D0B00AF9AB5 /* SharedLauncherViewComponents.swift in Sources */,
+				3590CA602836C988006A7F92 /* PomodoroState.swift in Sources */,
 				3566A37026B9D35B0064AE00 /* Dataloader.swift in Sources */,
 				35AEA188267F9582000AFE85 /* TimeTrackerModel.swift in Sources */,
 				35EF3DC7279B3607004E2795 /* BottomMenu.swift in Sources */,
@@ -628,6 +648,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = "";
+				"DEBUG_ACTIVITY_MODE[sdk=macosx*]" = disable;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -689,6 +711,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_ACTIVITY_MODE = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

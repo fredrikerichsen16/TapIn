@@ -11,8 +11,17 @@ import RealmSwift
 struct WorkspaceTimeTracking: View {
     @ObservedRealmObject var timeTracker: TimeTrackerDB
     
+    var status: String {
+        let startOfDay = Calendar.current.startOfDay(for: Date.init())
+        let amountWorkedToday = timeTracker.workspace.first!.getWorkDuration(dateInterval: DateInterval(start: startOfDay, end: startOfDay.advanced(by: 60 * 60 * 24)))
+        let amountWorkedTodayMinutes = Int(amountWorkedToday / 60)
+        
+        return "You have worked \(amountWorkedTodayMinutes) minutes today!"
+    }
+    
     var body: some View {
-        Text("WorkspaceTimeTracking (ID: \(timeTracker.id))")
+        Text(status)
+            .font(.headline)
     }
 }
 

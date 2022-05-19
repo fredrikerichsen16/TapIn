@@ -73,7 +73,7 @@ struct SidebarButton: View {
                 
                 selection = "home"
                 
-                workspace.deleteWorkspace(realm)
+                WorkspaceDB.deleteWorkspace(realm, workspace: workspace)
                 
                 stateManager.refresh()
             }

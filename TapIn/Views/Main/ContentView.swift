@@ -16,7 +16,7 @@ struct ContentView: View {
                     SidebarSection(selection: $selection)
                 }
                 .listStyle(SidebarListStyle())
-                .frame(minWidth: 180, maxWidth: 300)
+                .frame(minWidth: 180, maxWidth: 250)
                 .padding(.top)
 			}
 		}

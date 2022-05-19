@@ -8,55 +8,78 @@
 import SwiftUI
 import RealmSwift
 
-struct BottomMenu: View {
-    @ObservedRealmObject var launcher: LauncherDB
-    @StateObject var pomodoroState: PomodoroState
-    @EnvironmentObject var stateManager: StateManager
-    
-    @State private var showingPopover = false
-    @State private var displayCannotStartPomodoroError = false
-    
-    var navbar: some View {
-        HStack {
-            Spacer()
+struct BlockerBottomMenuController: View {
+    var body: some View {
+        VStack {
+            Text("Blocker").font(.body)
             
-            switch pomodoroState.timerMode
-            {
-            case .running:
-                Button("Cancel Pomodoro", action: pomodoroState.cancelSession)
-                Button("Pause Pomodoro", action: pomodoroState.pauseSession)
-            case .initial:
-                Button("Start Pomodoro", action: startPomodoroWithCheck)
-            case .paused:
-                Button("Cancel Pomodoro", action: pomodoroState.cancelSession)
-                Button("Resume Pomodoro", action: pomodoroState.resumeSession)
-            }
-            
-            Button("Open All") {
-                launcher.openAll()
-            }
-            
-            Button("Start") {
-                showingPopover.toggle()
-            }
-            .buttonStyle(FilledButton())
-            .popover(isPresented: $showingPopover) {
-                ToggleComponentMenu()
+            Button("Start Blocker") {
+                print("Activate Blocker")
             }
         }
-        .padding()
-        .background(Color(r: 37, g: 37, b: 42, opacity: 1))
+    }
+}
+
+struct LauncherBottomMenuController: View {
+    @ObservedRealmObject var launcher: LauncherDB
+    
+    var body: some View {
+        VStack {
+            Text("Launcher").font(.body)
+            
+            Button("Launch") {
+                launcher.openAll()
+            }
+        }
+    }
+}
+
+struct PomodoroBottomMenuController: View {
+    @EnvironmentObject var stateManager: StateManager
+    @StateObject var pomodoroState: PomodoroState
+    @State private var displayCannotStartPomodoroError = false
+    
+    var vstack: some View {
+        VStack {
+            Text("Pomodoro").font(.body)
+            
+            HStack {
+                switch (pomodoroState.timerMode, pomodoroState.pomodoroStage)
+                {
+                case (.running, .pomodoro):
+                    Button("Cancel", action: pomodoroState.cancelSession)
+                    Button("Pause", action: pomodoroState.pauseSession)
+                case (.running, .longBreak), (.running, .shortBreak):
+                    Button("Skip", action: pomodoroState.skipBreak)
+                    Button("Pause", action: pomodoroState.pauseSession)
+                
+                case (.initial, .pomodoro):
+                    Button("Start", action: startPomodoroWithCheck)
+                case (.initial, .longBreak), (.initial, .shortBreak):
+                    Button("Skip", action: pomodoroState.skipBreak)
+                    Button("Start", action: startPomodoroWithCheck)
+                
+                    
+                case (.paused, .pomodoro):
+                    Button("Cancel", action: pomodoroState.cancelSession)
+                    Button("Resume", action: pomodoroState.resumeSession)
+                case (.paused, .longBreak), (.paused, .shortBreak):
+                    Button("Skip", action: pomodoroState.skipBreak)
+                    Button("Resume", action: pomodoroState.resumeSession)
+                }
+            }
+        }
     }
     
     var body: some View {
         if #available(macOS 12.0, *)
         {
-            navbar
+            vstack
                 .alert("Cannot start pomodoro session because one is already active in a different workspace", isPresented: $displayCannotStartPomodoroError, actions: {})
         }
         else
         {
-            navbar
+            vstack
         }
     }
     
@@ -70,93 +93,96 @@ struct BottomMenu: View {
     }
 }
 
-struct ToggleComponentMenu: View {
+enum BottomMenuControllerSelection {
+    case pomodoro
+    case launcher
+    case blocker
     
-    var body: some View {
-        VStack(alignment: .leading, spacing: 5.0) {
-            ToggleComponentMenuItem(iconSize: 30.0, title: "Pomodoro")
-            ToggleComponentMenuItem(iconSize: 30.0, title: "Timetracker")
-            ToggleComponentMenuItem(iconSize: 30.0, title: "Website Blocker")
-            ToggleComponentMenuItem(iconSize: 30.0, title: "Radio")
-            ToggleComponentMenuItem(iconSize: 30.0, title: "All")
+    mutating func next() {
+        switch self {
+        case .pomodoro:
+            self = .launcher
+        case .launcher:
+            self = .blocker
+        case .blocker:
+            self = .pomodoro
         }
-        .padding(14)
+    }
+    
+    mutating func previous() {
+        switch self {
+        case .pomodoro:
+            self = .blocker
+        case .launcher:
+            self = .pomodoro
+        case .blocker:
+            self = .launcher
+        }
     }
 }
 
-struct ToggleComponentMenuItem: View {
-    let iconSize: Double
-    let title: String
+enum Direction {
+    case right
+    case left
+}
+
+struct BottomMenu: View {
+    @ObservedRealmObject var launcher: LauncherDB // just passing through
+    @StateObject var pomodoroState: PomodoroState // just passing through
     
-    @State private var active = false
+    @EnvironmentObject var stateManager: StateManager
     
-    func getTitle() -> String {
-        let prefix = active ? "Stop" : "Start"
-        return "\(prefix) \(title)"
-    }
+    @Binding var bottomMenuControllerSelection: BottomMenuControllerSelection
     
     var body: some View {
-        Button(action: {
-            active.toggle()
-        }, label: {
-            HStack(spacing: 5.0) {
-                Image(systemName: active ? "pause.fill" : "play.fill")
-                    .frame(width: iconSize, height: iconSize, alignment: .center)
-                    .clipShape(Circle())
-                    .background(Color.blue)
-                    .cornerRadius(iconSize / 2)
-                    .padding(EdgeInsets(top: 5.0, leading: 5.0, bottom: 5.0, trailing: 5.0))
-                
-                Text(getTitle())
-                    .font(.system(size: 18.0))
+        HStack {
+            Spacer()
+            
+//            Button(action: { bottomMenuControllerSelection.previous() }, label: {
+//                Image(systemName: "chevron.left")
+//            })
+//            .buttonStyle(PlainButtonStyle())
+            
+            navigateButton(direction: .left)
+            
+            switch bottomMenuControllerSelection {
+            case .pomodoro:
+                PomodoroBottomMenuController(pomodoroState: pomodoroState)
+                    .padding()
+            case .launcher:
+                LauncherBottomMenuController(launcher: launcher)
+                    .padding()
+            case .blocker:
+                BlockerBottomMenuController()
+                    .padding()
             }
+            
+//            Button(action: { bottomMenuControllerSelection.next() }, label: {
+//                Image(systemName: "chevron.right")
+//            })
+//            .buttonStyle(PlainButtonStyle())
+            
+            navigateButton(direction: .right)
+        }
+        .padding(EdgeInsets.init(top: 2, leading: 22, bottom: 2, trailing: 22))
+        .background(Color(r: 37, g: 37, b: 42, opacity: 1))
+    }
+    
+    private func navigateButton(direction: Direction) -> some View {
+        var action: () -> Void = {}
+        var icon: String = ""
+        
+        if direction == .right {
+            action = { bottomMenuControllerSelection.next() }
+            icon = "chevron.right"
+        } else {
+            action = { bottomMenuControllerSelection.previous() }
+            icon = "chevron.left"
+        }
+        
+        return Button(action: action, label: {
+            Image(systemName: icon)
         })
         .buttonStyle(PlainButtonStyle())
-        .padding(5)
     }
 }
-
-//.popover(isPresented: $showingPopover) {
-//    Toggle(isOn: $first) {
-//        Text("Enable Timetracking")
-//    }.padding()
-//
-//    Toggle(isOn: $second) {
-//        Text("Enable Website Blocker")
-//    }.padding()
-//
-//    Toggle(isOn: $third) {
-//        Text("Run Launcher on Start")
-//    }.padding()
-//
-//    Button("Start Pomodoro") {
-//        print("Start Pomodoro")
-//    }
-//
-//    Button("Start Timetracker") {
-//        print("Start Timetracker")
-//    }
-//
-//    Button("Start Website Blocker") {
-//        print("Start Website Blocker")
-//    }
-//
-//    Button("Automatically Run Launcher") {
-//        print("Automatically Run Launcher")
-//    }
-//}
-
-//struct ContentView: View {
-//    @State private var showingPopover = false
-//
-//    var body: some View {
-//        Button("Show Menu") {
-//            showingPopover = true
-//        }
-//        .popover(isPresented: $showingPopover) {
-//            Text("Your content here")
-//                .font(.headline)
-//                .padding()
-//        }
-//    }
-//}
