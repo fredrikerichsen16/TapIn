@@ -10,43 +10,27 @@ import RealmSwift
 
 struct BottomMenu: View {
     @ObservedRealmObject var launcher: LauncherDB
+    @StateObject var pomodoroState: PomodoroState
     @EnvironmentObject var stateManager: StateManager
     
     @State private var showingPopover = false
-    @State private var first = true
-    @State private var second = false
-    @State private var third = false
+    @State private var displayCannotStartPomodoroError = false
     
-    var body: some View {
+    var navbar: some View {
         HStack {
             Spacer()
             
-            switch stateManager.selectedPomodoro.timerMode
+            switch pomodoroState.timerMode
             {
             case .running:
-                Button("Cancel Pomodoro", action: cancelSession)
-                Button("Pause Pomodoro", action: pauseSession)
+                Button("Cancel Pomodoro", action: pomodoroState.cancelSession)
+                Button("Pause Pomodoro", action: pomodoroState.pauseSession)
             case .initial:
-                Button("Start Pomodoro", action: startSession)
+                Button("Start Pomodoro", action: startPomodoroWithCheck)
             case .paused:
-                Button("Cancel Pomodoro", action: cancelSession)
-                Button("Resume Pomodoro", action: resumeSession)
+                Button("Cancel Pomodoro", action: pomodoroState.cancelSession)
+                Button("Resume Pomodoro", action: pomodoroState.resumeSession)
             }
-            
-            
-//            Button("Cancel Pomodoro") {
-//                stateManager.endSession()
-//            }
-//
-//            Button("Pause Pomodoro") {
-//                stateManager.pauseSession()
-//            }
-//
-//            Button("Start Pomodoro") {
-//                if stateManager.activeWorkspace != nil { return }
-//
-//                stateManager.beginSessionWithSelectedWorkspace()
-//            }
             
             Button("Open All") {
                 launcher.openAll()
@@ -64,24 +48,25 @@ struct BottomMenu: View {
         .background(Color(r: 37, g: 37, b: 42, opacity: 1))
     }
     
-    func cancelSession() {
-        stateManager.activePomodoro = nil
-        stateManager.selectedPomodoro.cancelSession()
+    var body: some View {
+        if #available(macOS 12.0, *)
+        {
+            navbar
+                .alert("Cannot start pomodoro session because one is already active in a different workspace", isPresented: $displayCannotStartPomodoroError, actions: {})
+        }
+        else
+        {
+            navbar
+        }
     }
     
-    func pauseSession() {
-        stateManager.activePomodoro = nil
-        stateManager.selectedPomodoro.pauseSession()
-    }
-    
-    func startSession() {
-        stateManager.activePomodoro = stateManager.selectedPomodoro
-        stateManager.selectedPomodoro.startSession()
-    }
-    
-    func resumeSession() {
-        stateManager.activePomodoro = stateManager.selectedPomodoro
-        stateManager.selectedPomodoro.resumeSession()
+    func startPomodoroWithCheck() {
+        if stateManager.getActivePomodoro() != nil {
+            displayCannotStartPomodoroError = true
+            return
+        }
+        
+        pomodoroState.startSession()
     }
 }
 

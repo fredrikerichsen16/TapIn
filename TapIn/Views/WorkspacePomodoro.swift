@@ -51,22 +51,24 @@ import RealmSwift
 
 struct WorkspacePomodoro: View {
     @EnvironmentObject var stateManager: StateManager
-    
-    @State var falseInitialCircleProgress = 1.0
+    @StateObject var pomodoroState: PomodoroState
     
     var body: some View {
         Spacer()
         
         ZStack {
-            ProgressCircleView(circleProgress: $stateManager.selectedPomodoro.circleProgress)
+            ProgressCircleView(circleProgress: $pomodoroState.circleProgress)
                 .padding()
             
             VStack {
-                Text(String(stateManager.selectedPomodoro.remainingTimeString))
+                Text(pomodoroState.pomodoroStage.getTitle())
+                    .font(.body)
+                
+                Text(String(pomodoroState.remainingTimeString))
                     .font(.system(size: 36.0))
                     .bold()
                     .multilineTextAlignment(.center)
-                    .padding()
+                    .padding(3)
             }
         }
     }
@@ -77,20 +79,6 @@ struct ProgressCircleView: View {
     @Binding var circleProgress: Double
 
     var body: some View {
-        
-//        GeometryReader { proxy in
-//            VStack(spacing: 15) {
-//                ZStack {
-//                    Circle()
-//                        .trim(from: 0, to: 0.5)
-//                        .stroke(Color.purple.opacity(0.7), lineWidth: 10)
-//                }
-//                .padding(60)
-//                .frame(height: proxy.size.width)
-//            }
-//            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-//        }
-        
         ZStack {
             Circle()
                 .stroke(lineWidth: 18.0)
