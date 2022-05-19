@@ -22,80 +22,62 @@ enum PomodoroStage {
     }
 }
 
-class StateManager: ObservableObject {
+class PomodoroState: ObservableObject {
+    @Published var activeWorkspace: WorkspaceDB
     
-    var pomodoroStates: [ObjectId: StateManager] = [:]
-    
-    @Published var selectedWorkspace: WorkspaceDB? = nil
-    @Published var activeWorkspace: WorkspaceDB? = nil
+    var pomodoroDb: PomodoroDB
     
     var activePomodoro: PomodoroDB? {
-        activeWorkspace?.pomodoro
+        activeWorkspace.pomodoro
     }
-    
-    @Published var sidebarSelection: String? = "home"
     
     // MARK: Pomodoro (put in separate observable object eventually)
     
-    @Published var remainingTimeString = "Initial"
+    @Published var remainingTimeString = "00:00"
     @Published var circleProgress: Double = 1.0
     
-    @Published var activeElsewhere: Bool = false
-    
-    private var timerMode: TimerMode = .initial
+    public var timerMode: TimerMode = .initial
     private var pomodoroStage: PomodoroStage
     private var timer: Timer!
     private var timeElapsed: Double = 0.0
     private var remainingTime: Double? = nil
     
-    init() {
-        pomodoroStage = .pomodoro(60.0 * 0.5)
+    init(ws: WorkspaceDB) {
+        activeWorkspace = ws
+        pomodoroDb = ws.pomodoro!
+        
+        pomodoroStage = .pomodoro(60.0 * 0.5) // setInitialStage()
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-            self.activeElsewhere = self.showInitialPomodoroState() != nil
-            
             if self.timerMode != .running { return }
             
             self.timeElapsed += 1
-            self.setRemainingTime()
-            self.setCircleProgress()
+            self.updateUI()
             
             if self.remainingTime ?? 1 < 0 {
-                self.setNextStep()
-                
-                self.setRemainingTime()
-                self.setCircleProgress()
+                self.setNextStage()
+
+                self.updateUI()
             }
         }
     }
     
-    func showInitialPomodoroState() -> String? {
-        print(selectedWorkspace?.name)
-        print(activeWorkspace?.name)
-        if selectedWorkspace != nil && (activeWorkspace == nil || selectedWorkspace == activeWorkspace) { return nil }
-        
-        return "0:0:0"
-    }
-    
-//    func shouldExecuteTimer() -> Bool {
-//        return activeWorkspace != nil && selectedWorkspace == activeWorkspace && timerMode == .running
-//    }
-    
-    func setNextStep() {
+    func setNextStage() {
         timerMode = .initial
-        
+
         switch pomodoroStage {
         case .pomodoro(_):
             pomodoroStage = .shortBreak(60.0 * 0.5)
         case .shortBreak(_), .longBreak(_):
             pomodoroStage = .pomodoro(60.0 * 1.0)
         }
-        
+
         timeElapsed = 0
     }
     
-    func changePomodoroStatus(stage: PomodoroStage) {
-        pomodoroStage = stage
+    func updateUI() {
+        self.setRemainingTime()
+        self.setCircleProgress()
     }
     
     func setRemainingTime() {
@@ -121,26 +103,72 @@ class StateManager: ObservableObject {
         return formatter.string(from: remainingTime) ?? "N/A"
     }
     
-    // MARK: Start, Pause, Cancel
-    
-    func beginSessionWithSelectedWorkspace() {
-        activeWorkspace = selectedWorkspace
-        print(["Started workspace: ", activeWorkspace?.name])
+    func startSession() {
+        print(["Started workspace: ", activeWorkspace.name])
         timeElapsed = 0
         timerMode = .running
+        
+        updateUI()
     }
-    
+
     func pauseSession() {
-        if selectedWorkspace != activeWorkspace { return }
-        
         timerMode = .paused
+        
+        updateUI()
     }
     
-    func endSession() {
-        if selectedWorkspace != activeWorkspace { return }
+    func resumeSession() {
+        timerMode = .running
         
+        updateUI()
+    }
+
+    func cancelSession() {
         timerMode = .initial
         timeElapsed = 0
+        
+        updateUI()
+    }
+    
+}
+
+class StateManager: ObservableObject {
+    
+    // MARK: General
+    
+    @Published var selectedWorkspace: WorkspaceDB? = nil
+    @Published var sidebarSelection: String? = "home"
+    
+    // MARK: Pomodoro
+    
+    var pomodoroStates: [ObjectId: PomodoroState] = [:]
+    
+    func getPomodoroState(ws: WorkspaceDB) -> PomodoroState {
+        let workspaceId = ws.id
+        
+        if let existingState = pomodoroStates[workspaceId] {
+            existingState.setRemainingTime()
+            
+            return existingState
+        }
+        
+        pomodoroStates = pomodoroStates.filter({
+            $0.value.timerMode != .initial
+        })
+        
+        let newState = PomodoroState(ws: ws)
+        
+        pomodoroStates[workspaceId] = newState
+        
+        return newState
+    }
+    
+    var selectedPomodoroState: PomodoroState? {
+        if let selectedWorkspace = selectedWorkspace, let pomodoroState = pomodoroStates[selectedWorkspace.id] {
+            return pomodoroState
+        }
+        
+        return nil
     }
     
 }

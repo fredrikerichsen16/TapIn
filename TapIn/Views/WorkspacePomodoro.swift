@@ -50,43 +50,24 @@ import RealmSwift
 //}
 
 struct WorkspacePomodoro: View {
-    @ObservedRealmObject var pomodoro: PomodoroDB
     @EnvironmentObject var stateManager: StateManager
+    @StateObject var pomodoroState: PomodoroState
     
     @State var falseInitialCircleProgress = 1.0
     
     var body: some View {
         Spacer()
         
-        if stateManager.activeElsewhere
-        {
-            Text("Active Elsewhere")
-//            ZStack {
-//                ProgressCircleView(circleProgress: $falseInitialCircleProgress)
-//                    .padding()
-//
-//                VStack {
-//                    Text(String(initialRemainingTimeString))
-//                        .font(.system(size: 36.0))
-//                        .bold()
-//                        .multilineTextAlignment(.center)
-//                        .padding()
-//                }
-//            }
-        }
-        else
-        {
-            ZStack {
-                ProgressCircleView(circleProgress: $stateManager.circleProgress)
+        ZStack {
+            ProgressCircleView(circleProgress: $pomodoroState.circleProgress)
+                .padding()
+            
+            VStack {
+                Text(String(pomodoroState.remainingTimeString))
+                    .font(.system(size: 36.0))
+                    .bold()
+                    .multilineTextAlignment(.center)
                     .padding()
-                
-                VStack {
-                    Text(String(stateManager.remainingTimeString))
-                        .font(.system(size: 36.0))
-                        .bold()
-                        .multilineTextAlignment(.center)
-                        .padding()
-                }
             }
         }
     }
@@ -129,9 +110,9 @@ struct ProgressCircleView: View {
     }
 }
 
-struct WorkspacePomodoro_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkspacePomodoro(pomodoro: PomodoroDB())
-            .environmentObject(StateManager())
-    }
-}
+//struct WorkspacePomodoro_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WorkspacePomodoro(pomodoro: PomodoroDB())
+//            .environmentObject(StateManager())
+//    }
+//}
