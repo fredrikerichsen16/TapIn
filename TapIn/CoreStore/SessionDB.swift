@@ -28,10 +28,10 @@ final class SessionDB: Object, ObjectKeyIdentifiable {
     @Persisted
     var duration: Double
     
-//    @Persisted(originProperty: "sessions")
-//    var workspace: LinkingObjects<WorkspaceDB>
+    @Persisted(originProperty: "sessions")
+    var workspace: LinkingObjects<WorkspaceDB>
     
-    convenience init(stage: PomodoroStageRealm, duration: Double, workspace: WorkspaceDB) {
+    convenience init(stage: PomodoroStageRealm, duration: Double) {
         self.init()
         self.id = ObjectId.generate()
         self.stage = stage

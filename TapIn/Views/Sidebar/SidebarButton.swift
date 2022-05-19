@@ -53,9 +53,7 @@ struct SidebarButton: View {
         {
         case .home, .statistics:
             Text(item.text).font(.largeTitle)
-        case .work(let ws):
-            WorkspaceBrowse(workspace: ws)
-        case .leisure(let ws):
+        case .workspace(let ws):
             WorkspaceBrowse(workspace: ws)
         }
     }
@@ -66,6 +64,8 @@ struct SidebarButton: View {
             Button("Add Child Workspace") {
                 guard let workspace = menuItem.workspace else { return }
                 workspace.addChild(realm)
+                
+                stateManager.refresh()
             }
             
             Button("Delete") {
@@ -74,6 +74,8 @@ struct SidebarButton: View {
                 selection = "home"
                 
                 workspace.deleteWorkspace(realm)
+                
+                stateManager.refresh()
             }
             
             Button("Rename") {
@@ -84,11 +86,11 @@ struct SidebarButton: View {
                 selection = nil
             }
             
-            Button("Set Active") {
-                print("MANUALLY SET")
-                print(menuItem.workspace)
-                stateManager.selectedWorkspace = menuItem.workspace
-            }
+//            Button("Set Active") {
+//                print("MANUALLY SET")
+//                print(menuItem.workspace)
+//                stateManager.selectedWorkspace = menuItem.workspace
+//            }
         }
     }
     
@@ -99,31 +101,6 @@ struct SidebarButton: View {
         
         renameWorkspaceField = menuItem.workspace!.name
         isRenaming = true
-    }
-}
-
-struct TemporaryView: View {
-    @ObservedResults(WorkspaceDB.self) var results
-    
-    let workspace: WorkspaceDB
-    
-    var body: some View {
-        VStack {
-            List {
-                Text("ID: \(workspace.id)")
-                Text(workspace.name)
-                Text(workspace.isWork ? "Is work" : "Is leisure")
-                Text("Pomodoro duration: \(workspace.pomodoro?.pomodoroDuration ?? 6.9)")
-            }
-            
-            Text("Temporary")
-            
-            List {
-                ForEach(results.sorted(byKeyPath: "name"), id: \.id) { ws in
-                    Text(ws.name)
-                }
-            }
-        }
     }
 }
 

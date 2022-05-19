@@ -15,7 +15,7 @@ class RealmManager {
     
     init() {
         do {
-            let config = Realm.Configuration(schemaVersion: 4)
+            let config = Realm.Configuration(schemaVersion: 6)
             
             self.realm = try Realm(configuration: config)
             
@@ -29,23 +29,17 @@ class RealmManager {
     func addData() {
         try! realm.write {
             for workspace in realm.objects(WorkspaceDB.self) {
+                print("Deleting: ")
+                print(workspace.name)
                 realm.delete(workspace)
             }
             
             let workNames = ["University", "Coding"]
             
             for name in workNames {
-                let ws = WorkspaceDB(name: name, isWork: true)
+                let ws = WorkspaceDB(name: name)
                 
                 ws.launcher!.launcherInstances.append(LauncherInstanceDB(name: "Craft", type: .app, instantiated: true, appPath: "/Applications/Craft.app", filePath: nil, launchDelay: 0.0, hideOnLaunch: false))
-                
-                realm.add(ws)
-            }
-            
-            let nonWorkNames = ["Writing", "Guitar"]
-            
-            for name in nonWorkNames {
-                let ws = WorkspaceDB(name: name, isWork: false)
                 
                 realm.add(ws)
             }

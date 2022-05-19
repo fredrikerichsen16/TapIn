@@ -11,15 +11,14 @@ import RealmSwift
 struct SidebarSection: View {
     @Environment(\.realm) var realm
     @ObservedResults(WorkspaceDB.self) private var workspaces
-    
-    var work: Bool
+    @EnvironmentObject var stateManager: StateManager
     
     @Binding var selection: String?
     
     var body: some View {
-        let workspaces = WorkspaceDB.getWorkspacesByWorkType(realm: realm, isWork: work)
+        let workspaces = WorkspaceDB.getWorkspaces(realm: realm)
         
-        Section(header: sectionHeaderView()) {
+        Section(header: Text("Workspaces")) {
             ForEach(MenuItem.getMenuItems(workspaces: Array(workspaces)), id: \.id) { menuItem in
                 if let ws = menuItem.workspace
                 {
@@ -38,18 +37,15 @@ struct SidebarSection: View {
             
             Button("Add Workspace") {
                 try? realm.write({
-                    let ws = WorkspaceDB(name: "New Workspace", isWork: true)
+                    let ws = WorkspaceDB(name: "New Workspace")
 
                     realm.add(ws)
                 })
+                
+                stateManager.refresh()
             }
         }
         .collapsible(false)
-    }
-    
-    func sectionHeaderView() -> some View {
-        let title = work ? "Work" : "Leisure"
-        return Text(title).padding(.bottom, 5)
     }
 }
 

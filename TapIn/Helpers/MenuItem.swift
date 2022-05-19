@@ -1,19 +1,7 @@
 enum MenuItem {
     case home
     case statistics
-    case work(WorkspaceDB)
-    case leisure(WorkspaceDB)
-    
-    init(workspace: WorkspaceDB, work: Bool) {
-        if work
-        {
-            self = .work(workspace)
-        }
-        else
-        {
-            self = .leisure(workspace)
-        }
-    }
+    case workspace(WorkspaceDB)
     
     var text: String {
         switch self
@@ -22,9 +10,7 @@ enum MenuItem {
                 return "Home"
             case .statistics:
                 return "Statistics"
-            case .work(let ws):
-                return ws.name
-            case .leisure(let ws):
+            case .workspace(let ws):
                 return ws.name
         }
     }
@@ -44,9 +30,7 @@ enum MenuItem {
     var workspace: WorkspaceDB? {
         get {
             switch self {
-                case .work(let ws):
-                    return ws
-                case .leisure(let ws):
+                case .workspace(let ws):
                     return ws
                 default:
                     return nil
@@ -59,7 +43,7 @@ enum MenuItem {
         
         for workspace in workspaces
         {
-            menuItems.append(MenuItem.init(workspace: workspace, work: workspace.isWork))
+            menuItems.append(.workspace(workspace))
         }
         
         return menuItems
@@ -74,10 +58,8 @@ extension MenuItem: Identifiable {
             return "home"
         case .statistics:
             return "statistics"
-        case .work(let ws):
-            return ws.name + "-work"
-        case .leisure(let ws):
-            return ws.name + "-leisure"
+        case .workspace(let ws):
+            return "workspace-\(ws.id)"
         }
     }
     

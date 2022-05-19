@@ -152,6 +152,11 @@ class StateManager: ObservableObject {
     @Published var selectedWorkspace: WorkspaceDB? = nil
     @Published var sidebarSelection: String? = "home"
     
+    /// I will remporarily use this to refresh the view, but it shouldn't be used because if your viewmodels and stuff are done correctly it's done automatically
+    func refresh() {
+        objectWillChange.send()
+    }
+    
     // MARK: Pomodoro
     
     var pomodoroStates: [ObjectId: PomodoroState] = [:]

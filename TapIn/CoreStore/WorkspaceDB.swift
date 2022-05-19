@@ -24,9 +24,6 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     var name: String = "New Workspace"
     
     @Persisted
-    var isWork: Bool = true
-    
-    @Persisted
     var children = RealmSwift.List<WorkspaceDB>()
     
     @Persisted(originProperty: "children")
@@ -44,14 +41,13 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     @Persisted
     var launcher: LauncherDB?
     
-//    @Persisted
-//    var sessions = RealmSwift.List<SessionDB>()
+    @Persisted
+    var sessions = RealmSwift.List<SessionDB>()
         
-    convenience init(name: String, isWork: Bool) {
+    convenience init(name: String) {
         self.init()
         self.id = ObjectId.generate()
         self.name = name
-        self.isWork = isWork
         
         self.pomodoro = PomodoroDB()
         self.blocker = BlockerDB()
@@ -63,13 +59,10 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
         return !parent.isEmpty
     }
     
-    static func getWorkspacesByWorkType(realm: Realm, isWork: Bool) -> Results<WorkspaceDB> {
-        let workspaces = realm.objects(WorkspaceDB.self)
-        let workspacesToShow = workspaces.where {
-            ($0.isWork == isWork) && ($0.parent.count == 0)
-        }
+    static func getWorkspaces(realm: Realm) -> Results<WorkspaceDB> {
+        let workspaces = realm.objects(WorkspaceDB.self).where { $0.parent.count == 0 }
         
-        return workspacesToShow
+        return workspaces
     }
     
     // MARK: CRUD
@@ -93,7 +86,7 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
             return
         }
         
-        let childWorkspace = WorkspaceDB(name: "New Workspace", isWork: isWork)
+        let childWorkspace = WorkspaceDB(name: "New Workspace")
         
         try! realm.write {
             thawed.children.append(childWorkspace)

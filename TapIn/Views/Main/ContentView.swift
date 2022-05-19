@@ -13,8 +13,7 @@ struct ContentView: View {
                     SidebarButton(menuItem: MenuItem.home, selection: $selection)
                     SidebarButton(menuItem: MenuItem.statistics, selection: $selection)
 
-                    SidebarSection(work: true, selection: $selection)
-                    SidebarSection(work: false, selection: $selection)
+                    SidebarSection(selection: $selection)
                 }
                 .listStyle(SidebarListStyle())
                 .frame(minWidth: 180, maxWidth: 300)
