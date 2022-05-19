@@ -10,6 +10,7 @@ import RealmSwift
 
 struct BottomMenu: View {
     @ObservedRealmObject var launcher: LauncherDB
+    @EnvironmentObject var stateManager: StateManager
     
     @State private var showingPopover = false
     @State private var first = true
@@ -19,6 +20,20 @@ struct BottomMenu: View {
     var body: some View {
         HStack {
             Spacer()
+            
+            Button("Cancel Pomodoro") {
+                stateManager.endSession()
+            }
+            
+            Button("Pause Pomodoro") {
+                stateManager.pauseSession()
+            }
+            
+            Button("Start Pomodoro") {
+                if stateManager.activeWorkspace != nil { return }
+                
+                stateManager.beginSessionWithSelectedWorkspace()
+            }
             
             Button("Open All") {
                 launcher.openAll()

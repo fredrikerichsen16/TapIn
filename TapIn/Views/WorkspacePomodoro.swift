@@ -51,41 +51,42 @@ import RealmSwift
 
 struct WorkspacePomodoro: View {
     @ObservedRealmObject var pomodoro: PomodoroDB
+    @EnvironmentObject var stateManager: StateManager
     
-    var timeString: String {
-        let remainingTime = pomodoro.remainingTime(\.pomodoroDuration)
-        
-        return pomodoro.readableTime(seconds: remainingTime)
-    }
-    
-    @State var circleProgress = 1.0
-    
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State var falseInitialCircleProgress = 1.0
     
     var body: some View {
         Spacer()
         
-        ZStack {
-            ProgressCircleView(circleProgress: $circleProgress)
-                .padding()
-                .onReceive(timer) { time in
-                    let pomodoroDuration = pomodoro.pomodoroDuration
-                    let timeElapsed = pomodoro.timeElapsed
-                    
-                    self.circleProgress = (pomodoroDuration - timeElapsed) / pomodoroDuration
-                }
-            
-            VStack {
-                Text(timeString)
-                    .font(.system(size: 36.0))
-                    .bold()
-                    .multilineTextAlignment(.center)
+        if stateManager.activeElsewhere
+        {
+            Text("Active Elsewhere")
+//            ZStack {
+//                ProgressCircleView(circleProgress: $falseInitialCircleProgress)
+//                    .padding()
+//
+//                VStack {
+//                    Text(String(initialRemainingTimeString))
+//                        .font(.system(size: 36.0))
+//                        .bold()
+//                        .multilineTextAlignment(.center)
+//                        .padding()
+//                }
+//            }
+        }
+        else
+        {
+            ZStack {
+                ProgressCircleView(circleProgress: $stateManager.circleProgress)
                     .padding()
-                    .onReceive(timer) { time in
-                        guard pomodoro.timerMode == .running else { return }
-                        
-                        pomodoro.timeElapsed += 1
-                    }
+                
+                VStack {
+                    Text(String(stateManager.remainingTimeString))
+                        .font(.system(size: 36.0))
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .padding()
+                }
             }
         }
     }
@@ -96,15 +97,29 @@ struct ProgressCircleView: View {
     @Binding var circleProgress: Double
 
     var body: some View {
-        ZStack{
+        
+//        GeometryReader { proxy in
+//            VStack(spacing: 15) {
+//                ZStack {
+//                    Circle()
+//                        .trim(from: 0, to: 0.5)
+//                        .stroke(Color.purple.opacity(0.7), lineWidth: 10)
+//                }
+//                .padding(60)
+//                .frame(height: proxy.size.width)
+//            }
+//            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+//        }
+        
+        ZStack {
             Circle()
-                .stroke(lineWidth: 13.0)
+                .stroke(lineWidth: 18.0)
                 .opacity(0.08)
                 .foregroundColor(.black)
 
             Circle()
                 .trim(from: 0.0, to: CGFloat(circleProgress))
-                .stroke(style: StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .round))
+                .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
                 .rotationEffect(.degrees(270.0))
                 .foregroundColor(.blue)
                 // .foregroundColor(getCircleColor(timerSeconds: timerSeconds))
@@ -114,18 +129,9 @@ struct ProgressCircleView: View {
     }
 }
 
-//func getCircleColor(timerSeconds: Int) -> Color {
-//    if (timerSeconds <= 10 && timerSeconds > 3) {
-//        return Color.yellow
-//    } else if (timerSeconds <= 3){
-//        return Color.red
-//    } else {
-//        return Color.green
-//    }
-//}
-
-//struct WorkspacePomodoro_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WorkspacePomodoro(workspace: nil)
-//    }
-//}
+struct WorkspacePomodoro_Previews: PreviewProvider {
+    static var previews: some View {
+        WorkspacePomodoro(pomodoro: PomodoroDB())
+            .environmentObject(StateManager())
+    }
+}

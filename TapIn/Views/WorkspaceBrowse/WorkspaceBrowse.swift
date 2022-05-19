@@ -64,7 +64,8 @@ import RealmSwift
 struct WorkspaceBrowse: View {
     @Environment(\.realm) var realm
     @EnvironmentObject var navigator: Navigator
-    @ObservedRealmObject var workspaceDB: WorkspaceDB
+    @EnvironmentObject var stateManager: StateManager
+    @ObservedRealmObject var workspace: WorkspaceDB
 
     var body: some View {
 		VStack {
@@ -72,25 +73,29 @@ struct WorkspaceBrowse: View {
 
 			SwitchRoutes {
 				Route("workspace-pomodoro") {
-                    WorkspacePomodoro(pomodoro: workspaceDB.pomodoro!)
+                    WorkspacePomodoro(pomodoro: workspace.pomodoro!)
 				}
 				Route("workspace-timetracking") { info in
-                    WorkspaceTimeTracking(timeTracker: workspaceDB.timeTracker!)
+                    WorkspaceTimeTracking(timeTracker: workspace.timeTracker!)
 				}
 				Route("workspace-launcher/*") {
-                    WorkspaceLauncher(launcher: workspaceDB.launcher!)
+                    WorkspaceLauncher(launcher: workspace.launcher!)
 				}
 				Route("workspace-blocker") {
-                    WorkspaceBlocker(blocker: workspaceDB.blocker!)
+                    WorkspaceBlocker(blocker: workspace.blocker!)
 				}
 			}
 
             Spacer()
 
-            BottomMenu(launcher: workspaceDB.launcher!)
+            BottomMenu(launcher: workspace.launcher!)
 		}
         .edgesIgnoringSafeArea([.bottom, .horizontal])
 		.onAppear {
+            print("SELECTED ")
+            print(workspace.name)
+            stateManager.selectedWorkspace = workspace
+            
 			navigator.navigate("/workspace-pomodoro")
 		}
     }

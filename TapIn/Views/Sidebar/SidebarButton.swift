@@ -42,6 +42,11 @@ struct SidebarButton: View {
                 Label(menuItem.text, systemImage: menuItem.icon)
                     .padding(.vertical, 5)
             })
+//            .onChange(of: selection, perform: {
+//                print("SELECTED ")
+//                print(menuItem.workspace)
+//                stateManager.selectedWorkspace = menuItem.workspace
+//            })
             .contextMenu(ContextMenu(menuItems: {
                 menuItemContextMenu(menuItem.workspace)
             }))
@@ -55,9 +60,9 @@ struct SidebarButton: View {
         case .home, .statistics:
             Text(item.text).font(.largeTitle)
         case .work(let ws):
-            WorkspaceBrowse(workspaceDB: ws)
+            WorkspaceBrowse(workspace: ws)
         case .leisure(let ws):
-            WorkspaceBrowse(workspaceDB: ws)
+            WorkspaceBrowse(workspace: ws)
         }
     }
     

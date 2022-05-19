@@ -43,6 +43,9 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     
     @Persisted
     var launcher: LauncherDB?
+    
+//    @Persisted
+//    var sessions = RealmSwift.List<SessionDB>()
         
     convenience init(name: String, isWork: Bool) {
         self.init()

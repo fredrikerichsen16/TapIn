@@ -27,8 +27,6 @@ final class PomodoroDB: Object, ObjectKeyIdentifiable {
     @Persisted(originProperty: "pomodoro")
     var workspace: LinkingObjects<WorkspaceDB>
     
-    
-    
     var timeElapsed: TimeInterval = 0.0
     
     var timerMode: TimerMode = .initial
