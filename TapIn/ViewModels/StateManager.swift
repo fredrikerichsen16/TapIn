@@ -20,6 +20,18 @@ enum PomodoroStage {
                 return duration
         }
     }
+    
+    func getTitle() -> String {
+        switch self
+        {
+        case .pomodoro(_):
+            return "Work Work Work!"
+        case .shortBreak(_):
+            return "Short Break"
+        case .longBreak(_):
+            return "Long Break"
+        }
+    }
 }
 
 class PomodoroState: ObservableObject {
@@ -36,8 +48,9 @@ class PomodoroState: ObservableObject {
     @Published var remainingTimeString = "00:00"
     @Published var circleProgress: Double = 1.0
     
-    public var timerMode: TimerMode = .initial
-    private var pomodoroStage: PomodoroStage
+    @Published var timerMode: TimerMode = .initial
+    @Published var pomodoroStage: PomodoroStage
+    
     private var timer: Timer!
     private var timeElapsed: Double = 0.0
     private var remainingTime: Double? = nil
@@ -163,9 +176,16 @@ class StateManager: ObservableObject {
         return newState
     }
     
-    var selectedPomodoroState: PomodoroState? {
-        if let selectedWorkspace = selectedWorkspace, let pomodoroState = pomodoroStates[selectedWorkspace.id] {
-            return pomodoroState
+    func getActivePomodoro() -> PomodoroState? {
+        let statesConsideredActivePomodoro = [TimerMode.running, TimerMode.paused]
+        let active = pomodoroStates.filter({
+            statesConsideredActivePomodoro.contains($0.value.timerMode)
+        })
+        
+        assert(active.count <= 1)
+        
+        if active.count == 1 {
+            return active.first?.value
         }
         
         return nil

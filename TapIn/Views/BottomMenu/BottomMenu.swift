@@ -14,11 +14,9 @@ struct BottomMenu: View {
     @EnvironmentObject var stateManager: StateManager
     
     @State private var showingPopover = false
-    @State private var first = true
-    @State private var second = false
-    @State private var third = false
+    @State private var displayCannotStartPomodoroError = false
     
-    var body: some View {
+    var navbar: some View {
         HStack {
             Spacer()
             
@@ -28,26 +26,11 @@ struct BottomMenu: View {
                 Button("Cancel Pomodoro", action: pomodoroState.cancelSession)
                 Button("Pause Pomodoro", action: pomodoroState.pauseSession)
             case .initial:
-                Button("Start Pomodoro", action: pomodoroState.startSession)
+                Button("Start Pomodoro", action: startPomodoroWithCheck)
             case .paused:
                 Button("Cancel Pomodoro", action: pomodoroState.cancelSession)
                 Button("Resume Pomodoro", action: pomodoroState.resumeSession)
             }
-            
-            
-//            Button("Cancel Pomodoro") {
-//                stateManager.endSession()
-//            }
-//
-//            Button("Pause Pomodoro") {
-//                stateManager.pauseSession()
-//            }
-//
-//            Button("Start Pomodoro") {
-//                if stateManager.activeWorkspace != nil { return }
-//
-//                stateManager.beginSessionWithSelectedWorkspace()
-//            }
             
             Button("Open All") {
                 launcher.openAll()
@@ -63,6 +46,27 @@ struct BottomMenu: View {
         }
         .padding()
         .background(Color(r: 37, g: 37, b: 42, opacity: 1))
+    }
+    
+    var body: some View {
+        if #available(macOS 12.0, *)
+        {
+            navbar
+                .alert("Cannot start pomodoro session because one is already active in a different workspace", isPresented: $displayCannotStartPomodoroError, actions: {})
+        }
+        else
+        {
+            navbar
+        }
+    }
+    
+    func startPomodoroWithCheck() {
+        if stateManager.getActivePomodoro() != nil {
+            displayCannotStartPomodoroError = true
+            return
+        }
+        
+        pomodoroState.startSession()
     }
 }
 
