@@ -3,7 +3,7 @@ import SwiftUIRouter
 import RealmSwift
 
 struct ContentView: View {
-	@Binding var selection: String?
+    @State var selection: String? = "home"
     @EnvironmentObject var stateManager: StateManager
 
 	var body: some View {
@@ -15,9 +15,9 @@ struct ContentView: View {
 
                     SidebarSection(work: true, selection: $selection)
                     SidebarSection(work: false, selection: $selection)
-				}
-				.listStyle(SidebarListStyle())
-				.frame(minWidth: 180, maxWidth: 300)
+                }
+                .listStyle(SidebarListStyle())
+                .frame(minWidth: 180, maxWidth: 300)
                 .padding(.top)
 			}
 		}

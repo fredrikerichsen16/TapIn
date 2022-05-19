@@ -73,7 +73,7 @@ struct WorkspaceBrowse: View {
 
 			SwitchRoutes {
 				Route("workspace-pomodoro") {
-                    WorkspacePomodoro(pomodoroState: stateManager.getPomodoroState(ws: workspace))
+                    WorkspacePomodoro()
 				}
 				Route("workspace-timetracking") { info in
                     WorkspaceTimeTracking(timeTracker: workspace.timeTracker!)
@@ -88,7 +88,7 @@ struct WorkspaceBrowse: View {
 
             Spacer()
 
-            BottomMenu(launcher: workspace.launcher!, pomodoroState: stateManager.getPomodoroState(ws: workspace))
+            BottomMenu(launcher: workspace.launcher!)
 		}
         .edgesIgnoringSafeArea([.bottom, .horizontal])
 		.onAppear {

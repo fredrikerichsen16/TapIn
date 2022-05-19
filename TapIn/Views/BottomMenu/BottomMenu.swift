@@ -10,7 +10,6 @@ import RealmSwift
 
 struct BottomMenu: View {
     @ObservedRealmObject var launcher: LauncherDB
-    @StateObject var pomodoroState: PomodoroState
     @EnvironmentObject var stateManager: StateManager
     
     @State private var showingPopover = false
@@ -22,16 +21,16 @@ struct BottomMenu: View {
         HStack {
             Spacer()
             
-            switch pomodoroState.timerMode
+            switch stateManager.selectedPomodoro.timerMode
             {
             case .running:
-                Button("Cancel Pomodoro", action: pomodoroState.cancelSession)
-                Button("Pause Pomodoro", action: pomodoroState.pauseSession)
+                Button("Cancel Pomodoro", action: cancelSession)
+                Button("Pause Pomodoro", action: pauseSession)
             case .initial:
-                Button("Start Pomodoro", action: pomodoroState.startSession)
+                Button("Start Pomodoro", action: startSession)
             case .paused:
-                Button("Cancel Pomodoro", action: pomodoroState.cancelSession)
-                Button("Resume Pomodoro", action: pomodoroState.resumeSession)
+                Button("Cancel Pomodoro", action: cancelSession)
+                Button("Resume Pomodoro", action: resumeSession)
             }
             
             
@@ -63,6 +62,26 @@ struct BottomMenu: View {
         }
         .padding()
         .background(Color(r: 37, g: 37, b: 42, opacity: 1))
+    }
+    
+    func cancelSession() {
+        stateManager.activePomodoro = nil
+        stateManager.selectedPomodoro.cancelSession()
+    }
+    
+    func pauseSession() {
+        stateManager.activePomodoro = nil
+        stateManager.selectedPomodoro.pauseSession()
+    }
+    
+    func startSession() {
+        stateManager.activePomodoro = stateManager.selectedPomodoro
+        stateManager.selectedPomodoro.startSession()
+    }
+    
+    func resumeSession() {
+        stateManager.activePomodoro = stateManager.selectedPomodoro
+        stateManager.selectedPomodoro.resumeSession()
     }
 }
 

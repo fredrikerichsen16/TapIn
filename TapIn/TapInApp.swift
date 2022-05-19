@@ -6,13 +6,11 @@ struct TapinApp: SwiftUI.App {
 	@Environment(\.scenePhase) var scenePhase
     @ObservedObject var stateManager = StateManager()
     
-    @State var selection: String? = "home"
-    
     let realmManager = RealmManager()
     
 	var body: some Scene {
 		WindowGroup {
-            ContentView(selection: $selection)
+            ContentView()
 				.frame(minWidth: 500, idealWidth: 700, maxWidth: 900, minHeight: 500, idealHeight: 500, maxHeight: 900, alignment: .center)
                 .environment(\.realm, realmManager.realm)
                 .environmentObject(stateManager)

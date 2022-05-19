@@ -22,19 +22,15 @@ enum PomodoroStage {
     }
 }
 
-class PomodoroState: ObservableObject {
-    @Published var activeWorkspace: WorkspaceDB
+struct PomodoroState {
+    /*@Published*/ var workspace: WorkspaceDB
     
-    var pomodoroDb: PomodoroDB
-    
-    var activePomodoro: PomodoroDB? {
-        activeWorkspace.pomodoro
-    }
+    var pomodoroDb: PomodoroDB!
     
     // MARK: Pomodoro (put in separate observable object eventually)
     
-    @Published var remainingTimeString = "00:00"
-    @Published var circleProgress: Double = 1.0
+    /*@Published*/ var remainingTimeString = "00:00"
+    /*@Published*/ var circleProgress: Double = 1.0
     
     public var timerMode: TimerMode = .initial
     private var pomodoroStage: PomodoroStage
@@ -42,14 +38,18 @@ class PomodoroState: ObservableObject {
     private var timeElapsed: Double = 0.0
     private var remainingTime: Double? = nil
     
-    init(ws: WorkspaceDB) {
-        activeWorkspace = ws
-        pomodoroDb = ws.pomodoro!
+    init(workspace: WorkspaceDB) {
+        self.workspace = workspace
+        pomodoroDb = workspace.pomodoro!
         
         pomodoroStage = .pomodoro(60.0 * 0.5) // setInitialStage()
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
             if self.timerMode != .running { return }
+    
+            if Int(self.timeElapsed) % 5 == 0 {
+                print(self.description)
+            }
             
             self.timeElapsed += 1
             self.updateUI()
@@ -62,7 +62,7 @@ class PomodoroState: ObservableObject {
         }
     }
     
-    func setNextStage() {
+    mutating func setNextStage() {
         timerMode = .initial
 
         switch pomodoroStage {
@@ -75,17 +75,17 @@ class PomodoroState: ObservableObject {
         timeElapsed = 0
     }
     
-    func updateUI() {
+    mutating func updateUI() {
         self.setRemainingTime()
         self.setCircleProgress()
     }
     
-    func setRemainingTime() {
+    mutating func setRemainingTime() {
         remainingTime = pomodoroStage.getDuration() - timeElapsed
         remainingTimeString = getReadableTime()
     }
     
-    func setCircleProgress() {
+    mutating func setCircleProgress() {
         let duration = pomodoroStage.getDuration()
         
         self.circleProgress = (duration - timeElapsed) / duration
@@ -103,31 +103,39 @@ class PomodoroState: ObservableObject {
         return formatter.string(from: remainingTime) ?? "N/A"
     }
     
-    func startSession() {
-        print(["Started workspace: ", activeWorkspace.name])
+    mutating func startSession() {
+        print(["Started workspace: ", workspace.name])
         timeElapsed = 0
         timerMode = .running
         
         updateUI()
     }
 
-    func pauseSession() {
+    mutating func pauseSession() {
         timerMode = .paused
         
         updateUI()
     }
     
-    func resumeSession() {
+    mutating func resumeSession() {
         timerMode = .running
         
         updateUI()
     }
 
-    func cancelSession() {
+    mutating func cancelSession() {
         timerMode = .initial
         timeElapsed = 0
         
         updateUI()
+    }
+    
+    public var description: String {
+        return """
+        Timeelapsed: \(timeElapsed)
+        pomodoroStage: \(pomodoroStage)
+        remainingTimeString \(remainingTimeString)
+        """
     }
     
 }
@@ -136,39 +144,26 @@ class StateManager: ObservableObject {
     
     // MARK: General
     
-    @Published var selectedWorkspace: WorkspaceDB? = nil
+    @Published var activeWorkspace: WorkspaceDB? = nil
+    @Published var selectedWorkspace: WorkspaceDB? = nil {
+        didSet {
+            guard let ws = selectedWorkspace else { return }
+            
+            if activeWorkspace != nil && ws == activeWorkspace
+            {
+                selectedPomodoro = activePomodoro
+            }
+            else
+            {
+                selectedPomodoro = PomodoroState(workspace: ws)
+            }
+        }
+    }
     @Published var sidebarSelection: String? = "home"
     
     // MARK: Pomodoro
     
-    var pomodoroStates: [ObjectId: PomodoroState] = [:]
-    
-    func getPomodoroState(ws: WorkspaceDB) -> PomodoroState {
-        let workspaceId = ws.id
-        
-        if let existingState = pomodoroStates[workspaceId] {
-            existingState.setRemainingTime()
-            
-            return existingState
-        }
-        
-        pomodoroStates = pomodoroStates.filter({
-            $0.value.timerMode != .initial
-        })
-        
-        let newState = PomodoroState(ws: ws)
-        
-        pomodoroStates[workspaceId] = newState
-        
-        return newState
-    }
-    
-    var selectedPomodoroState: PomodoroState? {
-        if let selectedWorkspace = selectedWorkspace, let pomodoroState = pomodoroStates[selectedWorkspace.id] {
-            return pomodoroState
-        }
-        
-        return nil
-    }
+    var activePomodoro: PomodoroState?
+    @Published var selectedPomodoro: PomodoroState!
     
 }

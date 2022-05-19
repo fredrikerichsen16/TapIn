@@ -51,7 +51,6 @@ import RealmSwift
 
 struct WorkspacePomodoro: View {
     @EnvironmentObject var stateManager: StateManager
-    @StateObject var pomodoroState: PomodoroState
     
     @State var falseInitialCircleProgress = 1.0
     
@@ -59,11 +58,11 @@ struct WorkspacePomodoro: View {
         Spacer()
         
         ZStack {
-            ProgressCircleView(circleProgress: $pomodoroState.circleProgress)
+            ProgressCircleView(circleProgress: $stateManager.selectedPomodoro.circleProgress)
                 .padding()
             
             VStack {
-                Text(String(pomodoroState.remainingTimeString))
+                Text(String(stateManager.selectedPomodoro.remainingTimeString))
                     .font(.system(size: 36.0))
                     .bold()
                     .multilineTextAlignment(.center)

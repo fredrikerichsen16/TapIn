@@ -37,16 +37,10 @@ struct SidebarButton: View {
         }
         else
         {
-            //            NavigationLink(destination: viewForMenuItem(menuItem)) {
             NavigationLink(tag: menuItem.id, selection: $selection, destination: { viewForMenuItem(menuItem) }, label: {
                 Label(menuItem.text, systemImage: menuItem.icon)
                     .padding(.vertical, 5)
             })
-//            .onChange(of: selection, perform: {
-//                print("SELECTED ")
-//                print(menuItem.workspace)
-//                stateManager.selectedWorkspace = menuItem.workspace
-//            })
             .contextMenu(ContextMenu(menuItems: {
                 menuItemContextMenu(menuItem.workspace)
             }))
@@ -88,6 +82,12 @@ struct SidebarButton: View {
             
             Button("Test") {
                 selection = nil
+            }
+            
+            Button("Set Active") {
+                print("MANUALLY SET")
+                print(menuItem.workspace)
+                stateManager.selectedWorkspace = menuItem.workspace
             }
         }
     }
