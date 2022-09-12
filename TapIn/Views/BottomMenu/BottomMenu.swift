@@ -136,6 +136,8 @@ struct BottomMenu: View {
     
     var body: some View {
         HStack {
+            MusicPlayerView()
+            
             Spacer()
             
 //            Button(action: { bottomMenuControllerSelection.previous() }, label: {

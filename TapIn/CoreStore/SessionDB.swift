@@ -41,7 +41,7 @@ final class SessionDB: Object, ObjectKeyIdentifiable {
     
     override var description: String {
         return """
-        completion time: \(completedTime)
+        completion time: \(String(describing: completedTime))
         stage: \(stage.rawValue)
         duration: \(String(duration))
         """

