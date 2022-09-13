@@ -19,7 +19,7 @@ class PomodoroStatesHolder {
         
         if let existingState = pomodoroStates[workspaceId] {
             existingState.realm = realm
-            existingState.setRemainingTime()
+            existingState.updateUI()
             
             return existingState
         }
@@ -44,10 +44,6 @@ class PomodoroStatesHolder {
         
         assert(active.count <= 1)
         
-        if active.count == 1 {
-            return active.first?.value
-        }
-        
-        return nil
+        return active.first?.value
     }
 }

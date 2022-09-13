@@ -97,7 +97,6 @@ class StateManager: ObservableObject {
     func pausePlayer() {
         player?.pause()
     }
-    
 }
 
 class RadioPlayer {

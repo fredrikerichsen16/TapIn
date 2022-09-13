@@ -28,12 +28,20 @@ enum PomodoroStage {
     func convertToRealmType() -> PomodoroStageRealm {
         switch self
         {
-        case .pomodoro(_):
-            return .pomodoro
-        case .shortBreak(_):
-            return .shortBreak
-        case .longBreak(_):
-            return .longBreak
+            case .pomodoro(_):
+                return .pomodoro
+            case .shortBreak(_):
+                return .shortBreak
+            case .longBreak(_):
+                return .longBreak
         }
+    }
+    
+    func isInBreak() -> Bool {
+        if case .pomodoro = self {
+            return false
+        }
+        
+        return true
     }
 }

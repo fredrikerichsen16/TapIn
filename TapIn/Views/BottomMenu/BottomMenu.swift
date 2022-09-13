@@ -42,32 +42,7 @@ struct PomodoroBottomMenuController: View {
     var vstack: some View {
         VStack {
             Text("Pomodoro").font(.body)
-            
-            HStack {
-                switch (pomodoroState.timerMode, pomodoroState.pomodoroStage)
-                {
-                case (.running, .pomodoro):
-                    Button("Cancel", action: pomodoroState.cancelSession)
-                    Button("Pause", action: pomodoroState.pauseSession)
-                case (.running, .longBreak), (.running, .shortBreak):
-                    Button("Skip", action: pomodoroState.skipBreak)
-                    Button("Pause", action: pomodoroState.pauseSession)
-                
-                case (.initial, .pomodoro):
-                    Button("Start", action: startPomodoroWithCheck)
-                case (.initial, .longBreak), (.initial, .shortBreak):
-                    Button("Skip", action: pomodoroState.skipBreak)
-                    Button("Start", action: startPomodoroWithCheck)
-                
-                    
-                case (.paused, .pomodoro):
-                    Button("Cancel", action: pomodoroState.cancelSession)
-                    Button("Resume", action: pomodoroState.resumeSession)
-                case (.paused, .longBreak), (.paused, .shortBreak):
-                    Button("Skip", action: pomodoroState.skipBreak)
-                    Button("Resume", action: pomodoroState.resumeSession)
-                }
-            }
+            pomodoroState.getButtons()
         }
     }
     
@@ -147,16 +122,17 @@ struct BottomMenu: View {
             
             navigateButton(direction: .left)
             
-            switch bottomMenuControllerSelection {
-            case .pomodoro:
-                PomodoroBottomMenuController(pomodoroState: pomodoroState)
-                    .padding()
-            case .launcher:
-                LauncherBottomMenuController(launcher: launcher)
-                    .padding()
-            case .blocker:
-                BlockerBottomMenuController()
-                    .padding()
+            switch bottomMenuControllerSelection
+            {
+                case .pomodoro:
+                    PomodoroBottomMenuController(pomodoroState: pomodoroState)
+                        .padding()
+                case .launcher:
+                    LauncherBottomMenuController(launcher: launcher)
+                        .padding()
+                case .blocker:
+                    BlockerBottomMenuController()
+                        .padding()
             }
             
 //            Button(action: { bottomMenuControllerSelection.next() }, label: {

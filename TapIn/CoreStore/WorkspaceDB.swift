@@ -105,15 +105,32 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     
     // MARK: Sessions
     
-    func getWorkDuration(dateInterval: DateInterval) -> Double {
-//        let workspaces = realm.objects(WorkspaceDB.self).where { $0.parent.count == 0 }
+    /// Number of workspace sessions completed today
+    /// - Returns: an int
+    func numSessionsCompletedToday() -> Int {
+        let startOfDay = Calendar.current.startOfDay(for: Date.init())
+        let todayInterval = DateInterval(start: startOfDay, end: startOfDay.advanced(by: 60 * 60 * 24))
         
+        let sessionsInInterval = getSessionsInInterval(todayInterval)
+        return sessionsInInterval.count
+    }
+    
+    /// Get the amount of minutes worked on a workspace in a certain time interval
+    /// - Parameter dateInterval: Time interval
+    /// - Returns: Time in minutes
+    func getWorkDuration(dateInterval: DateInterval) -> Double {
+        let sessionsInInterval = getSessionsInInterval(dateInterval)
+        return sessionsInInterval.sum(of: \.duration)
+    }
+    
+    /// Get a Result set of sessions in this workspace that were completed within a certain date interval
+    /// - Parameter dateInterval: Date Interval to get results from
+    /// - Returns: Result set
+    private func getSessionsInInterval(_ dateInterval: DateInterval) -> Results<SessionDB> {
         let startTime = dateInterval.start
         let endTime = dateInterval.end
         
-        let sessionsInInterval = sessions.filter("completedTime BETWEEN {%@, %@}", startTime, endTime)
-        
-        return sessionsInInterval.sum(of: \.duration)
+        return sessions.filter("completedTime BETWEEN {%@, %@}", startTime, endTime)
     }
     
 //    static func deleteById(_ realm: Realm, id: ObjectId) -> Bool {

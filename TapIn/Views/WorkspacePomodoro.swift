@@ -8,47 +8,6 @@
 import SwiftUI
 import RealmSwift
 
-//struct WorkspacePomodoro: View {
-//    @EnvironmentObject var workspace: Workspace
-//
-//    var timeString: String {
-//        let remainingTime = workspace.pomodoro.remainingTime(\.pomodoroDuration)
-//        return workspace.pomodoro.readableTime(seconds: remainingTime)
-//    }
-//
-//    @State var circleProgress = 1.0
-//
-//    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-//
-//    var body: some View {
-//		Spacer()
-//
-//        ZStack {
-//            ProgressCircleView(circleProgress: $circleProgress)
-//                .padding()
-//                .onReceive(timer) { time in
-//                    let pomodoroDuration = workspace.pomodoro.pomodoroDuration
-//                    let timeElapsed = workspace.pomodoro.timeElapsed
-//
-//                    self.circleProgress = (pomodoroDuration - timeElapsed) / pomodoroDuration
-//                }
-//
-//            VStack {
-//                Text(timeString)
-//                    .font(.system(size: 36.0))
-//                    .bold()
-//                    .multilineTextAlignment(.center)
-//                    .padding()
-//                    .onReceive(timer) { time in
-//                        guard workspace.pomodoro.timerMode == .running else { return }
-//
-//                        workspace.pomodoro.timeElapsed += 1
-//                    }
-//            }
-//        }
-//    }
-//}
-
 struct WorkspacePomodoro: View {
     @EnvironmentObject var stateManager: StateManager
     @StateObject var pomodoroState: PomodoroState
@@ -61,7 +20,7 @@ struct WorkspacePomodoro: View {
                 .padding()
             
             VStack {
-                Text(pomodoroState.pomodoroStage.getTitle())
+                Text(pomodoroState.stageState.getLabel())
                     .font(.body)
                 
                 Text(String(pomodoroState.remainingTimeString))
@@ -75,7 +34,6 @@ struct WorkspacePomodoro: View {
 }
 
 struct ProgressCircleView: View {
-
     @Binding var circleProgress: Double
 
     var body: some View {
