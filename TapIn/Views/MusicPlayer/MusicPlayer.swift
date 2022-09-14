@@ -2,38 +2,44 @@ import SwiftUI
 
 struct MusicPlayerView: View {
     @EnvironmentObject var stateManager: StateManager
-    @State var playing: Bool = false
     
-    func getPlayingStatusIcon() -> Image {
-        return playing
+    private func getPlayingStatusIcon() -> Image {
+        return stateManager.radioIsPlaying
             ? Image(systemName: "pause.fill")
             : Image(systemName: "play.fill")
     }
     
-    func startPlayer() {
-        stateManager.startPlayer()
+    private func startPlayer() {
+        stateManager.radioManager.play()
     }
     
-    func pausePlayer() {
-        stateManager.pausePlayer()
+    private func pausePlayer() {
+        stateManager.radioManager.pause()
+    }
+    
+    private func prevChannel() {
+        stateManager.radioManager.goToPrevChannel()
+    }
+    
+    private func nextChannel() {
+        stateManager.radioManager.goToNextChannel()
     }
     
     var body: some View {
         HStack(spacing: 8) {
-            Text(stateManager.selectedRadioChannel.label)
+            Text(stateManager.radioManager.getActiveChannel().label)
                 .font(.subheadline)
             
             Button(action: {
-                playing = false
-                stateManager.goToPrevChannel()
+                prevChannel()
             }, label: {
                 Image(systemName: "arrowtriangle.left.fill")
             })
             
             Button(action: {
-                playing.toggle()
+                stateManager.radioIsPlaying.toggle()
                 
-                if playing {
+                if stateManager.radioIsPlaying {
                     startPlayer()
                 } else {
                     pausePlayer()
@@ -43,8 +49,7 @@ struct MusicPlayerView: View {
             })
             
             Button(action: {
-                playing = false
-                stateManager.goToNextChannel()
+                nextChannel()
             }, label: {
                 Image(systemName: "arrowtriangle.right.fill")
             })

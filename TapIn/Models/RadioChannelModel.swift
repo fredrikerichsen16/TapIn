@@ -6,13 +6,12 @@
 //
 
 import Foundation
-
+import AVKit
 
 struct RadioChannelModel {
     var keyname: String
     var label: String
     var numberOfSongsInChannel: Int
-    var lastPlayedSongIndex: Int?
     
     init(keyname: String, label: String) throws {
         self.keyname = keyname
@@ -29,7 +28,50 @@ struct RadioChannelModel {
         }
         
         self.numberOfSongsInChannel = 2
-        self.lastPlayedSongIndex = nil
+    }
+    
+//    func getSong() -> AVAudioPlayer? {
+//        let songIndex = Array(0..<numberOfSongsInChannel).randomElement()!
+//        print("--------- !!! \(keyname)-\(songIndex)")
+//        guard let songData = NSDataAsset(name: "\(keyname)-\(songIndex)", bundle: Bundle.main)?.data else {
+//            print("FAEN I HELVETE!")
+//            return nil
+//        }
+//        return try? AVAudioPlayer(data: songData)
+//    }
+    
+    func getSong() -> AVAudioPlayer? {
+        let songIndex = Array(0..<numberOfSongsInChannel).randomElement()!
+        print("\(keyname)-\(songIndex).mp3")
+        let path = Bundle.main.path(forResource: "\(keyname)-\(songIndex)", ofType: "mp3")!
+        let url = URL(fileURLWithPath: path)
+        
+        return try? AVAudioPlayer(contentsOf: url)
+    }
+    
+    //func getNextSong() throws -> AVAudioPlayer {
+    //    var songIndexes = Array(0..<radioChannel.numberOfSongsInChannel)
+    //
+    //    if let lastPlayed = radioChannel.lastPlayedSongIndex,
+    //       let index = songIndexes.firstIndex(of: lastPlayed) {
+    //        songIndexes.remove(at: index)
+    //    }
+    //
+    //    guard let songToPlay = songIndexes.randomElement(),
+    //          let songData = NSDataAsset(name: "\(radioChannel.keyname)-\(songToPlay)")?.data
+    //    else {
+    //        throw NSError(domain: "RadioPlayer", code: 1)
+    //    }
+    //
+    //    let audioPlayer = try! AVAudioPlayer(data: songData)
+    //
+    //    return audioPlayer
+    //}
+
+}
+
+
+
 //
 //        if let resourcePath = Bundle.main().resourcePath {
 //            print(resourcePath)
@@ -44,8 +86,6 @@ struct RadioChannelModel {
 //                print(error)
 //            }
 //        }
-    }
-}
 
 //static let radioChannels: [String: String] = [
 //    "Relaxing Piano": "piano",
@@ -53,3 +93,22 @@ struct RadioChannelModel {
 //    "Techno Bops": "techno",
 //    "Jazzy Jazz": "jazz"
 //]
+//
+//func getNextSong() throws -> AVAudioPlayer {
+//    var songIndexes = Array(0..<radioChannel.numberOfSongsInChannel)
+//
+//    if let lastPlayed = radioChannel.lastPlayedSongIndex,
+//       let index = songIndexes.firstIndex(of: lastPlayed) {
+//        songIndexes.remove(at: index)
+//    }
+//
+//    guard let songToPlay = songIndexes.randomElement(),
+//          let songData = NSDataAsset(name: "\(radioChannel.keyname)-\(songToPlay)")?.data
+//    else {
+//        throw NSError(domain: "RadioPlayer", code: 1)
+//    }
+//
+//    let audioPlayer = try! AVAudioPlayer(data: songData)
+//
+//    return audioPlayer
+//}

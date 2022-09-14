@@ -40,6 +40,7 @@ class Ticker {
         pomodoroState.updateUI(readableTime: readableTime, circleProgress: circleProgress)
     }
     
+    /// Get time in seconds as readable string of minutes and seconds
     private func getReadableTime(seconds: Double) -> String {
         let formatter = DateComponentsFormatter()
             formatter.allowedUnits = [.minute, .second]
@@ -49,10 +50,16 @@ class Ticker {
         return formatter.string(from: seconds) ?? "N/A"
     }
     
+    /// Return the fraction of a given full time period that has elapsed
+    /// - Parameters:
+    ///   - duration: full time period (pomodoro period duration)
+    ///   - timeElapsed: time that has elapsed
+    /// - Returns: fraction of period elapsed -> equivalent to circle progress
     private func getCircleProgress(duration: Double, timeElapsed: Double) -> Double {
         return (duration - timeElapsed) / duration
     }
     
+    /// Set timeElapsed to zero, and run the timer immediately for immediate effect rather than waiting up to one second
     func resetTimer() {
         timeElapsed = 0
         timer.fire()
@@ -61,12 +68,13 @@ class Ticker {
 
 class PomodoroState: ObservableObject {
     @Published var workspace: WorkspaceDB
-    
-    var pomodoroDb: PomodoroDB
-    var realm: Realm
+    private var pomodoroDb: PomodoroDB
+    private var realm: Realm
+    private var stateManager: StateManager
     
     @Published var remainingTimeString = "00:00"
     @Published var circleProgress: Double = 1.0
+    @Published var displayCannotStartPomodoroError = false
     
     @Published var timerMode: TimerMode = .initial {
         didSet
@@ -97,11 +105,11 @@ class PomodoroState: ObservableObject {
     var shortBreakStageState: PomodoroStageState!
     var longBreakStageState: PomodoroStageState!
     
-    init(realm: Realm, ws: WorkspaceDB) {
+    init(realm: Realm, ws: WorkspaceDB, stateManager: StateManager) {
         self.workspace = ws
         self.pomodoroDb = ws.pomodoro!
         self.realm = realm
-//        self.pomodoroStage = .pomodoro(pomodoroDb.pomodoroDuration / divideDurationBy) // setInitialStage()
+        self.stateManager = stateManager
         
         self.initialTimerState = PomodoroInitialTimerState(self)
         self.runningTimerState = PomodoroRunningTimerState(self)
@@ -146,8 +154,23 @@ class PomodoroState: ObservableObject {
     func setStageState(_ state: PomodoroStageState) {
         self.stageState = state
     }
-        
+    
     // MARK: ?
+    
+    func otherPomodoroRunning() -> Bool {
+        if let activePomodoro = stateManager.getActivePomodoro() {
+            return activePomodoro.workspace.id != workspace.id
+        }
+        
+        return false
+    }
+    
+    func longBreakDue() -> Bool {
+        let numCompletedSessions = workspace.numSessionsCompletedToday()
+        let longBreakFrequency = Int(pomodoroDb.longBreakFrequency)
+        
+        return numCompletedSessions % longBreakFrequency == 0
+    }
     
     func completedSession() {
         let (thawed, realm) = workspace.easyThaw()
@@ -208,17 +231,15 @@ class PomodoroInitialTimerState: PomodoroTimerState {
     
     func start() {
         // TODO: Implement it like startPomodoroWithCheck()
-        pomodoroState.setTimerState(.running)
+        if pomodoroState.otherPomodoroRunning()
+        {
+            pomodoroState.displayCannotStartPomodoroError = true
+        }
+        else
+        {
+            pomodoroState.setTimerState(.running)
+        }
     }
-    
-//    func startPomodoroWithCheck() {
-//        if stateManager.getActivePomodoro() != nil {
-//            displayCannotStartPomodoroError = true
-//            return
-//        }
-//
-//        pomodoroState.startSession()
-//    }
     
     func pause() {
         fatalError("Should not be possible")
@@ -376,14 +397,11 @@ final class PomodoroWorkingStageState: PomodoroStageState {
     
     init(_ pomodoroState: PomodoroState, duration: Double) {
         self.pomodoroState = pomodoroState
-        self.stage = .pomodoro(duration)
+        self.stage = .working(duration)
     }
     
     func transitionToNextState() {
-        let numCompletedSessions = pomodoroState.workspace.numSessionsCompletedToday()
-        let longBreakFrequency = Int(pomodoroState.pomodoroDb.longBreakFrequency)
-        
-        if numCompletedSessions % longBreakFrequency == 0
+        if pomodoroState.longBreakDue()
         {
             pomodoroState.setStageState(pomodoroState.longBreakStageState)
         }

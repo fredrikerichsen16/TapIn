@@ -14,25 +14,26 @@ class PomodoroStatesHolder {
     ///   - realm: realm instance
     ///   - ws: workspace to create new pomodoro state based on, or to find existing pomodoro state corresponding to this workspace
     /// - Returns: pomodoro state object
-    func getPomodoroState(realm: Realm, ws: WorkspaceDB) -> PomodoroState {
+    func getPomodoroState(realm: Realm, ws: WorkspaceDB, stateManager: StateManager) -> PomodoroState {
         let workspaceId = ws.id
         
-        if let existingState = pomodoroStates[workspaceId] {
-            existingState.realm = realm
-            existingState.updateUI()
-            
-            return existingState
+        if let state = pomodoroStates[workspaceId]
+        {
+//            state.realm = realm
+            state.updateUI()
+            return state
         }
-        
-        pomodoroStates = pomodoroStates.filter({
-            $0.value.timerMode != .initial
-        })
-        
-        let newState = PomodoroState(realm: realm, ws: ws)
-        
-        pomodoroStates[workspaceId] = newState
-        
-        return newState
+        else
+        {
+            pomodoroStates = pomodoroStates.filter({
+                $0.value.timerMode != .initial
+            })
+            
+            let state = PomodoroState(realm: realm, ws: ws, stateManager: stateManager)
+            pomodoroStates[workspaceId] = state
+            
+            return state
+        }
     }
     
     // Might remove this

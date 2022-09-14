@@ -39,6 +39,8 @@
 		357DD55B28344FC3004D1636 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 357DD55A28344FC3004D1636 /* RealmSwift */; };
 		357DD55E28345118004D1636 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = 357DD55D28345118004D1636 /* SwiftUIRouter */; };
 		358342B92784459900B7175C /* TopLevelMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358342B82784459900B7175C /* TopLevelMenuItem.swift */; };
+		3585E0DD28D13B8F00339930 /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3585E0DC28D13B8F00339930 /* piano-1.mp3 */; };
+		3585E0DF28D13B9500339930 /* piano-0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3585E0DE28D13B9500339930 /* piano-0.mp3 */; };
 		358D114827C1AD1200983673 /* SectionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358D114727C1AD1200983673 /* SectionPicker.swift */; };
 		358D114A27C1DCF600983673 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358D114927C1DCF600983673 /* StateManager.swift */; };
 		3590CA5928360292006A7F92 /* SessionDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590CA5828360292006A7F92 /* SessionDB.swift */; };
@@ -131,6 +133,8 @@
 		3573F1532687A16C004B9C21 /* LauncherPopups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPopups.swift; sourceTree = "<group>"; };
 		357A38D728C293DB007FD35F /* RadioChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioChannelModel.swift; sourceTree = "<group>"; };
 		358342B82784459900B7175C /* TopLevelMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLevelMenuItem.swift; sourceTree = "<group>"; };
+		3585E0DC28D13B8F00339930 /* piano-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "piano-1.mp3"; path = "TapIn/Assets.xcassets/piano-1.dataset/piano-1.mp3"; sourceTree = SOURCE_ROOT; };
+		3585E0DE28D13B9500339930 /* piano-0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "piano-0.mp3"; path = "TapIn/Assets.xcassets/piano-0.dataset/piano-0.mp3"; sourceTree = SOURCE_ROOT; };
 		358D114727C1AD1200983673 /* SectionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPicker.swift; sourceTree = "<group>"; };
 		358D114927C1DCF600983673 /* StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 		3590CA5828360292006A7F92 /* SessionDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDB.swift; sourceTree = "<group>"; };
@@ -257,6 +261,15 @@
 			path = Launcher;
 			sourceTree = "<group>";
 		};
+		3585E0DB28D13B7600339930 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				3585E0DE28D13B9500339930 /* piano-0.mp3 */,
+				3585E0DC28D13B8F00339930 /* piano-1.mp3 */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		358D114627C1AC9B00983673 /* WorkspaceBrowse */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +320,7 @@
 		35AEA153267F65D0000AFE85 /* TapIn */ = {
 			isa = PBXGroup;
 			children = (
+				3585E0DB28D13B7600339930 /* Assets */,
 				35BDF6C1279FACB9008BF50D /* CoreStore */,
 				3566A36E26B9D34A0064AE00 /* Helpers */,
 				3573F14326875F81004B9C21 /* Views */,
@@ -536,6 +550,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3585E0DD28D13B8F00339930 /* piano-1.mp3 in Resources */,
+				3585E0DF28D13B9500339930 /* piano-0.mp3 in Resources */,
 				35AEA15C267F65D2000AFE85 /* Preview Assets.xcassets in Resources */,
 				35AEA159267F65D2000AFE85 /* Assets.xcassets in Resources */,
 			);

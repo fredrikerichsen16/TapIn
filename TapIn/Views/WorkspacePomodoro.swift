@@ -48,16 +48,8 @@ struct ProgressCircleView: View {
                 .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
                 .rotationEffect(.degrees(270.0))
                 .foregroundColor(.blue)
-                // .foregroundColor(getCircleColor(timerSeconds: timerSeconds))
                 .animation(.linear)
         }
         .frame(width: 330, height: 330, alignment: .center)
     }
 }
-
-//struct WorkspacePomodoro_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WorkspacePomodoro(pomodoro: PomodoroDB())
-//            .environmentObject(StateManager())
-//    }
-//}

@@ -1,14 +1,14 @@
 import Foundation
 
 enum PomodoroStage {
-    case pomodoro(Double)
+    case working(Double)
     case shortBreak(Double)
     case longBreak(Double)
     
     func getDuration() -> Double {
         switch self
         {
-            case .pomodoro(let duration), .shortBreak(let duration), .longBreak(let duration):
+            case .working(let duration), .shortBreak(let duration), .longBreak(let duration):
                 return duration
         }
     }
@@ -16,7 +16,7 @@ enum PomodoroStage {
     func getTitle() -> String {
         switch self
         {
-        case .pomodoro(_):
+        case .working(_):
             return "Work Work Work!"
         case .shortBreak(_):
             return "Short Break"
@@ -28,7 +28,7 @@ enum PomodoroStage {
     func convertToRealmType() -> PomodoroStageRealm {
         switch self
         {
-            case .pomodoro(_):
+            case .working(_):
                 return .pomodoro
             case .shortBreak(_):
                 return .shortBreak
@@ -38,7 +38,7 @@ enum PomodoroStage {
     }
     
     func isInBreak() -> Bool {
-        if case .pomodoro = self {
+        if case .working = self {
             return false
         }
         
