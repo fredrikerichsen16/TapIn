@@ -38,9 +38,16 @@
 		357DD55928344FC3004D1636 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 357DD55828344FC3004D1636 /* Realm */; };
 		357DD55B28344FC3004D1636 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 357DD55A28344FC3004D1636 /* RealmSwift */; };
 		357DD55E28345118004D1636 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = 357DD55D28345118004D1636 /* SwiftUIRouter */; };
-		358342B92784459900B7175C /* TopLevelMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358342B82784459900B7175C /* TopLevelMenuItem.swift */; };
 		3585E0DD28D13B8F00339930 /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3585E0DC28D13B8F00339930 /* piano-1.mp3 */; };
 		3585E0DF28D13B9500339930 /* piano-0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3585E0DE28D13B9500339930 /* piano-0.mp3 */; };
+		3585E0E228D249BF00339930 /* InactiveBottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0E128D249BF00339930 /* InactiveBottomMenu.swift */; };
+		3585E0EB28D24AA200339930 /* MultiStateObjectHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0EA28D24AA200339930 /* MultiStateObjectHolder.swift */; };
+		3585E0ED28D24AE700339930 /* WorkspaceSubcomponentStateObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0EC28D24AE700339930 /* WorkspaceSubcomponentStateObject.swift */; };
+		3585E0F028D24B1A00339930 /* RadioState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0EF28D24B1A00339930 /* RadioState.swift */; };
+		3585E0F228D24B5B00339930 /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0F128D24B5B00339930 /* RadioPlayer.swift */; };
+		3585E0F528D24BB500339930 /* PomodoroTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0F428D24BB500339930 /* PomodoroTicker.swift */; };
+		3585E0F728D24BE200339930 /* PomodoroTimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0F628D24BE200339930 /* PomodoroTimerState.swift */; };
+		3585E0F928D24C0100339930 /* PomodoroStageState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0F828D24C0100339930 /* PomodoroStageState.swift */; };
 		358D114827C1AD1200983673 /* SectionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358D114727C1AD1200983673 /* SectionPicker.swift */; };
 		358D114A27C1DCF600983673 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358D114927C1DCF600983673 /* StateManager.swift */; };
 		3590CA5928360292006A7F92 /* SessionDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590CA5828360292006A7F92 /* SessionDB.swift */; };
@@ -132,9 +139,16 @@
 		3573F14F268767FB004B9C21 /* WorkspaceBlocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceBlocker.swift; sourceTree = "<group>"; };
 		3573F1532687A16C004B9C21 /* LauncherPopups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPopups.swift; sourceTree = "<group>"; };
 		357A38D728C293DB007FD35F /* RadioChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioChannelModel.swift; sourceTree = "<group>"; };
-		358342B82784459900B7175C /* TopLevelMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLevelMenuItem.swift; sourceTree = "<group>"; };
 		3585E0DC28D13B8F00339930 /* piano-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "piano-1.mp3"; path = "TapIn/Assets.xcassets/piano-1.dataset/piano-1.mp3"; sourceTree = SOURCE_ROOT; };
 		3585E0DE28D13B9500339930 /* piano-0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "piano-0.mp3"; path = "TapIn/Assets.xcassets/piano-0.dataset/piano-0.mp3"; sourceTree = SOURCE_ROOT; };
+		3585E0E128D249BF00339930 /* InactiveBottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InactiveBottomMenu.swift; sourceTree = "<group>"; };
+		3585E0EA28D24AA200339930 /* MultiStateObjectHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiStateObjectHolder.swift; sourceTree = "<group>"; };
+		3585E0EC28D24AE700339930 /* WorkspaceSubcomponentStateObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSubcomponentStateObject.swift; sourceTree = "<group>"; };
+		3585E0EF28D24B1A00339930 /* RadioState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioState.swift; sourceTree = "<group>"; };
+		3585E0F128D24B5B00339930 /* RadioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayer.swift; sourceTree = "<group>"; };
+		3585E0F428D24BB500339930 /* PomodoroTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTicker.swift; sourceTree = "<group>"; };
+		3585E0F628D24BE200339930 /* PomodoroTimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerState.swift; sourceTree = "<group>"; };
+		3585E0F828D24C0100339930 /* PomodoroStageState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroStageState.swift; sourceTree = "<group>"; };
 		358D114727C1AD1200983673 /* SectionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPicker.swift; sourceTree = "<group>"; };
 		358D114927C1DCF600983673 /* StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 		3590CA5828360292006A7F92 /* SessionDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDB.swift; sourceTree = "<group>"; };
@@ -200,6 +214,8 @@
 		35521BC9279C3F450047508D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				3585E0F328D24B9300339930 /* Pomodoro */,
+				3585E0EE28D24B0D00339930 /* Radio */,
 				3590CA5A2836C94E006A7F92 /* Enums */,
 				358D114927C1DCF600983673 /* StateManager.swift */,
 				3590CA5F2836C988006A7F92 /* PomodoroState.swift */,
@@ -210,6 +226,8 @@
 		35608D1626C6FB6C0054FCD2 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				3573F14426875FB7004B9C21 /* Settings.swift */,
+				3573F14B268767DB004B9C21 /* WorkspaceTimeTracking.swift */,
 				35608D1726C6FB7D0054FCD2 /* SettingsView.swift */,
 				35608D1926C6FBCB0054FCD2 /* GeneralSettingsView.swift */,
 				35608D1B26C6FBEC0054FCD2 /* AdvancedSettingsView.swift */,
@@ -231,18 +249,12 @@
 		3573F14326875F81004B9C21 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				35A699EA283FFA67001E90A3 /* MusicPlayer */,
 				358D114627C1AC9B00983673 /* WorkspaceBrowse */,
 				35EF3DC5279B35EF004E2795 /* BottomMenu */,
 				35C2FF1E278CE2750008AA55 /* Sidebar */,
 				35C2FF1D278CE2640008AA55 /* Main */,
 				35608D1626C6FB6C0054FCD2 /* Preferences */,
 				3573F1512687A157004B9C21 /* Launcher */,
-				3573F14426875FB7004B9C21 /* Settings.swift */,
-				3573F149268767C6004B9C21 /* WorkspacePomodoro.swift */,
-				3573F14B268767DB004B9C21 /* WorkspaceTimeTracking.swift */,
-				3573F14F268767FB004B9C21 /* WorkspaceBlocker.swift */,
-				358342B82784459900B7175C /* TopLevelMenuItem.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -270,9 +282,96 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		3585E0E028D2497300339930 /* PomodoroTimer */ = {
+			isa = PBXGroup;
+			children = (
+				3573F149268767C6004B9C21 /* WorkspacePomodoro.swift */,
+			);
+			path = PomodoroTimer;
+			sourceTree = "<group>";
+		};
+		3585E0E328D249F000339930 /* Blocker */ = {
+			isa = PBXGroup;
+			children = (
+				3573F14F268767FB004B9C21 /* WorkspaceBlocker.swift */,
+			);
+			path = Blocker;
+			sourceTree = "<group>";
+		};
+		3585E0E428D24A2100339930 /* Launcher */ = {
+			isa = PBXGroup;
+			children = (
+				35AEA189267F95B5000AFE85 /* LauncherModel.swift */,
+				35521BCB279C98FA0047508D /* LauncherModelExtra.swift */,
+			);
+			path = Launcher;
+			sourceTree = "<group>";
+		};
+		3585E0E528D24A2A00339930 /* Pomodoro */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pomodoro;
+			sourceTree = "<group>";
+		};
+		3585E0E628D24A2F00339930 /* Blocker */ = {
+			isa = PBXGroup;
+			children = (
+				35AEA18B267F95D9000AFE85 /* BlockerModel.swift */,
+			);
+			path = Blocker;
+			sourceTree = "<group>";
+		};
+		3585E0E728D24A3500339930 /* Radio */ = {
+			isa = PBXGroup;
+			children = (
+				357A38D728C293DB007FD35F /* RadioChannelModel.swift */,
+			);
+			path = Radio;
+			sourceTree = "<group>";
+		};
+		3585E0E828D24A3A00339930 /* TimeTracker */ = {
+			isa = PBXGroup;
+			children = (
+				35AEA187267F9582000AFE85 /* TimeTrackerModel.swift */,
+			);
+			path = TimeTracker;
+			sourceTree = "<group>";
+		};
+		3585E0E928D24A8500339930 /* MultiStateHolder */ = {
+			isa = PBXGroup;
+			children = (
+				3585E0EA28D24AA200339930 /* MultiStateObjectHolder.swift */,
+				3585E0EC28D24AE700339930 /* WorkspaceSubcomponentStateObject.swift */,
+			);
+			path = MultiStateHolder;
+			sourceTree = "<group>";
+		};
+		3585E0EE28D24B0D00339930 /* Radio */ = {
+			isa = PBXGroup;
+			children = (
+				3585E0EF28D24B1A00339930 /* RadioState.swift */,
+				3585E0F128D24B5B00339930 /* RadioPlayer.swift */,
+			);
+			path = Radio;
+			sourceTree = "<group>";
+		};
+		3585E0F328D24B9300339930 /* Pomodoro */ = {
+			isa = PBXGroup;
+			children = (
+				3585E0F428D24BB500339930 /* PomodoroTicker.swift */,
+				3585E0F628D24BE200339930 /* PomodoroTimerState.swift */,
+				3585E0F828D24C0100339930 /* PomodoroStageState.swift */,
+			);
+			path = Pomodoro;
+			sourceTree = "<group>";
+		};
 		358D114627C1AC9B00983673 /* WorkspaceBrowse */ = {
 			isa = PBXGroup;
 			children = (
+				3585E0E328D249F000339930 /* Blocker */,
+				3585E0E028D2497300339930 /* PomodoroTimer */,
+				35A699EA283FFA67001E90A3 /* MusicPlayer */,
 				35AEA180267F6AD4000AFE85 /* WorkspaceBrowse.swift */,
 				358D114727C1AD1200983673 /* SectionPicker.swift */,
 			);
@@ -367,11 +466,12 @@
 		35AEA182267F8132000AFE85 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				35AEA187267F9582000AFE85 /* TimeTrackerModel.swift */,
-				35AEA189267F95B5000AFE85 /* LauncherModel.swift */,
-				35AEA18B267F95D9000AFE85 /* BlockerModel.swift */,
-				35521BCB279C98FA0047508D /* LauncherModelExtra.swift */,
-				357A38D728C293DB007FD35F /* RadioChannelModel.swift */,
+				3585E0E928D24A8500339930 /* MultiStateHolder */,
+				3585E0E828D24A3A00339930 /* TimeTracker */,
+				3585E0E728D24A3500339930 /* Radio */,
+				3585E0E628D24A2F00339930 /* Blocker */,
+				3585E0E528D24A2A00339930 /* Pomodoro */,
+				3585E0E428D24A2100339930 /* Launcher */,
 				3538F30728CFC0D000BC7867 /* PomodoroStatesHolder.swift */,
 			);
 			path = Models;
@@ -432,6 +532,7 @@
 			isa = PBXGroup;
 			children = (
 				35EF3DC6279B3607004E2795 /* BottomMenu.swift */,
+				3585E0E128D249BF00339930 /* InactiveBottomMenu.swift */,
 			);
 			path = BottomMenu;
 			sourceTree = "<group>";
@@ -593,10 +694,12 @@
 				3538C2ED27AB60BA00D74044 /* TimeTrackerDB.swift in Sources */,
 				3538C2EB27AB5F3700D74044 /* BlockerDB.swift in Sources */,
 				35AEA181267F6AD4000AFE85 /* WorkspaceBrowse.swift in Sources */,
+				3585E0F928D24C0100339930 /* PomodoroStageState.swift in Sources */,
 				35608D1826C6FB7D0054FCD2 /* SettingsView.swift in Sources */,
 				35EF3DC4279B327D004E2795 /* SwiftUIHelpers.swift in Sources */,
 				35D18EEC279E551300ECA17C /* WebsiteLauncherView.swift in Sources */,
 				3538F30828CFC0D000BC7867 /* PomodoroStatesHolder.swift in Sources */,
+				3585E0F028D24B1A00339930 /* RadioState.swift in Sources */,
 				35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */,
 				358D114A27C1DCF600983673 /* StateManager.swift in Sources */,
 				3590CA5928360292006A7F92 /* SessionDB.swift in Sources */,
@@ -610,6 +713,7 @@
 				3573F14526875FB7004B9C21 /* Settings.swift in Sources */,
 				35AEA155267F65D0000AFE85 /* TapInApp.swift in Sources */,
 				35A699EC283FFA75001E90A3 /* MusicPlayer.swift in Sources */,
+				3585E0F228D24B5B00339930 /* RadioPlayer.swift in Sources */,
 				352E18AF279CCB4100EC87F2 /* URL+.swift in Sources */,
 				35AEA194267FA815000AFE85 /* Color+.swift in Sources */,
 				352A0B8526C94F2C00AA256B /* Collection+.swift in Sources */,
@@ -618,15 +722,19 @@
 				3573F14C268767DB004B9C21 /* WorkspaceTimeTracking.swift in Sources */,
 				35608D1A26C6FBCB0054FCD2 /* GeneralSettingsView.swift in Sources */,
 				35521BCC279C98FA0047508D /* LauncherModelExtra.swift in Sources */,
+				3585E0F728D24BE200339930 /* PomodoroTimerState.swift in Sources */,
 				3566A37226B9D63B0064AE00 /* MenuItem.swift in Sources */,
 				35500DF728355D0B00AF9AB5 /* SharedLauncherViewComponents.swift in Sources */,
 				3590CA602836C988006A7F92 /* PomodoroState.swift in Sources */,
 				3566A37026B9D35B0064AE00 /* Dataloader.swift in Sources */,
+				3585E0F528D24BB500339930 /* PomodoroTicker.swift in Sources */,
+				3585E0EB28D24AA200339930 /* MultiStateObjectHolder.swift in Sources */,
+				3585E0E228D249BF00339930 /* InactiveBottomMenu.swift in Sources */,
 				357A38D828C293DB007FD35F /* RadioChannelModel.swift in Sources */,
+				3585E0ED28D24AE700339930 /* WorkspaceSubcomponentStateObject.swift in Sources */,
 				35AEA188267F9582000AFE85 /* TimeTrackerModel.swift in Sources */,
 				35EF3DC7279B3607004E2795 /* BottomMenu.swift in Sources */,
 				352A0B8726C9689C00AA256B /* AppLauncherView.swift in Sources */,
-				358342B92784459900B7175C /* TopLevelMenuItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

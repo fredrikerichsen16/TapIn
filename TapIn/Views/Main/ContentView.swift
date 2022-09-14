@@ -3,24 +3,23 @@ import SwiftUIRouter
 import RealmSwift
 
 struct ContentView: View {
-    @State var selection: String? = "home"
     @EnvironmentObject var stateManager: StateManager
 
-	var body: some View {
-		Router {
-			NavigationView {
-                List(selection: $selection) {
-                    SidebarButton(menuItem: MenuItem.home, selection: $selection)
-                    SidebarButton(menuItem: MenuItem.statistics, selection: $selection)
+    var body: some View {
+        Router {
+            NavigationView {
+                List(selection: $stateManager.sidebarSelection) {
+                    SidebarButton(menuItem: MenuItem.home, selection: $stateManager.sidebarSelection)
+                    SidebarButton(menuItem: MenuItem.statistics, selection: $stateManager.sidebarSelection)
 
-                    SidebarSection(selection: $selection)
+                    SidebarSection(selection: $stateManager.sidebarSelection)
                 }
                 .listStyle(SidebarListStyle())
                 .frame(minWidth: 180, maxWidth: 250)
                 .padding(.top)
-			}
-		}
-	}
+            }
+        }
+    }
 }
 
 //struct ContentView_Previews: PreviewProvider {

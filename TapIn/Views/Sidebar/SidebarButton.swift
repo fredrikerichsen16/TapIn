@@ -58,6 +58,17 @@ struct SidebarButton: View {
         }
     }
     
+//    private func viewForMenuItem(_ item: MenuItem) -> AnyView {
+//        switch item
+//        {
+//        case .home, .statistics:
+//            return AnyView(Text(item.text).font(.largeTitle))
+//        case .workspace(let ws):
+////            stateManager.selectedWorkspace = ws
+//            return AnyView(WorkspaceBrowse(workspace: ws))
+//        }
+//    }
+    
     @ViewBuilder
     private func menuItemContextMenu(_ ws: WorkspaceDB?) -> some View {
         SwiftUI.Group {

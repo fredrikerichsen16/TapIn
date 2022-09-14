@@ -2,32 +2,33 @@ import SwiftUI
 
 struct MusicPlayerView: View {
     @EnvironmentObject var stateManager: StateManager
+    @StateObject var radioState: RadioState
     
     private func getPlayingStatusIcon() -> Image {
-        return stateManager.radioIsPlaying
+        return radioState.radioIsPlaying
             ? Image(systemName: "pause.fill")
             : Image(systemName: "play.fill")
     }
     
     private func startPlayer() {
-        stateManager.radioManager.play()
+        radioState.play()
     }
     
     private func pausePlayer() {
-        stateManager.radioManager.pause()
+        radioState.pause()
     }
     
     private func prevChannel() {
-        stateManager.radioManager.goToPrevChannel()
+        radioState.goToPrevChannel()
     }
     
     private func nextChannel() {
-        stateManager.radioManager.goToNextChannel()
+        radioState.goToNextChannel()
     }
     
     var body: some View {
         HStack(spacing: 8) {
-            Text(stateManager.radioManager.getActiveChannel().label)
+            Text(radioState.getActiveChannel().label)
                 .font(.subheadline)
             
             Button(action: {
@@ -37,9 +38,9 @@ struct MusicPlayerView: View {
             })
             
             Button(action: {
-                stateManager.radioIsPlaying.toggle()
+                radioState.radioIsPlaying.toggle()
                 
-                if stateManager.radioIsPlaying {
+                if radioState.radioIsPlaying {
                     startPlayer()
                 } else {
                     pausePlayer()
@@ -56,10 +57,3 @@ struct MusicPlayerView: View {
         }
     }
 }
-
-//struct MusicPlayer_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SwiftUIView()
-//    }
-//}
-

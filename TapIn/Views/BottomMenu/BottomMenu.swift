@@ -62,7 +62,6 @@ enum BottomMenuControllerSelection {
     case pomodoro
     case launcher
     case blocker
-    case radio
     
     mutating func next() {
         switch self
@@ -72,8 +71,6 @@ enum BottomMenuControllerSelection {
         case .launcher:
             self = .blocker
         case .blocker:
-            self = .radio
-        case .radio:
             self = .pomodoro
         }
     }
@@ -82,13 +79,11 @@ enum BottomMenuControllerSelection {
         switch self
         {
         case .pomodoro:
-            self = .radio
+            self = .blocker
         case .launcher:
             self = .pomodoro
         case .blocker:
             self = .launcher
-        case .radio:
-            self = .blocker
         }
     }
 }
@@ -99,14 +94,16 @@ enum Direction {
 }
 
 struct BottomMenu: View {
-    @ObservedRealmObject var launcher: LauncherDB // just passing through
+    @Environment(\.realm) var realm // just passing through
+    @ObservedRealmObject var workspace: WorkspaceDB // just passing through
     @StateObject var pomodoroState: PomodoroState // just passing through
+    
     @EnvironmentObject var stateManager: StateManager
     @Binding var bottomMenuControllerSelection: BottomMenuControllerSelection
     
     var body: some View {
         HStack {
-            Text("[name]")
+            MusicPlayerView(radioState: stateManager.getRadioState(realm: realm, workspace: workspace))
             
             Spacer()
             
@@ -119,13 +116,11 @@ struct BottomMenu: View {
                     PomodoroBottomMenuController(pomodoroState: pomodoroState)
                         .padding()
                 case .launcher:
-                    LauncherBottomMenuController(launcher: launcher)
+                    LauncherBottomMenuController(launcher: workspace.launcher!)
                         .padding()
                 case .blocker:
                     BlockerBottomMenuController()
                         .padding()
-                case .radio:
-                    MusicPlayerView()
                 }
                 navigateButton(direction: .right)
             }
