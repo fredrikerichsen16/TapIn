@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		352428B8290C6BCD0046C9AB /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 352428B6290C6BCD0046C9AB /* piano-1.mp3 */; };
 		352428B9290C6BCD0046C9AB /* piano-0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 352428B7290C6BCD0046C9AB /* piano-0.mp3 */; };
+		352428BB290C72280046C9AB /* WorkspaceViewModelHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352428BA290C72280046C9AB /* WorkspaceViewModelHolder.swift */; };
+		352428BD290C72B70046C9AB /* WorkspaceVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352428BC290C72B70046C9AB /* WorkspaceVM.swift */; };
 		352A0B8526C94F2C00AA256B /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8426C94F2C00AA256B /* Collection+.swift */; };
 		352A0B8726C9689C00AA256B /* AppLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8626C9689C00AA256B /* AppLauncherView.swift */; };
 		352A0B8926C96AC000AA256B /* FileLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8826C96AC000AA256B /* FileLauncherView.swift */; };
@@ -106,6 +108,8 @@
 /* Begin PBXFileReference section */
 		352428B6290C6BCD0046C9AB /* piano-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-1.mp3"; sourceTree = "<group>"; };
 		352428B7290C6BCD0046C9AB /* piano-0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-0.mp3"; sourceTree = "<group>"; };
+		352428BA290C72280046C9AB /* WorkspaceViewModelHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceViewModelHolder.swift; sourceTree = "<group>"; };
+		352428BC290C72B70046C9AB /* WorkspaceVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceVM.swift; sourceTree = "<group>"; };
 		352A0B8426C94F2C00AA256B /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		352A0B8626C9689C00AA256B /* AppLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncherView.swift; sourceTree = "<group>"; };
 		352A0B8826C96AC000AA256B /* FileLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLauncherView.swift; sourceTree = "<group>"; };
@@ -513,6 +517,7 @@
 		356B4D37290C29E100C12949 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				352428BC290C72B70046C9AB /* WorkspaceVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -529,6 +534,7 @@
 		356B4D39290C29E500C12949 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				352428BA290C72280046C9AB /* WorkspaceViewModelHolder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -811,6 +817,7 @@
 				35F5592A27A27D4D0094F2C4 /* RealmManager.swift in Sources */,
 				35AEA157267F65D0000AFE85 /* ContentView.swift in Sources */,
 				3538C2E927AB5D0800D74044 /* PomodoroDB.swift in Sources */,
+				352428BB290C72280046C9AB /* WorkspaceViewModelHolder.swift in Sources */,
 				3573F1542687A16C004B9C21 /* LauncherPopups.swift in Sources */,
 				352E18AC279CBA3600EC87F2 /* EmptyLauncherView.swift in Sources */,
 				3573F14526875FB7004B9C21 /* Settings.swift in Sources */,
@@ -818,6 +825,7 @@
 				35A699EC283FFA75001E90A3 /* MusicPlayer.swift in Sources */,
 				3585E0F228D24B5B00339930 /* RadioPlayer.swift in Sources */,
 				356B4D3F290C449D00C12949 /* NuclearWasteland.swift in Sources */,
+				352428BD290C72B70046C9AB /* WorkspaceVM.swift in Sources */,
 				352E18AF279CCB4100EC87F2 /* URL+.swift in Sources */,
 				35AEA194267FA815000AFE85 /* Color+.swift in Sources */,
 				352A0B8526C94F2C00AA256B /* Collection+.swift in Sources */,

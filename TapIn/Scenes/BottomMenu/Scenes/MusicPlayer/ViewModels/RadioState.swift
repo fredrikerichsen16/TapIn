@@ -3,8 +3,10 @@ import RealmSwift
 
 final class RadioState: WorkspaceSubcomponentStateObject {
     var workspace: WorkspaceDB
-    var realm: Realm
     var stateManager: StateManager
+    var realm: Realm {
+        RealmManager.shared.realm
+    }
     
     func isActive() -> Bool {
         return radioIsPlaying
@@ -31,7 +33,6 @@ final class RadioState: WorkspaceSubcomponentStateObject {
     }
     
     init(workspace: WorkspaceDB, stateManager: StateManager) {
-        self.realm = RealmManager.shared.realm
         self.workspace = workspace
         self.stateManager = stateManager
         self.radioPlayer = radioPlayerConstructor()

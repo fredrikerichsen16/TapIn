@@ -2,8 +2,11 @@ import SwiftUI
 import RealmSwift
 
 final class PomodoroState: WorkspaceSubcomponentStateObject {
+    var realm: Realm {
+        RealmManager.shared.realm
+    }
+    
     @Published var workspace: WorkspaceDB
-    internal var realm: Realm
     internal var stateManager: StateManager
     private var pomodoroDb: PomodoroDB
     
@@ -44,7 +47,6 @@ final class PomodoroState: WorkspaceSubcomponentStateObject {
     init(workspace: WorkspaceDB, stateManager: StateManager) {
         self.workspace = workspace
         self.pomodoroDb = workspace.pomodoro
-        self.realm = RealmManager.shared.realm
         self.stateManager = stateManager
         
         self.initialTimerState = PomodoroInitialTimerState(self)
