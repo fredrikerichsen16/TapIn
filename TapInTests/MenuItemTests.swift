@@ -26,11 +26,11 @@ class MenuItemTests: XCTestCase {
         XCTAssertEqual(statistics.id, "statistics")
     }
     
-    func test_getMenuItems_emptyParameter() throws {
-        XCTAssertNoThrow({
-            MenuItem.getMenuItems(workspaces: [])
-        })
-    }
+//    func test_getMenuItems_emptyParameter() throws {
+//        XCTAssertNoThrow({
+//            MenuItem.getMenuItems(workspaces: [])
+//        })
+//    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.

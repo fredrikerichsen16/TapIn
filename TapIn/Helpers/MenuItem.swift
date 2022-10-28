@@ -3,7 +3,7 @@ enum MenuItem {
     case statistics
     case workspace(WorkspaceDB)
     
-    var text: String {
+    var label: String {
         switch self
         {
             case .home:
@@ -28,32 +28,36 @@ enum MenuItem {
     }
     
     var workspace: WorkspaceDB? {
-        get {
-            switch self {
-                case .workspace(let ws):
-                    return ws
-                default:
-                    return nil
+        get
+        {
+            switch self
+            {
+            case .workspace(let ws):
+                return ws
+            default:
+                return nil
             }
         }
     }
     
-    static func getMenuItems(workspaces: [WorkspaceDB]) -> [MenuItem] {
-        var menuItems = [MenuItem]()
-        
-        for workspace in workspaces
-        {
-            menuItems.append(.workspace(workspace))
-        }
-        
-        return menuItems
-    }
+//    DON'T THINK I USE THIS
+//    static func getMenuItems(workspaces: [WorkspaceDB]) -> [MenuItem] {
+//        var menuItems = [MenuItem]()
+//
+//        for workspace in workspaces
+//        {
+//            menuItems.append(.workspace(workspace))
+//        }
+//
+//        return menuItems
+//    }
 }
 
 extension MenuItem: Identifiable {
     
     var id: String {
-        switch self {
+        switch self
+        {
         case .home:
             return "home"
         case .statistics:
