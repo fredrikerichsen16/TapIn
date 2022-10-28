@@ -12,7 +12,7 @@ final class LauncherDB: Object, ObjectKeyIdentifiable {
     var launcherInstances = RealmSwift.List<LauncherInstanceDB>()
     
     var parentLauncherInstances: RealmSwift.List<LauncherInstanceDB>? {
-        workspace.first?.parent.first?.launcher?.launcherInstances
+        workspace.first?.parent.first?.launcher.launcherInstances
     }
     
     // MARK: CRUD

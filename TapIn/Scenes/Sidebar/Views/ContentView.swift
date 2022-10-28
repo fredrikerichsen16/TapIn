@@ -9,10 +9,10 @@ struct ContentView: View {
         Router {
             NavigationView {
                 List(selection: $stateManager.sidebarSelection) {
-                    SidebarButton(menuItem: MenuItem.home, selection: $stateManager.sidebarSelection)
-                    SidebarButton(menuItem: MenuItem.statistics, selection: $stateManager.sidebarSelection)
+                    SidebarButtonToPage(menuItem: MenuItem.home)
+                    SidebarButtonToPage(menuItem: MenuItem.statistics)
 
-                    SidebarSection(selection: $stateManager.sidebarSelection)
+                    SidebarWorkspacesSection(stateManager: stateManager)
                 }
                 .listStyle(SidebarListStyle())
                 .frame(minWidth: 180, maxWidth: 250)

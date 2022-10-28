@@ -8,7 +8,7 @@ class MultiStateObjectHolder<T: WorkspaceSubcomponentStateObject> {
         return stateObjects[workspace.id]
     }
 
-    func getObject(realm: Realm, workspace: WorkspaceDB, stateManager: StateManager) -> T {
+    func getObject(workspace: WorkspaceDB, stateManager: StateManager) -> T {
         let workspaceId = workspace.id
         let activeWorkspace = stateManager.activeWorkspace
         
@@ -38,7 +38,7 @@ class MultiStateObjectHolder<T: WorkspaceSubcomponentStateObject> {
                 stateObjects = [:]
             }
 
-            let state = T.init(realm: realm, workspace: workspace, stateManager: stateManager)
+            let state = T.init(workspace: workspace, stateManager: stateManager)
             stateObjects[workspaceId] = state
             
             return state

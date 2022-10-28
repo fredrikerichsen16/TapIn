@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		352428B8290C6BCD0046C9AB /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 352428B6290C6BCD0046C9AB /* piano-1.mp3 */; };
+		352428B9290C6BCD0046C9AB /* piano-0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 352428B7290C6BCD0046C9AB /* piano-0.mp3 */; };
 		352A0B8526C94F2C00AA256B /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8426C94F2C00AA256B /* Collection+.swift */; };
 		352A0B8726C9689C00AA256B /* AppLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8626C9689C00AA256B /* AppLauncherView.swift */; };
 		352A0B8926C96AC000AA256B /* FileLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8826C96AC000AA256B /* FileLauncherView.swift */; };
@@ -27,6 +29,7 @@
 		35608D1C26C6FBEC0054FCD2 /* AdvancedSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35608D1B26C6FBEC0054FCD2 /* AdvancedSettingsView.swift */; };
 		3566A37026B9D35B0064AE00 /* Dataloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566A36F26B9D35B0064AE00 /* Dataloader.swift */; };
 		3566A37226B9D63B0064AE00 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566A37126B9D63B0064AE00 /* MenuItem.swift */; };
+		356B4D3F290C449D00C12949 /* NuclearWasteland.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356B4D3E290C449D00C12949 /* NuclearWasteland.swift */; };
 		3570158627D42F4F000848B7 /* RealmHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3570158527D42F4F000848B7 /* RealmHelpers.swift */; };
 		3573F14526875FB7004B9C21 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F14426875FB7004B9C21 /* Settings.swift */; };
 		3573F14A268767C6004B9C21 /* WorkspacePomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F149268767C6004B9C21 /* WorkspacePomodoro.swift */; };
@@ -64,7 +67,7 @@
 		35AEA18A267F95B5000AFE85 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA189267F95B5000AFE85 /* LauncherModel.swift */; };
 		35AEA18C267F95D9000AFE85 /* BlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA18B267F95D9000AFE85 /* BlockerModel.swift */; };
 		35AEA194267FA815000AFE85 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA193267FA815000AFE85 /* Color+.swift */; };
-		35C2FF20278CE2D70008AA55 /* SidebarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF1F278CE2D70008AA55 /* SidebarSection.swift */; };
+		35C2FF20278CE2D70008AA55 /* SidebarWorkspacesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF1F278CE2D70008AA55 /* SidebarWorkspacesSection.swift */; };
 		35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF21278CE3910008AA55 /* SidebarButton.swift */; };
 		35D18EEC279E551300ECA17C /* WebsiteLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D18EEB279E551300ECA17C /* WebsiteLauncherView.swift */; };
 		35E438A528D3F43E00C1C7DB /* BlockerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E438A428D3F43E00C1C7DB /* BlockerVM.swift */; };
@@ -101,6 +104,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		352428B6290C6BCD0046C9AB /* piano-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-1.mp3"; sourceTree = "<group>"; };
+		352428B7290C6BCD0046C9AB /* piano-0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-0.mp3"; sourceTree = "<group>"; };
 		352A0B8426C94F2C00AA256B /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		352A0B8626C9689C00AA256B /* AppLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncherView.swift; sourceTree = "<group>"; };
 		352A0B8826C96AC000AA256B /* FileLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLauncherView.swift; sourceTree = "<group>"; };
@@ -123,6 +128,7 @@
 		3566A36F26B9D35B0064AE00 /* Dataloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dataloader.swift; sourceTree = "<group>"; };
 		3566A37126B9D63B0064AE00 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		356A4F77279A191900A6C633 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		356B4D3E290C449D00C12949 /* NuclearWasteland.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NuclearWasteland.swift; sourceTree = "<group>"; };
 		3570158527D42F4F000848B7 /* RealmHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelpers.swift; sourceTree = "<group>"; };
 		3573F14426875FB7004B9C21 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3573F149268767C6004B9C21 /* WorkspacePomodoro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacePomodoro.swift; sourceTree = "<group>"; };
@@ -162,7 +168,7 @@
 		35AEA189267F95B5000AFE85 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
 		35AEA18B267F95D9000AFE85 /* BlockerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerModel.swift; sourceTree = "<group>"; };
 		35AEA193267FA815000AFE85 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
-		35C2FF1F278CE2D70008AA55 /* SidebarSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSection.swift; sourceTree = "<group>"; };
+		35C2FF1F278CE2D70008AA55 /* SidebarWorkspacesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarWorkspacesSection.swift; sourceTree = "<group>"; };
 		35C2FF21278CE3910008AA55 /* SidebarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButton.swift; sourceTree = "<group>"; };
 		35D18EEB279E551300ECA17C /* WebsiteLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteLauncherView.swift; sourceTree = "<group>"; };
 		35E438A428D3F43E00C1C7DB /* BlockerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerVM.swift; sourceTree = "<group>"; };
@@ -193,13 +199,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		352428B5290C6BC40046C9AB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				352428B7290C6BCD0046C9AB /* piano-0.mp3 */,
+				352428B6290C6BCD0046C9AB /* piano-1.mp3 */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		35521BC9279C3F450047508D /* Other */ = {
 			isa = PBXGroup;
 			children = (
 				3538F30728CFC0D000BC7867 /* PomodoroStatesHolder.swift */,
 				3585E0EA28D24AA200339930 /* MultiStateObjectHolder.swift */,
 				3585E0EC28D24AE700339930 /* WorkspaceSubcomponentStateObject.swift */,
-				358D114927C1DCF600983673 /* StateManager.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -284,6 +298,7 @@
 		356B4D1A290C283F00C12949 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				358D114927C1DCF600983673 /* StateManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -291,7 +306,7 @@
 		356B4D1B290C284B00C12949 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				35C2FF1F278CE2D70008AA55 /* SidebarSection.swift */,
+				35C2FF1F278CE2D70008AA55 /* SidebarWorkspacesSection.swift */,
 				35C2FF21278CE3910008AA55 /* SidebarButton.swift */,
 				35AEA156267F65D0000AFE85 /* ContentView.swift */,
 			);
@@ -584,6 +599,7 @@
 		35AEA153267F65D0000AFE85 /* TapIn */ = {
 			isa = PBXGroup;
 			children = (
+				352428B5290C6BC40046C9AB /* Resources */,
 				356B4D0F290C27B800C12949 /* Scenes */,
 				35BDF6C1279FACB9008BF50D /* Persistence */,
 				3566A36E26B9D34A0064AE00 /* Helpers */,
@@ -595,6 +611,7 @@
 				35AEA15E267F65D2000AFE85 /* TapIn.entitlements */,
 				35AEA15A267F65D2000AFE85 /* Preview Content */,
 				352E18B0279CD18600EC87F2 /* README.md */,
+				356B4D3E290C449D00C12949 /* NuclearWasteland.swift */,
 			);
 			path = TapIn;
 			sourceTree = "<group>";
@@ -743,6 +760,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				352428B8290C6BCD0046C9AB /* piano-1.mp3 in Resources */,
+				352428B9290C6BCD0046C9AB /* piano-0.mp3 in Resources */,
 				35AEA15C267F65D2000AFE85 /* Preview Assets.xcassets in Resources */,
 				35AEA159267F65D2000AFE85 /* Assets.xcassets in Resources */,
 			);
@@ -788,7 +807,7 @@
 				358D114A27C1DCF600983673 /* StateManager.swift in Sources */,
 				3590CA5928360292006A7F92 /* SessionDB.swift in Sources */,
 				352A0B8926C96AC000AA256B /* FileLauncherView.swift in Sources */,
-				35C2FF20278CE2D70008AA55 /* SidebarSection.swift in Sources */,
+				35C2FF20278CE2D70008AA55 /* SidebarWorkspacesSection.swift in Sources */,
 				35F5592A27A27D4D0094F2C4 /* RealmManager.swift in Sources */,
 				35AEA157267F65D0000AFE85 /* ContentView.swift in Sources */,
 				3538C2E927AB5D0800D74044 /* PomodoroDB.swift in Sources */,
@@ -798,6 +817,7 @@
 				35AEA155267F65D0000AFE85 /* TapInApp.swift in Sources */,
 				35A699EC283FFA75001E90A3 /* MusicPlayer.swift in Sources */,
 				3585E0F228D24B5B00339930 /* RadioPlayer.swift in Sources */,
+				356B4D3F290C449D00C12949 /* NuclearWasteland.swift in Sources */,
 				352E18AF279CCB4100EC87F2 /* URL+.swift in Sources */,
 				35AEA194267FA815000AFE85 /* Color+.swift in Sources */,
 				352A0B8526C94F2C00AA256B /* Collection+.swift in Sources */,
@@ -882,6 +902,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				EXCLUDED_SOURCE_FILE_NAMES = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -896,7 +917,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -952,7 +973,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -974,12 +995,13 @@
 				DEVELOPMENT_TEAM = S83364QYM6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_SOURCE_FILE_NAMES = "";
 				INFOPLIST_FILE = TapIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				PRODUCT_BUNDLE_IDENTIFIER = fredrik.TapIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1000,12 +1022,13 @@
 				DEVELOPMENT_TEAM = S83364QYM6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_SOURCE_FILE_NAMES = "";
 				INFOPLIST_FILE = TapIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				PRODUCT_BUNDLE_IDENTIFIER = fredrik.TapIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

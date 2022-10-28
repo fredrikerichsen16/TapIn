@@ -91,7 +91,7 @@ struct BottomMenu: View {
     
     var body: some View {
         HStack {
-            MusicPlayerView(radioState: stateManager.getRadioState(realm: realm, workspace: workspace))
+            MusicPlayerView(radioState: stateManager.getRadioState(workspace: workspace))
             
             Spacer()
             
@@ -104,7 +104,7 @@ struct BottomMenu: View {
                     PomodoroBottomMenuController(pomodoroState: pomodoroState)
                         .padding()
                 case .launcher:
-                    LauncherBottomMenuController(launcher: workspace.launcher!)
+                    LauncherBottomMenuController(launcher: workspace.launcher)
                         .padding()
                 case .blocker:
                     BlockerBottomMenuController()

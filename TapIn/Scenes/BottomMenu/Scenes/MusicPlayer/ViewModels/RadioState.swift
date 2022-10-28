@@ -30,8 +30,8 @@ final class RadioState: WorkspaceSubcomponentStateObject {
         }
     }
     
-    init(realm: Realm, workspace: WorkspaceDB, stateManager: StateManager) {
-        self.realm = realm
+    init(workspace: WorkspaceDB, stateManager: StateManager) {
+        self.realm = RealmManager.shared.realm
         self.workspace = workspace
         self.stateManager = stateManager
         self.radioPlayer = radioPlayerConstructor()

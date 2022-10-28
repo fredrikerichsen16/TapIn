@@ -15,12 +15,9 @@ class BlockerVM: ObservableObject {
     @Published var blocker: BlockerDB
     
     init(_ realm: Realm, workspace: WorkspaceDB) {
-        guard let blocker = workspace.blocker else {
-            fatalError("Blocker should always be in database. Will probably make that non-optional eventually.")
-        }
-        
         self.realm = realm
-        self.blocker = blocker
+        self.blocker = workspace.blocker
+
 //        self.token = blocker.observe({ [weak self] (changes) in
 //            switch changes
 //            {

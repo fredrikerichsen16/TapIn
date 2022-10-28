@@ -39,18 +39,6 @@ enum MenuItem {
             }
         }
     }
-    
-//    DON'T THINK I USE THIS
-//    static func getMenuItems(workspaces: [WorkspaceDB]) -> [MenuItem] {
-//        var menuItems = [MenuItem]()
-//
-//        for workspace in workspaces
-//        {
-//            menuItems.append(.workspace(workspace))
-//        }
-//
-//        return menuItems
-//    }
 }
 
 extension MenuItem: Identifiable {
@@ -66,5 +54,9 @@ extension MenuItem: Identifiable {
             return "workspace-\(ws.id)"
         }
     }
+    
+}
+
+extension MenuItem: Hashable {
     
 }

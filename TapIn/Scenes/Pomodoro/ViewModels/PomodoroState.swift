@@ -41,10 +41,10 @@ final class PomodoroState: WorkspaceSubcomponentStateObject {
     var shortBreakStageState: PomodoroStageState!
     var longBreakStageState: PomodoroStageState!
     
-    init(realm: Realm, workspace: WorkspaceDB, stateManager: StateManager) {
+    init(workspace: WorkspaceDB, stateManager: StateManager) {
         self.workspace = workspace
-        self.pomodoroDb = workspace.pomodoro!
-        self.realm = realm
+        self.pomodoroDb = workspace.pomodoro
+        self.realm = RealmManager.shared.realm
         self.stateManager = stateManager
         
         self.initialTimerState = PomodoroInitialTimerState(self)

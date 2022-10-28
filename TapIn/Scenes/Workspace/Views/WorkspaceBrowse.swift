@@ -3,13 +3,16 @@ import SwiftUIRouter
 import RealmSwift
 
 struct WorkspaceBrowse: View {
-    @Environment(\.realm) var realm
+    var realm: Realm {
+        RealmManager.shared.realm
+    }
+    
     @EnvironmentObject var navigator: Navigator
     @EnvironmentObject var stateManager: StateManager
-    @ObservedRealmObject var workspace: WorkspaceDB
+    @StateObject var workspace: WorkspaceDB
     
     @State var bottomMenuControllerSelection = BottomMenuControllerSelection.pomodoro
-
+    
     var body: some View {
         VStack {
             SectionPicker()
@@ -18,16 +21,16 @@ struct WorkspaceBrowse: View {
 
             SwitchRoutes {
                 Route("workspace-pomodoro") {
-                    WorkspacePomodoro(pomodoroState: stateManager.getPomodoroState(realm: realm, workspace: workspace))
+                    WorkspacePomodoro(pomodoroState: stateManager.getPomodoroState(workspace: workspace))
                         .onAppear {
                             bottomMenuControllerSelection = .pomodoro
                         }
                 }
                 Route("workspace-timetracking") { info in
-                    WorkspaceTimeTracking(timeTracker: workspace.timeTracker!)
+                    WorkspaceTimeTracking(timeTracker: workspace.timeTracker)
                 }
                 Route("workspace-launcher/*") {
-                    WorkspaceLauncher(launcher: workspace.launcher!)
+                    WorkspaceLauncher(launcher: workspace.launcher)
                         .onAppear {
                             bottomMenuControllerSelection = .launcher
                         }
@@ -51,7 +54,7 @@ struct WorkspaceBrowse: View {
             {
                 BottomMenu(
                     workspace: workspace,
-                    pomodoroState: stateManager.getPomodoroState(realm: realm, workspace: workspace),
+                    pomodoroState: stateManager.getPomodoroState(workspace: workspace),
                     bottomMenuControllerSelection: $bottomMenuControllerSelection
                 )
             }

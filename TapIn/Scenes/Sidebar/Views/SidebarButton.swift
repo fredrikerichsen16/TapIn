@@ -1,53 +1,14 @@
-//
-//  SidebarButton.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 10/01/2022.
-//
-
 import SwiftUI
 import RealmSwift
 
-struct SidebarButton: View {
-    var realm: Realm {
-        RealmManager.shared.realm
-    }
-    
-    @ObservedResults(WorkspaceDB.self) var workspaces
-    @EnvironmentObject var stateManager: StateManager
+struct SidebarButtonToPage: View {
     @State var menuItem: MenuItem
     
-    @State var renameWorkspaceField: String = ""
-    @State var isRenaming = false
-    
-    @Binding var selection: String?
-    
-    @Namespace var mainNamespace
-    
     var body: some View {
-        if isRenaming
-        {
-            if #available(macOS 12.0, *) {
-                TextField("", text: $renameWorkspaceField) // passing it to bind
-                    .textFieldStyle(.roundedBorder) // adds border
-                    .prefersDefaultFocus(in: mainNamespace)
-                    .onSubmit {
-                        let realm = RealmManager.shared.realm
-                        guard let workspace = menuItem.workspace else { return }
-                        workspace.renameWorkspace(realm, name: renameWorkspaceField)
-                        isRenaming = false
-                    }
-            }
-        }
-        else
-        {
-            NavigationLink(tag: menuItem.id, selection: $selection, destination: { viewForMenuItem(menuItem) }, label: {
-                Label(menuItem.label, systemImage: menuItem.icon)
-                    .padding(.vertical, 5)
-            })
-            .contextMenu(ContextMenu(menuItems: {
-                menuItemContextMenu(menuItem.workspace)
-            }))
+        NavigationLink(destination: { viewForMenuItem(menuItem) }) {
+            Label(menuItem.label, systemImage: menuItem.icon)
+                .padding(.vertical, 5)
+                .tag(menuItem.id)
         }
     }
     
@@ -55,55 +16,94 @@ struct SidebarButton: View {
     private func viewForMenuItem(_ item: MenuItem) -> some View {
         switch item
         {
-        case .home, .statistics:
+        case .home:
             Text(item.label).font(.largeTitle)
-        case .workspace(let ws):
-            WorkspaceBrowse(workspace: ws)
+        case .statistics:
+            Text(item.label).font(.largeTitle)
+        default:
+            fatalError("1493403")
         }
     }
+}
+
+struct SidebarButtonToWorkspace: View {
+    var realm: Realm {
+        RealmManager.shared.realm
+    }
+
+    @EnvironmentObject var stateManager: StateManager
+    @State var menuItem: MenuItem
     
-    @ViewBuilder
-    private func menuItemContextMenu(_ ws: WorkspaceDB?) -> some View {
-        SwiftUI.Group {
+    var workspace: WorkspaceDB {
+        menuItem.workspace!
+    }
+
+    @State var renameWorkspaceField: String = ""
+    @State var isRenaming = false
+
+    @Namespace var mainNamespace
+
+    var body: some View {
+        if isRenaming
+        {
+            TextField("", text: $renameWorkspaceField) // passing it to bind
+                .textFieldStyle(.roundedBorder) // adds border
+                .prefersDefaultFocus(in: mainNamespace)
+                .onSubmit {
+                    workspace.renameWorkspace(realm, name: renameWorkspaceField)
+                    isRenaming = false
+                }
+        }
+        else
+        {
+            NavigationLink(destination: { WorkspaceBrowse(workspace: workspace) }) {
+                Label(menuItem.label, systemImage: menuItem.icon)
+                    .padding(.vertical, 5)
+                    .tag(menuItem.id)
+            }
+            .contextMenu(ContextMenu(menuItems: {
+                contextMenu
+            }))
+        }
+    }
+
+//    @ViewBuilder
+//    private func viewForMenuItem(_ item: MenuItem) -> some View {
+//        switch item
+//        {
+//        case .workspace(let ws):
+//            WorkspaceBrowse(workspace: ws)
+//        default:
+//            fatalError("18423403")
+//        }
+//    }
+}
+
+// MARK: Context Menu
+extension SidebarButtonToWorkspace {
+    var contextMenu: some View {
+        Group {
             Button("Add Child Workspace") {
-                guard let workspace = menuItem.workspace else { return }
                 workspace.addChild(realm)
-                
-                stateManager.refresh()
             }
-            
+
             Button("Delete") {
-                guard let workspace = menuItem.workspace else { return }
-                
-                selection = "home"
-                
+                stateManager.sidebarSelection = MenuItem.home.id
                 WorkspaceDB.deleteWorkspace(realm, workspace: workspace)
-                
-                stateManager.refresh()
             }
-            
+
             Button("Rename") {
                 beginRenamingWorkspace()
             }
-            
+
             Button("Test") {
-                selection = nil
+                stateManager.sidebarSelection = nil
             }
-            
-//            Button("Set Active") {
-//                print("MANUALLY SET")
-//                print(menuItem.workspace)
-//                stateManager.selectedWorkspace = menuItem.workspace
-//            }
         }
     }
     
     func beginRenamingWorkspace() {
-        guard #available(macOS 12.0, *) else {
-            return
-        }
-        
-        renameWorkspaceField = menuItem.workspace!.name
+        renameWorkspaceField = workspace.name
         isRenaming = true
     }
 }

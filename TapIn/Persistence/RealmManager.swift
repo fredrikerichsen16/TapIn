@@ -2,7 +2,7 @@ import Foundation
 import RealmSwift
 
 fileprivate func getRealmConfig() -> Realm.Configuration {
-    return Realm.Configuration(schemaVersion: 6)
+    return Realm.Configuration(schemaVersion: 7)
 }
 
 class RealmManager {
@@ -37,7 +37,7 @@ class RealmManager {
             {
                 let ws = WorkspaceDB(name: name)
                 
-                ws.launcher!.launcherInstances.append(LauncherInstanceDB(name: "Craft", type: .app, instantiated: true, appUrl: URL(string: "/Applications/Craft.app"), fileUrl: nil, launchDelay: 0.0, hideOnLaunch: false))
+                ws.launcher.launcherInstances.append(LauncherInstanceDB(name: "Craft", type: .app, instantiated: true, appUrl: URL(string: "/Applications/Craft.app"), fileUrl: nil, launchDelay: 0.0, hideOnLaunch: false))
                 
                 realm.add(ws)
             }

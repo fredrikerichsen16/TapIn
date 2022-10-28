@@ -1,14 +1,7 @@
-//
-//  SidebarSection.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 10/01/2022.
-//
-
 import SwiftUI
 import RealmSwift
 
-struct SidebarSection: View {
+struct SidebarWorkspacesSection: View {
     @Environment(\.realm) var realm
     @ObservedResults(WorkspaceDB.self) private var workspaces
     @EnvironmentObject var stateManager: StateManager
@@ -68,8 +61,8 @@ struct SidebarDisclosure: View {
     }
 }
 
-//struct SidebarSection_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SidebarSection(work: true)
-//    }
-//}
+struct SidebarSection_Previews: PreviewProvider {
+    static var previews: some View {
+        SidebarSection(work: true)
+    }
+}

@@ -30,16 +30,16 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     var parent: LinkingObjects<WorkspaceDB>
     
     @Persisted
-    var pomodoro: PomodoroDB
+    var pomodoro: PomodoroDB!
     
     @Persisted
-    var blocker: BlockerDB
+    var blocker: BlockerDB!
     
     @Persisted
-    var timeTracker: TimeTrackerDB
+    var timeTracker: TimeTrackerDB!
     
     @Persisted
-    var launcher: LauncherDB
+    var launcher: LauncherDB!
     
     @Persisted
     var sessions = RealmSwift.List<SessionDB>()
@@ -57,12 +57,6 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     
     func isChild() -> Bool {
         return !parent.isEmpty
-    }
-    
-    static func getWorkspaces(realm: Realm) -> Results<WorkspaceDB> {
-        let workspaces = realm.objects(WorkspaceDB.self).where { $0.parent.count == 0 }
-        
-        return workspaces
     }
     
     // - MARK: CRUD
