@@ -26,39 +26,19 @@ class SidebarVM: ObservableObject {
     
     init(stateManager: StateManager) {
         self.stateManager = stateManager
-
-        let realm = RealmManager.shared.realm
-        self.workspaces = realm.objects(WorkspaceDB.self)
-        self.workspaceMenuItems = MenuItemNode.createOutline(workspaces: Array(self.workspaces))
-        self.setToken()
     }
     
     var realm: Realm {
         RealmManager.shared.realm
     }
     
-    var token: NotificationToken? = nil
-    
-    func setToken() {
-        self.token = workspaces.observe({ [unowned self] (changes) in
-            switch changes
-            {
-            case .update(_, deletions: _, insertions: _, modifications: _):
-                self.workspaceMenuItems = MenuItemNode.createOutline(workspaces: Array(workspaces))
-            default:
-                break
-            }
-        })
+    var workspaceMenuItems: [MenuItemNode] {
+        stateManager.sidebarModel.menuItems
     }
-    
-    @Published var sidebarSelection: String? = MenuItem.home.id
-    
-    var workspaces: Results<WorkspaceDB>
-    @Published var workspaceMenuItems: [MenuItemNode] = []
-    
+
     func onNavigation(to workspace: WorkspaceDB) {
         stateManager.selectedWorkspace = workspace
-        sidebarSelection = MenuItem.workspace(workspace).id
+        stateManager.sidebarModel.selection = MenuItem.workspace(workspace).id
     }
     
     // MARK: CRUD
@@ -84,7 +64,7 @@ class SidebarVM: ObservableObject {
     }
     
     func deleteWorkspace(_ workspace: WorkspaceDB) {
-        sidebarSelection = MenuItem.home.id
+        stateManager.sidebarModel.selection = MenuItem.home.id
         
         guard let thawed = workspace.thaw() else { return }
         

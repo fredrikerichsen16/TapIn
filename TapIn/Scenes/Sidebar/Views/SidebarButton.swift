@@ -91,10 +91,6 @@ extension SidebarButtonToWorkspace {
             Button("Rename") {
                 beginRenamingWorkspace()
             }
-
-            Button("Test") {
-                vm.sidebarSelection = nil
-            }
         }
     }
 

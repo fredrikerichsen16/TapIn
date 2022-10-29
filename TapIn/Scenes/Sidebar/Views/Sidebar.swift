@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct Sidebar: View {
+    @EnvironmentObject var stateManager: StateManager
     @StateObject var vm: SidebarVM
     
     init(stateManager: StateManager) {
@@ -9,7 +10,7 @@ struct Sidebar: View {
     
     var body: some View {
         NavigationView {
-            List(selection: $vm.sidebarSelection) {
+            List(selection: $stateManager.sidebarModel.selection) {
                 Section(header: Text("")) {
                     SidebarButtonToPage(vm: vm, menuItem: MenuItem.home)
                     SidebarButtonToPage(vm: vm, menuItem: MenuItem.statistics)
@@ -27,7 +28,7 @@ struct Sidebar: View {
                 Button("Add Workspace", action: {
                     vm.addWorkspace()
                 })
-                Text(vm.sidebarSelection ?? "?")
+                Text(stateManager.sidebarModel.selection ?? "?")
             }
             .listStyle(SidebarListStyle())
             .frame(minWidth: 180, maxWidth: 250)
