@@ -61,42 +61,6 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     
     // - MARK: CRUD
     
-    // MARK: Workspaces
-    
-    func renameWorkspace(_ realm: Realm, name: String) {
-        guard let thawed = self.thaw() else { return }
-        
-        if name == "" { return }
-                
-        try! realm.write {
-            thawed.name = name
-        }
-    }
-    
-    func addChild(_ realm: Realm) {
-        guard let thawed = self.thaw() else { return }
-        
-        // You can only nest once, i.e. two levels
-        if thawed.isChild() {
-            print("Cannot add more than one level of nesting")
-            return
-        }
-        
-        let childWorkspace = WorkspaceDB(name: "New Workspace")
-        
-        try! realm.write {
-            thawed.children.append(childWorkspace)
-        }
-    }
-    
-    static func deleteWorkspace(_ realm: Realm, workspace: WorkspaceDB) {
-        guard let thawed = workspace.thaw() else { return }
-        
-        try! realm.write {
-            realm.delete(thawed)
-        }
-    }
-    
     // MARK: Sessions
     
     /// Number of workspace sessions completed today

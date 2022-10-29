@@ -67,27 +67,14 @@ class StateManager: ObservableObject {
         RealmManager.shared.realm
     }
     
-    @Published var workspaces: Results<WorkspaceDB>
-
-//    var workspaceMenuItems: [MenuItemNode] {
-//        return MenuItemNode.createOutline(workspaces: Array(workspaces))
+//    init() {
+//        let realm = RealmManager.shared.realm
 //    }
-    
-    var workspaceMenuItems: [MenuItemNode] = []
-    
-    init() {
-        let realm = RealmManager.shared.realm
-        
-        self.workspaces = realm.objects(WorkspaceDB.self)
-        self.workspaceMenuItems = MenuItemNode.createOutline(workspaces: Array(workspaces))
-    }
     
     // MARK: General
     
     @Published var selectedWorkspace: WorkspaceDB? = nil
     @Published var activeWorkspace: WorkspaceDB? = nil
-    
-    @Published var sidebarSelection: String? = MenuItem.home.id
     
     private let subcomponentsHolder = SubcomponentsHolder()
 
@@ -102,21 +89,11 @@ class StateManager: ObservableObject {
     }
     
     // Unused
-    func changeToWorkspace(ws: WorkspaceDB) {
-//        sidebarSelection = MenuItem.workspace(ws)
-    }
+    func changeToWorkspace(ws: WorkspaceDB) {}
     
     /// I will remporarily use this to refresh the view, but it shouldn't be used because if your viewmodels and stuff are done correctly it's done automatically
     func refresh() {
         objectWillChange.send()
-    }
-    
-    func addWorkspace() {
-        try? realm.write({
-            let ws = WorkspaceDB(name: "New Workspace")
-
-            realm.add(ws)
-        })
     }
     
     // MARK: Pomodoro

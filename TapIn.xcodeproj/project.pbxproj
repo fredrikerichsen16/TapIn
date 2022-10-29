@@ -11,6 +11,8 @@
 		352428B9290C6BCD0046C9AB /* piano-0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 352428B7290C6BCD0046C9AB /* piano-0.mp3 */; };
 		352428BB290C72280046C9AB /* WorkspaceViewModelHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352428BA290C72280046C9AB /* WorkspaceViewModelHolder.swift */; };
 		352428BD290C72B70046C9AB /* WorkspaceVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352428BC290C72B70046C9AB /* WorkspaceVM.swift */; };
+		352428BF290C98160046C9AB /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352428BE290C98160046C9AB /* Sidebar.swift */; };
+		352428C1290C98540046C9AB /* SidebarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352428C0290C98540046C9AB /* SidebarVM.swift */; };
 		352A0B8526C94F2C00AA256B /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8426C94F2C00AA256B /* Collection+.swift */; };
 		352A0B8726C9689C00AA256B /* AppLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8626C9689C00AA256B /* AppLauncherView.swift */; };
 		352A0B8926C96AC000AA256B /* FileLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A0B8826C96AC000AA256B /* FileLauncherView.swift */; };
@@ -110,6 +112,8 @@
 		352428B7290C6BCD0046C9AB /* piano-0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-0.mp3"; sourceTree = "<group>"; };
 		352428BA290C72280046C9AB /* WorkspaceViewModelHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceViewModelHolder.swift; sourceTree = "<group>"; };
 		352428BC290C72B70046C9AB /* WorkspaceVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceVM.swift; sourceTree = "<group>"; };
+		352428BE290C98160046C9AB /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
+		352428C0290C98540046C9AB /* SidebarVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarVM.swift; sourceTree = "<group>"; };
 		352A0B8426C94F2C00AA256B /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		352A0B8626C9689C00AA256B /* AppLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncherView.swift; sourceTree = "<group>"; };
 		352A0B8826C96AC000AA256B /* FileLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLauncherView.swift; sourceTree = "<group>"; };
@@ -303,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				358D114927C1DCF600983673 /* StateManager.swift */,
+				352428C0290C98540046C9AB /* SidebarVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -313,6 +318,7 @@
 				35C2FF1F278CE2D70008AA55 /* SidebarWorkspacesSection.swift */,
 				35C2FF21278CE3910008AA55 /* SidebarButton.swift */,
 				35AEA156267F65D0000AFE85 /* ContentView.swift */,
+				352428BE290C98160046C9AB /* Sidebar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -807,10 +813,12 @@
 				35608D1826C6FB7D0054FCD2 /* SettingsView.swift in Sources */,
 				35EF3DC4279B327D004E2795 /* SwiftUIHelpers.swift in Sources */,
 				35D18EEC279E551300ECA17C /* WebsiteLauncherView.swift in Sources */,
+				352428BF290C98160046C9AB /* Sidebar.swift in Sources */,
 				3538F30828CFC0D000BC7867 /* PomodoroStatesHolder.swift in Sources */,
 				3585E0F028D24B1A00339930 /* RadioState.swift in Sources */,
 				35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */,
 				358D114A27C1DCF600983673 /* StateManager.swift in Sources */,
+				352428C1290C98540046C9AB /* SidebarVM.swift in Sources */,
 				3590CA5928360292006A7F92 /* SessionDB.swift in Sources */,
 				352A0B8926C96AC000AA256B /* FileLauncherView.swift in Sources */,
 				35C2FF20278CE2D70008AA55 /* SidebarWorkspacesSection.swift in Sources */,

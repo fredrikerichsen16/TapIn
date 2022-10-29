@@ -3,6 +3,7 @@ import RealmSwift
 
 
 struct SidebarButtonToPage: View {
+    @StateObject var vm: SidebarVM
     @State var menuItem: MenuItem
 
     var body: some View {
@@ -28,12 +29,14 @@ struct SidebarButtonToPage: View {
 }
 
 struct SidebarButtonToWorkspace: View {
+    @StateObject var vm: SidebarVM
+    @State var menuItem: MenuItem
+    
     var realm: Realm {
         RealmManager.shared.realm
     }
 
     @EnvironmentObject var stateManager: StateManager
-    @State var menuItem: MenuItem
 
     var workspace: WorkspaceDB {
         menuItem.workspace!
@@ -51,7 +54,7 @@ struct SidebarButtonToWorkspace: View {
                 .textFieldStyle(.roundedBorder) // adds border
                 .prefersDefaultFocus(in: mainNamespace)
                 .onSubmit {
-                    workspace.renameWorkspace(realm, name: renameWorkspaceField)
+                    vm.renameWorkspace(workspace, name: renameWorkspaceField)
                     isRenaming = false
                 }
         }
@@ -59,8 +62,7 @@ struct SidebarButtonToWorkspace: View {
         {
             NavigationLink(destination: {
                 WorkspaceBrowse().onAppear(perform: {
-                    stateManager.selectedWorkspace = workspace
-                    stateManager.sidebarSelection = menuItem.id
+                    vm.onNavigation(to: workspace)
                 })
             }) {
                 Label(menuItem.label, systemImage: menuItem.icon)
@@ -79,12 +81,11 @@ extension SidebarButtonToWorkspace {
     var contextMenu: some View {
         Group {
             Button("Add Child Workspace") {
-                workspace.addChild(realm)
+                vm.addChild(to: workspace)
             }
 
             Button("Delete") {
-                stateManager.sidebarSelection = MenuItem.home.id
-//                WorkspaceDB.deleteWorkspace(realm, workspace: workspace)
+                vm.deleteWorkspace(workspace)
             }
 
             Button("Rename") {
@@ -92,7 +93,7 @@ extension SidebarButtonToWorkspace {
             }
 
             Button("Test") {
-                stateManager.sidebarSelection = nil
+                vm.sidebarSelection = nil
             }
         }
     }
