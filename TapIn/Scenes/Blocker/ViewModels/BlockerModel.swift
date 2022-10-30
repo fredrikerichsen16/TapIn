@@ -9,11 +9,11 @@ import Foundation
 import RealmSwift
 
 class BlockerModel: ObservableObject {
-    var realm: Realm {
-        RealmManager.shared.realm
-    }
+//    var realm: Realm {
+//        RealmManager.shared.realm
+//    }
 
-    var token: NotificationToken?
+//    var token: NotificationToken?
     
     @Published var blocker: BlockerDB
     
@@ -35,11 +35,9 @@ class BlockerModel: ObservableObject {
 //        })
     }
     
-    func addBlacklistedWebsite(url: String) {
+    func addBlacklistedWebsite(_ realm: Realm, url: String) {
         try? realm.write {
             blocker.blacklistedWebsites.append(url)
-            
-            objectWillChange.send()
         }
     }
 

@@ -9,22 +9,27 @@
 import SwiftUI
 
 struct WorkspaceBlocker: View {
-    @EnvironmentObject var blockerModel: BlockerModel
+    @Environment(\.realm) var realm
+    @StateObject var vm: BlockerModel
     @State private var addWebsiteFieldValue = ""
+    
+    init(_ blockerModel: BlockerModel) {
+        self._vm = StateObject(wrappedValue: blockerModel)
+    }
     
     var body: some View {
         VStack {
             Text("Blocked Websites").font(.subheadline)
             
             List {
-                ForEach(blockerModel.blocker.blacklistedWebsites, id: \.self) { website in
+                ForEach(vm.blocker.blacklistedWebsites, id: \.self) { website in
                     Text(website)
                 }
             }
             
             TextField("Add Website", text: $addWebsiteFieldValue)
             Button("Add", action: {
-                blockerModel.addBlacklistedWebsite(url: addWebsiteFieldValue)
+                vm.addBlacklistedWebsite(realm, url: addWebsiteFieldValue)
             })
         }
     }

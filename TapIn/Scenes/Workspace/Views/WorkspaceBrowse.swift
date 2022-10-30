@@ -31,8 +31,7 @@ struct WorkspaceBrowse: View {
                         bottomMenuControllerSelection = .launcher
                     }
                 
-                WorkspaceBlocker()
-                    .environmentObject(workspaceVM.blockerModel)
+                WorkspaceBlocker(workspaceVM.blockerModel)
                     .tabItem({ Text("Blocker") })
                     .onAppear {
                         bottomMenuControllerSelection = .blocker
