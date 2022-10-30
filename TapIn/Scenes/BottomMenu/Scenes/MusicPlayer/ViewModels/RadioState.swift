@@ -1,9 +1,10 @@
 import SwiftUI
 import RealmSwift
 
-final class RadioState: WorkspaceSubcomponentStateObject {
+final class RadioState {
     var workspace: WorkspaceDB
-    var stateManager: StateManager
+    var workspaceVM: WorkspaceVM
+    
     var realm: Realm {
         RealmManager.shared.realm
     }
@@ -25,16 +26,17 @@ final class RadioState: WorkspaceSubcomponentStateObject {
     private var radioPlayer: RadioPlayer!
     
     @Published var currentChannel: String = ""
-    @Published var radioIsPlaying: Bool = false {
-        didSet
-        {
-            stateManager.refreshActiveWorkspace()
-        }
-    }
+    @Published var radioIsPlaying: Bool = false
+//    {
+//        didSet
+//        {
+//            stateManager.refreshActiveWorkspace()
+//        }
+//    }
     
-    init(workspace: WorkspaceDB, stateManager: StateManager) {
-        self.workspace = workspace
-        self.stateManager = stateManager
+    init(workspaceVM: WorkspaceVM) {
+        self.workspaceVM = workspaceVM
+        self.workspace = workspaceVM.workspace
         self.radioPlayer = radioPlayerConstructor()
     }
     

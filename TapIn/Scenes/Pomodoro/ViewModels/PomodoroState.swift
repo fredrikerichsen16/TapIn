@@ -1,14 +1,17 @@
 import SwiftUI
 import RealmSwift
 
-final class PomodoroState: WorkspaceSubcomponentStateObject {
+final class PomodoroState {
     var realm: Realm {
         RealmManager.shared.realm
     }
     
-    @Published var workspace: WorkspaceDB
-    internal var stateManager: StateManager
+    private var workspaceVM: WorkspaceVM
     private var pomodoroDb: PomodoroDB
+    
+    private var workspaceDb: WorkspaceDB {
+        workspaceVM.workspace
+    }
     
     @Published var remainingTimeString = "00:00"
     @Published var circleProgress: Double = 1.0
@@ -18,16 +21,14 @@ final class PomodoroState: WorkspaceSubcomponentStateObject {
         {
             switch timerMode
             {
-                case .initial:
-                    timerState = initialTimerState
-                    ticker.resetTimer()
-                case .running:
-                    timerState = runningTimerState
-                case .paused:
-                    timerState = pausedTimerState
+            case .initial:
+                timerState = initialTimerState
+                ticker.resetTimer()
+            case .running:
+                timerState = runningTimerState
+            case .paused:
+                timerState = pausedTimerState
             }
-            
-            stateManager.refreshActiveWorkspace()
         }
     }
     
@@ -44,10 +45,9 @@ final class PomodoroState: WorkspaceSubcomponentStateObject {
     var shortBreakStageState: PomodoroStageState!
     var longBreakStageState: PomodoroStageState!
     
-    init(workspace: WorkspaceDB, stateManager: StateManager) {
-        self.workspace = workspace
-        self.pomodoroDb = workspace.pomodoro
-        self.stateManager = stateManager
+    init(workspaceVM: WorkspaceVM) {
+        self.workspaceVM = workspaceVM
+        self.pomodoroDb = workspaceVM.workspace.pomodoro
         
         self.initialTimerState = PomodoroInitialTimerState(self)
         self.runningTimerState = PomodoroRunningTimerState(self)
@@ -100,14 +100,14 @@ final class PomodoroState: WorkspaceSubcomponentStateObject {
     // MARK: ?
     
     func longBreakDue() -> Bool {
-        let numCompletedSessions = workspace.numSessionsCompletedToday()
+        let numCompletedSessions = workspaceDb.numSessionsCompletedToday()
         let longBreakFrequency = Int(pomodoroDb.longBreakFrequency)
         
         return numCompletedSessions % longBreakFrequency == 0
     }
     
     func completedSession() {
-        let (thawed, realm) = workspace.easyThaw()
+        let (thawed, realm) = workspaceDb.easyThaw()
         var numCompletedSessions: Int = 0
         
         let pomodoroStageEnum = stageState.stage

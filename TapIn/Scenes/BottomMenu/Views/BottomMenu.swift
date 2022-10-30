@@ -21,7 +21,10 @@ struct BlockerBottomMenuController: View {
 }
 
 struct LauncherBottomMenuController: View {
-    @ObservedRealmObject var launcher: LauncherDB
+    @EnvironmentObject var workspaceVM: WorkspaceVM
+    var launcher: LauncherDB {
+        workspaceVM.workspace.launcher
+    }
     
     var body: some View {
         VStack {
@@ -35,8 +38,10 @@ struct LauncherBottomMenuController: View {
 }
 
 struct PomodoroBottomMenuController: View {
-    @EnvironmentObject var stateManager: StateManager
-    @StateObject var pomodoroState: PomodoroState
+    @EnvironmentObject var workspaceVM: WorkspaceVM
+    var pomodoroState: PomodoroState {
+        workspaceVM.pomodoroState
+    }
 
     var body: some View {
         VStack {
@@ -82,29 +87,25 @@ enum Direction {
 }
 
 struct BottomMenu: View {
-    @Environment(\.realm) var realm // just passing through
-    @ObservedRealmObject var workspace: WorkspaceDB // just passing through
-    @StateObject var pomodoroState: PomodoroState // just passing through
-    
-    @EnvironmentObject var stateManager: StateManager
+    @EnvironmentObject var workspaceVM: WorkspaceVM
     @Binding var bottomMenuControllerSelection: BottomMenuControllerSelection
     
     var body: some View {
         HStack {
-            MusicPlayerView(radioState: stateManager.getRadioState(workspace: workspace))
+            MusicPlayerView()
             
             Spacer()
-            
+
             Group {
                 navigateButton(direction: .left)
-                
+
                 switch bottomMenuControllerSelection
                 {
                 case .pomodoro:
-                    PomodoroBottomMenuController(pomodoroState: pomodoroState)
+                    PomodoroBottomMenuController()
                         .padding()
                 case .launcher:
-                    LauncherBottomMenuController(launcher: workspace.launcher)
+                    LauncherBottomMenuController()
                         .padding()
                 case .blocker:
                     BlockerBottomMenuController()

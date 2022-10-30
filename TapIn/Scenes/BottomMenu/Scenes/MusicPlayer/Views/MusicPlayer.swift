@@ -1,8 +1,11 @@
 import SwiftUI
 
 struct MusicPlayerView: View {
-    @EnvironmentObject var stateManager: StateManager
-    @StateObject var radioState: RadioState
+    @EnvironmentObject var workspaceVM: WorkspaceVM
+    
+    var radioState: RadioState {
+        workspaceVM.radioState
+    }
     
     private func getPlayingStatusIcon() -> Image {
         return radioState.radioIsPlaying

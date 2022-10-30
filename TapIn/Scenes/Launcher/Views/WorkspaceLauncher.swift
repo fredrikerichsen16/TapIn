@@ -3,6 +3,8 @@ import RealmSwift
 import QuickLook
 
 struct WorkspaceLauncher: View {
+    @EnvironmentObject var workspaceVM: WorkspaceVM
+    
 	@State private var showingSheet = false
     @State private var selectedInstance: ObjectId? = nil
     
