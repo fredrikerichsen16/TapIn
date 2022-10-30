@@ -20,13 +20,13 @@ struct WorkspaceBrowse: View {
 
             SwitchRoutes {
                 Route("workspace-pomodoro") {
-                    WorkspacePomodoro()
+                    WorkspacePomodoro(workspaceVM)
                         .onAppear {
                             bottomMenuControllerSelection = .pomodoro
                         }
                 }
                 Route("workspace-timetracking") { info in
-                    WorkspaceTimeTracking()
+                    WorkspaceTimeTracking(workspaceVM)
                 }
 //                Route("workspace-launcher/*") {
 //                    WorkspaceLauncher()
@@ -45,17 +45,21 @@ struct WorkspaceBrowse: View {
             Spacer()
             
             Text(workspaceVM.workspace.name)
+            
+            BottomMenu(
+                bottomMenuControllerSelection: $bottomMenuControllerSelection
+            )
 
-            if workspaceVM.isActive()
-            {
-                BottomMenu(
-                    bottomMenuControllerSelection: $bottomMenuControllerSelection
-                )
-            }
-            else
-            {
-                InactiveBottomMenu()
-            }
+//            if workspaceVM.isActive
+//            {
+//                BottomMenu(
+//                    bottomMenuControllerSelection: $bottomMenuControllerSelection
+//                )
+//            }
+//            else
+//            {
+//                InactiveBottomMenu()
+//            }
         }
         .edgesIgnoringSafeArea([.bottom, .horizontal])
         .onAppear {

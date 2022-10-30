@@ -10,9 +10,10 @@ import RealmSwift
 
 struct WorkspaceTimeTracking: View {
     @EnvironmentObject var workspaceVM: WorkspaceVM
+    @StateObject var timeTrackerState: TimeTrackerState
     
-    var timeTrackerState: TimeTrackerState {
-        workspaceVM.timeTrackerState
+    init(_ workspaceVM: WorkspaceVM) {
+        self._timeTrackerState = StateObject(wrappedValue: workspaceVM.timeTrackerState)
     }
     
     var status: String {

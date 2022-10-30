@@ -1,7 +1,7 @@
 import SwiftUI
 import RealmSwift
 
-final class PomodoroState {
+final class PomodoroState: ObservableObject {
     var realm: Realm {
         RealmManager.shared.realm
     }
