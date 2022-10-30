@@ -6,25 +6,28 @@ struct SidebarButtonToPage: View {
     @State var menuItem: MenuItem
 
     var body: some View {
-        NavigationLink(destination: { viewForMenuItem(menuItem) }) {
-            Label(menuItem.label, systemImage: menuItem.icon)
-                .padding(.vertical, 5)
-        }
-        .tag(menuItem.id)
+        NavigationLink(menuItem.label, value: menuItem)
+            .tag(menuItem)
+        
+//        NavigationLink(value: menuItem) {
+//            Label(menuItem.label, systemImage: menuItem.icon)
+//                .padding(.vertical, 5)
+//        }
+//        .tag(menuItem.id)
     }
 
-    @ViewBuilder
-    private func viewForMenuItem(_ item: MenuItem) -> some View {
-        switch item
-        {
-        case .home:
-            Text(item.label).font(.largeTitle)
-        case .statistics:
-            Text(item.label).font(.largeTitle)
-        default:
-            fatalError("1493403")
-        }
-    }
+//    @ViewBuilder
+//    private func viewForMenuItem(_ item: MenuItem) -> some View {
+//        switch item
+//        {
+//        case .home:
+//            Text(item.label).font(.largeTitle)
+//        case .statistics:
+//            Text(item.label).font(.largeTitle)
+//        default:
+//            fatalError("1493403")
+//        }
+//    }
 }
 
 struct SidebarButtonToWorkspace: View {

@@ -7,11 +7,12 @@ struct TapinApp: SwiftUI.App {
     
 	var body: some Scene {
 		WindowGroup {
-            ContentView()
-                .frame(minWidth: 500, idealWidth: 700, maxWidth: 1000, minHeight: 500, idealHeight: 500, maxHeight: 800, alignment: .center)
-                .environment(\.realm, RealmManager.shared.realm)
-                .environmentObject(stateManager)
-                .environmentObject(SidebarVM(stateManager: stateManager))
+            WorkspaceBrowse()
+//            ContentView()
+//                .frame(minWidth: 500, idealWidth: 700, maxWidth: 1000, minHeight: 500, idealHeight: 500, maxHeight: 800, alignment: .center)
+//                .environment(\.realm, RealmManager.shared.realm)
+//                .environmentObject(stateManager)
+//                .environmentObject(SidebarVM(stateManager: stateManager))
 		}
 		.windowStyle(HiddenTitleBarWindowStyle())
         

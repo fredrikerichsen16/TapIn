@@ -5,6 +5,8 @@
 //  Created by Fredrik Skjelvik on 21/01/2022.
 //
 
+/*
+
 import SwiftUI
 import RealmSwift
 
@@ -48,6 +50,7 @@ struct PomodoroBottomMenuController: View {
     }
 }
 
+*/
 enum BottomMenuControllerSelection {
     case pomodoro
     case launcher
@@ -82,15 +85,16 @@ enum Direction {
     case right
     case left
 }
+/*
 
 struct BottomMenu: View {
-    @ObservedObject var pomodoroState: PomodoroState
-    @ObservedObject var radioState: RadioState
+    @StateObject var pomodoroState: PomodoroState
+    @StateObject var radioState: RadioState
     @Binding var bottomMenuControllerSelection: BottomMenuControllerSelection
     
     init(_ workspaceVM: WorkspaceVM, bottomMenuControllerSelection: Binding<BottomMenuControllerSelection>) {
-        self._pomodoroState = ObservedObject(wrappedValue: workspaceVM.pomodoroState)
-        self._radioState = ObservedObject(wrappedValue: workspaceVM.radioState)
+        self._pomodoroState = StateObject(wrappedValue: workspaceVM.pomodoroState)
+        self._radioState = StateObject(wrappedValue: workspaceVM.radioState)
         self._bottomMenuControllerSelection = bottomMenuControllerSelection
     }
     
@@ -142,3 +146,5 @@ struct BottomMenu: View {
         }).buttonStyle(PlainButtonStyle())
     }
 }
+
+*/

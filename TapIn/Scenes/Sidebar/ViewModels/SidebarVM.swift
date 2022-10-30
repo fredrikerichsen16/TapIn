@@ -14,15 +14,29 @@ class SidebarVM: ObservableObject {
     
     @Published var workspaces: Results<WorkspaceDB>
     
-    @Published var workspaceMenuItems: [MenuItemNode] = []
+    @Published var routes: [Route] = []
+    
+//    @Published var workspaceMenuItems: [MenuItemNode] = []
+    
+    @Published var menuItems = [MenuItem]()
     
     func updateWorkspaceMenuItems() {
         let workspaces = Array(workspaces.filter({ $0.parent.isEmpty }))
         
-        self.workspaceMenuItems = MenuItemNode.createOutline(workspaces: workspaces)
+        var menuItems = [MenuItem.home, MenuItem.statistics]
+        for workspace in workspaces
+        {
+            menuItems.append(MenuItem.workspace(workspace))
+        }
+        
+        self.menuItems = menuItems
+        
+//        self.workspaceMenuItems = [MenuItemNode(menuItem: MenuItem.home), MenuItemNode(menuItem: MenuItem.statistics)] + MenuItemNode.createOutline(workspaces: workspaces)
     }
     
-    @Published var sidebarSelection: String? = MenuItem.home.id
+    @Published var selection: MenuItem? = nil
+    
+    @Published var sidebarSelection: String? = MenuItem.home.id //
     
     var token: NotificationToken? = nil
 

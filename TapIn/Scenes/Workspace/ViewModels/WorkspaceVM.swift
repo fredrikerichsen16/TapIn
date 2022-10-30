@@ -4,6 +4,8 @@ class WorkspaceVM: ObservableObject {
     static var current: WorkspaceVM? = nil
     
     static func getCurrent(for workspace: WorkspaceDB, stateManager: StateManager) -> WorkspaceVM {
+        stateManager.selectedWorkspace = workspace
+        
         if let current = current, current.workspace == workspace
         {
             return current
@@ -21,7 +23,7 @@ class WorkspaceVM: ObservableObject {
         self.workspace = workspace
         self.pomodoroState = PomodoroState(workspaceVM: self)
         self.timeTrackerState = TimeTrackerState(workspaceVM: self)
-        self.radioState = RadioState(workspaceVM: self)
+//        self.radioState = RadioState(workspaceVM: self)
     }
     
     func startSession() {
@@ -35,10 +37,10 @@ class WorkspaceVM: ObservableObject {
     }
     
     var pomodoroState: PomodoroState!
-    
+
     var timeTrackerState: TimeTrackerState!
-    
-    var radioState: RadioState!
+
+//    var radioState: RadioState!
 }
 
 class TimeTrackerState: ObservableObject {

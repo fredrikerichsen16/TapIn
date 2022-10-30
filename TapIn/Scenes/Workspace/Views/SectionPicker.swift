@@ -1,32 +1,19 @@
-//
-//  SectionPicker.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 19/02/2022.
-//
-
 import SwiftUI
 import SwiftUIRouter
 
 struct SectionPicker: View {
-    @State var pageSelection = "workspace-pomodoro"
-    @EnvironmentObject var navigator: Navigator
+    @State var selection = Route.pomodoro
     
     var body: some View {
         HStack(alignment: .center) {
-            Picker("", selection: $pageSelection) {
-                Text("Pomodoro").tag("workspace-pomodoro")
-                Text("Time Tracking").tag("workspace-timetracking")
-                Text("Launcher").tag("workspace-launcher")
-                Text("Blocker").tag("workspace-blocker")
-                Image(systemName: "ellipsis")
+            Picker("", selection: $selection) {
+                NavigationLink("Pomodoro", value: Route.pomodoro)
+                NavigationLink("Time Tracking", value: Route.timetracker)
+                NavigationLink("Launcher", value: Route.launcher)
+                NavigationLink("Blocker", value: Route.blocker)
+//                Image(systemName: "ellipsis")
             }
             .pickerStyle(SegmentedPickerStyle())
-            .onChange(of: pageSelection) { selection in
-                guard selection != "more" else { return }
-
-                navigator.navigate("/" + selection, replace: true)
-            }
             .frame(width: 400)
         }
     }
