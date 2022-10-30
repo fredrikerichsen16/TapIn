@@ -7,80 +7,51 @@ struct WorkspaceBrowse: View {
         RealmManager.shared.realm
     }
     
-    @EnvironmentObject var navigator: Navigator
     @EnvironmentObject var stateManager: StateManager
-    
-    var workspace: WorkspaceDB? {
-        stateManager.selectedWorkspace
-    }
+    @EnvironmentObject var workspaceVM: WorkspaceVM
     
     @State var bottomMenuControllerSelection = BottomMenuControllerSelection.pomodoro
     
     var body: some View {
-        if let workspace = workspace
-        {
-            VStack {
-                SectionPicker()
+        VStack {
+            TabView {
+                WorkspacePomodoro(pomodoroState: workspaceVM.pomodoroState)
+                    .tabItem { Text("Pomodoro") }
+                    .onAppear {
+                        bottomMenuControllerSelection = .pomodoro
+                    }
                 
-                Spacer()
-
-                SwitchRoutes {
-                    Route("workspace-pomodoro") {
-                        WorkspacePomodoro(pomodoroState: stateManager.getPomodoroState(workspace: workspace))
-                            .onAppear {
-                                bottomMenuControllerSelection = .pomodoro
-                            }
-                    }
-                    Route("workspace-timetracking") { info in
-                        WorkspaceTimeTracking(timeTracker: workspace.timeTracker)
-                    }
-                    Route("workspace-launcher/*") {
-                        WorkspaceLauncher(launcher: workspace.launcher)
-                            .onAppear {
-                                bottomMenuControllerSelection = .launcher
-                            }
-                    }
-                    Route("workspace-blocker") {
-                        WorkspaceBlocker()
-    //                        .environmentObject(BlockerVM(realm, workspace: workspace))
-                            .onAppear {
-                                bottomMenuControllerSelection = .blocker
-                            }
-                    }
-                }
+                WorkspaceTimeTracking(timeTrackerState: workspaceVM.timeTrackerState)
+                    .tabItem { Text("Time Tracking") }
                 
-                Spacer()
+                WorkspaceLauncher()
+                    .environmentObject(workspaceVM.launcherState)
+                    .tabItem({ Text("Launcher") })
+                    .onAppear {
+                        bottomMenuControllerSelection = .launcher
+                    }
                 
-                Text(stateManager.selectedWorkspace!.name)
-
-                if shouldShowInactiveBottomMenu()
-                {
-                    InactiveBottomMenu()
-                }
-                else
-                {
-                    BottomMenu(
-                        workspace: workspace,
-                        pomodoroState: stateManager.getPomodoroState(workspace: workspace),
-                        bottomMenuControllerSelection: $bottomMenuControllerSelection
-                    )
-                }
+                WorkspaceBlocker()
+                    .environmentObject(workspaceVM.blockerModel)
+                    .tabItem({ Text("Blocker") })
+                    .onAppear {
+                        bottomMenuControllerSelection = .blocker
+                    }
             }
-            .edgesIgnoringSafeArea([.bottom, .horizontal])
-            .onAppear {
-                stateManager.selectedWorkspace = workspace
-                navigator.navigate("/workspace-pomodoro")
-            }
+            
+            Spacer()
+            
+            BottomMenu(bottomMenuControllerSelection: $bottomMenuControllerSelection)
         }
-        else
-        {
-            Text("Loading...")
+        .edgesIgnoringSafeArea([.bottom, .horizontal])
+        .onAppear {
+            stateManager.selectedWorkspace = workspaceVM.workspace
         }
     }
     
-    func shouldShowInactiveBottomMenu() -> Bool {
-        return stateManager.activeWorkspace != nil && stateManager.activeWorkspace != workspace
-    }
+//    func shouldShowInactiveBottomMenu() -> Bool {
+//        return stateManager.activeWorkspace != nil && stateManager.activeWorkspace != workspace
+//    }
 }
 
 

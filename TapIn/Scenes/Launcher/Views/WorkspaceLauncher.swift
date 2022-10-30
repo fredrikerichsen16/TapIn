@@ -6,8 +6,7 @@ struct WorkspaceLauncher: View {
 	@State private var showingSheet = false
     @State private var selectedInstance: ObjectId? = nil
     
-    @ObservedRealmObject var launcher: LauncherDB
-    @Environment(\.realm) var realm
+    @EnvironmentObject var launcherState: LauncherState
 	
     var body: some View {
 		VStack(alignment: .leading) {
@@ -15,22 +14,12 @@ struct WorkspaceLauncher: View {
 
 			NavigationView {
                 VStack(alignment: .leading) {
-                    if let parentInstances = launcher.parentLauncherInstances, parentInstances.count > 0
-                    {
-                        List(parentInstances, id: \.id, selection: $selectedInstance) { instance in
-                            launcherInstanceListItem(instance: instance)
-                        }
-                        
-                        Divider()
-                        Spacer()
-                    }
-                    
-                    List(launcher.launcherInstances, id: \.id, selection: $selectedInstance) { instance in
+                    List(launcherState.launcherInstances, id: \.id, selection: $selectedInstance) { instance in
                         launcherInstanceListItem(instance: instance)
                     }
                     .frame(width: 210, alignment: .center)
 
-                    LauncherInstanceListControlButtons(launcher: launcher, selectedInstance: $selectedInstance)
+                    LauncherInstanceListControlButtons(selectedInstance: $selectedInstance)
                 }
                 .padding()
 
@@ -52,7 +41,7 @@ struct WorkspaceLauncher: View {
                 
                 Spacer()
             }
-            .tag(instance.id.stringValue)
+            .tag(instance.id)
         }
         .contextMenu(ContextMenu(menuItems: {
             listItemContextMenu(instance: instance)
@@ -66,7 +55,7 @@ struct WorkspaceLauncher: View {
     private func navigationLinkDestination(instance: LauncherInstanceDB) -> some View {
         switch instance.fullType {
             case .app:
-                AppLauncherView(launcherInstance: instance)
+                AppLauncherView(launcherState: launcherState, launcherInstance: instance)
             case .file:
                 FileLauncherView(launcherInstance: instance)
             case .folder:
@@ -94,10 +83,7 @@ struct WorkspaceLauncher: View {
             }
             
             Button("Duplicate") {
-                try! realm.write {
-                    let duplicatedLauncher = LauncherInstanceDB(name: instance.name, type: instance.type, instantiated: instance.instantiated, appUrl: instance.appUrl, fileUrl: instance.fileUrl, launchDelay: instance.launchDelay, hideOnLaunch: instance.hideOnLaunch)
-                    realm.add(duplicatedLauncher)
-                }
+                launcherState.duplicate(launcherInstance: instance)
             }
             
             Button("Quick Look") {
@@ -105,30 +91,18 @@ struct WorkspaceLauncher: View {
             }
             
             Button("Delete") {
-                let _ = LauncherInstanceDB.deleteById(realm, id: instance.id)
+                launcherState.delete(launcherInstance: instance)
             }
         }
     }
 }
 
-//struct WorkspaceLauncher_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WorkspaceLauncher()
-//    }
-//}
-
 /// The plus and minus buttons below the list of launcher list items, for adding or removing launcher instances
 struct LauncherInstanceListControlButtons: View {
-//    init(launcher: LauncherDB, selectedInstance: ObjectId?) {
-//        self.launcher = launcher
-//        self.selectedInstance = selectedInstance
-//    }
-    
-    @ObservedRealmObject var launcher: LauncherDB
+    @EnvironmentObject var launcherState: LauncherState
     @Binding var selectedInstance: ObjectId?
     @State var appSelection: Int? = nil
     @State var showingPopover = false
-    @Environment(\.realm) var realm
     
     var body: some View {
         HStack(alignment: .center, spacing: 5) {
@@ -140,13 +114,12 @@ struct LauncherInstanceListControlButtons: View {
             })
             .buttonStyle(PlainButtonStyle())
             .popover(isPresented: $showingPopover) {
-                Popover(launcher: launcher, selection: $appSelection, showingPopover: $showingPopover)
+                Popover(selection: $appSelection, showingPopover: $showingPopover)
             }
             
             Button(action: {
                 guard let id = selectedInstance else { return }
-                
-                let _ = LauncherInstanceDB.deleteById(realm, id: id)
+                launcherState.deleteInstance(by: id)
             }, label: {
                 Image(systemName: "minus")
                     .font(.system(size: 16.0))

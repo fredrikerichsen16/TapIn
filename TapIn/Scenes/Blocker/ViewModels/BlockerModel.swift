@@ -1,22 +1,24 @@
 //
-//  BlockerVM.swift
+//  BlockerModel.swift
 //  TapIn
 //
-//  Created by Fredrik Skjelvik on 16/09/2022.
+//  Created by Fredrik Skjelvik on 20/06/2021.
 //
 
 import Foundation
 import RealmSwift
 
-class BlockerVM: ObservableObject {
-    var realm: Realm
-//    var token: NotificationToken?
+class BlockerModel: ObservableObject {
+    var realm: Realm {
+        RealmManager.shared.realm
+    }
+
+    var token: NotificationToken?
     
     @Published var blocker: BlockerDB
     
-    init(_ realm: Realm, workspace: WorkspaceDB) {
-        self.realm = realm
-        self.blocker = workspace.blocker
+    init(_ workspaceVM: WorkspaceVM) {
+        self.blocker = workspaceVM.workspace.blocker
 
 //        self.token = blocker.observe({ [weak self] (changes) in
 //            switch changes
@@ -31,6 +33,14 @@ class BlockerVM: ObservableObject {
 //                fatalError("Not possible to delete")
 //            }
 //        })
+    }
+    
+    func addBlacklistedWebsite(url: String) {
+        try? realm.write {
+            blocker.blacklistedWebsites.append(url)
+            
+            objectWillChange.send()
+        }
     }
 
 //    func addBlacklistedWebsite(url: String) {

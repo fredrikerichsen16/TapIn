@@ -71,10 +71,11 @@
 		35AEA18A267F95B5000AFE85 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA189267F95B5000AFE85 /* LauncherModel.swift */; };
 		35AEA18C267F95D9000AFE85 /* BlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA18B267F95D9000AFE85 /* BlockerModel.swift */; };
 		35AEA194267FA815000AFE85 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA193267FA815000AFE85 /* Color+.swift */; };
+		35BF8A5D290F2A44009EC6CC /* LauncherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BF8A5C290F2A44009EC6CC /* LauncherState.swift */; };
+		35BF8A5F290F33DA009EC6CC /* ActiveSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BF8A5E290F33DA009EC6CC /* ActiveSession.swift */; };
 		35C2FF20278CE2D70008AA55 /* SidebarWorkspacesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF1F278CE2D70008AA55 /* SidebarWorkspacesSection.swift */; };
 		35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF21278CE3910008AA55 /* SidebarButton.swift */; };
 		35D18EEC279E551300ECA17C /* WebsiteLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D18EEB279E551300ECA17C /* WebsiteLauncherView.swift */; };
-		35E438A528D3F43E00C1C7DB /* BlockerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E438A428D3F43E00C1C7DB /* BlockerVM.swift */; };
 		35EF3DC4279B327D004E2795 /* SwiftUIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF3DC3279B327D004E2795 /* SwiftUIHelpers.swift */; };
 		35EF3DC7279B3607004E2795 /* BottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF3DC6279B3607004E2795 /* BottomMenu.swift */; };
 		35F5592827A26D410094F2C4 /* WorkspaceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5592727A26D410094F2C4 /* WorkspaceDB.swift */; };
@@ -176,10 +177,11 @@
 		35AEA189267F95B5000AFE85 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
 		35AEA18B267F95D9000AFE85 /* BlockerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerModel.swift; sourceTree = "<group>"; };
 		35AEA193267FA815000AFE85 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		35BF8A5C290F2A44009EC6CC /* LauncherState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherState.swift; sourceTree = "<group>"; };
+		35BF8A5E290F33DA009EC6CC /* ActiveSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSession.swift; sourceTree = "<group>"; };
 		35C2FF1F278CE2D70008AA55 /* SidebarWorkspacesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarWorkspacesSection.swift; sourceTree = "<group>"; };
 		35C2FF21278CE3910008AA55 /* SidebarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButton.swift; sourceTree = "<group>"; };
 		35D18EEB279E551300ECA17C /* WebsiteLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteLauncherView.swift; sourceTree = "<group>"; };
-		35E438A428D3F43E00C1C7DB /* BlockerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerVM.swift; sourceTree = "<group>"; };
 		35EF3DC3279B327D004E2795 /* SwiftUIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIHelpers.swift; sourceTree = "<group>"; };
 		35EF3DC6279B3607004E2795 /* BottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenu.swift; sourceTree = "<group>"; };
 		35F5592727A26D410094F2C4 /* WorkspaceDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDB.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 		356B4D21290C28CE00C12949 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				35BF8A5C290F2A44009EC6CC /* LauncherState.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -386,7 +389,7 @@
 		356B4D24290C28D600C12949 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				35E438A428D3F43E00C1C7DB /* BlockerVM.swift */,
+				35AEA18B267F95D9000AFE85 /* BlockerModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -402,7 +405,6 @@
 		356B4D26290C28DA00C12949 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				35AEA18B267F95D9000AFE85 /* BlockerModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -541,6 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				352428BA290C72280046C9AB /* WorkspaceViewModelHolder.swift */,
+				35BF8A5E290F33DA009EC6CC /* ActiveSession.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -826,6 +829,7 @@
 				35AEA157267F65D0000AFE85 /* ContentView.swift in Sources */,
 				3538C2E927AB5D0800D74044 /* PomodoroDB.swift in Sources */,
 				352428BB290C72280046C9AB /* WorkspaceViewModelHolder.swift in Sources */,
+				35BF8A5D290F2A44009EC6CC /* LauncherState.swift in Sources */,
 				3573F1542687A16C004B9C21 /* LauncherPopups.swift in Sources */,
 				352E18AC279CBA3600EC87F2 /* EmptyLauncherView.swift in Sources */,
 				3573F14526875FB7004B9C21 /* Settings.swift in Sources */,
@@ -840,7 +844,7 @@
 				3573F14A268767C6004B9C21 /* WorkspacePomodoro.swift in Sources */,
 				3590CA5C2836C95B006A7F92 /* PomodoroStage.swift in Sources */,
 				3573F14C268767DB004B9C21 /* WorkspaceTimeTracking.swift in Sources */,
-				35E438A528D3F43E00C1C7DB /* BlockerVM.swift in Sources */,
+				35BF8A5F290F33DA009EC6CC /* ActiveSession.swift in Sources */,
 				35608D1A26C6FBCB0054FCD2 /* GeneralSettingsView.swift in Sources */,
 				35521BCC279C98FA0047508D /* LauncherModelExtra.swift in Sources */,
 				3585E0F728D24BE200339930 /* PomodoroTimerState.swift in Sources */,

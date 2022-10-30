@@ -7,9 +7,7 @@ struct ContentView: View {
     @EnvironmentObject var sidebarVM: SidebarVM
     
     var body: some View {
-        Router {
-            Sidebar()
-        }
+        Sidebar()
     }
 }
 

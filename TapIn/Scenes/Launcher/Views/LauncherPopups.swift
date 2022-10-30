@@ -1,45 +1,13 @@
-//
-//  LauncherPopups.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 26/06/2021.
-//
-
 import SwiftUI
-import SwiftUIRouter
 import RealmSwift
 
 struct Popover: View {
-    @Environment(\.realm) var realm
-	@EnvironmentObject var navigator: Navigator
-    
-    @ObservedRealmObject var launcher: LauncherDB
+    @EnvironmentObject var launcherState: LauncherState
     @Binding var selection: Int?
     @Binding var showingPopover: Bool
     
-    func createEmptyWebsiteInstance() {
-        let newInstance = LauncherInstanceDB(
-            name: RealmLauncherType.website.label(),
-            type: .website,
-            instantiated: true,
-            appUrl: nil,
-            fileUrl: nil,
-            launchDelay: 0.0,
-            hideOnLaunch: false
-        )
-        
-        $launcher.launcherInstances.append(newInstance)
-        
-        showingPopover = false
-    }
-    
     func createEmptyInstance(type: RealmLauncherType) {
-        let newInstance = LauncherInstanceDB(name: type.label(), type: type, instantiated: false)
-        
-        $launcher.launcherInstances.append(newInstance)
-        
-        print(launcher.launcherInstances.count)
-        
+        launcherState.createEmptyInstance(type: type)
 		showingPopover = false
     }
 	
@@ -67,7 +35,7 @@ struct Popover: View {
 			.buttonStyle(PlainButtonStyle())
 			
 			Button(action: {
-                createEmptyWebsiteInstance()
+                createEmptyInstance(type: .website)
 			}, label: {
 				Label("Website", systemImage: "link")
 			})

@@ -82,16 +82,13 @@ enum Direction {
 }
 
 struct BottomMenu: View {
-    @Environment(\.realm) var realm // just passing through
-    @ObservedRealmObject var workspace: WorkspaceDB // just passing through
-    @StateObject var pomodoroState: PomodoroState // just passing through
-    
     @EnvironmentObject var stateManager: StateManager
+    @EnvironmentObject var workspaceVM: WorkspaceVM
     @Binding var bottomMenuControllerSelection: BottomMenuControllerSelection
     
     var body: some View {
         HStack {
-            MusicPlayerView(radioState: stateManager.getRadioState(workspace: workspace))
+            MusicPlayerView(radioState: workspaceVM.radioState)
             
             Spacer()
             
@@ -101,10 +98,10 @@ struct BottomMenu: View {
                 switch bottomMenuControllerSelection
                 {
                 case .pomodoro:
-                    PomodoroBottomMenuController(pomodoroState: pomodoroState)
+                    PomodoroBottomMenuController(pomodoroState: workspaceVM.pomodoroState)
                         .padding()
                 case .launcher:
-                    LauncherBottomMenuController(launcher: workspace.launcher)
+                    LauncherBottomMenuController(launcher: workspaceVM.workspace.launcher)
                         .padding()
                 case .blocker:
                     BlockerBottomMenuController()

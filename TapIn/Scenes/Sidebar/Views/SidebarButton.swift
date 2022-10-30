@@ -60,9 +60,11 @@ struct SidebarButtonToWorkspace: View {
         else
         {
             NavigationLink(destination: {
-                WorkspaceBrowse().onAppear(perform: {
-                    sidebarVM.onNavigation(to: workspace)
-                })
+                WorkspaceBrowse()
+                    .environmentObject(WorkspaceVM.getCurrent(for: workspace, stateManager: stateManager))
+                    .onAppear(perform: {
+                        sidebarVM.onNavigation(to: workspace)
+                    })
             }) {
                 Label(menuItem.label, systemImage: menuItem.icon)
                     .padding(.vertical, 5)

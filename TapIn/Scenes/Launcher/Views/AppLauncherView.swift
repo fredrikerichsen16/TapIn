@@ -15,11 +15,10 @@ import RealmSwift
 //}
 
 struct AppLauncherView: View {
-    @ObservedRealmObject var launcherInstance: LauncherInstanceDB
-    @Environment(\.realm) var realm
+    @StateObject var launcherState: LauncherState
+    var launcherInstance: LauncherInstanceDB
     
     @State private var hideOnLaunch: Bool = false
-    
     @State private var isEditingAppName: Bool = false
     
     var body: some View {
@@ -35,11 +34,7 @@ struct AppLauncherView: View {
             Toggle("Hide app on launch", isOn: $hideOnLaunch)
                 .toggleStyle(.checkbox)
                 .onChange(of: hideOnLaunch) { value in
-                    if let thawed = launcherInstance.thaw() {
-                        try! realm.write {
-                            thawed.hideOnLaunch = hideOnLaunch
-                        }
-                    }
+                    launcherState.toggleHideOnLaunch(instance: launcherInstance, value: value)
                 }
         }.onAppear(perform: {
             hideOnLaunch = launcherInstance.hideOnLaunch
