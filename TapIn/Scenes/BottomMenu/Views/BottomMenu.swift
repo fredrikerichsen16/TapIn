@@ -38,10 +38,7 @@ struct LauncherBottomMenuController: View {
 }
 
 struct PomodoroBottomMenuController: View {
-    @EnvironmentObject var workspaceVM: WorkspaceVM
-    var pomodoroState: PomodoroState {
-        workspaceVM.pomodoroState
-    }
+    @StateObject var pomodoroState: PomodoroState
 
     var body: some View {
         VStack {
@@ -87,8 +84,15 @@ enum Direction {
 }
 
 struct BottomMenu: View {
-    @EnvironmentObject var workspaceVM: WorkspaceVM
+    @ObservedObject var pomodoroState: PomodoroState
+    @ObservedObject var radioState: RadioState
     @Binding var bottomMenuControllerSelection: BottomMenuControllerSelection
+    
+    init(_ workspaceVM: WorkspaceVM, bottomMenuControllerSelection: Binding<BottomMenuControllerSelection>) {
+        self._pomodoroState = ObservedObject(wrappedValue: workspaceVM.pomodoroState)
+        self._radioState = ObservedObject(wrappedValue: workspaceVM.radioState)
+        self._bottomMenuControllerSelection = bottomMenuControllerSelection
+    }
     
     var body: some View {
         HStack {
@@ -102,7 +106,7 @@ struct BottomMenu: View {
                 switch bottomMenuControllerSelection
                 {
                 case .pomodoro:
-                    PomodoroBottomMenuController()
+                    PomodoroBottomMenuController(pomodoroState: pomodoroState)
                         .padding()
                 case .launcher:
                     LauncherBottomMenuController()

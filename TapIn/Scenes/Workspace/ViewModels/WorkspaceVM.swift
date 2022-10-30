@@ -24,6 +24,16 @@ class WorkspaceVM: ObservableObject {
         self.radioState = RadioState(workspaceVM: self)
     }
     
+    func startSession() {
+        self.isActive = true
+        WorkspaceVM.current = self
+    }
+    
+    func endSession() {
+        self.isActive = false
+        WorkspaceVM.current = nil
+    }
+    
     var pomodoroState: PomodoroState!
     
     var timeTrackerState: TimeTrackerState!

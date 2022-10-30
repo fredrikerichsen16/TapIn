@@ -2,10 +2,10 @@ import SwiftUI
 import RealmSwift
 
 struct WorkspacePomodoro: View {
-    @StateObject var pomodoroState: PomodoroState
+    @ObservedObject var pomodoroState: PomodoroState
     
     init(_ workspaceVM: WorkspaceVM) {
-        self._pomodoroState = StateObject(wrappedValue: workspaceVM.pomodoroState)
+        self._pomodoroState = ObservedObject(wrappedValue: workspaceVM.pomodoroState)
     }
     
     var body: some View {

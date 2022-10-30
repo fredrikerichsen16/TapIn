@@ -46,9 +46,7 @@ struct WorkspaceBrowse: View {
             
             Text(workspaceVM.workspace.name)
             
-            BottomMenu(
-                bottomMenuControllerSelection: $bottomMenuControllerSelection
-            )
+            BottomMenu(workspaceVM, bottomMenuControllerSelection: $bottomMenuControllerSelection)
 
 //            if workspaceVM.isActive
 //            {

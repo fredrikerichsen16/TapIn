@@ -1,7 +1,7 @@
 import SwiftUI
 import RealmSwift
 
-final class RadioState {
+final class RadioState: ObservableObject {
     var workspace: WorkspaceDB
     var workspaceVM: WorkspaceVM
     
