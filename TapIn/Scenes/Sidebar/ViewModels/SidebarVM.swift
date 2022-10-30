@@ -1,44 +1,51 @@
 import Foundation
 import RealmSwift
 
-//@Published var workspaces: Results<WorkspaceDB>
-//
-//init() {
-//    let realm = RealmManager.shared.realm
-//    self.workspaces = realm.objects(WorkspaceDB.self)
-//
-//    self.token = workspaces.observe({ [unowned self] (changes) in
-//        switch changes
-//        {
-//        case .update(_, deletions: _, insertions: _, modifications: _):
-////                self.workspaces = realm.objects(WorkspaceDB.self)
-//            objectWillChange.send()
-//        default:
-//            break
-//        }
-//    })
-//}
-//
-//var token: NotificationToken? = nil
-
 class SidebarVM: ObservableObject {
-    var stateManager: StateManager
+    private var stateManager: StateManager
     
     init(stateManager: StateManager) {
         self.stateManager = stateManager
+        let realm = RealmManager.shared.realm
+        self.workspaces = realm.objects(WorkspaceDB.self)
+        self.updateWorkspaceMenuItems()
+        self.setToken()
+    }
+    
+    @Published var workspaces: Results<WorkspaceDB>
+    
+    @Published var workspaceMenuItems: [MenuItemNode] = []
+    
+    func updateWorkspaceMenuItems() {
+        let workspaces = Array(workspaces.filter({ $0.parent.isEmpty }))
+        
+        self.workspaceMenuItems = MenuItemNode.createOutline(workspaces: workspaces)
+    }
+    
+    @Published var sidebarSelection: String? = MenuItem.home.id
+    
+    var token: NotificationToken? = nil
+
+    func setToken() {
+        self.token = workspaces.observe({ [unowned self] (changes) in
+            switch changes
+            {
+            case .update(_, deletions: _, insertions: _, modifications: _):
+                objectWillChange.send()
+                self.updateWorkspaceMenuItems()
+            default:
+                break
+            }
+        })
     }
     
     var realm: Realm {
         RealmManager.shared.realm
     }
-    
-    var workspaceMenuItems: [MenuItemNode] {
-        stateManager.sidebarModel.menuItems
-    }
 
     func onNavigation(to workspace: WorkspaceDB) {
         stateManager.selectedWorkspace = workspace
-        stateManager.sidebarModel.selection = MenuItem.workspace(workspace).id
+        sidebarSelection = MenuItem.workspace(workspace).id
     }
     
     // MARK: CRUD
@@ -64,7 +71,7 @@ class SidebarVM: ObservableObject {
     }
     
     func deleteWorkspace(_ workspace: WorkspaceDB) {
-        stateManager.sidebarModel.selection = MenuItem.home.id
+        sidebarSelection = MenuItem.home.id
         
         guard let thawed = workspace.thaw() else { return }
         

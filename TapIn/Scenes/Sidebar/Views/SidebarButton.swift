@@ -3,7 +3,6 @@ import RealmSwift
 
 
 struct SidebarButtonToPage: View {
-    @StateObject var vm: SidebarVM
     @State var menuItem: MenuItem
 
     var body: some View {
@@ -29,7 +28,7 @@ struct SidebarButtonToPage: View {
 }
 
 struct SidebarButtonToWorkspace: View {
-    @StateObject var vm: SidebarVM
+    @EnvironmentObject var sidebarVM: SidebarVM
     @State var menuItem: MenuItem
     
     var realm: Realm {
@@ -54,7 +53,7 @@ struct SidebarButtonToWorkspace: View {
                 .textFieldStyle(.roundedBorder) // adds border
                 .prefersDefaultFocus(in: mainNamespace)
                 .onSubmit {
-                    vm.renameWorkspace(workspace, name: renameWorkspaceField)
+                    sidebarVM.renameWorkspace(workspace, name: renameWorkspaceField)
                     isRenaming = false
                 }
         }
@@ -62,7 +61,7 @@ struct SidebarButtonToWorkspace: View {
         {
             NavigationLink(destination: {
                 WorkspaceBrowse().onAppear(perform: {
-                    vm.onNavigation(to: workspace)
+                    sidebarVM.onNavigation(to: workspace)
                 })
             }) {
                 Label(menuItem.label, systemImage: menuItem.icon)
@@ -81,11 +80,11 @@ extension SidebarButtonToWorkspace {
     var contextMenu: some View {
         Group {
             Button("Add Child Workspace") {
-                vm.addChild(to: workspace)
+                sidebarVM.addChild(to: workspace)
             }
 
             Button("Delete") {
-                vm.deleteWorkspace(workspace)
+                sidebarVM.deleteWorkspace(workspace)
             }
 
             Button("Rename") {

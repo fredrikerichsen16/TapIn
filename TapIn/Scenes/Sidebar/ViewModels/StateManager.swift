@@ -61,55 +61,13 @@ class SubcomponentsHolder {
     }
 }
 
-struct SidebarModel {
-    var realm: Realm {
-        RealmManager.shared.realm
-    }
-    
-    var workspaces: Results<WorkspaceDB>
-    var menuItems: [MenuItemNode] = [] {
-        didSet {
-            self.menuItems = MenuItemNode.createOutline(workspaces: Array(workspaces))
-        }
-    }
-    var selection: String? = MenuItem.home.id
-    
-    init(workspaces: Results<WorkspaceDB>) {
-        self.workspaces = workspaces
-        self.menuItems = MenuItemNode.createOutline(workspaces: Array(workspaces))
-        self.selection = MenuItem.home.id
-    }
-}
-
 class StateManager: ObservableObject {
     
     var realm: Realm {
         RealmManager.shared.realm
     }
     
-    init() {
-        let realm = RealmManager.shared.realm
-        
-        let workspaces = realm.objects(WorkspaceDB.self)
-        self.sidebarModel = SidebarModel(workspaces: workspaces)
-        self.setToken()
-    }
-    
-    var token: NotificationToken? = nil
-
-    func setToken() {
-        self.token = sidebarModel.workspaces.observe({ [unowned self] (changes) in
-            switch changes
-            {
-            case .update(_, deletions: _, insertions: _, modifications: _):
-                objectWillChange.send()
-            default:
-                break
-            }
-        })
-    }
-    
-    @Published var sidebarModel: SidebarModel
+    init() {}
     
     // MARK: General
     

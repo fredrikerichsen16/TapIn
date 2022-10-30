@@ -16,7 +16,7 @@ class RealmManager {
             let config = getRealmConfig()
             self.realm = try Realm(configuration: config)
             
-//            addData()
+            addData()
         }
         catch
         {
