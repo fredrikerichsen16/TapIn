@@ -9,7 +9,6 @@ import SwiftUI
 import RealmSwift
 
 struct WorkspaceTimeTracking: View {
-    @EnvironmentObject var workspaceVM: WorkspaceVM
     @ObservedObject var timeTrackerState: TimeTrackerState
     
     var status: String {

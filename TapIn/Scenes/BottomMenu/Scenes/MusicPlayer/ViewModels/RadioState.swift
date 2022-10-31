@@ -2,8 +2,8 @@ import SwiftUI
 import RealmSwift
 
 final class RadioState: ObservableObject {
-    var workspaceDB: WorkspaceDB
-    var workspaceVM: WorkspaceVM
+    var stateManager: StateManager
+    var workspace: WorkspaceDB
     var realm: Realm {
         RealmManager.shared.realm
     }
@@ -32,9 +32,9 @@ final class RadioState: ObservableObject {
         }
     }
     
-    init(workspaceVM: WorkspaceVM) {
-        self.workspaceVM = workspaceVM
-        self.workspaceDB = workspaceVM.workspace
+    init(workspace: WorkspaceDB, stateManager: StateManager) {
+        self.workspace = workspace
+        self.stateManager = stateManager
         self.radioPlayer = radioPlayerConstructor()
     }
     

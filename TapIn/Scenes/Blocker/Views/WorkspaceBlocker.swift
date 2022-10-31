@@ -10,12 +10,8 @@ import SwiftUI
 
 struct WorkspaceBlocker: View {
     @Environment(\.realm) var realm
-    @StateObject var vm: BlockerModel
+    @ObservedObject var vm: BlockerState
     @State private var addWebsiteFieldValue = ""
-    
-    init(_ blockerModel: BlockerModel) {
-        self._vm = StateObject(wrappedValue: blockerModel)
-    }
     
     var body: some View {
         VStack {
@@ -31,6 +27,9 @@ struct WorkspaceBlocker: View {
             Button("Add", action: {
                 vm.addBlacklistedWebsite(realm, url: addWebsiteFieldValue)
             })
+            Button("Ballz") {
+                print(vm.blocker.blacklistedWebsites.count)
+            }
         }
     }
 }

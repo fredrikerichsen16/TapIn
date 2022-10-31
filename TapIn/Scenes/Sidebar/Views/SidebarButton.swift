@@ -28,14 +28,9 @@ struct SidebarButtonToPage: View {
 }
 
 struct SidebarButtonToWorkspace: View {
-    @EnvironmentObject var sidebarVM: SidebarVM
-    @State var menuItem: MenuItem
-    
-    var realm: Realm {
-        RealmManager.shared.realm
-    }
-
     @EnvironmentObject var stateManager: StateManager
+    @StateObject var vm: SidebarVM
+    @State var menuItem: MenuItem
 
     var workspace: WorkspaceDB {
         menuItem.workspace!
@@ -53,7 +48,7 @@ struct SidebarButtonToWorkspace: View {
                 .textFieldStyle(.roundedBorder) // adds border
                 .prefersDefaultFocus(in: mainNamespace)
                 .onSubmit {
-                    sidebarVM.renameWorkspace(workspace, name: renameWorkspaceField)
+                    vm.renameWorkspace(workspace, name: renameWorkspaceField)
                     isRenaming = false
                 }
         }
@@ -61,9 +56,8 @@ struct SidebarButtonToWorkspace: View {
         {
             NavigationLink(destination: {
                 WorkspaceBrowse()
-                    .environmentObject(WorkspaceVM.getCurrent(for: workspace, stateManager: stateManager))
                     .onAppear(perform: {
-                        sidebarVM.onNavigation(to: workspace)
+                        vm.onNavigation(to: workspace)
                     })
             }) {
                 Label(menuItem.label, systemImage: menuItem.icon)
@@ -82,11 +76,11 @@ extension SidebarButtonToWorkspace {
     var contextMenu: some View {
         Group {
             Button("Add Child Workspace") {
-                sidebarVM.addChild(to: workspace)
+                vm.addChild(to: workspace)
             }
 
             Button("Delete") {
-                sidebarVM.deleteWorkspace(workspace)
+                vm.deleteWorkspace(workspace)
             }
 
             Button("Rename") {

@@ -6,8 +6,8 @@ final class PomodoroState: ObservableObject {
         RealmManager.shared.realm
     }
     
-    internal var workspaceVM: WorkspaceVM
-    private var workspaceDb: WorkspaceDB
+    private var stateManager: StateManager
+    public var workspace: WorkspaceDB
     private var pomodoroDb: PomodoroDB
     
     @Published var remainingTimeString = "00:00"
@@ -21,16 +21,13 @@ final class PomodoroState: ObservableObject {
             case .initial:
                 timerState = initialTimerState
                 ticker.resetTimer()
-                workspaceVM.endSession()
             case .running:
                 timerState = runningTimerState
-                workspaceVM.startSession()
             case .paused:
                 timerState = pausedTimerState
-                workspaceVM.startSession()
             }
             
-//            stateManager.refreshActiveWorkspace()
+            stateManager.refreshActiveWorkspace()
         }
     }
     
@@ -47,10 +44,10 @@ final class PomodoroState: ObservableObject {
     var shortBreakStageState: PomodoroStageState!
     var longBreakStageState: PomodoroStageState!
     
-    init(workspaceVM: WorkspaceVM) {
-        self.workspaceVM = workspaceVM
-        self.workspaceDb = workspaceVM.workspace
-        self.pomodoroDb = workspaceDb.pomodoro
+    init(workspace: WorkspaceDB, stateManager: StateManager) {
+        self.workspace = workspace
+        self.pomodoroDb = workspace.pomodoro
+        self.stateManager = stateManager
         
         self.initialTimerState = PomodoroInitialTimerState(self)
         self.runningTimerState = PomodoroRunningTimerState(self)
@@ -103,14 +100,14 @@ final class PomodoroState: ObservableObject {
     // MARK: ?
     
     func longBreakDue() -> Bool {
-        let numCompletedSessions = workspaceDb.numSessionsCompletedToday()
+        let numCompletedSessions = workspace.numSessionsCompletedToday()
         let longBreakFrequency = Int(pomodoroDb.longBreakFrequency)
         
         return numCompletedSessions % longBreakFrequency == 0
     }
     
     func completedSession() {
-        let (thawed, realm) = workspaceDb.easyThaw()
+        let (thawed, realm) = workspace.easyThaw()
         var numCompletedSessions: Int = 0
         
         let pomodoroStageEnum = stageState.stage

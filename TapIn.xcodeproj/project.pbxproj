@@ -69,7 +69,7 @@
 		35AEA181267F6AD4000AFE85 /* WorkspaceBrowse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA180267F6AD4000AFE85 /* WorkspaceBrowse.swift */; };
 		35AEA188267F9582000AFE85 /* TimeTrackerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA187267F9582000AFE85 /* TimeTrackerModel.swift */; };
 		35AEA18A267F95B5000AFE85 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA189267F95B5000AFE85 /* LauncherModel.swift */; };
-		35AEA18C267F95D9000AFE85 /* BlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA18B267F95D9000AFE85 /* BlockerModel.swift */; };
+		35AEA18C267F95D9000AFE85 /* BlockerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA18B267F95D9000AFE85 /* BlockerState.swift */; };
 		35AEA194267FA815000AFE85 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA193267FA815000AFE85 /* Color+.swift */; };
 		35BF8A5D290F2A44009EC6CC /* LauncherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BF8A5C290F2A44009EC6CC /* LauncherState.swift */; };
 		35BF8A5F290F33DA009EC6CC /* ActiveSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BF8A5E290F33DA009EC6CC /* ActiveSession.swift */; };
@@ -175,7 +175,7 @@
 		35AEA180267F6AD4000AFE85 /* WorkspaceBrowse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceBrowse.swift; sourceTree = "<group>"; };
 		35AEA187267F9582000AFE85 /* TimeTrackerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerModel.swift; sourceTree = "<group>"; };
 		35AEA189267F95B5000AFE85 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
-		35AEA18B267F95D9000AFE85 /* BlockerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerModel.swift; sourceTree = "<group>"; };
+		35AEA18B267F95D9000AFE85 /* BlockerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerState.swift; sourceTree = "<group>"; };
 		35AEA193267FA815000AFE85 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		35BF8A5C290F2A44009EC6CC /* LauncherState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherState.swift; sourceTree = "<group>"; };
 		35BF8A5E290F33DA009EC6CC /* ActiveSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSession.swift; sourceTree = "<group>"; };
@@ -389,7 +389,7 @@
 		356B4D24290C28D600C12949 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				35AEA18B267F95D9000AFE85 /* BlockerModel.swift */,
+				35AEA18B267F95D9000AFE85 /* BlockerState.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -802,7 +802,7 @@
 				358D114827C1AD1200983673 /* SectionPicker.swift in Sources */,
 				35608D1C26C6FBEC0054FCD2 /* AdvancedSettingsView.swift in Sources */,
 				355B46E527C97FAC007E0507 /* LauncherInstanceDB.swift in Sources */,
-				35AEA18C267F95D9000AFE85 /* BlockerModel.swift in Sources */,
+				35AEA18C267F95D9000AFE85 /* BlockerState.swift in Sources */,
 				3573F14E268767E9004B9C21 /* WorkspaceLauncher.swift in Sources */,
 				35F5592827A26D410094F2C4 /* WorkspaceDB.swift in Sources */,
 				35AEA18A267F95B5000AFE85 /* LauncherModel.swift in Sources */,

@@ -2,11 +2,13 @@ import Foundation
 import RealmSwift
 
 class LauncherState: ObservableObject {
-//    private var workspaceVM: WorkspaceVM
+//    private var stateManager: StateManager
+    private var workspace: WorkspaceDB
     
-    init(workspaceVM: WorkspaceVM) {
-//        self.workspaceVM = workspaceVM
-        self.launcher = workspaceVM.workspace.launcher
+    init(workspace: WorkspaceDB, stateManager: StateManager) {
+//        self.stateManager = stateManager
+        self.workspace = workspace
+        self.launcher = workspace.launcher
         self.launcherInstances = Array(launcher.launcherInstances)
         self.setToken()
     }
