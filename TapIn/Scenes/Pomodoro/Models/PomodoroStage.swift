@@ -2,15 +2,15 @@ import RealmSwift
 import Foundation
 
 enum PomodoroStage {
-    case working(Double)
-    case shortBreak(Double)
-    case longBreak(Double)
+    case working(Int)
+    case shortBreak(Int)
+    case longBreak(Int)
     
     func getDuration() -> Double {
         switch self
         {
             case .working(let duration), .shortBreak(let duration), .longBreak(let duration):
-                return duration
+                return Double(duration) * 60
         }
     }
     
@@ -56,7 +56,7 @@ extension PomodoroStage: FailableCustomPersistable {
         }
         
         let name = String(label.split(separator: "(")[0])
-        let duration = Double(label.split(separator: "(")[1].dropLast(1))! // using ! because regex should catch any errors
+        let duration = Int(label.split(separator: "(")[1].dropLast(1))! // using ! because regex should catch any errors
         
         switch name
         {

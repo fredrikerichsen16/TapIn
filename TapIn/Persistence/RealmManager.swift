@@ -14,13 +14,13 @@ class RealmManager {
             {
                 let config = Realm.Configuration(inMemoryIdentifier: "preview")
                 self.realm = try Realm(configuration: config)
-                addData()
+//                addData()
             }
             else
             {
-                let config = Realm.Configuration(schemaVersion: 7)
+                let config = Realm.Configuration(schemaVersion: 9)
                 self.realm = try Realm(configuration: config)
-//                addData()
+                addData()
             }
         }
         catch

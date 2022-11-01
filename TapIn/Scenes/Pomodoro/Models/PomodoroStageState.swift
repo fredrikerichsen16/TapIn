@@ -7,7 +7,7 @@ protocol PomodoroStageState {
     var pomodoroState: PomodoroState { get set }
     var stage: PomodoroStage { get set }
     
-    init(_ pomodoroState: PomodoroState, duration: Double)
+    init(_ pomodoroState: PomodoroState, duration: Int)
     
     func transitionToNextState()
     func getLabel() -> String
@@ -30,7 +30,7 @@ final class PomodoroWorkingStageState: PomodoroStageState {
     var pomodoroState: PomodoroState
     var stage: PomodoroStage
     
-    init(_ pomodoroState: PomodoroState, duration: Double) {
+    init(_ pomodoroState: PomodoroState, duration: Int) {
         self.pomodoroState = pomodoroState
         self.stage = .working(duration)
     }
@@ -55,7 +55,7 @@ final class PomodoroShortBreakStageState: PomodoroStageState {
     var pomodoroState: PomodoroState
     var stage: PomodoroStage
     
-    init(_ pomodoroState: PomodoroState, duration: Double) {
+    init(_ pomodoroState: PomodoroState, duration: Int) {
         self.pomodoroState = pomodoroState
         self.stage = .shortBreak(duration)
     }
@@ -73,7 +73,7 @@ final class PomodoroLongBreakStageState: PomodoroStageState {
     var pomodoroState: PomodoroState
     var stage: PomodoroStage
     
-    init(_ pomodoroState: PomodoroState, duration: Double) {
+    init(_ pomodoroState: PomodoroState, duration: Int) {
         self.pomodoroState = pomodoroState
         self.stage = .longBreak(duration)
     }

@@ -16,7 +16,7 @@ final class BlockerDB: Object, ObjectKeyIdentifiable {
     var blacklistedWebsites = RealmSwift.List<String>()
     
     @Persisted
-    var whitelistedWebsites = RealmSwift.List<String>()
+    var blockerStrength: BlockerStrength = .normal
     
     @Persisted(originProperty: "blocker")
     var workspace: LinkingObjects<WorkspaceDB>
@@ -32,5 +32,11 @@ final class BlockerDB: Object, ObjectKeyIdentifiable {
 //        }
 //    }
     
+}
+
+enum BlockerStrength: String, PersistableEnum {
+    case lenient // can be turned off
+    case normal  // can be turned off by closing app
+    case extreme // can be turned off by restarting computer
 }
 

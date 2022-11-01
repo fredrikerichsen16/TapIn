@@ -14,6 +14,7 @@ struct GeneralSettingsView: View {
             
             Toggle("Display toolbar widget", isOn: $displayToolbarWidget)
         }
+        .formStyle(.grouped)
     }
 }
 

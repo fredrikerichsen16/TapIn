@@ -1,10 +1,3 @@
-//
-//  PomodoroDB.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 03/02/2022.
-//
-
 import Foundation
 import RealmSwift
 
@@ -13,16 +6,16 @@ final class PomodoroDB: Object, ObjectKeyIdentifiable {
     var id: ObjectId
     
     @Persisted
-    var pomodoroDuration: TimeInterval = 60.0 * 25.0
+    var pomodoroDuration: Int = 25 // in minutes
     
     @Persisted
-    var shortBreakDuration: TimeInterval = 60.0 * 5.0
+    var shortBreakDuration: Int = 5 // in minutes
     
     @Persisted
-    var longBreakDuration: TimeInterval = 60.0 * 15.0
+    var longBreakDuration: Int = 15 // in minutes
     
     @Persisted
-    var longBreakFrequency: Int8 = 3
+    var longBreakFrequency: Int = 3
     
     @Persisted(originProperty: "pomodoro")
     var workspace: LinkingObjects<WorkspaceDB>

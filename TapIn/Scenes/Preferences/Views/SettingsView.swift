@@ -21,8 +21,8 @@ struct SettingsView: View {
                 }
                 .tag(Tabs.workspace)
         }
+        .frame(minWidth: 300, idealWidth: 450, maxWidth: 1200, minHeight: 300, idealHeight: 450, maxHeight: 1200, alignment: .center)
         .padding(20)
-        .frame(width: 375, height: 150)
     }
 }
 
