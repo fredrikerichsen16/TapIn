@@ -161,16 +161,32 @@ enum RealmLauncherType: String, Equatable, PersistableEnum {
     
     func label() -> String {
         switch self {
-            case .app:
-                return "New App"
-            case .file:
-                return "New File"
-            case .folder:
-                return "New Folder"
-            case .website:
-                return "New Website"
-            case .terminal:
-                return "New Terminal"
+        case .app:
+            return "App"
+        case .file:
+            return "File"
+        case .folder:
+            return "Folder"
+        case .website:
+            return "Website"
+        case .terminal:
+            return "Terminal"
+        }
+    }
+    
+    func icon() -> String {
+        switch self
+        {
+        case .app:
+            return "music.note"
+        case .file:
+            return "doc"
+        case .folder:
+            return "folder"
+        case .website:
+            return "link"
+        case .terminal:
+            return "terminal"
         }
     }
     

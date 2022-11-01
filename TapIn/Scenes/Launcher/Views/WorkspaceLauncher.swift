@@ -3,7 +3,6 @@ import RealmSwift
 import QuickLook
 
 struct WorkspaceLauncher: View {
-	@State private var showingSheet = false
     @State private var selectedInstance: ObjectId? = nil
     
     @EnvironmentObject var launcherState: LauncherState
@@ -18,6 +17,7 @@ struct WorkspaceLauncher: View {
                         launcherInstanceListItem(instance: instance)
                     }
                     .frame(width: 210, alignment: .center)
+                    // TODO: Change background color to clear
 
                     LauncherInstanceListControlButtons(selectedInstance: $selectedInstance)
                 }
@@ -89,10 +89,13 @@ struct WorkspaceLauncher: View {
             Button("Quick Look") {
                 quickLookURL = instance.fileController.getFile() ?? instance.appController.getApp()
             }
+            .keyboardShortcut(.space, modifiers: [])
             
             Button("Delete") {
+                selectedInstance = nil
                 launcherState.delete(launcherInstance: instance)
             }
+            .keyboardShortcut("d")
         }
     }
 }
@@ -119,6 +122,8 @@ struct LauncherInstanceListControlButtons: View {
             
             Button(action: {
                 guard let id = selectedInstance else { return }
+                
+                selectedInstance = nil
                 launcherState.deleteInstance(by: id)
             }, label: {
                 Image(systemName: "minus")

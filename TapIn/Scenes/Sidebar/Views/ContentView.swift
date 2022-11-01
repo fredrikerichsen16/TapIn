@@ -1,12 +1,9 @@
 import SwiftUI
-import SwiftUIRouter
 import RealmSwift
 
 struct ContentView: View {
-    @EnvironmentObject var stateManager: StateManager
-    
     var body: some View {
-        Sidebar(stateManager: stateManager)
+        Sidebar()
     }
 }
 

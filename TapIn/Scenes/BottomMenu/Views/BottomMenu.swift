@@ -1,135 +1,22 @@
-//
-//  BottomMenu.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 21/01/2022.
-//
+import SwiftUI
 
-//import SwiftUI
-//import RealmSwift
-//
-//struct BlockerBottomMenuController: View {
-//    var body: some View {
-//        VStack {
-//            Text("Blocker").font(.body)
-//            
-//            Button("Start Blocker") {
-//                print("Activate Blocker")
-//            }
-//        }
-//    }
-//}
-//
-//struct LauncherBottomMenuController: View {
-//    @ObservedRealmObject var launcher: LauncherDB
-//    
-//    var body: some View {
-//        VStack {
-//            Text("Launcher").font(.body)
-//            
-//            Button("Launch") {
-//                launcher.openAll()
-//            }
-//        }
-//    }
-//}
-//
-//struct PomodoroBottomMenuController: View {
-//    @EnvironmentObject var stateManager: StateManager
-//    @StateObject var pomodoroState: PomodoroState
-//
-//    var body: some View {
-//        VStack {
-//            Text("Pomodoro").font(.body)
-//            pomodoroState.getButtons()
-//        }
-//    }
-//}
-//
-enum BottomMenuControllerSelection {
-    case pomodoro
-    case launcher
-    case blocker
+struct BottomMenu: View {
+    @EnvironmentObject var workspace: WorkspaceVM
     
-    mutating func next() {
-        switch self
+    let height: CGFloat = 80.0
+    
+    var body: some View {
+        if WorkspaceVM.shouldShowActiveBottomMenu(for: workspace.workspace)
         {
-        case .pomodoro:
-            self = .launcher
-        case .launcher:
-            self = .blocker
-        case .blocker:
-            self = .pomodoro
+            ActiveBottomMenu()
+                .frame(maxWidth: .infinity, minHeight: height, idealHeight: height, maxHeight: height, alignment: .center)
+                .background(Color(r: 37, g: 37, b: 42, opacity: 1))
         }
-    }
-    
-    mutating func previous() {
-        switch self
+        else
         {
-        case .pomodoro:
-            self = .blocker
-        case .launcher:
-            self = .pomodoro
-        case .blocker:
-            self = .launcher
+            InactiveBottomMenu()
+                .frame(maxWidth: .infinity, minHeight: height, idealHeight: height, maxHeight: height, alignment: .center)
+                .background(Color(r: 37, g: 37, b: 42, opacity: 1))
         }
     }
 }
-//
-//enum Direction {
-//    case right
-//    case left
-//}
-//
-//struct BottomMenu: View {
-//    @EnvironmentObject var stateManager: StateManager
-//    @Binding var bottomMenuControllerSelection: BottomMenuControllerSelection
-//    
-//    var body: some View {
-//        HStack {
-//            MusicPlayerView(radioState: workspaceVM.radioState)
-//            
-//            Spacer()
-//            
-//            Group {
-//                navigateButton(direction: .left)
-//                
-//                switch bottomMenuControllerSelection
-//                {
-//                case .pomodoro:
-//                    PomodoroBottomMenuController(pomodoroState: workspaceVM.pomodoroState)
-//                        .padding()
-//                case .launcher:
-//                    LauncherBottomMenuController(launcher: workspaceVM.workspace.launcher)
-//                        .padding()
-//                case .blocker:
-//                    BlockerBottomMenuController()
-//                        .padding()
-//                }
-//                navigateButton(direction: .right)
-//            }
-//        }
-//        .padding(EdgeInsets.init(top: 2, leading: 22, bottom: 2, trailing: 22))
-//        .background(Color(r: 37, g: 37, b: 42, opacity: 1))
-//    }
-//    
-//    private func navigateButton(direction: Direction) -> some View {
-//        var action: () -> Void = {}
-//        var icon: String = ""
-//        
-//        if direction == .right
-//        {
-//            action = { bottomMenuControllerSelection.next() }
-//            icon = "chevron.right"
-//        }
-//        else
-//        {
-//            action = { bottomMenuControllerSelection.previous() }
-//            icon = "chevron.left"
-//        }
-//        
-//        return Button(action: action, label: {
-//            Image(systemName: icon)
-//        }).buttonStyle(PlainButtonStyle())
-//    }
-//}

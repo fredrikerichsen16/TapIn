@@ -2,18 +2,16 @@ import Foundation
 import RealmSwift
 
 class LauncherState: ObservableObject {
-//    private var stateManager: StateManager
     private var workspace: WorkspaceDB
     
-    init(workspace: WorkspaceDB, stateManager: StateManager) {
-//        self.stateManager = stateManager
+    init(workspace: WorkspaceDB) {
         self.workspace = workspace
         self.launcher = workspace.launcher
         self.launcherInstances = Array(launcher.launcherInstances)
         self.setToken()
     }
     
-    var realm: Realm {
+    private var realm: Realm {
         RealmManager.shared.realm
     }
     
@@ -28,6 +26,7 @@ class LauncherState: ObservableObject {
             switch changes
             {
             case .change(_, _):
+                self.launcherInstances = Array(launcher.launcherInstances)
                 objectWillChange.send()
             default:
                 break
@@ -38,29 +37,35 @@ class LauncherState: ObservableObject {
     // MARK: Sidebar
     
     func duplicate(launcherInstance: LauncherInstanceDB) {
+        guard let launcher = launcher.thaw() else { return }
+        
         try? realm.write
         {
             let duplicatedLauncher = LauncherInstanceDB(duplicate: launcherInstance)
-            realm.add(duplicatedLauncher)
+            launcher.launcherInstances.append(duplicatedLauncher)
         }
     }
     
     func delete(launcherInstance: LauncherInstanceDB) {
-        guard let instance = launcherInstance.thaw() else {
-            return
-        }
+        guard
+            let launcher = launcher.thaw(),
+            let instanceIndex = launcher.launcherInstances.firstIndex(where: { $0.id == launcherInstance.id })
+        else { return }
         
         try? realm.write {
-            realm.delete(instance)
+            launcher.launcherInstances.remove(at: instanceIndex)
         }
     }
     
     func deleteInstance(by id: ObjectId) {
-        guard let instance = launcher.launcherInstances.first(where: { $0.id == id }) else {
-            return
-        }
+        guard
+            let launcher = launcher.thaw(),
+            let instanceIndex = launcher.launcherInstances.firstIndex(where: { $0.id == id })
+        else { return }
         
-        self.delete(launcherInstance: instance)
+        try? realm.write {
+            launcher.launcherInstances.remove(at: instanceIndex)
+        }
     }
     
     // MARK: Popover
@@ -72,7 +77,7 @@ class LauncherState: ObservableObject {
         {
         case .website:
             newInstance = LauncherInstanceDB(
-                name: RealmLauncherType.website.label(),
+                name: "New " + RealmLauncherType.website.label(),
                 type: .website,
                 instantiated: true,
                 appUrl: nil,
@@ -81,7 +86,11 @@ class LauncherState: ObservableObject {
                 hideOnLaunch: false
             )
         case .app, .file, .folder:
-            newInstance = LauncherInstanceDB(name: type.label(), type: type, instantiated: false)
+            newInstance = LauncherInstanceDB(
+                name: "New " + type.label(),
+                type: type,
+                instantiated: false
+            )
         default:
             fatalError("Not implemented yet")
         }

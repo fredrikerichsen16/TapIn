@@ -2,19 +2,69 @@ import Foundation
 import RealmSwift
 
 class SidebarVM: ObservableObject {
-    private var stateManager: StateManager
-
-    init(stateManager: StateManager) {
-        self.stateManager = stateManager
-    }
     
     var realm: Realm {
         RealmManager.shared.realm
     }
+    
+    init() {
+        let realm = RealmManager.shared.realm
+        self.workspaces = realm.objects(WorkspaceDB.self)
+        self.updateWorkspaceMenuItems()
+        self.setToken()
+    }
+    
+    // MARK: General
+    
+    @Published var selectedWorkspace: WorkspaceDB? = nil
+    @Published var activeWorkspace: WorkspaceDB? = nil
 
+    /// I will remporarily use this to refresh the view, but it shouldn't be used because if your viewmodels and stuff are done correctly it's done automatically
+    func refresh() {
+        objectWillChange.send()
+    }
+    
+    // MARK: Sidebar
+    
+    @Published var workspaces: Results<WorkspaceDB>
+    
+    @Published var workspaceMenuItems: [MenuItemNode] = []
+    
+    @Published var sidebarSelection: String? = MenuItem.home.id
+    
+    var token: NotificationToken? = nil
+
+    func setToken() {
+        self.token = workspaces.observe({ [unowned self] (changes) in
+            switch changes
+            {
+            case .update(_, deletions: let deletions, insertions: let insertions, modifications: _):
+                if deletions.count + insertions.count > 0 {
+                    objectWillChange.send()
+                    self.updateWorkspaceMenuItems()
+                }
+            default:
+                break
+            }
+        })
+    }
+    
+    func updateWorkspaceMenuItems() {
+        let workspaces = Array(workspaces.filter({ $0.parent.isEmpty }))
+        
+        self.workspaceMenuItems = MenuItemNode.createOutline(workspaces: workspaces)
+    }
+    
+    // MARK: Navigation
+    
     func onNavigation(to workspace: WorkspaceDB) {
-        stateManager.selectedWorkspace = workspace
-        stateManager.sidebarSelection = MenuItem.workspace(workspace).id
+        selectedWorkspace = workspace
+        sidebarSelection = MenuItem.workspace(workspace).id
+    }
+    
+    func navigate(to workspace: WorkspaceDB) {
+        selectedWorkspace = workspace
+        sidebarSelection = MenuItem.workspace(workspace).id
     }
 
     // MARK: CRUD
@@ -40,8 +90,8 @@ class SidebarVM: ObservableObject {
     }
 
     func deleteWorkspace(_ workspace: WorkspaceDB) {
-        stateManager.sidebarSelection = MenuItem.home.id
-
+        sidebarSelection = MenuItem.home.id
+        
         guard let thawed = workspace.thaw() else { return }
 
         try! realm.write {
@@ -60,9 +110,9 @@ class SidebarVM: ObservableObject {
 
         let childWorkspace = WorkspaceDB(name: "New Workspace")
 
-        try! realm.write {
+        try? realm.write {
             workspace.children.append(childWorkspace)
         }
     }
-
+    
 }

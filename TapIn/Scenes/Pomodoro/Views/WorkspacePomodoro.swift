@@ -1,16 +1,8 @@
-//
-//  WorkspacePomodoro.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 26/06/2021.
-//
-
 import SwiftUI
 import RealmSwift
 
 struct WorkspacePomodoro: View {
-    @EnvironmentObject var stateManager: StateManager
-    @ObservedObject var pomodoroState: PomodoroState
+    @EnvironmentObject var pomodoroState: PomodoroState
     
     var body: some View {
         VStack {
@@ -32,6 +24,9 @@ struct WorkspacePomodoro: View {
                 }
             }
         }
+        .onAppear {
+            pomodoroState.updateUI()
+        }
     }
 }
 
@@ -50,7 +45,7 @@ struct ProgressCircleView: View {
                 .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
                 .rotationEffect(.degrees(270.0))
                 .foregroundColor(.blue)
-                .animation(.linear)
+                .animation(.linear, value: circleProgress)
         }
         .frame(width: 330, height: 330, alignment: .center)
     }

@@ -12,10 +12,12 @@ struct RadioChannelModel {
     var keyname: String
     var label: String
     var numberOfSongsInChannel: Int
+    let image: String
     
-    init(keyname: String, label: String) throws {
+    init(keyname: String, label: String, image: String) throws {
         self.keyname = keyname
         self.label = label
+        self.image = image
         
         if let resourcePath = Bundle.main.resourcePath,
            let assets = try? FileManager.default.contentsOfDirectory(atPath: resourcePath)

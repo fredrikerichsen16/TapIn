@@ -10,13 +10,6 @@ import RealmSwift
 
 final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     
-    func easyThaw() -> (WorkspaceDB, Realm) {
-        guard let thawed = self.thaw(),
-              let realm = thawed.realm else { fatalError("Easythaw failed") }
-        
-        return (thawed, realm)
-    }
-    
     @Persisted(primaryKey: true)
     var id: ObjectId
     
@@ -90,22 +83,5 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
         
         return sessions.filter("completedTime BETWEEN {%@, %@}", startTime, endTime)
     }
-    
-//    static func deleteById(_ realm: Realm, id: ObjectId) -> Bool {
-//        guard let instanceToDelete = realm.objects(LauncherInstanceDB.self).where({ ($0.id == id) }).first else {
-//            // TODO: Return a double where the second element is the status where it says e.g. that no instance with that id was found
-//            return true
-//        }
-//
-//        if let thawed = instanceToDelete.thaw() {
-//            try! realm.write {
-//                realm.delete(thawed)
-//            }
-//
-//            return true
-//        }
-//
-//        return false
-//    }
     
 }

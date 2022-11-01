@@ -1,15 +1,8 @@
-//
-//  WorkspaceTimeTracking.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 26/06/2021.
-//
-
 import SwiftUI
 import RealmSwift
 
 struct WorkspaceTimeTracking: View {
-    @ObservedObject var timeTrackerState: TimeTrackerState
+    @EnvironmentObject var timeTrackerState: TimeTrackerState
     
     var status: String {
         return "You have worked \(timeTrackerState.hoursWorked) hours today"

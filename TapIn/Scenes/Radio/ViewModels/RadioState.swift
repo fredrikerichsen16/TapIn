@@ -2,7 +2,6 @@ import SwiftUI
 import RealmSwift
 
 final class RadioState: ObservableObject {
-    var stateManager: StateManager
     var workspace: WorkspaceDB
     var realm: Realm {
         RealmManager.shared.realm
@@ -13,13 +12,11 @@ final class RadioState: ObservableObject {
     }
     
     private let channels: [RadioChannelModel] = [
-        try! RadioChannelModel(keyname: "piano", label: "Relaxing Piano"),
-        try! RadioChannelModel(keyname: "piano", label: "Lofi Beats"),
-        try! RadioChannelModel(keyname: "piano", label: "Techno Bops"),
-        try! RadioChannelModel(keyname: "piano", label: "Jazzy Jazz")
-//        try! RadioChannelModel(keyname: "lofi", label: "Lofi Beats"),
-//        try! RadioChannelModel(keyname: "techno", label: "Techno Bops"),
-//        try! RadioChannelModel(keyname: "jazz", label: "Jazzy Jazz")
+        try! RadioChannelModel(keyname: "piano", label: "Dark Academia", image: "DarkAcademia"),
+        try! RadioChannelModel(keyname: "piano", label: "Lofi Beats", image: "Classical"),
+        try! RadioChannelModel(keyname: "piano", label: "Techno Bops", image: "Classical"),
+        try! RadioChannelModel(keyname: "piano", label: "Jazzy Jazz", image: "Classical"),
+        try! RadioChannelModel(keyname: "piano", label: "Gregorian Chants", image: "GregorianChants")
     ]
     private var activeChannelIndex: Int = 0
     private var radioPlayer: RadioPlayer!
@@ -32,9 +29,8 @@ final class RadioState: ObservableObject {
         }
     }
     
-    init(workspace: WorkspaceDB, stateManager: StateManager) {
+    init(workspace: WorkspaceDB) {
         self.workspace = workspace
-        self.stateManager = stateManager
         self.radioPlayer = radioPlayerConstructor()
     }
     

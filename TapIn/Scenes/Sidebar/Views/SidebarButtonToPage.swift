@@ -27,81 +27,11 @@ struct SidebarButtonToPage: View {
     }
 }
 
-struct SidebarButtonToWorkspace: View {
-    @EnvironmentObject var stateManager: StateManager
-    @StateObject var vm: SidebarVM
-    @State var menuItem: MenuItem
-
-    var workspace: WorkspaceDB {
-        menuItem.workspace!
-    }
-
-    @State var renameWorkspaceField: String = ""
-    @State var isRenaming = false
-
-    @Namespace var mainNamespace
-
-    var body: some View {
-        if isRenaming
-        {
-            TextField("", text: $renameWorkspaceField) // passing it to bind
-                .textFieldStyle(.roundedBorder) // adds border
-                .prefersDefaultFocus(in: mainNamespace)
-                .onSubmit {
-                    vm.renameWorkspace(workspace, name: renameWorkspaceField)
-                    isRenaming = false
-                }
-        }
-        else
-        {
-            NavigationLink(destination: {
-                WorkspaceBrowse()
-                    .onAppear(perform: {
-                        vm.onNavigation(to: workspace)
-                    })
-            }) {
-                Label(menuItem.label, systemImage: menuItem.icon)
-                    .padding(.vertical, 5)
-            }
-            .tag(menuItem.id)
-            .contextMenu(ContextMenu(menuItems: {
-                contextMenu
-            }))
-        }
+struct SidebarButtonToPage_Previews: PreviewProvider {
+    static var previews: some View {
+        SidebarButtonToPage(menuItem: .statistics)
     }
 }
-
-// MARK: Context Menu
-extension SidebarButtonToWorkspace {
-    var contextMenu: some View {
-        Group {
-            Button("Add Child Workspace") {
-                vm.addChild(to: workspace)
-            }
-
-            Button("Delete") {
-                vm.deleteWorkspace(workspace)
-            }
-
-            Button("Rename") {
-                beginRenamingWorkspace()
-            }
-        }
-    }
-
-    func beginRenamingWorkspace() {
-        renameWorkspaceField = workspace.name
-        isRenaming = true
-    }
-}
-
-//struct SidebarButton_Previews: PreviewProvider {
-//    @State var selection: String? = "statistics"
-//
-//    static var previews: some View {
-//        SidebarButton(menuItem: .statistics, selection: $selection)
-//    }
-//}
 
 
 

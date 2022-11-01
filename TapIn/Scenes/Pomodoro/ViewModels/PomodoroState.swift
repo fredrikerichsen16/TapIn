@@ -6,7 +6,6 @@ final class PomodoroState: ObservableObject {
         RealmManager.shared.realm
     }
     
-    private var stateManager: StateManager
     public var workspace: WorkspaceDB
     private var pomodoroDb: PomodoroDB
     
@@ -26,8 +25,6 @@ final class PomodoroState: ObservableObject {
             case .paused:
                 timerState = pausedTimerState
             }
-            
-            stateManager.refreshActiveWorkspace()
         }
     }
     
@@ -44,10 +41,9 @@ final class PomodoroState: ObservableObject {
     var shortBreakStageState: PomodoroStageState!
     var longBreakStageState: PomodoroStageState!
     
-    init(workspace: WorkspaceDB, stateManager: StateManager) {
+    init(workspace: WorkspaceDB) {
         self.workspace = workspace
         self.pomodoroDb = workspace.pomodoro
-        self.stateManager = stateManager
         
         self.initialTimerState = PomodoroInitialTimerState(self)
         self.runningTimerState = PomodoroRunningTimerState(self)
@@ -107,22 +103,24 @@ final class PomodoroState: ObservableObject {
     }
     
     func completedSession() {
-        let (thawed, realm) = workspace.easyThaw()
+        guard let workspace = workspace.thaw() else {
+            return
+        }
         var numCompletedSessions: Int = 0
         
         let pomodoroStageEnum = stageState.stage
         let pomodoroStageDuration = stageState.getStageDuration()
     
         try! realm.write {
-            thawed.sessions.append(SessionDB(stage: pomodoroStageEnum, duration: pomodoroStageDuration))
-            numCompletedSessions = thawed.sessions.count
+            workspace.sessions.append(SessionDB(stage: pomodoroStageEnum, duration: pomodoroStageDuration))
+            numCompletedSessions = workspace.sessions.count
         }
         
         print("Have completed this many sessions: ")
         print(numCompletedSessions)
         
         print("PRINT INFO")
-        for session in thawed.sessions {
+        for session in workspace.sessions {
             print(session.description)
         }
         

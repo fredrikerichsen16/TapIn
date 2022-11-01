@@ -10,51 +10,20 @@ struct Popover: View {
         launcherState.createEmptyInstance(type: type)
 		showingPopover = false
     }
+    
+    @State private var launcherInstanceTypes: [RealmLauncherType] = [.app, .file, .folder, .website, .terminal]
 	
-	var body: some View {
-		List {
-			Button(action: {
-                createEmptyInstance(type: .file)
-			}, label: {
-				Label("File", systemImage: "doc")
-			})
-			.buttonStyle(PlainButtonStyle())
-			
-			Button(action: {
-                createEmptyInstance(type: .folder)
-			}, label: {
-				Label("Folder", systemImage: "folder")
-			})
-			.buttonStyle(PlainButtonStyle())
-			
-			Button(action: {
-                createEmptyInstance(type: .app)
-			}, label: {
-				Label("Application", systemImage: "music.note")
-			})
-			.buttonStyle(PlainButtonStyle())
-			
-			Button(action: {
-                createEmptyInstance(type: .website)
-			}, label: {
-				Label("Website", systemImage: "link")
-			})
-			.buttonStyle(PlainButtonStyle())
-			
-			Button(action: {
-//                createEmptyInstance(type: .app)
-			}, label: {
-				Label("Terminal", systemImage: "terminal")
-			})
-			.buttonStyle(PlainButtonStyle())
-			
-			Button(action: {
-//                createEmptyInstance(type: .app)
-			}, label: {
-				Label("Automation", systemImage: "paperplane")
-			})
-			.buttonStyle(PlainButtonStyle())
-		}
+    var body: some View {
+        List {
+            ForEach(launcherInstanceTypes, id: \.self) { instance in
+                Button(action: {
+                    createEmptyInstance(type: instance)
+                }, label: {
+                    Label(instance.label(), systemImage: instance.icon())
+                })
+                .buttonStyle(PlainButtonStyle())
+            }
+        }
 		.frame(width: 160, height: 165)
 	}
 }
