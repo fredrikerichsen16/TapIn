@@ -1,15 +1,8 @@
-//
-//  SettingsView.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 13/08/2021.
-//
-
 import SwiftUI
 
 struct SettingsView: View {
     private enum Tabs: Hashable {
-        case general, advanced
+        case general, workspace
     }
     
     @State private var selection: Tabs = .general
@@ -21,11 +14,12 @@ struct SettingsView: View {
                     Label("General", systemImage: "gear")
                 }
                 .tag(Tabs.general)
-            AdvancedSettingsView()
+            
+            WorkspaceSettingsView()
                 .tabItem {
-                    Label("Advanced", systemImage: "star")
+                    Label("Workspaces", systemImage: "star")
                 }
-                .tag(Tabs.advanced)
+                .tag(Tabs.workspace)
         }
         .padding(20)
         .frame(width: 375, height: 150)

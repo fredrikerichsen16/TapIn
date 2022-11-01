@@ -29,7 +29,7 @@
 		355B46E527C97FAC007E0507 /* LauncherInstanceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355B46E427C97FAC007E0507 /* LauncherInstanceDB.swift */; };
 		35608D1826C6FB7D0054FCD2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35608D1726C6FB7D0054FCD2 /* SettingsView.swift */; };
 		35608D1A26C6FBCB0054FCD2 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35608D1926C6FBCB0054FCD2 /* GeneralSettingsView.swift */; };
-		35608D1C26C6FBEC0054FCD2 /* AdvancedSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35608D1B26C6FBEC0054FCD2 /* AdvancedSettingsView.swift */; };
+		35608D1C26C6FBEC0054FCD2 /* WorkspaceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35608D1B26C6FBEC0054FCD2 /* WorkspaceSettingsView.swift */; };
 		3566A37026B9D35B0064AE00 /* Dataloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566A36F26B9D35B0064AE00 /* Dataloader.swift */; };
 		3566A37226B9D63B0064AE00 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566A37126B9D63B0064AE00 /* MenuItem.swift */; };
 		356B4D3F290C449D00C12949 /* NuclearWasteland.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356B4D3E290C449D00C12949 /* NuclearWasteland.swift */; };
@@ -49,6 +49,7 @@
 		357C6FF32910AA5D00982A36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 357C6FF22910AA5D00982A36 /* Assets.xcassets */; };
 		357C6FF62910AA8E00982A36 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 357C6FF52910AA8E00982A36 /* Preview Assets.xcassets */; };
 		357C6FF82911454100982A36 /* SidebarButtonToWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357C6FF72911454100982A36 /* SidebarButtonToWorkspace.swift */; };
+		357C7000291184F100982A36 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357C6FFF291184F100982A36 /* ViewModifiers.swift */; };
 		357DD55928344FC3004D1636 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 357DD55828344FC3004D1636 /* Realm */; };
 		357DD55B28344FC3004D1636 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 357DD55A28344FC3004D1636 /* RealmSwift */; };
 		3585E0E228D249BF00339930 /* InactiveBottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0E128D249BF00339930 /* InactiveBottomMenu.swift */; };
@@ -131,7 +132,7 @@
 		355B46E427C97FAC007E0507 /* LauncherInstanceDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherInstanceDB.swift; sourceTree = "<group>"; };
 		35608D1726C6FB7D0054FCD2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		35608D1926C6FBCB0054FCD2 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
-		35608D1B26C6FBEC0054FCD2 /* AdvancedSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedSettingsView.swift; sourceTree = "<group>"; };
+		35608D1B26C6FBEC0054FCD2 /* WorkspaceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSettingsView.swift; sourceTree = "<group>"; };
 		3566A36F26B9D35B0064AE00 /* Dataloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dataloader.swift; sourceTree = "<group>"; };
 		3566A37126B9D63B0064AE00 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		356A4F77279A191900A6C633 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -152,6 +153,7 @@
 		357C6FF22910AA5D00982A36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		357C6FF52910AA8E00982A36 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		357C6FF72911454100982A36 /* SidebarButtonToWorkspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButtonToWorkspace.swift; sourceTree = "<group>"; };
+		357C6FFF291184F100982A36 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		3585E0E128D249BF00339930 /* InactiveBottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InactiveBottomMenu.swift; sourceTree = "<group>"; };
 		3585E0EF28D24B1A00339930 /* RadioState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioState.swift; sourceTree = "<group>"; };
 		3585E0F128D24B5B00339930 /* RadioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayer.swift; sourceTree = "<group>"; };
@@ -567,7 +569,7 @@
 				3573F14B268767DB004B9C21 /* WorkspaceTimeTracking.swift */,
 				35608D1726C6FB7D0054FCD2 /* SettingsView.swift */,
 				35608D1926C6FBCB0054FCD2 /* GeneralSettingsView.swift */,
-				35608D1B26C6FBEC0054FCD2 /* AdvancedSettingsView.swift */,
+				35608D1B26C6FBEC0054FCD2 /* WorkspaceSettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -620,6 +622,14 @@
 				357C6FF52910AA8E00982A36 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		357C6FFE291184E900982A36 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				357C6FFF291184F100982A36 /* ViewModifiers.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		359D2B8D28D410EB0043B698 /* Realm */ = {
@@ -682,6 +692,7 @@
 		35AEA192267FA809000AFE85 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				357C6FFE291184E900982A36 /* SwiftUI */,
 				359D2B8D28D410EB0043B698 /* Realm */,
 				35AEA193267FA815000AFE85 /* Color+.swift */,
 				352A0B8426C94F2C00AA256B /* Collection+.swift */,
@@ -828,11 +839,12 @@
 				3570158627D42F4F000848B7 /* RealmHelpers.swift in Sources */,
 				356F82332910500F00CD289E /* TimeTrackerModel.swift in Sources */,
 				3590CA5E2836C970006A7F92 /* TimerMode.swift in Sources */,
-				35608D1C26C6FBEC0054FCD2 /* AdvancedSettingsView.swift in Sources */,
+				35608D1C26C6FBEC0054FCD2 /* WorkspaceSettingsView.swift in Sources */,
 				355B46E527C97FAC007E0507 /* LauncherInstanceDB.swift in Sources */,
 				35AEA18C267F95D9000AFE85 /* BlockerState.swift in Sources */,
 				3573F14E268767E9004B9C21 /* WorkspaceLauncher.swift in Sources */,
 				35F5592827A26D410094F2C4 /* WorkspaceDB.swift in Sources */,
+				357C7000291184F100982A36 /* ViewModifiers.swift in Sources */,
 				35AEA18A267F95B5000AFE85 /* LauncherModel.swift in Sources */,
 				35A91B4027C9A26E00E94E56 /* LauncherDB.swift in Sources */,
 				35500DFC2835A8B900AF9AB5 /* String+.swift in Sources */,

@@ -14,6 +14,7 @@ class RealmManager {
             {
                 let config = Realm.Configuration(inMemoryIdentifier: "preview")
                 self.realm = try Realm(configuration: config)
+                addData()
             }
             else
             {

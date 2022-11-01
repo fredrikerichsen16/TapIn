@@ -19,48 +19,30 @@ struct WorkspaceBrowseIntermediate: View {
 }
 
 struct WorkspaceBrowse: View {
-    var realm: Realm {
-        RealmManager.shared.realm
-    }
-    
     @EnvironmentObject var workspace: WorkspaceVM
-    
-    var workspaceDb: WorkspaceDB? {
-        workspace.workspace
-    }
     
     var body: some View {
         VStack {
-            TabView {
+            TabView(selection: $workspace.workspaceTab) {
                 WorkspacePomodoro()
                     .tabItem { Text("Pomodoro") }
-                    .onAppear {
-                        workspace.workspaceTab = .pomodoro
-                    }
+                    .tag(WorkspaceTab.pomodoro)
                 
                 WorkspaceTimeTracking()
                     .tabItem { Text("Time Tracking") }
-                    .onAppear {
-                        workspace.workspaceTab = .timetracking
-                    }
+                    .tag(WorkspaceTab.timetracking)
                 
                 WorkspaceLauncher()
                     .tabItem({ Text("Launcher") })
-                    .onAppear {
-                        workspace.workspaceTab = .launcher
-                    }
+                    .tag(WorkspaceTab.launcher)
                 
                 WorkspaceBlocker()
                     .tabItem({ Text("Blocker") })
-                    .onAppear {
-                        workspace.workspaceTab = .blocker
-                    }
+                    .tag(WorkspaceTab.blocker)
                 
                 RadioView()
                     .tabItem({ Text("Radio") })
-                    .onAppear {
-                        workspace.workspaceTab = .radio
-                    }
+                    .tag(WorkspaceTab.radio)
             }
             
             Spacer()

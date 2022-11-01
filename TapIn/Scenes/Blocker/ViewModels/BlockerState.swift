@@ -7,9 +7,7 @@ struct BlacklistedWebsite: Identifiable {
 }
 
 class BlockerState: ObservableObject {
-    private var realm: Realm {
-        RealmManager.shared.realm
-    }
+    var realm: Realm
 
     var token: NotificationToken?
     
@@ -29,6 +27,7 @@ class BlockerState: ObservableObject {
     
     init(workspace: WorkspaceDB) {
         self.blocker = workspace.blocker
+        self.realm = RealmManager.shared.realm
         self.updateBlacklist()
 
         self.token = blocker.observe({ [weak self] (changes) in

@@ -44,19 +44,12 @@ struct WorkspaceBlocker: View {
     }
 }
 
-//struct WorkspaceBlocker_Preview: PreviewProvider {
-//    static func getData() -> (WorkspaceVM, BlockerState) {
-//        let workspaceDB = WorkspaceDB(name: "Uni")
-//        let workspace = WorkspaceVM.preview
-//        let blocker = BlockerState(workspace: workspaceDB)
-//        
-//        return (workspace, blocker)
-//    }
-//
-//    static var previews: some View {
-//        let (workspace, blocker) = WorkspaceBlocker_Preview.getData()
-//        WorkspaceBrowse()
-//            .environmentObject(workspace)
-//            .environmentObject(blocker)
-//    }
-//}
+struct WorkspaceBlocker_Preview: PreviewProvider {
+    static var previews: some View {
+        let workspace = WorkspaceVM.preview
+        
+        WorkspaceBlocker()
+            .environmentObject(workspace)
+            .environmentObject(workspace.blockerState)
+    }
+}

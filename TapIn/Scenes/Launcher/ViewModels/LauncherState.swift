@@ -7,13 +7,12 @@ class LauncherState: ObservableObject {
     init(workspace: WorkspaceDB) {
         self.workspace = workspace
         self.launcher = workspace.launcher
+        self.realm = RealmManager.shared.realm
         self.launcherInstances = Array(launcher.launcherInstances)
         self.setToken()
     }
     
-    private var realm: Realm {
-        RealmManager.shared.realm
-    }
+    var realm: Realm
     
     @Published var launcher: LauncherDB
     

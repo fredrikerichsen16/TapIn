@@ -3,7 +3,19 @@ import Foundation
 class WorkspaceVM: ObservableObject {
     // MARK: Static
     
-//    static var preview: WorkspaceVM = WorkspaceVM(workspace: WorkspaceDB(name: "Workspace"))
+    static var preview: WorkspaceVM = {
+        let realm = RealmManager.preview.realm
+        let workspace = realm.objects(WorkspaceDB.self).first!
+        let workspaceVM = WorkspaceVM(workspace: workspace)
+        
+        workspaceVM.pomodoroState.realm = realm
+        workspaceVM.timeTrackerState.realm = realm
+        workspaceVM.radioState.realm = realm
+        workspaceVM.launcherState.realm = realm
+        workspaceVM.blockerState.realm = realm
+        
+        return workspaceVM
+    }()
     
     static var current: WorkspaceVM? = nil
 
