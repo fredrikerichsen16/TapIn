@@ -1,52 +1,65 @@
 import Foundation
 
 class WorkspaceVM: ObservableObject {
-    static var current: WorkspaceVM? = nil
+    // MARK: Static
     
-    static func getCurrent(for workspace: WorkspaceDB, stateManager: StateManager) -> WorkspaceVM {
-        stateManager.selectedWorkspace = workspace
-        
+//    static var preview: WorkspaceVM = WorkspaceVM(workspace: WorkspaceDB(name: "Workspace"))
+    
+    static var current: WorkspaceVM? = nil
+
+    static func getCurrent(for workspace: WorkspaceDB) -> WorkspaceVM {
         if let current = current, current.workspace == workspace
         {
             return current
         }
+
+        return WorkspaceVM(workspace: workspace)
+    }
+    
+    static func shouldShowActiveBottomMenu(for workspace: WorkspaceDB) -> Bool {
+        if let current = WorkspaceVM.current
+        {
+            return current.workspace == workspace
+        }
         
-        return WorkspaceVM(stateManager: stateManager, workspace: workspace)
+        return true
     }
+
+    // MARK: Init
     
-    private var stateManager: StateManager
     var workspace: WorkspaceDB
-    var isActive = false
     
-    private init(stateManager: StateManager, workspace: WorkspaceDB) {
-        self.stateManager = stateManager
+    private init(workspace: WorkspaceDB) {
         self.workspace = workspace
-        self.pomodoroState = PomodoroState(workspaceVM: self)
-        self.timeTrackerState = TimeTrackerState(workspaceVM: self)
-//        self.radioState = RadioState(workspaceVM: self)
+        self.pomodoroState = PomodoroState(workspace: workspace)
+        self.timeTrackerState = TimeTrackerState(workspace: workspace)
+        self.radioState = RadioState(workspace: workspace)
+        self.launcherState = LauncherState(workspace: workspace)
+        self.blockerState = BlockerState(workspace: workspace)
     }
     
+    var isActive = false
+
     func startSession() {
         self.isActive = true
         WorkspaceVM.current = self
     }
-    
+
     func endSession() {
         self.isActive = false
         WorkspaceVM.current = nil
     }
+
+    // MARK: Tab states
     
     var pomodoroState: PomodoroState!
-
     var timeTrackerState: TimeTrackerState!
-
-//    var radioState: RadioState!
-}
-
-class TimeTrackerState: ObservableObject {
-    private var workspaceVM: WorkspaceVM
+    var radioState: RadioState!
+    var launcherState: LauncherState!
+    var blockerState: BlockerState!
     
-    init(workspaceVM: WorkspaceVM) {
-        self.workspaceVM = workspaceVM
-    }
+    // MARK: Tab
+    
+    @Published var workspaceTab: WorkspaceTab = .pomodoro
+    
 }

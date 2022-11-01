@@ -71,6 +71,17 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
         self.instantiated = instantiated
     }
     
+    convenience init(duplicate instance: LauncherInstanceDB) {
+        self.init()
+        self.name = instance.name
+        self.type = instance.type
+        self.instantiated = instance.instantiated
+        self.appUrl = instance.appUrl
+        self.fileUrl = instance.fileUrl
+        self.launchDelay = instance.launchDelay
+        self.hideOnLaunch = instance.hideOnLaunch
+    }
+    
     // MARK: Set up bridge
     
     lazy var appController: AppController = {
@@ -139,25 +150,6 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
         }
     }()
     
-    // MARK: CRUD
-    
-    static func deleteById(_ realm: Realm, id: ObjectId) -> Bool {
-        guard let instanceToDelete = realm.objects(LauncherInstanceDB.self).where({ ($0.id == id) }).first else {
-            // TODO: Return a double where the second element is the status where it says e.g. that no instance with that id was found
-            return true
-        }
-
-        if let thawed = instanceToDelete.thaw() {
-            try! realm.write {
-                realm.delete(thawed)
-            }
-            
-            return true
-        }
-        
-        return false
-    }
-
 }
 
 enum RealmLauncherType: String, Equatable, PersistableEnum {
@@ -169,16 +161,32 @@ enum RealmLauncherType: String, Equatable, PersistableEnum {
     
     func label() -> String {
         switch self {
-            case .app:
-                return "New App"
-            case .file:
-                return "New File"
-            case .folder:
-                return "New Folder"
-            case .website:
-                return "New Website"
-            case .terminal:
-                return "New Terminal"
+        case .app:
+            return "App"
+        case .file:
+            return "File"
+        case .folder:
+            return "Folder"
+        case .website:
+            return "Website"
+        case .terminal:
+            return "Terminal"
+        }
+    }
+    
+    func icon() -> String {
+        switch self
+        {
+        case .app:
+            return "music.note"
+        case .file:
+            return "doc"
+        case .folder:
+            return "folder"
+        case .website:
+            return "link"
+        case .terminal:
+            return "terminal"
         }
     }
     

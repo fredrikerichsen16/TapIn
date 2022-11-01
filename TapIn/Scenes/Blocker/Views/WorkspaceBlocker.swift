@@ -1,42 +1,62 @@
-//
-//  WorkspaceBlocker.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 26/06/2021.
-//
-
-//import RealmSwift
 import SwiftUI
 
 struct WorkspaceBlocker: View {
-//    @EnvironmentObject var blockerModel: BlockerVM
-//    @Environment(\.realm) var realm
-//    @State private var addWebsiteFieldValue = ""
+    @EnvironmentObject var blockerState: BlockerState
+    @State private var addWebsiteFieldValue = ""
+    @State private var tableSelection: Set<Int> = Set()
     
     var body: some View {
         VStack {
-//            Text("Blocker for workspace \(blockerModel.blocker.getWorkspace().name)").font(.headline)
-            Text("Blocked Websites").font(.subheadline)
+            Text("Blocked Websites").font(.headline)
             
-//            List {
-//                ForEach(blockerModel.blocker.blacklistedWebsites, id: \.self) { website in
-//                    Text(website)
-//                }
-//            }
+            Table(blockerState.blacklist, selection: $tableSelection) {
+                TableColumn("URL", value: \.url)
+            }
             
-//            TextField("Add Website", text: $addWebsiteFieldValue)
-//            Button("Add", action: {
-//                blockerModel.addBlacklistedWebsite(url: addWebsiteFieldValue)
-//            })
+            Form {
+                HStack {
+                    TextField("Add Website to Blacklist", text: $addWebsiteFieldValue)
+                        .onSubmit {
+                            add()
+                        }
+                    
+                    Button("Add", action: add)
+                    
+                    Button("Delete") {
+                        if tableSelection.isEmpty {
+                            return
+                        }
+                        
+                        blockerState.deleteBlacklistedWebsite(by: tableSelection)
+                        
+                        tableSelection = Set()
+                    }
+                    .disabled(tableSelection.isEmpty)
+                }
+            }
         }
+        .padding()
+    }
+    
+    func add() {
+        blockerState.addBlacklistedWebsite(url: addWebsiteFieldValue)
+        addWebsiteFieldValue = ""
     }
 }
 
-//struct WorkspaceBlocker_Previews: PreviewProvider {
+//struct WorkspaceBlocker_Preview: PreviewProvider {
+//    static func getData() -> (WorkspaceVM, BlockerState) {
+//        let workspaceDB = WorkspaceDB(name: "Uni")
+//        let workspace = WorkspaceVM.preview
+//        let blocker = BlockerState(workspace: workspaceDB)
+//        
+//        return (workspace, blocker)
+//    }
+//
 //    static var previews: some View {
-//        let workspace = WorkspaceDB(name: "Coding")
-//        workspace.blocker!.blacklistedWebsites.append("facebook.com")
-//        let blocker = BlockerVM(workspace)
-//        return WorkspaceBlocker().environmentObject(blocker)
+//        let (workspace, blocker) = WorkspaceBlocker_Preview.getData()
+//        WorkspaceBrowse()
+//            .environmentObject(workspace)
+//            .environmentObject(blocker)
 //    }
 //}

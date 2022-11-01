@@ -2,29 +2,30 @@ import SwiftUI
 import RealmSwift
 
 struct WorkspacePomodoro: View {
-    @StateObject var pomodoroState: PomodoroState
-    
-    init(_ workspaceVM: WorkspaceVM) {
-        self._pomodoroState = StateObject(wrappedValue: workspaceVM.pomodoroState)
-    }
+    @EnvironmentObject var pomodoroState: PomodoroState
     
     var body: some View {
-        Spacer()
-        
-        ZStack {
-            ProgressCircleView(circleProgress: $pomodoroState.circleProgress)
-                .padding()
+        VStack {
+            Spacer()
             
-            VStack {
-                Text(pomodoroState.stageState.getLabel())
-                    .font(.body)
+            ZStack {
+                ProgressCircleView(circleProgress: $pomodoroState.circleProgress)
+                    .padding()
                 
-                Text(String(pomodoroState.remainingTimeString))
-                    .font(.system(size: 36.0))
-                    .bold()
-                    .multilineTextAlignment(.center)
-                    .padding(3)
+                VStack {
+                    Text(pomodoroState.stageState.getLabel())
+                        .font(.body)
+                    
+                    Text(String(pomodoroState.remainingTimeString))
+                        .font(.system(size: 36.0))
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .padding(3)
+                }
             }
+        }
+        .onAppear {
+            pomodoroState.updateUI()
         }
     }
 }

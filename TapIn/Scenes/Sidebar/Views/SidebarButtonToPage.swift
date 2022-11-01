@@ -6,111 +6,32 @@ struct SidebarButtonToPage: View {
     @State var menuItem: MenuItem
 
     var body: some View {
-        NavigationLink(menuItem.label, value: menuItem)
-            .tag(menuItem)
-        
-//        NavigationLink(value: menuItem) {
-//            Label(menuItem.label, systemImage: menuItem.icon)
-//                .padding(.vertical, 5)
-//        }
-//        .tag(menuItem.id)
+        NavigationLink(destination: { viewForMenuItem(menuItem) }) {
+            Label(menuItem.label, systemImage: menuItem.icon)
+                .padding(.vertical, 5)
+        }
+        .tag(menuItem.id)
     }
 
-//    @ViewBuilder
-//    private func viewForMenuItem(_ item: MenuItem) -> some View {
-//        switch item
-//        {
-//        case .home:
-//            Text(item.label).font(.largeTitle)
-//        case .statistics:
-//            Text(item.label).font(.largeTitle)
-//        default:
-//            fatalError("1493403")
-//        }
-//    }
-}
-
-struct SidebarButtonToWorkspace: View {
-    @EnvironmentObject var sidebarVM: SidebarVM
-    @State var menuItem: MenuItem
-    
-    var realm: Realm {
-        RealmManager.shared.realm
-    }
-
-    @EnvironmentObject var stateManager: StateManager
-
-    var workspace: WorkspaceDB {
-        menuItem.workspace!
-    }
-
-    @State var renameWorkspaceField: String = ""
-    @State var isRenaming = false
-
-    @Namespace var mainNamespace
-
-    var body: some View {
-        if isRenaming
+    @ViewBuilder
+    private func viewForMenuItem(_ item: MenuItem) -> some View {
+        switch item
         {
-            TextField("", text: $renameWorkspaceField) // passing it to bind
-                .textFieldStyle(.roundedBorder) // adds border
-                .prefersDefaultFocus(in: mainNamespace)
-                .onSubmit {
-                    sidebarVM.renameWorkspace(workspace, name: renameWorkspaceField)
-                    isRenaming = false
-                }
-        }
-        else
-        {
-            NavigationLink(destination: {
-                WorkspaceBrowse()
-                    .environmentObject(WorkspaceVM.getCurrent(for: workspace, stateManager: stateManager))
-                    .onAppear(perform: {
-                        sidebarVM.onNavigation(to: workspace)
-                    })
-            }) {
-                Label(menuItem.label, systemImage: menuItem.icon)
-                    .padding(.vertical, 5)
-            }
-            .tag(menuItem.id)
-            .contextMenu(ContextMenu(menuItems: {
-                contextMenu
-            }))
+        case .home:
+            Text(item.label).font(.largeTitle)
+        case .statistics:
+            Text(item.label).font(.largeTitle)
+        default:
+            fatalError("1493403")
         }
     }
 }
 
-// MARK: Context Menu
-extension SidebarButtonToWorkspace {
-    var contextMenu: some View {
-        Group {
-            Button("Add Child Workspace") {
-                sidebarVM.addChild(to: workspace)
-            }
-
-            Button("Delete") {
-                sidebarVM.deleteWorkspace(workspace)
-            }
-
-            Button("Rename") {
-                beginRenamingWorkspace()
-            }
-        }
-    }
-
-    func beginRenamingWorkspace() {
-        renameWorkspaceField = workspace.name
-        isRenaming = true
+struct SidebarButtonToPage_Previews: PreviewProvider {
+    static var previews: some View {
+        SidebarButtonToPage(menuItem: .statistics)
     }
 }
-
-//struct SidebarButton_Previews: PreviewProvider {
-//    @State var selection: String? = "statistics"
-//
-//    static var previews: some View {
-//        SidebarButton(menuItem: .statistics, selection: $selection)
-//    }
-//}
 
 
 

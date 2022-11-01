@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		352428B8290C6BCD0046C9AB /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 352428B6290C6BCD0046C9AB /* piano-1.mp3 */; };
 		352428B9290C6BCD0046C9AB /* piano-0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 352428B7290C6BCD0046C9AB /* piano-0.mp3 */; };
-		352428BB290C72280046C9AB /* WorkspaceViewModelHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352428BA290C72280046C9AB /* WorkspaceViewModelHolder.swift */; };
 		352428BD290C72B70046C9AB /* WorkspaceVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352428BC290C72B70046C9AB /* WorkspaceVM.swift */; };
 		352428BF290C98160046C9AB /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352428BE290C98160046C9AB /* Sidebar.swift */; };
 		352428C1290C98540046C9AB /* SidebarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352428C0290C98540046C9AB /* SidebarVM.swift */; };
@@ -34,6 +33,11 @@
 		3566A37026B9D35B0064AE00 /* Dataloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566A36F26B9D35B0064AE00 /* Dataloader.swift */; };
 		3566A37226B9D63B0064AE00 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566A37126B9D63B0064AE00 /* MenuItem.swift */; };
 		356B4D3F290C449D00C12949 /* NuclearWasteland.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356B4D3E290C449D00C12949 /* NuclearWasteland.swift */; };
+		356F82332910500F00CD289E /* TimeTrackerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F82322910500F00CD289E /* TimeTrackerModel.swift */; };
+		356F8235291050F300CD289E /* BottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F8234291050F300CD289E /* BottomMenu.swift */; };
+		356F82372910510500CD289E /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F82362910510500CD289E /* Direction.swift */; };
+		356F82392910511A00CD289E /* WorkspaceTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F82382910511A00CD289E /* WorkspaceTab.swift */; };
+		356F823F29109ABC00CD289E /* RadioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F823E29109ABC00CD289E /* RadioView.swift */; };
 		3570158627D42F4F000848B7 /* RealmHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3570158527D42F4F000848B7 /* RealmHelpers.swift */; };
 		3573F14526875FB7004B9C21 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F14426875FB7004B9C21 /* Settings.swift */; };
 		3573F14A268767C6004B9C21 /* WorkspacePomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F149268767C6004B9C21 /* WorkspacePomodoro.swift */; };
@@ -42,41 +46,37 @@
 		3573F150268767FB004B9C21 /* WorkspaceBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F14F268767FB004B9C21 /* WorkspaceBlocker.swift */; };
 		3573F1542687A16C004B9C21 /* LauncherPopups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F1532687A16C004B9C21 /* LauncherPopups.swift */; };
 		357A38D828C293DB007FD35F /* RadioChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357A38D728C293DB007FD35F /* RadioChannelModel.swift */; };
+		357C6FF32910AA5D00982A36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 357C6FF22910AA5D00982A36 /* Assets.xcassets */; };
+		357C6FF62910AA8E00982A36 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 357C6FF52910AA8E00982A36 /* Preview Assets.xcassets */; };
+		357C6FF82911454100982A36 /* SidebarButtonToWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357C6FF72911454100982A36 /* SidebarButtonToWorkspace.swift */; };
 		357DD55928344FC3004D1636 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 357DD55828344FC3004D1636 /* Realm */; };
 		357DD55B28344FC3004D1636 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 357DD55A28344FC3004D1636 /* RealmSwift */; };
-		357DD55E28345118004D1636 /* SwiftUIRouter in Frameworks */ = {isa = PBXBuildFile; productRef = 357DD55D28345118004D1636 /* SwiftUIRouter */; };
 		3585E0E228D249BF00339930 /* InactiveBottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0E128D249BF00339930 /* InactiveBottomMenu.swift */; };
-		3585E0EB28D24AA200339930 /* MultiStateObjectHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0EA28D24AA200339930 /* MultiStateObjectHolder.swift */; };
-		3585E0ED28D24AE700339930 /* WorkspaceSubcomponentStateObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0EC28D24AE700339930 /* WorkspaceSubcomponentStateObject.swift */; };
 		3585E0F028D24B1A00339930 /* RadioState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0EF28D24B1A00339930 /* RadioState.swift */; };
 		3585E0F228D24B5B00339930 /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0F128D24B5B00339930 /* RadioPlayer.swift */; };
 		3585E0F528D24BB500339930 /* PomodoroTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0F428D24BB500339930 /* PomodoroTicker.swift */; };
 		3585E0F728D24BE200339930 /* PomodoroTimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0F628D24BE200339930 /* PomodoroTimerState.swift */; };
 		3585E0F928D24C0100339930 /* PomodoroStageState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3585E0F828D24C0100339930 /* PomodoroStageState.swift */; };
-		358D114827C1AD1200983673 /* SectionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358D114727C1AD1200983673 /* SectionPicker.swift */; };
 		358D114A27C1DCF600983673 /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358D114927C1DCF600983673 /* StateManager.swift */; };
 		3590CA5928360292006A7F92 /* SessionDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590CA5828360292006A7F92 /* SessionDB.swift */; };
 		3590CA5C2836C95B006A7F92 /* PomodoroStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590CA5B2836C95B006A7F92 /* PomodoroStage.swift */; };
 		3590CA5E2836C970006A7F92 /* TimerMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590CA5D2836C970006A7F92 /* TimerMode.swift */; };
 		3590CA602836C988006A7F92 /* PomodoroState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3590CA5F2836C988006A7F92 /* PomodoroState.swift */; };
 		359D2B8F28D4110F0043B698 /* CustomPersistables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359D2B8E28D4110F0043B698 /* CustomPersistables.swift */; };
-		35A699EC283FFA75001E90A3 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A699EB283FFA75001E90A3 /* MusicPlayer.swift */; };
+		35A699EC283FFA75001E90A3 /* RadioBottomMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A699EB283FFA75001E90A3 /* RadioBottomMenuController.swift */; };
 		35A91B4027C9A26E00E94E56 /* LauncherDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A91B3F27C9A26E00E94E56 /* LauncherDB.swift */; };
 		35AEA155267F65D0000AFE85 /* TapInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA154267F65D0000AFE85 /* TapInApp.swift */; };
 		35AEA157267F65D0000AFE85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA156267F65D0000AFE85 /* ContentView.swift */; };
-		35AEA159267F65D2000AFE85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35AEA158267F65D2000AFE85 /* Assets.xcassets */; };
-		35AEA15C267F65D2000AFE85 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35AEA15B267F65D2000AFE85 /* Preview Assets.xcassets */; };
 		35AEA181267F6AD4000AFE85 /* WorkspaceBrowse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA180267F6AD4000AFE85 /* WorkspaceBrowse.swift */; };
-		35AEA188267F9582000AFE85 /* TimeTrackerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA187267F9582000AFE85 /* TimeTrackerModel.swift */; };
 		35AEA18A267F95B5000AFE85 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA189267F95B5000AFE85 /* LauncherModel.swift */; };
-		35AEA18C267F95D9000AFE85 /* BlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA18B267F95D9000AFE85 /* BlockerModel.swift */; };
+		35AEA18C267F95D9000AFE85 /* BlockerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA18B267F95D9000AFE85 /* BlockerState.swift */; };
 		35AEA194267FA815000AFE85 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA193267FA815000AFE85 /* Color+.swift */; };
-		35C2FF20278CE2D70008AA55 /* SidebarWorkspacesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF1F278CE2D70008AA55 /* SidebarWorkspacesSection.swift */; };
-		35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF21278CE3910008AA55 /* SidebarButton.swift */; };
+		35BF8A5D290F2A44009EC6CC /* LauncherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BF8A5C290F2A44009EC6CC /* LauncherState.swift */; };
+		35C2FF20278CE2D70008AA55 /* MenuItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF1F278CE2D70008AA55 /* MenuItemNode.swift */; };
+		35C2FF22278CE3910008AA55 /* SidebarButtonToPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF21278CE3910008AA55 /* SidebarButtonToPage.swift */; };
 		35D18EEC279E551300ECA17C /* WebsiteLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D18EEB279E551300ECA17C /* WebsiteLauncherView.swift */; };
-		35E438A528D3F43E00C1C7DB /* BlockerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E438A428D3F43E00C1C7DB /* BlockerVM.swift */; };
 		35EF3DC4279B327D004E2795 /* SwiftUIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF3DC3279B327D004E2795 /* SwiftUIHelpers.swift */; };
-		35EF3DC7279B3607004E2795 /* BottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF3DC6279B3607004E2795 /* BottomMenu.swift */; };
+		35EF3DC7279B3607004E2795 /* ActiveBottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF3DC6279B3607004E2795 /* ActiveBottomMenu.swift */; };
 		35F5592827A26D410094F2C4 /* WorkspaceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5592727A26D410094F2C4 /* WorkspaceDB.swift */; };
 		35F5592A27A27D4D0094F2C4 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5592927A27D4D0094F2C4 /* RealmManager.swift */; };
 /* End PBXBuildFile section */
@@ -110,7 +110,6 @@
 /* Begin PBXFileReference section */
 		352428B6290C6BCD0046C9AB /* piano-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-1.mp3"; sourceTree = "<group>"; };
 		352428B7290C6BCD0046C9AB /* piano-0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-0.mp3"; sourceTree = "<group>"; };
-		352428BA290C72280046C9AB /* WorkspaceViewModelHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceViewModelHolder.swift; sourceTree = "<group>"; };
 		352428BC290C72B70046C9AB /* WorkspaceVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceVM.swift; sourceTree = "<group>"; };
 		352428BE290C98160046C9AB /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		352428C0290C98540046C9AB /* SidebarVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarVM.swift; sourceTree = "<group>"; };
@@ -137,6 +136,11 @@
 		3566A37126B9D63B0064AE00 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		356A4F77279A191900A6C633 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		356B4D3E290C449D00C12949 /* NuclearWasteland.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NuclearWasteland.swift; sourceTree = "<group>"; };
+		356F82322910500F00CD289E /* TimeTrackerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerModel.swift; sourceTree = "<group>"; };
+		356F8234291050F300CD289E /* BottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenu.swift; sourceTree = "<group>"; };
+		356F82362910510500CD289E /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		356F82382910511A00CD289E /* WorkspaceTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceTab.swift; sourceTree = "<group>"; };
+		356F823E29109ABC00CD289E /* RadioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioView.swift; sourceTree = "<group>"; };
 		3570158527D42F4F000848B7 /* RealmHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelpers.swift; sourceTree = "<group>"; };
 		3573F14426875FB7004B9C21 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3573F149268767C6004B9C21 /* WorkspacePomodoro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacePomodoro.swift; sourceTree = "<group>"; };
@@ -145,43 +149,40 @@
 		3573F14F268767FB004B9C21 /* WorkspaceBlocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceBlocker.swift; sourceTree = "<group>"; };
 		3573F1532687A16C004B9C21 /* LauncherPopups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPopups.swift; sourceTree = "<group>"; };
 		357A38D728C293DB007FD35F /* RadioChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioChannelModel.swift; sourceTree = "<group>"; };
+		357C6FF22910AA5D00982A36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		357C6FF52910AA8E00982A36 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		357C6FF72911454100982A36 /* SidebarButtonToWorkspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButtonToWorkspace.swift; sourceTree = "<group>"; };
 		3585E0E128D249BF00339930 /* InactiveBottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InactiveBottomMenu.swift; sourceTree = "<group>"; };
-		3585E0EA28D24AA200339930 /* MultiStateObjectHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiStateObjectHolder.swift; sourceTree = "<group>"; };
-		3585E0EC28D24AE700339930 /* WorkspaceSubcomponentStateObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSubcomponentStateObject.swift; sourceTree = "<group>"; };
 		3585E0EF28D24B1A00339930 /* RadioState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioState.swift; sourceTree = "<group>"; };
 		3585E0F128D24B5B00339930 /* RadioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioPlayer.swift; sourceTree = "<group>"; };
 		3585E0F428D24BB500339930 /* PomodoroTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTicker.swift; sourceTree = "<group>"; };
 		3585E0F628D24BE200339930 /* PomodoroTimerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerState.swift; sourceTree = "<group>"; };
 		3585E0F828D24C0100339930 /* PomodoroStageState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroStageState.swift; sourceTree = "<group>"; };
-		358D114727C1AD1200983673 /* SectionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPicker.swift; sourceTree = "<group>"; };
 		358D114927C1DCF600983673 /* StateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 		3590CA5828360292006A7F92 /* SessionDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDB.swift; sourceTree = "<group>"; };
 		3590CA5B2836C95B006A7F92 /* PomodoroStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroStage.swift; sourceTree = "<group>"; };
 		3590CA5D2836C970006A7F92 /* TimerMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerMode.swift; sourceTree = "<group>"; };
 		3590CA5F2836C988006A7F92 /* PomodoroState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroState.swift; sourceTree = "<group>"; };
 		359D2B8E28D4110F0043B698 /* CustomPersistables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPersistables.swift; sourceTree = "<group>"; };
-		35A699EB283FFA75001E90A3 /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
+		35A699EB283FFA75001E90A3 /* RadioBottomMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioBottomMenuController.swift; sourceTree = "<group>"; };
 		35A91B3F27C9A26E00E94E56 /* LauncherDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherDB.swift; sourceTree = "<group>"; };
 		35AEA151267F65D0000AFE85 /* TapIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35AEA154267F65D0000AFE85 /* TapInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInApp.swift; sourceTree = "<group>"; };
 		35AEA156267F65D0000AFE85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		35AEA158267F65D2000AFE85 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		35AEA15B267F65D2000AFE85 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		35AEA15D267F65D2000AFE85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35AEA15E267F65D2000AFE85 /* TapIn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TapIn.entitlements; sourceTree = "<group>"; };
 		35AEA163267F65D2000AFE85 /* TapInTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapInTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		35AEA169267F65D2000AFE85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35AEA180267F6AD4000AFE85 /* WorkspaceBrowse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceBrowse.swift; sourceTree = "<group>"; };
-		35AEA187267F9582000AFE85 /* TimeTrackerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerModel.swift; sourceTree = "<group>"; };
 		35AEA189267F95B5000AFE85 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
-		35AEA18B267F95D9000AFE85 /* BlockerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerModel.swift; sourceTree = "<group>"; };
+		35AEA18B267F95D9000AFE85 /* BlockerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerState.swift; sourceTree = "<group>"; };
 		35AEA193267FA815000AFE85 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
-		35C2FF1F278CE2D70008AA55 /* SidebarWorkspacesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarWorkspacesSection.swift; sourceTree = "<group>"; };
-		35C2FF21278CE3910008AA55 /* SidebarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButton.swift; sourceTree = "<group>"; };
+		35BF8A5C290F2A44009EC6CC /* LauncherState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherState.swift; sourceTree = "<group>"; };
+		35C2FF1F278CE2D70008AA55 /* MenuItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemNode.swift; sourceTree = "<group>"; };
+		35C2FF21278CE3910008AA55 /* SidebarButtonToPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButtonToPage.swift; sourceTree = "<group>"; };
 		35D18EEB279E551300ECA17C /* WebsiteLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteLauncherView.swift; sourceTree = "<group>"; };
-		35E438A428D3F43E00C1C7DB /* BlockerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerVM.swift; sourceTree = "<group>"; };
 		35EF3DC3279B327D004E2795 /* SwiftUIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIHelpers.swift; sourceTree = "<group>"; };
-		35EF3DC6279B3607004E2795 /* BottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenu.swift; sourceTree = "<group>"; };
+		35EF3DC6279B3607004E2795 /* ActiveBottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveBottomMenu.swift; sourceTree = "<group>"; };
 		35F5592727A26D410094F2C4 /* WorkspaceDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDB.swift; sourceTree = "<group>"; };
 		35F5592927A27D4D0094F2C4 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,7 +192,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				357DD55E28345118004D1636 /* SwiftUIRouter in Frameworks */,
 				357DD55B28344FC3004D1636 /* RealmSwift in Frameworks */,
 				357DD55928344FC3004D1636 /* Realm in Frameworks */,
 			);
@@ -207,21 +207,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		352428B5290C6BC40046C9AB /* Resources */ = {
+		352428B5290C6BC40046C9AB /* Recursos */ = {
 			isa = PBXGroup;
 			children = (
 				352428B7290C6BCD0046C9AB /* piano-0.mp3 */,
 				352428B6290C6BCD0046C9AB /* piano-1.mp3 */,
 			);
-			path = Resources;
+			path = Recursos;
 			sourceTree = "<group>";
 		};
 		35521BC9279C3F450047508D /* Other */ = {
 			isa = PBXGroup;
 			children = (
 				3538F30728CFC0D000BC7867 /* PomodoroStatesHolder.swift */,
-				3585E0EA28D24AA200339930 /* MultiStateObjectHolder.swift */,
-				3585E0EC28D24AE700339930 /* WorkspaceSubcomponentStateObject.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -240,13 +238,14 @@
 		356B4D0F290C27B800C12949 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				356F823A29109AA500CD289E /* Radio */,
 				356B4D3A290C2A3000C12949 /* Preferences */,
 				356B4D36290C29B600C12949 /* Sidebar */,
 				356B4D35290C298600C12949 /* Workspace */,
 				356B4D19290C283900C12949 /* BottomMenu */,
 				356B4D18290C281700C12949 /* Launcher */,
 				356B4D17290C280000C12949 /* Blocker */,
-				356B4D16290C27F600C12949 /* Timer */,
+				356B4D16290C27F600C12949 /* TimeTracker */,
 				356B4D15290C27EE00C12949 /* Pomodoro */,
 			);
 			path = Scenes;
@@ -262,14 +261,14 @@
 			path = Pomodoro;
 			sourceTree = "<group>";
 		};
-		356B4D16290C27F600C12949 /* Timer */ = {
+		356B4D16290C27F600C12949 /* TimeTracker */ = {
 			isa = PBXGroup;
 			children = (
 				356B4D29290C28E100C12949 /* Models */,
 				356B4D28290C28DF00C12949 /* Views */,
 				356B4D27290C28DD00C12949 /* ViewModels */,
 			);
-			path = Timer;
+			path = TimeTracker;
 			sourceTree = "<group>";
 		};
 		356B4D17290C280000C12949 /* Blocker */ = {
@@ -315,10 +314,10 @@
 		356B4D1B290C284B00C12949 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				35C2FF1F278CE2D70008AA55 /* SidebarWorkspacesSection.swift */,
-				35C2FF21278CE3910008AA55 /* SidebarButton.swift */,
+				35C2FF21278CE3910008AA55 /* SidebarButtonToPage.swift */,
 				35AEA156267F65D0000AFE85 /* ContentView.swift */,
 				352428BE290C98160046C9AB /* Sidebar.swift */,
+				357C6FF72911454100982A36 /* SidebarButtonToWorkspace.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -326,6 +325,7 @@
 		356B4D1C290C284C00C12949 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				35C2FF1F278CE2D70008AA55 /* MenuItemNode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -340,8 +340,9 @@
 		356B4D1F290C28BD00C12949 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				35EF3DC6279B3607004E2795 /* BottomMenu.swift */,
+				35EF3DC6279B3607004E2795 /* ActiveBottomMenu.swift */,
 				3585E0E128D249BF00339930 /* InactiveBottomMenu.swift */,
+				356F8234291050F300CD289E /* BottomMenu.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -349,6 +350,8 @@
 		356B4D20290C28C800C12949 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				356F82362910510500CD289E /* Direction.swift */,
+				356F82382910511A00CD289E /* WorkspaceTab.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 		356B4D21290C28CE00C12949 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				35BF8A5C290F2A44009EC6CC /* LauncherState.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -386,7 +390,7 @@
 		356B4D24290C28D600C12949 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				35E438A428D3F43E00C1C7DB /* BlockerVM.swift */,
+				35AEA18B267F95D9000AFE85 /* BlockerState.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -402,7 +406,6 @@
 		356B4D26290C28DA00C12949 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				35AEA18B267F95D9000AFE85 /* BlockerModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 		356B4D27290C28DD00C12949 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				356F82322910500F00CD289E /* TimeTrackerModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -424,7 +428,6 @@
 		356B4D29290C28E100C12949 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				35AEA187267F9582000AFE85 /* TimeTrackerModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -478,7 +481,6 @@
 		356B4D32290C295A00C12949 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				3585E0EF28D24B1A00339930 /* RadioState.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -486,7 +488,7 @@
 		356B4D33290C295E00C12949 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				35A699EB283FFA75001E90A3 /* MusicPlayer.swift */,
+				35A699EB283FFA75001E90A3 /* RadioBottomMenuController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -494,8 +496,6 @@
 		356B4D34290C296000C12949 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3585E0F128D24B5B00339930 /* RadioPlayer.swift */,
-				357A38D728C293DB007FD35F /* RadioChannelModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -531,7 +531,6 @@
 		356B4D38290C29E400C12949 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				358D114727C1AD1200983673 /* SectionPicker.swift */,
 				35AEA180267F6AD4000AFE85 /* WorkspaceBrowse.swift */,
 			);
 			path = Views;
@@ -540,7 +539,6 @@
 		356B4D39290C29E500C12949 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				352428BA290C72280046C9AB /* WorkspaceViewModelHolder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -581,6 +579,49 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		356F823A29109AA500CD289E /* Radio */ = {
+			isa = PBXGroup;
+			children = (
+				356F823D29109AB400CD289E /* Models */,
+				356F823C29109AB200CD289E /* Views */,
+				356F823B29109AA800CD289E /* ViewModels */,
+			);
+			path = Radio;
+			sourceTree = "<group>";
+		};
+		356F823B29109AA800CD289E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3585E0EF28D24B1A00339930 /* RadioState.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		356F823C29109AB200CD289E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				356F823E29109ABC00CD289E /* RadioView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		356F823D29109AB400CD289E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3585E0F128D24B5B00339930 /* RadioPlayer.swift */,
+				357A38D728C293DB007FD35F /* RadioChannelModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		357C6FF42910AA7B00982A36 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				357C6FF52910AA8E00982A36 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		359D2B8D28D410EB0043B698 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
@@ -611,29 +652,21 @@
 		35AEA153267F65D0000AFE85 /* TapIn */ = {
 			isa = PBXGroup;
 			children = (
-				352428B5290C6BC40046C9AB /* Resources */,
+				357C6FF42910AA7B00982A36 /* Preview Content */,
+				352428B5290C6BC40046C9AB /* Recursos */,
 				356B4D0F290C27B800C12949 /* Scenes */,
 				35BDF6C1279FACB9008BF50D /* Persistence */,
 				3566A36E26B9D34A0064AE00 /* Helpers */,
 				35AEA192267FA809000AFE85 /* Extensions */,
 				35521BC9279C3F450047508D /* Other */,
-				35AEA158267F65D2000AFE85 /* Assets.xcassets */,
+				357C6FF22910AA5D00982A36 /* Assets.xcassets */,
 				35AEA154267F65D0000AFE85 /* TapInApp.swift */,
 				35AEA15D267F65D2000AFE85 /* Info.plist */,
 				35AEA15E267F65D2000AFE85 /* TapIn.entitlements */,
-				35AEA15A267F65D2000AFE85 /* Preview Content */,
 				352E18B0279CD18600EC87F2 /* README.md */,
 				356B4D3E290C449D00C12949 /* NuclearWasteland.swift */,
 			);
 			path = TapIn;
-			sourceTree = "<group>";
-		};
-		35AEA15A267F65D2000AFE85 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				35AEA15B267F65D2000AFE85 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		35AEA166267F65D2000AFE85 /* TapInTests */ = {
@@ -701,7 +734,6 @@
 			packageProductDependencies = (
 				357DD55828344FC3004D1636 /* Realm */,
 				357DD55A28344FC3004D1636 /* RealmSwift */,
-				357DD55D28345118004D1636 /* SwiftUIRouter */,
 			);
 			productName = TapIn;
 			productReference = 35AEA151267F65D0000AFE85 /* TapIn.app */;
@@ -732,7 +764,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1410;
 				TargetAttributes = {
 					35AEA150267F65D0000AFE85 = {
 						CreatedOnToolsVersion = 12.5;
@@ -755,7 +787,6 @@
 			packageReferences = (
 				355F84A5279FC0F9002E77EC /* XCRemoteSwiftPackageReference "realm-swift" */,
 				357DD55728344FC3004D1636 /* XCRemoteSwiftPackageReference "realm-swift" */,
-				357DD55C28345118004D1636 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */,
 			);
 			productRefGroup = 35AEA152267F65D0000AFE85 /* Products */;
 			projectDirPath = "";
@@ -773,9 +804,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				352428B8290C6BCD0046C9AB /* piano-1.mp3 in Resources */,
+				357C6FF32910AA5D00982A36 /* Assets.xcassets in Resources */,
+				357C6FF62910AA8E00982A36 /* Preview Assets.xcassets in Resources */,
 				352428B9290C6BCD0046C9AB /* piano-0.mp3 in Resources */,
-				35AEA15C267F65D2000AFE85 /* Preview Assets.xcassets in Resources */,
-				35AEA159267F65D2000AFE85 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -795,11 +826,11 @@
 			files = (
 				3573F150268767FB004B9C21 /* WorkspaceBlocker.swift in Sources */,
 				3570158627D42F4F000848B7 /* RealmHelpers.swift in Sources */,
+				356F82332910500F00CD289E /* TimeTrackerModel.swift in Sources */,
 				3590CA5E2836C970006A7F92 /* TimerMode.swift in Sources */,
-				358D114827C1AD1200983673 /* SectionPicker.swift in Sources */,
 				35608D1C26C6FBEC0054FCD2 /* AdvancedSettingsView.swift in Sources */,
 				355B46E527C97FAC007E0507 /* LauncherInstanceDB.swift in Sources */,
-				35AEA18C267F95D9000AFE85 /* BlockerModel.swift in Sources */,
+				35AEA18C267F95D9000AFE85 /* BlockerState.swift in Sources */,
 				3573F14E268767E9004B9C21 /* WorkspaceLauncher.swift in Sources */,
 				35F5592827A26D410094F2C4 /* WorkspaceDB.swift in Sources */,
 				35AEA18A267F95B5000AFE85 /* LauncherModel.swift in Sources */,
@@ -807,6 +838,8 @@
 				35500DFC2835A8B900AF9AB5 /* String+.swift in Sources */,
 				3538C2ED27AB60BA00D74044 /* TimeTrackerDB.swift in Sources */,
 				359D2B8F28D4110F0043B698 /* CustomPersistables.swift in Sources */,
+				356F8235291050F300CD289E /* BottomMenu.swift in Sources */,
+				356F823F29109ABC00CD289E /* RadioView.swift in Sources */,
 				3538C2EB27AB5F3700D74044 /* BlockerDB.swift in Sources */,
 				35AEA181267F6AD4000AFE85 /* WorkspaceBrowse.swift in Sources */,
 				3585E0F928D24C0100339930 /* PomodoroStageState.swift in Sources */,
@@ -816,21 +849,24 @@
 				352428BF290C98160046C9AB /* Sidebar.swift in Sources */,
 				3538F30828CFC0D000BC7867 /* PomodoroStatesHolder.swift in Sources */,
 				3585E0F028D24B1A00339930 /* RadioState.swift in Sources */,
-				35C2FF22278CE3910008AA55 /* SidebarButton.swift in Sources */,
+				35C2FF22278CE3910008AA55 /* SidebarButtonToPage.swift in Sources */,
 				358D114A27C1DCF600983673 /* StateManager.swift in Sources */,
 				352428C1290C98540046C9AB /* SidebarVM.swift in Sources */,
 				3590CA5928360292006A7F92 /* SessionDB.swift in Sources */,
 				352A0B8926C96AC000AA256B /* FileLauncherView.swift in Sources */,
-				35C2FF20278CE2D70008AA55 /* SidebarWorkspacesSection.swift in Sources */,
+				35C2FF20278CE2D70008AA55 /* MenuItemNode.swift in Sources */,
 				35F5592A27A27D4D0094F2C4 /* RealmManager.swift in Sources */,
 				35AEA157267F65D0000AFE85 /* ContentView.swift in Sources */,
+				357C6FF82911454100982A36 /* SidebarButtonToWorkspace.swift in Sources */,
 				3538C2E927AB5D0800D74044 /* PomodoroDB.swift in Sources */,
-				352428BB290C72280046C9AB /* WorkspaceViewModelHolder.swift in Sources */,
+				356F82392910511A00CD289E /* WorkspaceTab.swift in Sources */,
+				35BF8A5D290F2A44009EC6CC /* LauncherState.swift in Sources */,
+				356F82372910510500CD289E /* Direction.swift in Sources */,
 				3573F1542687A16C004B9C21 /* LauncherPopups.swift in Sources */,
 				352E18AC279CBA3600EC87F2 /* EmptyLauncherView.swift in Sources */,
 				3573F14526875FB7004B9C21 /* Settings.swift in Sources */,
 				35AEA155267F65D0000AFE85 /* TapInApp.swift in Sources */,
-				35A699EC283FFA75001E90A3 /* MusicPlayer.swift in Sources */,
+				35A699EC283FFA75001E90A3 /* RadioBottomMenuController.swift in Sources */,
 				3585E0F228D24B5B00339930 /* RadioPlayer.swift in Sources */,
 				356B4D3F290C449D00C12949 /* NuclearWasteland.swift in Sources */,
 				352428BD290C72B70046C9AB /* WorkspaceVM.swift in Sources */,
@@ -840,7 +876,6 @@
 				3573F14A268767C6004B9C21 /* WorkspacePomodoro.swift in Sources */,
 				3590CA5C2836C95B006A7F92 /* PomodoroStage.swift in Sources */,
 				3573F14C268767DB004B9C21 /* WorkspaceTimeTracking.swift in Sources */,
-				35E438A528D3F43E00C1C7DB /* BlockerVM.swift in Sources */,
 				35608D1A26C6FBCB0054FCD2 /* GeneralSettingsView.swift in Sources */,
 				35521BCC279C98FA0047508D /* LauncherModelExtra.swift in Sources */,
 				3585E0F728D24BE200339930 /* PomodoroTimerState.swift in Sources */,
@@ -849,12 +884,9 @@
 				3590CA602836C988006A7F92 /* PomodoroState.swift in Sources */,
 				3566A37026B9D35B0064AE00 /* Dataloader.swift in Sources */,
 				3585E0F528D24BB500339930 /* PomodoroTicker.swift in Sources */,
-				3585E0EB28D24AA200339930 /* MultiStateObjectHolder.swift in Sources */,
 				3585E0E228D249BF00339930 /* InactiveBottomMenu.swift in Sources */,
 				357A38D828C293DB007FD35F /* RadioChannelModel.swift in Sources */,
-				3585E0ED28D24AE700339930 /* WorkspaceSubcomponentStateObject.swift in Sources */,
-				35AEA188267F9582000AFE85 /* TimeTrackerModel.swift in Sources */,
-				35EF3DC7279B3607004E2795 /* BottomMenu.swift in Sources */,
+				35EF3DC7279B3607004E2795 /* ActiveBottomMenu.swift in Sources */,
 				352A0B8726C9689C00AA256B /* AppLauncherView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -913,6 +945,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_ACTIVITY_MODE = "";
 				"DEBUG_ACTIVITY_MODE[sdk=macosx*]" = disable;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -977,6 +1010,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_ACTIVITY_MODE = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1007,6 +1041,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"TapIn/Preview Content\"";
 				DEVELOPMENT_TEAM = S83364QYM6;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1034,6 +1069,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"TapIn/Preview Content\"";
 				DEVELOPMENT_TEAM = S83364QYM6;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1060,6 +1096,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = S83364QYM6;
 				INFOPLIST_FILE = TapInTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1083,6 +1120,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = S83364QYM6;
 				INFOPLIST_FILE = TapInTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1147,14 +1185,6 @@
 				kind = branch;
 			};
 		};
-		357DD55C28345118004D1636 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/frzi/SwiftUIRouter.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1167,11 +1197,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 357DD55728344FC3004D1636 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
-		};
-		357DD55D28345118004D1636 /* SwiftUIRouter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 357DD55C28345118004D1636 /* XCRemoteSwiftPackageReference "SwiftUIRouter" */;
-			productName = SwiftUIRouter;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

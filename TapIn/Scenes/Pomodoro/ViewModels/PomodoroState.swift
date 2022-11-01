@@ -6,12 +6,8 @@ final class PomodoroState: ObservableObject {
         RealmManager.shared.realm
     }
     
-    private var workspaceVM: WorkspaceVM
+    public var workspace: WorkspaceDB
     private var pomodoroDb: PomodoroDB
-    
-    private var workspaceDb: WorkspaceDB {
-        workspaceVM.workspace
-    }
     
     @Published var remainingTimeString = "00:00"
     @Published var circleProgress: Double = 1.0
@@ -45,9 +41,9 @@ final class PomodoroState: ObservableObject {
     var shortBreakStageState: PomodoroStageState!
     var longBreakStageState: PomodoroStageState!
     
-    init(workspaceVM: WorkspaceVM) {
-        self.workspaceVM = workspaceVM
-        self.pomodoroDb = workspaceVM.workspace.pomodoro
+    init(workspace: WorkspaceDB) {
+        self.workspace = workspace
+        self.pomodoroDb = workspace.pomodoro
         
         self.initialTimerState = PomodoroInitialTimerState(self)
         self.runningTimerState = PomodoroRunningTimerState(self)
@@ -100,29 +96,31 @@ final class PomodoroState: ObservableObject {
     // MARK: ?
     
     func longBreakDue() -> Bool {
-        let numCompletedSessions = workspaceDb.numSessionsCompletedToday()
+        let numCompletedSessions = workspace.numSessionsCompletedToday()
         let longBreakFrequency = Int(pomodoroDb.longBreakFrequency)
         
         return numCompletedSessions % longBreakFrequency == 0
     }
     
     func completedSession() {
-        let (thawed, realm) = workspaceDb.easyThaw()
+        guard let workspace = workspace.thaw() else {
+            return
+        }
         var numCompletedSessions: Int = 0
         
         let pomodoroStageEnum = stageState.stage
         let pomodoroStageDuration = stageState.getStageDuration()
     
         try! realm.write {
-            thawed.sessions.append(SessionDB(stage: pomodoroStageEnum, duration: pomodoroStageDuration))
-            numCompletedSessions = thawed.sessions.count
+            workspace.sessions.append(SessionDB(stage: pomodoroStageEnum, duration: pomodoroStageDuration))
+            numCompletedSessions = workspace.sessions.count
         }
         
         print("Have completed this many sessions: ")
         print(numCompletedSessions)
         
         print("PRINT INFO")
-        for session in thawed.sessions {
+        for session in workspace.sessions {
             print(session.description)
         }
         

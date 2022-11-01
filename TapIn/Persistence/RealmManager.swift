@@ -1,22 +1,26 @@
 import Foundation
 import RealmSwift
 
-fileprivate func getRealmConfig() -> Realm.Configuration {
-    return Realm.Configuration(schemaVersion: 7)
-}
-
 class RealmManager {
-    public static let shared = RealmManager()
+    public static let shared = RealmManager(preview: false)
+    public static let preview = RealmManager(preview: true)
     
     private(set) var realm: Realm
     
-    init() {
+    init(preview: Bool = false) {
         do
         {
-            let config = getRealmConfig()
-            self.realm = try Realm(configuration: config)
-            
-//            addData()
+            if preview
+            {
+                let config = Realm.Configuration(inMemoryIdentifier: "preview")
+                self.realm = try Realm(configuration: config)
+            }
+            else
+            {
+                let config = Realm.Configuration(schemaVersion: 7)
+                self.realm = try Realm(configuration: config)
+//                addData()
+            }
         }
         catch
         {
