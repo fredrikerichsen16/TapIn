@@ -1,10 +1,3 @@
-//
-//  WorkspaceDB.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 27/01/2022.
-//
-
 import Foundation
 import RealmSwift
 

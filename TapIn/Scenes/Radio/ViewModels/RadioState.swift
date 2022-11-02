@@ -10,10 +10,12 @@ final class RadioState: ObservableObject {
     }
     
     private let channels: [RadioChannelModel] = [
+        try! RadioChannelModel(keyname: "piano", label: "Lofi Beats", image: "Lofi"),
+        try! RadioChannelModel(keyname: "piano", label: "Classical", image: "Classical"),
         try! RadioChannelModel(keyname: "piano", label: "Dark Academia", image: "DarkAcademia"),
-        try! RadioChannelModel(keyname: "piano", label: "Lofi Beats", image: "Classical"),
-        try! RadioChannelModel(keyname: "piano", label: "Techno Bops", image: "Classical"),
-        try! RadioChannelModel(keyname: "piano", label: "Jazzy Jazz", image: "Classical"),
+        try! RadioChannelModel(keyname: "piano", label: "Techno Bops", image: "Techno"),
+        try! RadioChannelModel(keyname: "piano", label: "Jazzy Jazz", image: "Jazzy"),
+        try! RadioChannelModel(keyname: "piano", label: "Dramatic", image: "Dramatic"),
         try! RadioChannelModel(keyname: "piano", label: "Gregorian Chants", image: "GregorianChants")
     ]
     private var activeChannelIndex: Int = 0

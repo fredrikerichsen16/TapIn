@@ -1,10 +1,3 @@
-//
-//  Collection+.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 15/08/2021.
-//
-
 import Cocoa
 
 extension Collection {

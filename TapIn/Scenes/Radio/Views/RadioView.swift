@@ -32,14 +32,14 @@ struct RadioView: View {
     }
 
     var body: some View {
-        HStack(spacing: 24) {
-//            Image(nsImage: NSImage(named: radioState.getActiveChannel().image)!)
+        HStack(spacing: 40) {
             Image(radioState.getActiveChannel().image, bundle: .main)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 220, height: 320)
+                .frame(height: 340)
+                .cornerRadius(15)
 
-            VStack(spacing: 14) {
+            VStack(alignment: .leading, spacing: 14) {
                 Text(radioState.getActiveChannel().label)
                     .font(.title)
                     .fontWeight(.thin)

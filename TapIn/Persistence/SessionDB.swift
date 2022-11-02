@@ -1,7 +1,6 @@
 import Foundation
 import RealmSwift
 
-
 final class SessionDB: Object, ObjectKeyIdentifiable {
     
     func easyThaw() -> (SessionDB, Realm) {

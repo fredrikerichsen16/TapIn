@@ -23,26 +23,36 @@ struct WorkspaceBrowse: View {
     
     var body: some View {
         VStack {
-            TabView(selection: $workspace.workspaceTab) {
+            TabView {
                 WorkspacePomodoro()
                     .tabItem { Text("Pomodoro") }
-                    .tag(WorkspaceTab.pomodoro)
+                    .onAppear {
+                        workspace.workspaceTab = .pomodoro
+                    }
                 
                 WorkspaceTimeTracking()
                     .tabItem { Text("Time Tracking") }
-                    .tag(WorkspaceTab.timetracking)
+                    .onAppear {
+                        workspace.workspaceTab = .timetracking
+                    }
                 
                 WorkspaceLauncher()
                     .tabItem({ Text("Launcher") })
-                    .tag(WorkspaceTab.launcher)
+                    .onAppear {
+                        workspace.workspaceTab = .launcher
+                    }
                 
                 WorkspaceBlocker()
                     .tabItem({ Text("Blocker") })
-                    .tag(WorkspaceTab.blocker)
+                    .onAppear {
+                        workspace.workspaceTab = .blocker
+                    }
                 
                 RadioView()
                     .tabItem({ Text("Radio") })
-                    .tag(WorkspaceTab.radio)
+                    .onAppear {
+                        workspace.workspaceTab = .radio
+                    }
             }
             
             Spacer()

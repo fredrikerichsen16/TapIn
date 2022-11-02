@@ -1,10 +1,3 @@
-//
-//  BlockerDB.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 03/02/2022.
-//
-
 import Foundation
 import RealmSwift
 
@@ -24,7 +17,7 @@ final class BlockerDB: Object, ObjectKeyIdentifiable {
 //    func getWorkspace() -> WorkspaceDB {
 //        return workspace.first!
 //    }
-//    
+//
 //    func addBlacklistedWebsite(_ realm: Realm, url: String) {
 //        try? realm.write {
 //            blacklistedWebsites.append(url)
