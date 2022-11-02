@@ -14,10 +14,7 @@ final class SessionDB: Object, ObjectKeyIdentifiable {
     var id: ObjectId
     
     @Persisted
-    var completedTime: Date?
-    
-    @Persisted
-    var stage: PomodoroStage
+    var completedTime: Date
     
     @Persisted
     var duration: Double
@@ -25,18 +22,23 @@ final class SessionDB: Object, ObjectKeyIdentifiable {
     @Persisted(originProperty: "sessions")
     var workspace: LinkingObjects<WorkspaceDB>
     
-    convenience init(stage: PomodoroStage, duration: Double) {
+    convenience init(stage: PomodoroStage) {
         self.init()
         self.id = ObjectId.generate()
-        self.completedTime = Date.init()
-        self.stage = stage
-        self.duration = duration
+        self.completedTime = Date.now
+        self.duration = stage.getDurationInSeconds()
     }
+    
+//    convenience init(duration: Double) {
+//        self.init()
+//        self.id = ObjectId.generate()
+//        self.completedTime = Date.now
+//        self.duration = duration
+//    }
     
     override var description: String {
         return """
         completion time: \(String(describing: completedTime))
-        stage: \(stage.getTitle())
         duration: \(String(duration))
         """
     }

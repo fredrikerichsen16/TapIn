@@ -1,19 +1,17 @@
 import SwiftUI
 import RealmSwift
 
-// POMODORO TIMER STATES
-
-protocol PomodoroTimerState {
-    var pomodoroState: PomodoroState { get set }
-    
-    init(_ pomodoroState: PomodoroState)
-    func start()
-    func pause()
-    func cancel()
-    func getButtons(stage: PomodoroStage) -> AnyView
+enum PomodoroButton: String {
+    case start = "Start"
+    case pause = "Pause"
+    case resume = "Resume"
+    case cancel = "Cancel"
+    case skip = "Skip"
 }
 
-final class PomodoroInitialTimerState: PomodoroTimerState {
+// POMODORO TIMER STATES
+
+class PomodoroTimerState {
     var pomodoroState: PomodoroState
     
     init(_ pomodoroState: PomodoroState) {
@@ -21,17 +19,31 @@ final class PomodoroInitialTimerState: PomodoroTimerState {
     }
     
     func start() {
-        pomodoroState.setTimerState(.running)
+        fatalError("Not implemented")
     }
     
     func pause() {
-        fatalError("Should not be possible")
+        fatalError("Not implemented")
     }
     
     func cancel() {
+        fatalError("Not implemented")
+    }
+    
+    func getButtons() -> [PomodoroButton] {
+        fatalError("Not implemented")
+    }
+}
+
+class PomodoroInitialTimerState: PomodoroTimerState {
+    override func start() {
+        pomodoroState.setTimerState(.running)
+    }
+    
+    override func cancel() {
         if pomodoroState.stageState.isInBreak()
         {
-            pomodoroState.setTimerState(.initial)
+            pomodoroState.skippedSession()
         }
         else
         {
@@ -39,108 +51,72 @@ final class PomodoroInitialTimerState: PomodoroTimerState {
         }
     }
     
-    func getButtons(stage: PomodoroStage) -> AnyView {
-        if stage.isInBreak()
+    override func getButtons() -> [PomodoroButton] {
+        if pomodoroState.stageState.isInBreak()
         {
-            return AnyView(HStack {
-                Button("Skip", action: pomodoroState.cancelSession)
-                Button("Start", action: pomodoroState.startSession)
-            })
+            return [.start, .skip]
         }
         else
         {
-            return AnyView(HStack {
-                Button("Start", action: pomodoroState.startSession)
-                Button("", action: {})
-            })
+            return [.start]
         }
     }
 }
 
-final class PomodoroRunningTimerState: PomodoroTimerState {
-    var pomodoroState: PomodoroState
-    
-    init(_ pomodoroState: PomodoroState) {
-        self.pomodoroState = pomodoroState
-    }
-    
-    func start() {
-        fatalError("Should not be possible")
-    }
-    
-    func pause() {
+class PomodoroRunningTimerState: PomodoroTimerState {
+    override func pause() {
         pomodoroState.setTimerState(.paused)
     }
     
-    func cancel() {
+    override func cancel() {
         if pomodoroState.stageState.isInBreak()
         {
-            pomodoroState.completedSession()
+            pomodoroState.skippedSession()
         }
         else
         {
             pomodoroState.setTimerState(.initial)
+            pomodoroState.ticker.updateUI()
         }
     }
     
-    func getButtons(stage: PomodoroStage) -> AnyView {
-        if stage.isInBreak()
+    override func getButtons() -> [PomodoroButton] {
+        if pomodoroState.stageState.isInBreak()
         {
-            return AnyView(HStack {
-                Button("Skip", action: pomodoroState.cancelSession)
-                Button("Pause", action: pomodoroState.pauseSession)
-            })
+            return [.pause, .skip]
         }
         else
         {
-            return AnyView(HStack {
-                Button("Cancel", action: pomodoroState.cancelSession)
-                Button("Pause", action: pomodoroState.pauseSession)
-            })
+            return [.pause, .cancel]
         }
     }
 }
 
 final class PomodoroPausedTimerState: PomodoroTimerState {
-    var pomodoroState: PomodoroState
-    
-    init(_ pomodoroState: PomodoroState) {
-        self.pomodoroState = pomodoroState
-    }
-    
-    func start() {
+    override func start() {
         pomodoroState.setTimerState(.running)
     }
     
-    func pause() {
-        fatalError("Should not be possible")
-    }
-    
-    func cancel() {
+    override func cancel() {
         if pomodoroState.stageState.isInBreak()
         {
-            pomodoroState.completedSession()
+            pomodoroState.skippedSession()
         }
         else
         {
             pomodoroState.setTimerState(.initial)
+            pomodoroState.ticker.updateUI()
         }
     }
     
-    func getButtons(stage: PomodoroStage) -> AnyView {
-        if stage.isInBreak()
+    override func getButtons() -> [PomodoroButton] {
+        if pomodoroState.stageState.isInBreak()
         {
-            return AnyView(HStack {
-                Button("Skip", action: pomodoroState.cancelSession)
-                Button("Resume", action: pomodoroState.startSession)
-            })
+            return [.resume, .skip]
         }
         else
         {
-            return AnyView(HStack {
-                Button("Cancel", action: pomodoroState.cancelSession)
-                Button("Resume", action: pomodoroState.startSession)
-            })
+            return [.resume, .cancel]
         }
     }
 }

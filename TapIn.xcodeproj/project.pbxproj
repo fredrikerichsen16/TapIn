@@ -200,6 +200,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35AD05F72912EB6D00837016 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
 		35E000002911EEF2009D284D /* TapIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +314,7 @@
 		35E000652911F531009D284D /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				35AD05F72912EB6D00837016 /* Notes */,
 				35E000662911F531009D284D /* Sidebar */,
 				35E000722911F531009D284D /* Preferences */,
 				35E0007B2911F531009D284D /* TimeTracker */,

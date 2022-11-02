@@ -5,7 +5,6 @@ import RealmSwift
 struct TapinApp: SwiftUI.App {
     var body: some Scene {
         WindowGroup {
-//            ImgView()
             ContentView()
                 .frame(minWidth: 500, idealWidth: 700, maxWidth: 1000, minHeight: 500, idealHeight: 500, maxHeight: 800, alignment: .center)
                 .environment(\.realm, RealmManager.shared.realm)

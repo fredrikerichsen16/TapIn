@@ -27,9 +27,31 @@ class WorkspaceSettingsModel: ObservableObject {
             }
         }
     }
+    
     @Published var workspace: WorkspaceDB? = nil
     
     @Published var inputs = Inputs()
+    
+    func saveChanges() {
+        guard
+            let workspace = workspace,
+            let workspace = workspace.thaw()
+        else { return }
+        
+        try? realm.write {
+            if inputs.pomodoroDuration.useDefault == false {
+                workspace.pomodoro.pomodoroDuration = inputs.pomodoroDuration.value
+            }
+            
+            if inputs.shortBreakDuration.useDefault == false {
+                workspace.pomodoro.shortBreakDuration = inputs.shortBreakDuration.value
+            }
+            
+            if inputs.longBreakDuration.useDefault == false {
+                workspace.pomodoro.longBreakDuration = inputs.longBreakDuration.value
+            }
+        }
+    }
 }
 
 struct InputValue<T> {
@@ -217,6 +239,8 @@ struct WorkspaceSettingsView: View {
                     .pickerStyle(.inline)
                 }
             }
+            
+            Button("Save changes", action: vm.saveChanges)
         }
         .formStyle(.grouped)
     }

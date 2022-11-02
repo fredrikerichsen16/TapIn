@@ -97,7 +97,28 @@ struct PomodoroBottomMenuController: View {
     var body: some View {
         VStack {
             Text("Pomodoro").font(.body)
-            pomodoroState.getButtons()
+            HStack {
+                ForEach(pomodoroState.getButtons(), id: \.rawValue) { button in
+                    PomodoroButtonView(button: button)
+                }
+            }
+        }
+    }
+}
+
+struct PomodoroButtonView: View {
+    @EnvironmentObject var pomodoroState: PomodoroState
+    let button: PomodoroButton
+    
+    var body: some View {
+        switch button
+        {
+        case .start, .resume:
+            Button(button.rawValue, action: pomodoroState.startSession)
+        case .pause:
+            Button(button.rawValue, action: pomodoroState.pauseSession)
+        case .cancel, .skip:
+            Button(button.rawValue, action: pomodoroState.cancelSession)
         }
     }
 }

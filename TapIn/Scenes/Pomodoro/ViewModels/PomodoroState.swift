@@ -10,21 +10,7 @@ final class PomodoroState: ObservableObject {
     @Published var remainingTimeString = "00:00"
     @Published var circleProgress: Double = 1.0
     
-    @Published var timerMode: TimerMode = .initial {
-        didSet
-        {
-            switch timerMode
-            {
-            case .initial:
-                timerState = initialTimerState
-                ticker.resetTimer()
-            case .running:
-                timerState = runningTimerState
-            case .paused:
-                timerState = pausedTimerState
-            }
-        }
-    }
+    @Published var timerMode: TimerMode = .initial
     
     var ticker: PomodoroTicker!
     
@@ -54,42 +40,58 @@ final class PomodoroState: ObservableObject {
         self.longBreakStageState = PomodoroLongBreakStageState(self, duration: self.pomodoroDb.longBreakDuration)
         self.stageState = workingStageState
         
-        self.ticker = PomodoroTicker(self)
-    }
-    
-    func isActive() -> Bool {
-        return timerMode != .initial
+        self.ticker = PomodoroTicker(
+            onUpdate: { [weak self] (readableString, circleProgress) in
+                self?.remainingTimeString = readableString
+                self?.circleProgress = circleProgress
+            },
+            onCompletedSession: { [weak self] in
+                self?.completedSession()
+            }
+        )
+        
+        self.zapTicker()
     }
     
     // MARK: Pomodoro Timer States (State Pattern)
     
     func startSession() {
         timerState.start()
-        updateUI()
     }
     
     func pauseSession() {
         timerState.pause()
-        updateUI()
     }
     
     func cancelSession() {
         timerState.cancel()
-        updateUI()
     }
     
-    func getButtons() -> some View {
-        return self.timerState.getButtons(stage: stageState.stage)
+    func getButtons() -> [PomodoroButton] {
+        return self.timerState.getButtons()
     }
     
     func setTimerState(_ timerMode: TimerMode) {
         self.timerMode = timerMode
+        self.ticker.running = timerMode == .running
+        
+        switch timerMode
+        {
+        case .initial:
+            timerState = initialTimerState
+            ticker.resetTimer()
+        case .running:
+            timerState = runningTimerState
+        case .paused:
+            timerState = pausedTimerState
+        }
     }
     
     // MARK: Pomodoro Stage States (State Pattern)
     
     func setStageState(_ state: PomodoroStageState) {
         self.stageState = state
+        self.ticker.stageDuration = stageState.getStageDuration()
     }
     
     // MARK: ?
@@ -102,41 +104,28 @@ final class PomodoroState: ObservableObject {
     }
     
     func completedSession() {
-        guard let workspace = workspace.thaw() else {
-            return
-        }
-        var numCompletedSessions: Int = 0
+        if case .working(_) = stageState.stage
+        {
+            guard let workspace = workspace.thaw() else {
+                return
+            }
         
-        let pomodoroStageEnum = stageState.stage
-        let pomodoroStageDuration = stageState.getStageDuration()
-    
-        try! realm.write {
-            workspace.sessions.append(SessionDB(stage: pomodoroStageEnum, duration: pomodoroStageDuration))
-            numCompletedSessions = workspace.sessions.count
+            try! realm.write {
+                workspace.sessions.append(SessionDB(stage: stageState.stage))
+            }
         }
         
-        print("Have completed this many sessions: ")
-        print(numCompletedSessions)
-        
-        print("PRINT INFO")
-        for session in workspace.sessions {
-            print(session.description)
-        }
-        
-        timerMode = .initial
-        
-        stageState.transitionToNextState()
-
-        ticker.resetTimer()
+        stageState.transitionToNextState(withNotification: true)
     }
     
-    func updateUI() {
-        ticker.updateUI()
+    func skippedSession() {
+        stageState.transitionToNextState(withNotification: false)
     }
     
-    func updateUI(readableTime: String, circleProgress: Double) {
-        self.remainingTimeString = readableTime
-        self.circleProgress = circleProgress
+    func zapTicker() {
+        self.ticker.stageDuration = stageState.getStageDuration()
+        self.ticker.running = timerMode == .running
+        self.ticker.updateUI()
     }
     
 }

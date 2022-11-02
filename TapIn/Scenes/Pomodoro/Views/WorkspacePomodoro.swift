@@ -5,9 +5,7 @@ struct WorkspacePomodoro: View {
     @EnvironmentObject var pomodoroState: PomodoroState
     
     var body: some View {
-        VStack {
-            Spacer()
-            
+        VStack(alignment: .center) {
             ZStack {
                 ProgressCircleView(circleProgress: $pomodoroState.circleProgress)
                     .padding()
@@ -25,7 +23,7 @@ struct WorkspacePomodoro: View {
             }
         }
         .onAppear {
-            pomodoroState.updateUI()
+            pomodoroState.zapTicker()
         }
     }
 }
