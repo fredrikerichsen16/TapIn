@@ -1,37 +1,35 @@
-import SwiftUI
-import RealmSwift
+import Foundation
 import AVKit
 
-//class RadioPlayer {
-//    var radioChannel: RadioChannel
-//    var player: AVAudioPlayer?
-//    var timer: Timer
-//    
-//    init(radioChannel: RadioChannel) {
-//        self.radioChannel = radioChannel
-//        self.player = self.radioChannel.getSong()!
-//        
-//        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-//            self.timerEvent()
-//        }
-//    }
-//    
-//    private func timerEvent() {
-//        if player.currentTime >= player.duration {
-//            self.player = self.radioChannel.getSong()!
-//            self.play()
-//        }
-//    }
-//    
-//    func play() {
-//        self.player.play()
-//        
-//        manager.radioIsPlaying = true
-//    }
-//    
-//    func pause() {
-//        self.player.pause()
-//        
-//        manager.radioIsPlaying = false
-//    }
-//}
+class RadioPlayer: NSObject, AVAudioPlayerDelegate {
+    let channel: RadioChannel
+    var song: AVAudioPlayer
+    
+    init(channel: RadioChannel, isPlaying: Bool) {
+        self.channel = channel
+        self.song = try! channel.getNextSong()
+        
+        if isPlaying {
+            self.song.play()
+        } else {
+            self.song.pause()
+        }
+        
+        super.init()
+        
+        self.song.delegate = self
+    }
+    
+    func play() {
+        self.song.play()
+    }
+    
+    func pause() {
+        self.song.pause()
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        self.song = try! channel.getNextSong()
+        self.song.play()
+    }
+}
