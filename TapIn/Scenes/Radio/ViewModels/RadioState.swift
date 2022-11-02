@@ -1,100 +1,212 @@
 import SwiftUI
 import RealmSwift
+import AVKit
+
+class RadioPlayer: NSObject, AVAudioPlayerDelegate {
+    let channel: RadioChannel
+    var song: AVAudioPlayer
+    
+    init(channel: RadioChannel, isPlaying: Bool) {
+        self.channel = channel
+        self.song = try! channel.getNextSong()
+        
+        if isPlaying {
+            self.song.play()
+        } else {
+            self.song.pause()
+        }
+        
+        super.init()
+        
+        self.song.delegate = self
+    }
+    
+    func play() {
+        self.song.play()
+    }
+    
+    func pause() {
+        self.song.pause()
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        self.song = try! channel.getNextSong()
+        self.song.play()
+    }
+}
 
 final class RadioState: ObservableObject {
     var workspace: WorkspaceDB
     var realm: Realm
     
-    func isActive() -> Bool {
-        return radioIsPlaying
-    }
-    
-    private let channels: [RadioChannelModel] = [
-        try! RadioChannelModel(keyname: "piano", label: "Lofi Beats", image: "Lofi"),
-        try! RadioChannelModel(keyname: "piano", label: "Classical", image: "Classical"),
-        try! RadioChannelModel(keyname: "piano", label: "Dark Academia", image: "DarkAcademia"),
-        try! RadioChannelModel(keyname: "piano", label: "Techno Bops", image: "Techno"),
-        try! RadioChannelModel(keyname: "piano", label: "Jazzy Jazz", image: "Jazzy"),
-        try! RadioChannelModel(keyname: "piano", label: "Dramatic", image: "Dramatic"),
-        try! RadioChannelModel(keyname: "piano", label: "Gregorian Chants", image: "GregorianChants")
+    private let channels: [RadioChannel] = [
+//        RadioChannel(key: "LofiBeats", title: "Lofi Beats", numberOfSongs: 0),
+        RadioChannel(key: "Classical", title: "Classical", numberOfSongs: 4),
+//        RadioChannel(key: "DarkAcademia", title: "Dark Academia", numberOfSongs: 0),
+//        RadioChannel(key: "TechnoBops", title: "Techno Bops", numberOfSongs: 0),
+        RadioChannel(key: "JazzyJazz", title: "Jazzy Jazz", numberOfSongs: 3),
+        RadioChannel(key: "Dramatic", title: "Dramatic", numberOfSongs: 3),
+//        RadioChannel(key: "GregorianChants", title: "Gregorian Chants", numberOfSongs: 0)
     ]
-    private var activeChannelIndex: Int = 0
-    private var radioPlayer: RadioPlayer!
     
-    @Published var currentChannel: String = ""
-    @Published var radioIsPlaying: Bool = false {
-        didSet
-        {
-//            stateManager.refreshActiveWorkspace()
+    var currentChannelIndex: Int = 0 {
+        didSet {
+            currentChannel = channels[currentChannelIndex]
         }
     }
+    
+    @Published var radioIsPlaying: Bool = false
+    
+    @Published var currentChannel: RadioChannel
+    
+    var player: RadioPlayer? = nil
     
     init(workspace: WorkspaceDB) {
         self.workspace = workspace
         self.realm = RealmManager.shared.realm
-        self.radioPlayer = radioPlayerConstructor()
-    }
-    
-    private func radioPlayerConstructor() -> RadioPlayer {
-        return RadioPlayer(radioChannel: getActiveChannel(), manager: self)
-    }
-    
-    func getActiveChannel() -> RadioChannelModel {
-        return channels[activeChannelIndex]
-    }
-    
-    func getActivePlayer() -> RadioPlayer {
-        return radioPlayer
-    }
-    
-    private func changeChannel() {
-        let isPlaying = self.radioPlayer.player.isPlaying
+        self.currentChannelIndex = 0
+        self.currentChannel = channels[0]
         
-        self.radioPlayer = radioPlayerConstructor()
-        
-        if isPlaying
-        {
-            self.radioPlayer.play()
-        }
-        else
-        {
-            self.radioPlayer.pause()
-        }
-        
-        currentChannel = getActiveChannel().label
+        initializePlayer()
     }
     
     func goToPrevChannel() {
-        if activeChannelIndex == 0
+        if currentChannelIndex == 0
         {
-            activeChannelIndex = channels.count - 1
+            currentChannelIndex = channels.count - 1
         }
         else
         {
-            activeChannelIndex -= 1
+            currentChannelIndex -= 1
         }
         
-        changeChannel()
+        self.initializePlayer()
     }
     
     func goToNextChannel() {
-        if activeChannelIndex == channels.count - 1
+        if currentChannelIndex == channels.count - 1
         {
-            activeChannelIndex = 0
+            currentChannelIndex = 0
         }
         else
         {
-            activeChannelIndex += 1
+            currentChannelIndex += 1
         }
         
-        changeChannel()
+        self.initializePlayer()
     }
     
     func play() {
-        radioPlayer.play()
+        player?.play()
+        radioIsPlaying = true
     }
     
     func pause() {
-        radioPlayer.pause()
+        player?.pause()
+        radioIsPlaying = false
+    }
+    
+    func initializePlayer() {
+        self.player = RadioPlayer(channel: currentChannel, isPlaying: radioIsPlaying)
     }
 }
+
+
+//final class RadioState: ObservableObject {
+//    private var workspace: WorkspaceDB
+//    private var realm: Realm
+//
+//    func isActive() -> Bool {
+//        return radioIsPlaying
+//    }
+//
+//    private let channels: [RadioChannel] = [
+//        RadioChannel(key: "LofiBeats", title: "Lofi Beats", numberOfSongs: 0),
+//        RadioChannel(key: "Classical", title: "Classical", numberOfSongs: 4),
+//        RadioChannel(key: "DarkAcademia", title: "Dark Academia", numberOfSongs: 0),
+//        RadioChannel(key: "TechnoBops", title: "Techno Bops", numberOfSongs: 0),
+//        RadioChannel(key: "JazzyJazz", title: "Jazzy Jazz", numberOfSongs: 3),
+//        RadioChannel(key: "Dramatic", title: "Dramatic", numberOfSongs: 0),
+//        RadioChannel(key: "GregorianChants", title: "Gregorian Chants", numberOfSongs: 0)
+//    ]
+//
+//    private var activeChannelIndex: Int = 0
+//    private var radioPlayer: RadioPlayer!
+//
+//    @Published var currentChanelIndex: Int = 0
+//
+//    @Published var radioIsPlaying: Bool = false
+//
+//    var currentChannel: RadioChannel {
+//        channels[currentChanelIndex]
+//    }
+//
+//    init(workspace: WorkspaceDB) {
+//        self.workspace = workspace
+//        self.realm = RealmManager.shared.realm
+//        self.radioPlayer = radioPlayerConstructor()
+//    }
+//
+//    private func radioPlayerConstructor() -> RadioPlayer {
+//        return RadioPlayer(radioChannel: getActiveChannel(), manager: self)
+//    }
+//
+//    func getActiveChannel() -> RadioChannel {
+//        return channels[activeChannelIndex]
+//    }
+//
+//    func getActivePlayer() -> RadioPlayer {
+//        return radioPlayer
+//    }
+//
+//    private func changeChannel() {
+//        let isPlaying = self.radioPlayer.player.isPlaying
+//
+//        self.radioPlayer = radioPlayerConstructor()
+//
+//        if isPlaying
+//        {
+//            self.radioPlayer.play()
+//        }
+//        else
+//        {
+//            self.radioPlayer.pause()
+//        }
+//
+//        currentChannel = getActiveChannel().label
+//    }
+//
+//    func goToPrevChannel() {
+//        if activeChannelIndex == 0
+//        {
+//            activeChannelIndex = channels.count - 1
+//        }
+//        else
+//        {
+//            activeChannelIndex -= 1
+//        }
+//
+//        changeChannel()
+//    }
+//
+//    func goToNextChannel() {
+//        if activeChannelIndex == channels.count - 1
+//        {
+//            activeChannelIndex = 0
+//        }
+//        else
+//        {
+//            activeChannelIndex += 1
+//        }
+//
+//        changeChannel()
+//    }
+//
+//    func play() {
+//        radioPlayer.play()
+//    }
+//
+//    func pause() {
+//        radioPlayer.pause()
+//    }
+//}

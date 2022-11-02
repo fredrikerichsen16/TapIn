@@ -1,71 +1,46 @@
 import SwiftUI
 
-//struct RadioView: View {
-//    var body: some View {
-//        Text("Radio")
-//    }
-//}
-
 struct RadioView: View {
     @EnvironmentObject var radioState: RadioState
 
-    private func getPlayingStatusIcon() -> Image {
+    private func getToggleButtonLabel() -> Image {
         return radioState.radioIsPlaying
             ? Image(systemName: "pause.fill")
             : Image(systemName: "play.fill")
     }
-
-    private func startPlayer() {
-        radioState.play()
-    }
-
-    private func pausePlayer() {
-        radioState.pause()
-    }
-
-    private func prevChannel() {
-        radioState.goToPrevChannel()
-    }
-
-    private func nextChannel() {
-        radioState.goToNextChannel()
+    
+    private func toggleButtonAction() {
+        if radioState.radioIsPlaying
+        {
+            radioState.pause()
+        }
+        else
+        {
+            radioState.play()
+        }
     }
 
     var body: some View {
         HStack(spacing: 40) {
-            Image(radioState.getActiveChannel().image, bundle: .main)
+            Image(radioState.currentChannel.getIllustrationImage(), bundle: .main)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 340)
                 .cornerRadius(15)
 
             VStack(alignment: .leading, spacing: 14) {
-                Text(radioState.getActiveChannel().label)
+                Text(radioState.currentChannel.title)
                     .font(.title)
                     .fontWeight(.thin)
 
                 HStack(spacing: 8) {
-                    Button(action: {
-                        prevChannel()
-                    }, label: {
+                    Button(action: radioState.goToPrevChannel, label: {
                         Image(systemName: "arrowtriangle.left.fill")
                     })
 
-                    Button(action: {
-                        radioState.radioIsPlaying.toggle()
+                    Button(action: toggleButtonAction, label: getToggleButtonLabel)
 
-                        if radioState.radioIsPlaying {
-                            startPlayer()
-                        } else {
-                            pausePlayer()
-                        }
-                    }, label: {
-                        getPlayingStatusIcon()
-                    })
-
-                    Button(action: {
-                        nextChannel()
-                    }, label: {
+                    Button(action: radioState.goToNextChannel, label: {
                         Image(systemName: "arrowtriangle.right.fill")
                     })
                 }

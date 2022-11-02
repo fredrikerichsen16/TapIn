@@ -3,26 +3,21 @@ import SwiftUI
 struct RadioBottomMenuController: View {
     @EnvironmentObject var radioState: RadioState
     
-    private func getPlayingStatusIcon() -> Image {
+    private func getToggleButtonLabel() -> Image {
         return radioState.radioIsPlaying
             ? Image(systemName: "pause.fill")
             : Image(systemName: "play.fill")
     }
-
-    private func startPlayer() {
-        radioState.play()
-    }
-
-    private func pausePlayer() {
-        radioState.pause()
-    }
-
-    private func prevChannel() {
-        radioState.goToPrevChannel()
-    }
-
-    private func nextChannel() {
-        radioState.goToNextChannel()
+    
+    private func toggleButtonAction() {
+        if radioState.radioIsPlaying
+        {
+            radioState.pause()
+        }
+        else
+        {
+            radioState.play()
+        }
     }
     
     var body: some View {
@@ -30,31 +25,17 @@ struct RadioBottomMenuController: View {
             Text("Radio")
                 .font(.body)
             
-            Text(radioState.getActiveChannel().label)
+            Text(radioState.currentChannel.title)
                 .font(.caption)
             
             HStack(spacing: 8) {
-                Button(action: {
-                    prevChannel()
-                }, label: {
+                Button(action: radioState.goToPrevChannel, label: {
                     Image(systemName: "arrowtriangle.left.fill")
                 })
-                
-                Button(action: {
-                    radioState.radioIsPlaying.toggle()
-                    
-                    if radioState.radioIsPlaying {
-                        startPlayer()
-                    } else {
-                        pausePlayer()
-                    }
-                }, label: {
-                    getPlayingStatusIcon()
-                })
-                
-                Button(action: {
-                    nextChannel()
-                }, label: {
+
+                Button(action: toggleButtonAction, label: getToggleButtonLabel)
+
+                Button(action: radioState.goToNextChannel, label: {
                     Image(systemName: "arrowtriangle.right.fill")
                 })
             }

@@ -23,7 +23,7 @@ struct WorkspaceBrowse: View {
     
     @State private var expanded = false
     
-    var body: some View {
+    var body: some View {    
         VStack {
             TabView {
                 WorkspacePomodoro()

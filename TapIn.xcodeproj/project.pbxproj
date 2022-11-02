@@ -34,8 +34,6 @@
 		35E0005C2911F4D4009D284D /* LauncherInstanceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0005B2911F4D4009D284D /* LauncherInstanceDB.swift */; };
 		35E0005E2911F4E5009D284D /* LauncherDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0005D2911F4E5009D284D /* LauncherDB.swift */; };
 		35E000602911F4F4009D284D /* SessionDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0005F2911F4F4009D284D /* SessionDB.swift */; };
-		35E000632911F513009D284D /* piano-0.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 35E000612911F513009D284D /* piano-0.mp3 */; };
-		35E000642911F513009D284D /* piano-1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 35E000622911F513009D284D /* piano-1.mp3 */; };
 		35E000B92911F531009D284D /* SidebarVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000682911F531009D284D /* SidebarVM.swift */; };
 		35E000BA2911F531009D284D /* StateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000692911F531009D284D /* StateManager.swift */; };
 		35E000BB2911F531009D284D /* MenuItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0006B2911F531009D284D /* MenuItemNode.swift */; };
@@ -59,7 +57,7 @@
 		35E000CE2911F531009D284D /* LauncherPopups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0008B2911F531009D284D /* LauncherPopups.swift */; };
 		35E000CF2911F531009D284D /* WebsiteLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0008C2911F531009D284D /* WebsiteLauncherView.swift */; };
 		35E000D02911F531009D284D /* RadioState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0008F2911F531009D284D /* RadioState.swift */; };
-		35E000D12911F531009D284D /* RadioChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000912911F531009D284D /* RadioChannelModel.swift */; };
+		35E000D12911F531009D284D /* RadioChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000912911F531009D284D /* RadioChannel.swift */; };
 		35E000D22911F531009D284D /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000922911F531009D284D /* RadioPlayer.swift */; };
 		35E000D32911F531009D284D /* RadioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000942911F531009D284D /* RadioView.swift */; };
 		35E000D42911F531009D284D /* WorkspaceVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000972911F531009D284D /* WorkspaceVM.swift */; };
@@ -128,8 +126,6 @@
 		35E0005B2911F4D4009D284D /* LauncherInstanceDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherInstanceDB.swift; sourceTree = "<group>"; };
 		35E0005D2911F4E5009D284D /* LauncherDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherDB.swift; sourceTree = "<group>"; };
 		35E0005F2911F4F4009D284D /* SessionDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDB.swift; sourceTree = "<group>"; };
-		35E000612911F513009D284D /* piano-0.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-0.mp3"; sourceTree = "<group>"; };
-		35E000622911F513009D284D /* piano-1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "piano-1.mp3"; sourceTree = "<group>"; };
 		35E000682911F531009D284D /* SidebarVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarVM.swift; sourceTree = "<group>"; };
 		35E000692911F531009D284D /* StateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateManager.swift; sourceTree = "<group>"; };
 		35E0006B2911F531009D284D /* MenuItemNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemNode.swift; sourceTree = "<group>"; };
@@ -153,7 +149,7 @@
 		35E0008B2911F531009D284D /* LauncherPopups.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherPopups.swift; sourceTree = "<group>"; };
 		35E0008C2911F531009D284D /* WebsiteLauncherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebsiteLauncherView.swift; sourceTree = "<group>"; };
 		35E0008F2911F531009D284D /* RadioState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioState.swift; sourceTree = "<group>"; };
-		35E000912911F531009D284D /* RadioChannelModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioChannelModel.swift; sourceTree = "<group>"; };
+		35E000912911F531009D284D /* RadioChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioChannel.swift; sourceTree = "<group>"; };
 		35E000922911F531009D284D /* RadioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioPlayer.swift; sourceTree = "<group>"; };
 		35E000942911F531009D284D /* RadioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioView.swift; sourceTree = "<group>"; };
 		35E000972911F531009D284D /* WorkspaceVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceVM.swift; sourceTree = "<group>"; };
@@ -241,7 +237,6 @@
 			children = (
 				35E000652911F531009D284D /* Scenes */,
 				35E000072911EEF3009D284D /* Preview Content */,
-				35E000312911EF0E009D284D /* Recursos */,
 				35E0002F2911EF08009D284D /* Persistence */,
 				35E0002E2911EF05009D284D /* Helpers */,
 				35E0002D2911EF02009D284D /* Extensions */,
@@ -314,15 +309,6 @@
 				35AD05FE2912F18700837016 /* NoteDB.swift */,
 			);
 			path = Persistence;
-			sourceTree = "<group>";
-		};
-		35E000312911EF0E009D284D /* Recursos */ = {
-			isa = PBXGroup;
-			children = (
-				35E000612911F513009D284D /* piano-0.mp3 */,
-				35E000622911F513009D284D /* piano-1.mp3 */,
-			);
-			path = Recursos;
 			sourceTree = "<group>";
 		};
 		35E000472911F434009D284D /* Realm */ = {
@@ -525,7 +511,7 @@
 		35E000902911F531009D284D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				35E000912911F531009D284D /* RadioChannelModel.swift */,
+				35E000912911F531009D284D /* RadioChannel.swift */,
 				35E000922911F531009D284D /* RadioPlayer.swift */,
 			);
 			path = Models;
@@ -842,9 +828,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35E000632911F513009D284D /* piano-0.mp3 in Resources */,
 				35E000092911EEF3009D284D /* Preview Assets.xcassets in Resources */,
-				35E000642911F513009D284D /* piano-1.mp3 in Resources */,
 				35E000062911EEF3009D284D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -915,7 +899,7 @@
 				35E000D32911F531009D284D /* RadioView.swift in Sources */,
 				35E000BF2911F531009D284D /* Sidebar.swift in Sources */,
 				35E000582911F4B6009D284D /* BlockerDB.swift in Sources */,
-				35E000D12911F531009D284D /* RadioChannelModel.swift in Sources */,
+				35E000D12911F531009D284D /* RadioChannel.swift in Sources */,
 				35E000E42911F531009D284D /* PomodoroTicker.swift in Sources */,
 				35E000D22911F531009D284D /* RadioPlayer.swift in Sources */,
 				35E000BA2911F531009D284D /* StateManager.swift in Sources */,
