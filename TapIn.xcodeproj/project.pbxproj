@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,7 +46,6 @@
 		3573F150268767FB004B9C21 /* WorkspaceBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F14F268767FB004B9C21 /* WorkspaceBlocker.swift */; };
 		3573F1542687A16C004B9C21 /* LauncherPopups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3573F1532687A16C004B9C21 /* LauncherPopups.swift */; };
 		357A38D828C293DB007FD35F /* RadioChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357A38D728C293DB007FD35F /* RadioChannelModel.swift */; };
-		357C6FF32910AA5D00982A36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 357C6FF22910AA5D00982A36 /* Assets.xcassets */; };
 		357C6FF62910AA8E00982A36 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 357C6FF52910AA8E00982A36 /* Preview Assets.xcassets */; };
 		357C6FF82911454100982A36 /* SidebarButtonToWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357C6FF72911454100982A36 /* SidebarButtonToWorkspace.swift */; };
 		357C7000291184F100982A36 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357C6FFF291184F100982A36 /* ViewModifiers.swift */; };
@@ -69,13 +68,13 @@
 		35AEA155267F65D0000AFE85 /* TapInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA154267F65D0000AFE85 /* TapInApp.swift */; };
 		35AEA157267F65D0000AFE85 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA156267F65D0000AFE85 /* ContentView.swift */; };
 		35AEA181267F6AD4000AFE85 /* WorkspaceBrowse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA180267F6AD4000AFE85 /* WorkspaceBrowse.swift */; };
-		35AEA18A267F95B5000AFE85 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA189267F95B5000AFE85 /* LauncherModel.swift */; };
 		35AEA18C267F95D9000AFE85 /* BlockerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA18B267F95D9000AFE85 /* BlockerState.swift */; };
 		35AEA194267FA815000AFE85 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AEA193267FA815000AFE85 /* Color+.swift */; };
 		35BF8A5D290F2A44009EC6CC /* LauncherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BF8A5C290F2A44009EC6CC /* LauncherState.swift */; };
 		35C2FF20278CE2D70008AA55 /* MenuItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF1F278CE2D70008AA55 /* MenuItemNode.swift */; };
 		35C2FF22278CE3910008AA55 /* SidebarButtonToPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C2FF21278CE3910008AA55 /* SidebarButtonToPage.swift */; };
 		35D18EEC279E551300ECA17C /* WebsiteLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D18EEB279E551300ECA17C /* WebsiteLauncherView.swift */; };
+		35E000342911F076009D284D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 357C6FF22910AA5D00982A36 /* Assets.xcassets */; };
 		35EF3DC4279B327D004E2795 /* SwiftUIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF3DC3279B327D004E2795 /* SwiftUIHelpers.swift */; };
 		35EF3DC7279B3607004E2795 /* ActiveBottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF3DC6279B3607004E2795 /* ActiveBottomMenu.swift */; };
 		35F5592827A26D410094F2C4 /* WorkspaceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5592727A26D410094F2C4 /* WorkspaceDB.swift */; };
@@ -135,7 +134,6 @@
 		35608D1B26C6FBEC0054FCD2 /* WorkspaceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceSettingsView.swift; sourceTree = "<group>"; };
 		3566A36F26B9D35B0064AE00 /* Dataloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dataloader.swift; sourceTree = "<group>"; };
 		3566A37126B9D63B0064AE00 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
-		356A4F77279A191900A6C633 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		356B4D3E290C449D00C12949 /* NuclearWasteland.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NuclearWasteland.swift; sourceTree = "<group>"; };
 		356F82322910500F00CD289E /* TimeTrackerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerModel.swift; sourceTree = "<group>"; };
 		356F8234291050F300CD289E /* BottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenu.swift; sourceTree = "<group>"; };
@@ -168,21 +166,20 @@
 		359D2B8E28D4110F0043B698 /* CustomPersistables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPersistables.swift; sourceTree = "<group>"; };
 		35A699EB283FFA75001E90A3 /* RadioBottomMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioBottomMenuController.swift; sourceTree = "<group>"; };
 		35A91B3F27C9A26E00E94E56 /* LauncherDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherDB.swift; sourceTree = "<group>"; };
-		35AEA151267F65D0000AFE85 /* TapIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35AEA154267F65D0000AFE85 /* TapInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInApp.swift; sourceTree = "<group>"; };
 		35AEA156267F65D0000AFE85 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		35AEA15D267F65D2000AFE85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35AEA15E267F65D2000AFE85 /* TapIn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TapIn.entitlements; sourceTree = "<group>"; };
-		35AEA163267F65D2000AFE85 /* TapInTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TapInTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		35AEA163267F65D2000AFE85 /* TapInTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TapInTests.xctest; path = /Users/fredrik/Documents/GitHub/TapIn/build/Debug/TapInTests.xctest; sourceTree = "<absolute>"; };
 		35AEA169267F65D2000AFE85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35AEA180267F6AD4000AFE85 /* WorkspaceBrowse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceBrowse.swift; sourceTree = "<group>"; };
-		35AEA189267F95B5000AFE85 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
 		35AEA18B267F95D9000AFE85 /* BlockerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerState.swift; sourceTree = "<group>"; };
 		35AEA193267FA815000AFE85 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		35BF8A5C290F2A44009EC6CC /* LauncherState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherState.swift; sourceTree = "<group>"; };
 		35C2FF1F278CE2D70008AA55 /* MenuItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemNode.swift; sourceTree = "<group>"; };
 		35C2FF21278CE3910008AA55 /* SidebarButtonToPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButtonToPage.swift; sourceTree = "<group>"; };
 		35D18EEB279E551300ECA17C /* WebsiteLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteLauncherView.swift; sourceTree = "<group>"; };
+		35E000372911F182009D284D /* TapIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35EF3DC3279B327D004E2795 /* SwiftUIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIHelpers.swift; sourceTree = "<group>"; };
 		35EF3DC6279B3607004E2795 /* ActiveBottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveBottomMenu.swift; sourceTree = "<group>"; };
 		35F5592727A26D410094F2C4 /* WorkspaceDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceDB.swift; sourceTree = "<group>"; };
@@ -383,7 +380,6 @@
 		356B4D23290C28D300C12949 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				35AEA189267F95B5000AFE85 /* LauncherModel.swift */,
 				35521BCB279C98FA0047508D /* LauncherModelExtra.swift */,
 			);
 			path = Models;
@@ -645,18 +641,8 @@
 			children = (
 				35AEA153267F65D0000AFE85 /* TapIn */,
 				35AEA166267F65D2000AFE85 /* TapInTests */,
-				35AEA152267F65D0000AFE85 /* Products */,
-				35CC063F278CE4F900195486 /* Frameworks */,
+				35E000372911F182009D284D /* TapIn.app */,
 			);
-			sourceTree = "<group>";
-		};
-		35AEA152267F65D0000AFE85 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				35AEA151267F65D0000AFE85 /* TapIn.app */,
-				35AEA163267F65D2000AFE85 /* TapInTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		35AEA153267F65D0000AFE85 /* TapIn */ = {
@@ -717,14 +703,6 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
-		35CC063F278CE4F900195486 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				356A4F77279A191900A6C633 /* XCTest.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -747,7 +725,7 @@
 				357DD55A28344FC3004D1636 /* RealmSwift */,
 			);
 			productName = TapIn;
-			productReference = 35AEA151267F65D0000AFE85 /* TapIn.app */;
+			productReference = 35E000372911F182009D284D /* TapIn.app */;
 			productType = "com.apple.product-type.application";
 		};
 		35AEA162267F65D2000AFE85 /* TapInTests */ = {
@@ -787,7 +765,7 @@
 				};
 			};
 			buildConfigurationList = 35AEA14C267F65D0000AFE85 /* Build configuration list for PBXProject "TapIn" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -799,7 +777,7 @@
 				355F84A5279FC0F9002E77EC /* XCRemoteSwiftPackageReference "realm-swift" */,
 				357DD55728344FC3004D1636 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
-			productRefGroup = 35AEA152267F65D0000AFE85 /* Products */;
+			productRefGroup = 35AEA148267F65D0000AFE85;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -815,8 +793,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				352428B8290C6BCD0046C9AB /* piano-1.mp3 in Resources */,
-				357C6FF32910AA5D00982A36 /* Assets.xcassets in Resources */,
 				357C6FF62910AA8E00982A36 /* Preview Assets.xcassets in Resources */,
+				35E000342911F076009D284D /* Assets.xcassets in Resources */,
 				352428B9290C6BCD0046C9AB /* piano-0.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -845,7 +823,6 @@
 				3573F14E268767E9004B9C21 /* WorkspaceLauncher.swift in Sources */,
 				35F5592827A26D410094F2C4 /* WorkspaceDB.swift in Sources */,
 				357C7000291184F100982A36 /* ViewModifiers.swift in Sources */,
-				35AEA18A267F95B5000AFE85 /* LauncherModel.swift in Sources */,
 				35A91B4027C9A26E00E94E56 /* LauncherDB.swift in Sources */,
 				35500DFC2835A8B900AF9AB5 /* String+.swift in Sources */,
 				3538C2ED27AB60BA00D74044 /* TimeTrackerDB.swift in Sources */,
@@ -1049,6 +1026,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = TapIn/TapIn.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1077,6 +1055,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = TapIn/TapIn.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;

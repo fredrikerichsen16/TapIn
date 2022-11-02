@@ -1,6 +1,10 @@
 import Foundation
 import RealmSwift
 
+//struct LauncherInstance {
+//    
+//}
+
 final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
     
     func easyThaw() -> (LauncherInstanceDB, Realm) {
@@ -85,53 +89,56 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
     // MARK: Set up bridge
     
     lazy var appController: AppController = {
-        switch fullType {
-            case .app:
-                return AppLauncherAppController(parent: self)
-            case .file:
-                return FileLauncherAppController(parent: self)
-            case .folder:
-                return FileLauncherAppController(parent: self)
-            case .website:
-                return WebsiteLauncherAppController(parent: self)
-            case .terminal:
-                fatalError("3131232144")
-            case .empty(_):
-                return EmptyLauncherAppController(parent: self)
+        switch fullType
+        {
+        case .app:
+            return AppLauncherAppController(parent: self)
+        case .file:
+            return FileLauncherAppController(parent: self)
+        case .folder:
+            return FileLauncherAppController(parent: self)
+        case .website:
+            return WebsiteLauncherAppController(parent: self)
+        case .terminal:
+            fatalError("3131232144")
+        case .empty(_):
+            return EmptyLauncherAppController(parent: self)
         }
     }()
 
     lazy var fileController: FileController = {
-        switch fullType {
-            case .app:
-                return AppLauncherFileController(parent: self)
-            case .file:
-                return FileLauncherFileController(parent: self)
-            case .folder:
-                return FileLauncherFileController(parent: self)
-            case .website:
-                return WebsiteLauncherFileController(parent: self)
-            case .terminal:
-                fatalError("4234324")
-            case .empty(_):
-                return EmptyLauncherFileController(parent: self)
+        switch fullType
+        {
+        case .app:
+            return AppLauncherFileController(parent: self)
+        case .file:
+            return FileLauncherFileController(parent: self)
+        case .folder:
+            return FileLauncherFileController(parent: self)
+        case .website:
+            return WebsiteLauncherFileController(parent: self)
+        case .terminal:
+            fatalError("4234324")
+        case .empty(_):
+            return EmptyLauncherFileController(parent: self)
         }
     }()
 
     lazy var opener: Opener = {
-        switch fullType {
-            case .app:
-                return AppLauncherOpener(parent: self)
-            case .file:
-                return FileLauncherOpener(parent: self)
-            case .folder:
-                return FileLauncherOpener(parent: self)
-            case .website:
-                return WebsiteLauncherOpener(parent: self)
-            case .terminal:
-                fatalError("4234324")
-            case .empty(_):
-                return EmptyLauncherOpener(parent: self)
+        switch fullType
+        {
+        case .app:
+            return AppLauncherOpener(parent: self)
+        case .file:
+            return FileLauncherOpener(parent: self)
+        case .folder:
+            return FileLauncherOpener(parent: self)
+        case .website:
+            return WebsiteLauncherOpener(parent: self)
+        case .terminal:
+            fatalError("4234324")
+        case .empty(_):
+            return EmptyLauncherOpener(parent: self)
         }
     }()
 

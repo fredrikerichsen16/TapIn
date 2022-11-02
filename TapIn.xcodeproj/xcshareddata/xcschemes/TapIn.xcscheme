@@ -38,16 +38,6 @@
                ReferencedContainer = "container:TapIn.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "35AEA16D267F65D2000AFE85"
-               BuildableName = "TapInUITests.xctest"
-               BlueprintName = "TapInUITests"
-               ReferencedContainer = "container:TapIn.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

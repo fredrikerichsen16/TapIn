@@ -17,17 +17,6 @@ final class LauncherDB: Object, ObjectKeyIdentifiable {
     
     // MARK: CRUD
     
-    func deleteById(id: ObjectId) {
-        guard let realm = realm else { return }
-        guard let instanceToDelete = realm.objects(LauncherInstanceDB.self).where({ ($0.id == id) }).first else { return }
-        
-        if let thawed = instanceToDelete.thaw() {
-            try! realm.write {
-                realm.delete(thawed)
-            }
-        }
-    }
-    
     func openAll() {
         for launcher in launcherInstances
         {

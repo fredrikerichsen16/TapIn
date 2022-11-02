@@ -30,17 +30,6 @@ class WorkspaceSettingsModel: ObservableObject {
     @Published var workspace: WorkspaceDB? = nil
     
     @Published var inputs = Inputs()
-    
-//    func setPomodoroValue<V>(input: KeyPath<Inputs, V>, destination: WritableKeyPath<PomodoroDB, V>) {
-//        guard
-//            let workspace = workspace,
-//            let workspace = workspace.thaw()
-//        else { return }
-//
-//        try? realm.write {
-//            workspace.pomodoro[keyPath: destination] = inputs[keyPath: input]
-//        }
-//    }
 }
 
 struct InputValue<T> {

@@ -1,10 +1,3 @@
-//
-//  LauncherModelExtra.swift
-//  TapIn
-//
-//  Created by Fredrik Skjelvik on 22/01/2022.
-//
-
 import Cocoa
 import RealmSwift
 
@@ -23,6 +16,10 @@ func getAppIcon(for app: URL, size: Int) -> NSImage {
         image.size = NSSize(width: size, height: size)
     
     return image
+}
+
+func getDefaultApp(fileUrl: URL) -> URL? {
+    return NSWorkspace.shared.urlForApplication(toOpen: fileUrl)
 }
 
 // Structure
@@ -60,16 +57,6 @@ protocol AppController {
     func setApp(name: String, appUrl: URL)
     
     func iconForApp(size: Int) -> NSImage
-    
-    func getDefaultApp() -> URL?
-}
-
-extension AppController {
-    func getDefaultApp() -> URL? {
-        let file = parent.fileUrl!
-        
-        return NSWorkspace.shared.urlForApplication(toOpen: file)
-    }
 }
 
 protocol FileController {
@@ -237,7 +224,7 @@ struct FileLauncherAppController: AppController {
             return app
         }
         
-        return getDefaultApp()
+        return getDefaultApp(fileUrl: parent.fileUrl!)
     }
     
     func setApp(name: String, appUrl: URL) {
@@ -361,7 +348,7 @@ struct EmptyLauncherAppController: AppController {
     var parent: LauncherInstanceDB
 
     func getApp() -> URL? {
-        return getDefaultApp()
+        return nil
     }
     
     func setApp(name: String, appUrl: URL) {
@@ -448,11 +435,11 @@ struct WebsiteLauncherAppController: AppController {
     }
     
     func iconForApp(size: Int) -> NSImage {
-        var image: NSImage
+        let image: NSImage
         
-        if let _app = getApp()
+        if let app = getApp()
         {
-            image = NSWorkspace.shared.icon(forFile: _app.path)
+            image = NSWorkspace.shared.icon(forFile: app.path)
         }
         else
         {
@@ -478,12 +465,12 @@ struct WebsiteLauncherFileController: FileController {
     }
     
     func setFile(name: String, fileUrl: URL) {
-        let (thawed, realm) = parent.easyThaw()
+        let (instance, realm) = parent.easyThaw()
 
         try! realm.write {
-            thawed.name = name
-            thawed.fileUrl = fileUrl
-            thawed.instantiated = true
+            instance.name = name
+            instance.fileUrl = fileUrl
+            instance.instantiated = true
         }
     }
 }
