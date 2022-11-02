@@ -6,6 +6,7 @@ enum WorkspaceTab {
     case launcher
     case blocker
     case radio
+    case notes
     
     mutating func next() {
         switch self
@@ -20,6 +21,11 @@ enum WorkspaceTab {
             self = .radio
         case .radio:
             self = .pomodoro
+            
+        // Notes is basically excluded because it doesn't have a bottom menu thingy
+        case .notes:
+            // Safe: self = .notes
+            fatalError("This should never happen")
         }
     }
     
@@ -36,6 +42,11 @@ enum WorkspaceTab {
             self = .launcher
         case .radio:
             self = .blocker
+        
+        // Notes is basically excluded because it doesn't have a bottom menu thingy
+        case .notes:
+            // Safe: self = .notes
+            fatalError("This should never happen")
         }
     }
 }

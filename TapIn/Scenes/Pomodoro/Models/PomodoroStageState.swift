@@ -98,7 +98,6 @@ final class PomodoroShortBreakStageState: PomodoroStageState {
         pomodoroState.setTimerState(.initial)
         pomodoroState.ticker.updateUI()
         
-        
         if withNotification == false {
             return
         }

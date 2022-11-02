@@ -25,6 +25,8 @@ struct ActiveBottomMenu: View {
                     .padding()
             case .radio:
                 RadioBottomMenuController()
+            default:
+                EmptyView()
             }
             
             navigateButton(direction: .right)

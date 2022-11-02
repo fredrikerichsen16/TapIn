@@ -21,6 +21,8 @@ struct WorkspaceBrowseIntermediate: View {
 struct WorkspaceBrowse: View {
     @EnvironmentObject var workspace: WorkspaceVM
     
+    @State private var expanded = false
+    
     var body: some View {
         VStack {
             TabView {
@@ -53,6 +55,9 @@ struct WorkspaceBrowse: View {
                     .onAppear {
                         workspace.workspaceTab = .radio
                     }
+                
+                NotesView(note: workspace.workspace.note)
+                    .tabItem({ Text("Scratchpad") })
             }
             
             Spacer()

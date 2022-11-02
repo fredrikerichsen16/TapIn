@@ -28,6 +28,9 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     var launcher: LauncherDB!
     
     @Persisted
+    var note: NoteDB!
+    
+    @Persisted
     var sessions = RealmSwift.List<SessionDB>()
         
     convenience init(name: String) {
@@ -39,6 +42,7 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
         self.blocker = BlockerDB()
         self.timeTracker = TimeTrackerDB()
         self.launcher = LauncherDB()
+        self.note = NoteDB()
     }
     
     func isChild() -> Bool {
