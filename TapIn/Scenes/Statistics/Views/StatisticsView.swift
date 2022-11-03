@@ -6,12 +6,14 @@ import Charts
 struct StatisticsView: View {
     @StateObject var vm = StatisticsState()
     
+    @State private var showChart = true
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
             Text("Statistics").font(.largeTitle)
 
             HStack {
-                Picker("Time Unit", selection: $vm.interval.granularity) {
+                Picker("", selection: $vm.interval.granularity) {
                     Text("Week").tag(TimeGranularity.week)
                     Text("Month").tag(TimeGranularity.month)
                     Text("Year").tag(TimeGranularity.year)
@@ -20,6 +22,13 @@ struct StatisticsView: View {
                 .onChange(of: vm.interval.granularity) { _ in
                     vm.submit()
                 }
+                
+                Picker("", selection: $showChart) {
+                    Image(systemName: "chart.bar.fill").tag(true)
+                    Image(systemName: "list.bullet").tag(false)
+                }
+                .pickerStyle(.segmented)
+                .fixedSize()
 
                 Spacer()
 
@@ -37,9 +46,11 @@ struct StatisticsView: View {
             Text(vm.interval.label)
                 .font(.headline)
             
-            chart
-            
-            table
+            if showChart {
+                chart
+            } else {
+                table
+            }
             
             Spacer()
         }
@@ -52,24 +63,49 @@ struct StatisticsView: View {
     // MARK: Chart
     
     var chart: some View {
-        Chart(vm.sessionData) { data in
+        Chart(vm.chartData) { data in
             BarMark(
                 x: .value("Time", data.intervalLabel),
-                y: .value("Minutes", data.minutes / 60)
+                y: .value("Minutes", data.hours)
             )
             .foregroundStyle(by: .value("Workspace", data.workspace.name))
+            .cornerRadius(2)
         }
         .chartXAxisLabel(position: .bottom, alignment: .center) {
             Text("Period")
         }
         .chartYAxisLabel(position: .trailing, alignment: .center) {
-            Text("Average minutes worked per day")
+            Text("Average hours worked per day")
         }
-        
     }
     
     var table: some View {
-        Text("Table")
+        VStack {
+            ForEach(vm.listData) { data in
+                HStack {
+                    Text(data.workspace.name)
+                    Spacer()
+                    Text(data.formattedDuration)
+                }
+                .padding()
+                .background(Color.gray)
+                
+                if let children = data.children {
+                    VStack {
+                        ForEach(children) { child in
+                            HStack {
+                                Text(child.workspace.name)
+                                Spacer()
+                                Text(child.formattedDuration)
+                            }
+                            .padding()
+                            .background(Color.blue)
+                        }
+                        .offset(x: 20)
+                    }
+                }
+            }
+        }
     }
     
 //    var chart: some View {

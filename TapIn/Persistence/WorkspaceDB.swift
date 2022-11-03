@@ -45,8 +45,8 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
         self.note = NoteDB()
     }
     
-    func isChild() -> Bool {
-        return !parent.isEmpty
+    func isTopLevel() -> Bool {
+        return parent.isEmpty
     }
     
     // MARK: Sessions

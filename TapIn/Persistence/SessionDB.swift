@@ -22,9 +22,9 @@ final class SessionDB: Object, ObjectKeyIdentifiable {
     @Persisted(originProperty: "sessions")
     var workspace: LinkingObjects<WorkspaceDB>
     
-    func getWorkspace() -> WorkspaceDB {
-        return workspace.first!
-    }
+//    func getWorkspace() -> WorkspaceDB {
+//        return workspace.first!
+//    }
     
     func isIn(workspace ws: WorkspaceDB) -> Bool {
         guard let workspace = workspace.first else {

@@ -24,6 +24,14 @@ struct Sidebar: View {
                     sidebarVM.addWorkspace()
                 })
                 
+                Button("Settings") {
+                    if #available(macOS 13.0, *) {
+                        NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+                    } else {
+                        NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
+                    }
+                }
+                
                 Text(sidebarVM.sidebarSelection ?? "?")
             }
             .listStyle(SidebarListStyle())

@@ -1,3 +1,49 @@
+//    func loadData() {
+//        let realm = RealmManager.shared.realm
+//        let workspaces = Array(realm.objects(WorkspaceDB.self))
+//        let subdivisions = getIntervalSubdivisions()
+//        var data = [StatisticsData]()
+//
+//        for (_, subdivision) in subdivisions.enumerated() {
+//            let sessionsInInterval = sessions.filter({ session in
+//                session.completedTime > subdivision.interval.start && session.completedTime < subdivision.interval.end
+//            })
+//
+//            for workspace in workspaces
+//            {
+//                let sessionsInWorkspace = sessionsInInterval.filter({ $0.workspace.first?.id == workspace.id })
+//                let average = sessionsInWorkspace.reduce(0, { current, session in
+//                    current + session.duration
+//                })
+//
+//                // TODO: Need number of days present in IntervalSubdivision to calculate daily average
+//
+//                data.append(StatisticsData(intervalLabel: subdivision.label, seconds: average, workspace: workspace))
+//            }
+//        }
+//
+//        self.data = data
+//    }
+//
+//    func getDataForChart() -> [StatisticsData] {
+//        guard let data = data else {
+//            return []
+//        }
+//
+//        var result = [StatisticsData]()
+//
+//        let topLevelWorkspaces = data.filter({ $0.parentWorkspace == nil }).map({ $0.workspace })
+//
+//        for workspace in topLevelWorkspaces
+//        {
+//            let dataForWorkspace = data.filter({ $0.workspace == workspace || $0.parentWorkspace == workspace })
+//            let average = dataForWorkspace.reduce(0, { $0 + $1.seconds })
+//
+//            result.append(StatisticsData(intervalLabel: workspace., seconds: <#T##Double#>, workspace: <#T##WorkspaceDB#>))
+//        }
+//    }
+
+
 //    func chart() -> [IntervalSubdivision] {
 //        let workspaces = Array(WorkspaceDB.getTopLevelWorkspaces())
 //        let session = Array(s)

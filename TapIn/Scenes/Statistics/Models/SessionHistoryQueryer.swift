@@ -100,25 +100,24 @@ class SessionHistoryQueryer {
     }
     
     func getCharter(for interval: IntervalHolder) -> SessionHistoryCharter {
-        return SessionHistoryCharter(sessions: sessions, interval: interval)
+        return SessionHistoryCharter(sessions: Array(sessions), interval: interval)
     }
 }
 
 class SessionHistoryCharter {
-    var sessions: Results<SessionDB>
-    var interval: IntervalHolder
+    var sessions: [SessionDB]
+    let interval: IntervalHolder
     let calendar = Calendar.current
     
-    init(sessions: Results<SessionDB>, interval: IntervalHolder) {
+    init(sessions: [SessionDB], interval: IntervalHolder) {
         self.sessions = sessions
         self.interval = interval
     }
     
-    func chart() -> [StatisticsData] {
+    func chart() -> [ChartData] {
         let workspaces = Array(WorkspaceDB.getTopLevelWorkspaces())
-        let sessions = Array(sessions)
         let subdivisions = getIntervalSubdivisions()
-        var data = [StatisticsData]()
+        var data = [ChartData]()
         
         for (_, subdivision) in subdivisions.enumerated() {
             let sessionsInInterval = sessions.filter({ session in
@@ -127,19 +126,50 @@ class SessionHistoryCharter {
             
             for workspace in workspaces
             {
-                let sessionsInWorkspace = sessionsInInterval.filter({ $0.isIn(workspace: workspace) })
-                let averageInSeconds = sessionsInWorkspace.reduce(0, { current, session in
+                let sessionsInWorkspace = sessionsInInterval.filter({ $0.workspace.first == workspace })
+                
+                let total = sessionsInWorkspace.reduce(0, { current, session in
                     current + session.duration
                 })
-                let average = Int(averageInSeconds / 60)
+                let average = total / Double(subdivision.numberOfDays)
                 
-                data.append(StatisticsData(intervalLabel: subdivision.label, minutes: average, workspace: workspace))
+                data.append(ChartData(intervalLabel: subdivision.label, seconds: average, workspace: workspace))
             }
+        }
+        
+        return data
+    }
+    
+    func list() -> [ListData] {
+        let workspaces = Array(WorkspaceDB.getTopLevelWorkspaces())
+        var data = [ListData]()
+
+        for workspace in workspaces
+        {
+            var childrenListData = [ListData]()
+            for childWorkspace in [workspace] + workspace.children
+            {
+                let sessionsInChildWorkspace = sessions.filter({ $0.workspace.first == childWorkspace })
+
+                let total = sessionsInChildWorkspace.reduce(0, { current, session in
+                    current + session.duration
+                })
+                let average = total / Double(interval.durationInDays)
+
+                childrenListData.append(ListData(seconds: average, workspace: childWorkspace))
+            }
+
+            let total = childrenListData.reduce(0, { current, session in
+                current + session.seconds
+            })
+            
+            let average = total / Double(childrenListData.count)
+
+            data.append( ListData(seconds: average, workspace: workspace, children: childrenListData) )
         }
 
         return data
     }
-
     
     func getIntervalSubdivisions() -> [IntervalSubdivision] {
         var intervals = [IntervalSubdivision]()
@@ -191,9 +221,10 @@ class SessionHistoryCharter {
 
             for i in 0..<12
             {
-                let beginningOfMonth = DateComponents(calendar: calendar, month: i + 1, day: 1).date!
+                let beginningOfMonth = DateComponents(calendar: calendar, year: interval.year, month: i + 1, day: 1).date!
                 let endOfMonth = DateComponents(
                     calendar: calendar,
+                    year: interval.year,
                     month: i + 1,
                     day: calendar.range(of: .day, in: .month, for: beginningOfMonth)!.count,
                     hour: 23,

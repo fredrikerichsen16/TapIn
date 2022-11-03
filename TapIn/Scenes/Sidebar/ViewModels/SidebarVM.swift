@@ -103,7 +103,7 @@ class SidebarVM: ObservableObject {
         guard let workspace = workspace.thaw() else { return }
 
         // You can only nest once, i.e. two levels
-        if workspace.isChild() {
+        guard workspace.isTopLevel() else {
             print("Cannot add more than one level of nesting")
             return
         }

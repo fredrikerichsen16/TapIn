@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     private enum Tabs: Hashable {
-        case general, workspace
+        case general, workspace, sidebar
     }
     
     @State private var selection: Tabs = .general
@@ -20,6 +20,12 @@ struct SettingsView: View {
                     Label("Workspaces", systemImage: "star")
                 }
                 .tag(Tabs.workspace)
+            
+            SidebarSettingsView()
+                .tabItem {
+                    Label("Sidebar/Workspaces", systemImage: "star")
+                }
+                .tag(Tabs.sidebar)
         }
         .frame(minWidth: 300, idealWidth: 450, maxWidth: 1200, minHeight: 300, idealHeight: 450, maxHeight: 1200, alignment: .center)
         .padding(20)

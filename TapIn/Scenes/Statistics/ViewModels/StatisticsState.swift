@@ -86,11 +86,26 @@ struct IntervalHolder {
         case .month:
             // Return month name followed by year
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMMM"
+                dateFormatter.dateFormat = "MMMM"
             let monthName = dateFormatter.string(from: DateComponents(calendar: Calendar.current, year: year, month: month).date!)
             return "\(monthName) \(year)"
         case .week:
             return "Week \(week), \(year)"
+        }
+    }
+    
+    var durationInDays: Int {
+        // Get the duration of the year/week/month taking into account that months have different lengths and e.g. don't go further than today's date\
+        // but for now, just doing a simple one
+        
+        switch granularity
+        {
+        case .year:
+            return 365
+        case .month:
+            return 30
+        case .week:
+            return 7
         }
     }
 }
@@ -129,11 +144,13 @@ class StatisticsState: ObservableObject {
         // Query
         let queryer = SessionHistoryQueryer()
             queryer.completed(within: interval)
-        let charter = queryer.getCharter(for: interval)
-        let data = charter.chart()
         
-        self.sessionData = data
+        let charter = queryer.getCharter(for: interval)
+        
+        self.chartData = charter.chart()
+        self.listData = charter.list()
     }
     
-    @Published var sessionData = [StatisticsData]()
+    @Published var chartData = [ChartData]()
+    @Published var listData = [ListData]()
 }
