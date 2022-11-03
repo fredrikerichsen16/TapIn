@@ -173,7 +173,6 @@ class SessionHistoryCharter {
                 let addition = DateComponents(calendar: calendar, day: 1)
                 currentDate = calendar.date(byAdding: addition, to: currentDate)!
 
-                // if currentDate is a sunday or the last day of the month
                 let isSunday = calendar.component(.weekday, from: currentDate) == 1
                 let isLastDayOfMonth = calendar.component(.day, from: currentDate) == calendar.range(of: .day, in: .month, for: currentDate)!.count - 1
                 if isSunday || isLastDayOfMonth

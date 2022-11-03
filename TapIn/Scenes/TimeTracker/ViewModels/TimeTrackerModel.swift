@@ -8,7 +8,24 @@ class TimeTrackerState: ObservableObject {
     init(workspace: WorkspaceDB) {
         self.workspace = workspace
         self.realm = RealmManager.shared.realm
+        
+        setContent()
     }
     
-    @Published var hoursWorked = 4
+    func setContent() {
+        // Query
+        let queryer = SessionHistoryQueryer()
+            queryer.completedThisWeek()
+            queryer.inWorkspace(workspace: workspace)
+        
+        // Get Results
+        let numSessions = queryer.getNumSessionsCompleted()
+        let workDuration = queryer.getWorkDurationFormatted()
+        
+        self.numberOfSessions = numSessions
+        self.workDuration = workDuration
+    }
+    
+    @Published var numberOfSessions = 0
+    @Published var workDuration = "? hours"
 }

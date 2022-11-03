@@ -129,21 +129,11 @@ class StatisticsState: ObservableObject {
         // Query
         let queryer = SessionHistoryQueryer()
             queryer.completed(within: interval)
-        
-        // Get Results
-        let numSessions = queryer.getNumSessionsCompleted()
-        let workDuration = queryer.getWorkDurationFormatted()
-        
-        self.numSessions = numSessions
-        self.workDuration = workDuration
-        
         let charter = queryer.getCharter(for: interval)
         let data = charter.chart()
         
         self.sessionData = data
     }
     
-    @Published var numSessions = 0
-    @Published var workDuration = ""
     @Published var sessionData = [StatisticsData]()
 }
