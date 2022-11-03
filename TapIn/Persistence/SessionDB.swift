@@ -22,19 +22,24 @@ final class SessionDB: Object, ObjectKeyIdentifiable {
     @Persisted(originProperty: "sessions")
     var workspace: LinkingObjects<WorkspaceDB>
     
+    func getWorkspace() -> WorkspaceDB {
+        return workspace.first!
+    }
+    
+    func isIn(workspace ws: WorkspaceDB) -> Bool {
+        guard let workspace = workspace.first else {
+            return false
+        }
+        
+        return workspace == ws || workspace.parent.first == ws
+    }
+    
     convenience init(stage: PomodoroStage) {
         self.init()
         self.id = ObjectId.generate()
-        self.completedTime = Date.now
+        self.completedTime = Date()
         self.duration = stage.getDurationInSeconds()
     }
-    
-//    convenience init(duration: Double) {
-//        self.init()
-//        self.id = ObjectId.generate()
-//        self.completedTime = Date.now
-//        self.duration = duration
-//    }
     
     override var description: String {
         return """

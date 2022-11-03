@@ -9,8 +9,11 @@
 /* Begin PBXBuildFile section */
 		3505D2462911FBA9008B7274 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3505D2452911FBA9008B7274 /* Realm */; };
 		3505D2482911FBA9008B7274 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3505D2472911FBA9008B7274 /* RealmSwift */; };
+		359780032913FB44004FBDAE /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359780022913FB44004FBDAE /* StatisticsView.swift */; };
+		3597800529141729004FBDAE /* SessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597800429141729004FBDAE /* SessionModel.swift */; };
 		35AD05FD2912EDF800837016 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD05FC2912EDF800837016 /* NotesView.swift */; };
 		35AD05FF2912F18700837016 /* NoteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD05FE2912F18700837016 /* NoteDB.swift */; };
+		35AD06072913280D00837016 /* SessionHistoryQueryer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD06062913280D00837016 /* SessionHistoryQueryer.swift */; };
 		35E000022911EEF2009D284D /* TapInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000012911EEF2009D284D /* TapInApp.swift */; };
 		35E000062911EEF3009D284D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E000052911EEF3009D284D /* Assets.xcassets */; };
 		35E000092911EEF3009D284D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E000082911EEF3009D284D /* Preview Assets.xcassets */; };
@@ -78,6 +81,7 @@
 		35E000E32911F531009D284D /* PomodoroStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B52911F531009D284D /* PomodoroStage.swift */; };
 		35E000E42911F531009D284D /* PomodoroTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B62911F531009D284D /* PomodoroTicker.swift */; };
 		35E000E52911F531009D284D /* WorkspacePomodoro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B82911F531009D284D /* WorkspacePomodoro.swift */; };
+		DC0280BE4E4B255B10AA9422 /* StatisticsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC02823F03E1DB59824ADC39 /* StatisticsState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,8 +102,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		359780022913FB44004FBDAE /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		3597800429141729004FBDAE /* SessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionModel.swift; sourceTree = "<group>"; };
 		35AD05FC2912EDF800837016 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		35AD05FE2912F18700837016 /* NoteDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDB.swift; sourceTree = "<group>"; };
+		35AD06062913280D00837016 /* SessionHistoryQueryer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryQueryer.swift; sourceTree = "<group>"; };
+		35AD06082913327900837016 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		35E000012911EEF2009D284D /* TapInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInApp.swift; sourceTree = "<group>"; };
 		35E000052911EEF3009D284D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35E000082911EEF3009D284D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -171,6 +179,7 @@
 		35E000B62911F531009D284D /* PomodoroTicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroTicker.swift; sourceTree = "<group>"; };
 		35E000B82911F531009D284D /* WorkspacePomodoro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspacePomodoro.swift; sourceTree = "<group>"; };
 		35E0FFFE2911EEF2009D284D /* TapIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC02823F03E1DB59824ADC39 /* StatisticsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +237,41 @@
 			isa = PBXGroup;
 			children = (
 				35AD05FC2912EDF800837016 /* NotesView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		35AD0601291327CF00837016 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				35AD0603291327D500837016 /* Models */,
+				35AD0602291327D300837016 /* ViewModels */,
+				35AD0604291327D800837016 /* Views */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		35AD0602291327D300837016 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				DC02823F03E1DB59824ADC39 /* StatisticsState.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		35AD0603291327D500837016 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				35AD06062913280D00837016 /* SessionHistoryQueryer.swift */,
+				3597800429141729004FBDAE /* SessionModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		35AD0604291327D800837016 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				359780022913FB44004FBDAE /* StatisticsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,6 +374,7 @@
 		35E000652911F531009D284D /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				35AD0601291327CF00837016 /* Statistics */,
 				35AD05F72912EB6D00837016 /* Notes */,
 				35E000662911F531009D284D /* Sidebar */,
 				35E000722911F531009D284D /* Preferences */,
@@ -686,6 +731,7 @@
 		35E0FFF52911EEF2009D284D = {
 			isa = PBXGroup;
 			children = (
+				35AD06082913327900837016 /* MyPlayground.playground */,
 				35E000002911EEF2009D284D /* TapIn */,
 				35E000122911EEF3009D284D /* TapInTests */,
 				35E0001C2911EEF3009D284D /* TapInUITests */,
@@ -876,6 +922,7 @@
 				35E000602911F4F4009D284D /* SessionDB.swift in Sources */,
 				35E000442911F415009D284D /* URL+.swift in Sources */,
 				35E000392911F382009D284D /* NuclearWasteland.swift in Sources */,
+				359780032913FB44004FBDAE /* StatisticsView.swift in Sources */,
 				35E000E32911F531009D284D /* PomodoroStage.swift in Sources */,
 				35E000D42911F531009D284D /* WorkspaceVM.swift in Sources */,
 				35E000DF2911F531009D284D /* PomodoroState.swift in Sources */,
@@ -910,6 +957,7 @@
 				35E000C52911F531009D284D /* WorkspaceSettingsView.swift in Sources */,
 				35E000E52911F531009D284D /* WorkspacePomodoro.swift in Sources */,
 				35E000C72911F531009D284D /* LauncherState.swift in Sources */,
+				35AD06072913280D00837016 /* SessionHistoryQueryer.swift in Sources */,
 				35E000D92911F531009D284D /* RadioBottomMenuController.swift in Sources */,
 				35E000CD2911F531009D284D /* AppLauncherView.swift in Sources */,
 				35E000DB2911F531009D284D /* Direction.swift in Sources */,
@@ -921,6 +969,8 @@
 				35E000C62911F531009D284D /* TimeTrackerModel.swift in Sources */,
 				35E000422911F40C009D284D /* Collection+.swift in Sources */,
 				35E0005A2911F4C6009D284D /* TimeTrackerDB.swift in Sources */,
+				3597800529141729004FBDAE /* SessionModel.swift in Sources */,
+				DC0280BE4E4B255B10AA9422 /* StatisticsState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

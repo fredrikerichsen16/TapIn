@@ -81,4 +81,9 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
         return sessions.filter("completedTime BETWEEN {%@, %@}", startTime, endTime)
     }
     
+    static func getTopLevelWorkspaces() -> Results<WorkspaceDB> {
+        let realm = RealmManager.shared.realm
+        return realm.objects(WorkspaceDB.self).where({ $0.parent.count == 0 })
+    }
+    
 }

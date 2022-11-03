@@ -20,7 +20,7 @@ struct SidebarButtonToPage: View {
         case .home:
             Text(item.label).font(.largeTitle)
         case .statistics:
-            Text(item.label).font(.largeTitle)
+            StatisticsView()
         default:
             fatalError("1493403")
         }

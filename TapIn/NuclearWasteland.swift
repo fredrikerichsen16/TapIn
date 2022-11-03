@@ -1,3 +1,27 @@
+//    func chart() -> [IntervalSubdivision] {
+//        let workspaces = Array(WorkspaceDB.getTopLevelWorkspaces())
+//        let session = Array(s)
+//
+//        var subdivisions = getIntervalSubdivisions()
+//        var data = [StatisticsData]()
+//
+//        for (idx, subdivision) in subdivisions.enumerated() {
+//            let sessionsInInterval = sessions.filter("completedTime BETWEEN {%@, %@}", subdivision.interval.start, subdivision.interval.end)
+//
+//            for workspace in workspaces
+//            {
+//                let sessionsInWorkspace = sessionsInInterval.filter({ $0.isIn(workspace: workspace) })
+////                let sessionsInWorkspace = sessionsInInterval.filter({ $0.isIn(workspace: workspace) })
+//                let average = Int(sessionsInWorkspace.average(of: \.duration) ?? 0)
+//
+//                subdivisions[idx].data = average //.append(StatisticsData(averageMinutes: average))
+//            }
+//        }
+//
+//        return subdivisions
+//    }
+
+
 //struct SidebarButtonToWorkspace: View {
 //    var realm: Realm {
 //        RealmManager.shared.realm
