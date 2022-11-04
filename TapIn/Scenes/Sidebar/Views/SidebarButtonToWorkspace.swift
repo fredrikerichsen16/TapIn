@@ -33,7 +33,7 @@ struct SidebarButtonToWorkspace: View {
                 Label(menuItem.label, systemImage: menuItem.icon)
                     .padding(.vertical, 5)
             }
-            .tag(menuItem.id)
+            .tag(menuItem)
             .contextMenu(ContextMenu(menuItems: {
                 contextMenu
             }))
@@ -45,12 +45,12 @@ struct SidebarButtonToWorkspace: View {
 extension SidebarButtonToWorkspace {
     var contextMenu: some View {
         Group {
-            Button("Add Child Workspace") {
-                sidebarVM.addChild(to: workspace)
+            Button("Add workspace to folder") {
+                sidebarVM.addWorkspace(to: workspace.folder)
             }
-
+            
             Button("Delete") {
-                sidebarVM.deleteWorkspace(workspace)
+                sidebarVM.delete(workspace: workspace)
             }
 
             Button("Rename") {

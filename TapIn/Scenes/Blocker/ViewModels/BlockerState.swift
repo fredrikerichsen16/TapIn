@@ -45,11 +45,25 @@ class BlockerState: ObservableObject {
             }
         })
     }
+
+//    func validateUrl(url: String) -> Bool {
+//        let url = URL(string: url)
+//        return url != nil
+//    }
+
+    func validateUrl(url: String) -> Bool {
+        // try? NSRegularExpression(pattern: "https?:\\/\\/([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:\\/~+#-]*[\\w@?^=%&\\/~+#-])")
+
+        guard let linkRegex = try? NSRegularExpression(pattern: "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$", options: .caseInsensitive) else { return false }
+        return linkRegex.firstMatch(in: url, options: [], range: NSRange(location: 0, length: url.count)) != nil
+    }
     
     func addBlacklistedWebsite(url: String) {
         guard let blocker = blocker.thaw() else { return }
         
         let url = url.lowercased().trim()
+
+        guard validateUrl(url: url) else { return }
         
         try? realm.write {
             blocker.blacklistedWebsites.append(url)

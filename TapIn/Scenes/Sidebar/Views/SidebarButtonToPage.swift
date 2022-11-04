@@ -8,9 +8,8 @@ struct SidebarButtonToPage: View {
     var body: some View {
         NavigationLink(destination: { viewForMenuItem(menuItem) }) {
             Label(menuItem.label, systemImage: menuItem.icon)
-                .padding(.vertical, 5)
         }
-        .tag(menuItem.id)
+        .tag(menuItem)
     }
 
     @ViewBuilder

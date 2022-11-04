@@ -9,11 +9,12 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     @Persisted
     var name: String = "New Workspace"
     
-    @Persisted
-    var children = RealmSwift.List<WorkspaceDB>()
+    @Persisted(originProperty: "workspaces")
+    var _folder: LinkingObjects<FolderDB>
     
-    @Persisted(originProperty: "children")
-    var parent: LinkingObjects<WorkspaceDB>
+    var folder: FolderDB {
+        _folder.first!
+    }
     
     @Persisted
     var pomodoro: PomodoroDB!
@@ -45,10 +46,6 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
         self.note = NoteDB()
     }
     
-    func isTopLevel() -> Bool {
-        return parent.isEmpty
-    }
-    
     // MARK: Sessions
     
     /// Number of workspace sessions completed today
@@ -60,11 +57,6 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
         let sessionsToday = sessions.filter("completedTime BETWEEN {%@, %@}", todayInterval.start, todayInterval.end)
         
         return sessionsToday.count
-    }
-
-    static func getTopLevelWorkspaces() -> Results<WorkspaceDB> {
-        let realm = RealmManager.shared.realm
-        return realm.objects(WorkspaceDB.self).where({ $0.parent.count == 0 })
     }
     
 }

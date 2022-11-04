@@ -9,72 +9,64 @@ class SidebarVM: ObservableObject {
     
     init() {
         let realm = RealmManager.shared.realm
-        self.workspaces = realm.objects(WorkspaceDB.self)
-        self.updateWorkspaceMenuItems()
+        self.folders = realm.objects(FolderDB.self)
         self.setToken()
+        self.sidebarModel = SidebarModel()
+        self.sidebarModel.setOutline(with: folders)
     }
     
     // MARK: General
     
     @Published var selectedWorkspace: WorkspaceDB? = nil
     @Published var activeWorkspace: WorkspaceDB? = nil
-
-    /// I will remporarily use this to refresh the view, but it shouldn't be used because if your viewmodels and stuff are done correctly it's done automatically
-    func refresh() {
-        objectWillChange.send()
-    }
     
     // MARK: Sidebar
     
-    @Published var workspaces: Results<WorkspaceDB>
+    @Published var folders: Results<FolderDB>
     
-    @Published var workspaceMenuItems: [MenuItemNode] = []
+    @Published var sidebarModel: SidebarModel = SidebarModel()
     
-    @Published var sidebarSelection: String? = MenuItem.home.id
+    // MARK: Token
     
     var token: NotificationToken? = nil
 
     func setToken() {
-        self.token = workspaces.observe({ [unowned self] (changes) in
+        self.token = folders.observe({ [unowned self] (changes) in
             switch changes
             {
-            case .update(_, deletions: let deletions, insertions: let insertions, modifications: _):
-                if deletions.count + insertions.count > 0 {
-                    objectWillChange.send()
-                    self.updateWorkspaceMenuItems()
-                }
+            case .update(_, deletions: _, insertions: _, modifications: _):
+                objectWillChange.send()
+                self.sidebarModel.setOutline(with: folders)
             default:
                 break
             }
         })
     }
     
-    func updateWorkspaceMenuItems() {
-        let workspaces = Array(workspaces.filter({ $0.parent.isEmpty }))
-        
-        self.workspaceMenuItems = MenuItemNode.createOutline(workspaces: workspaces)
-    }
-    
     // MARK: Navigation
     
     func onNavigation(to workspace: WorkspaceDB) {
         selectedWorkspace = workspace
-        sidebarSelection = MenuItem.workspace(workspace).id
+        sidebarModel.selection = MenuItem.workspace(workspace)
+    }
+    
+    func onNavigation(to folder: FolderDB) {
+        selectedWorkspace = nil
+        sidebarModel.selection = MenuItem.folder(folder)
     }
     
     func navigate(to workspace: WorkspaceDB) {
         selectedWorkspace = workspace
-        sidebarSelection = MenuItem.workspace(workspace).id
+        sidebarModel.selection = MenuItem.workspace(workspace)
     }
-
+        
     // MARK: CRUD
-
-    func addWorkspace() {
-        try? realm.write({
-            let ws = WorkspaceDB(name: "New Workspace")
-
-            realm.add(ws)
-        })
+    
+    func addFolder() {
+        try? realm.write {
+            let folder = FolderDB(name: "New Folder")
+            realm.add(folder)
+        }
     }
 
     func renameWorkspace(_ workspace: WorkspaceDB, name: String) {
@@ -88,30 +80,53 @@ class SidebarVM: ObservableObject {
             workspace.name = name
         }
     }
-
-    func deleteWorkspace(_ workspace: WorkspaceDB) {
-        sidebarSelection = MenuItem.home.id
-        
-        guard let thawed = workspace.thaw() else { return }
-
-        try! realm.write {
-            realm.delete(thawed)
+    
+    func test() {
+        guard let folder = sidebarModel.selection?.folder else {
+            return
         }
+        
+        print("Num workspaces pre deletion: ", folder.workspaces.count, realm.objects(WorkspaceDB.self).count)
     }
 
-    func addChild(to workspace: WorkspaceDB) {
-        guard let workspace = workspace.thaw() else { return }
-
-        // You can only nest once, i.e. two levels
-        guard workspace.isTopLevel() else {
-            print("Cannot add more than one level of nesting")
+    func delete(workspace: WorkspaceDB) {
+        sidebarModel.selection = MenuItem.folder(workspace.folder)
+    
+        guard let folder = workspace.folder.thaw() else {
             return
         }
 
-        let childWorkspace = WorkspaceDB(name: "New Workspace")
+        try? realm.write {
+            guard let workspaceIndex = folder.workspaces.firstIndex(of: workspace) else {
+                return
+            }
+
+            folder.workspaces.remove(at: workspaceIndex)
+        }
+    }
+
+    func delete(folder: FolderDB) {
+        guard let folder = folder.thaw() else {
+            return
+        }
+        
+        sidebarModel.selection = nil
+        
+        try? realm.write
+        {
+            realm.delete(folder)
+        }
+    }
+
+    func addWorkspace(to folder: FolderDB) {
+        guard let folder = folder.thaw() else {
+            return
+        }
+        
+        let workspace = WorkspaceDB(name: "New Workspace")
 
         try? realm.write {
-            workspace.children.append(childWorkspace)
+            folder.workspaces.append(workspace)
         }
     }
     

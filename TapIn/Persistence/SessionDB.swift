@@ -26,14 +26,6 @@ final class SessionDB: Object, ObjectKeyIdentifiable {
 //        return workspace.first!
 //    }
     
-    func isIn(workspace ws: WorkspaceDB) -> Bool {
-        guard let workspace = workspace.first else {
-            return false
-        }
-        
-        return workspace == ws || workspace.parent.first == ws
-    }
-    
     convenience init(stage: PomodoroStage) {
         self.init()
         self.id = ObjectId.generate()

@@ -69,9 +69,9 @@ class SessionHistoryQueryer {
     
     // MARK: Workspace Filtering
     
-    func inWorkspace(workspace: WorkspaceDB, includeChildWorkspaces: Bool = true) {
+    func inWorkspace(workspace: WorkspaceDB) {
         self.sessions = sessions.where({ session in
-            session.workspace == workspace || session.workspace.parent == workspace
+            session.workspace == workspace
         })
     }
     
@@ -115,60 +115,62 @@ class SessionHistoryCharter {
     }
     
     func chart() -> [ChartData] {
-        let workspaces = Array(WorkspaceDB.getTopLevelWorkspaces())
-        let subdivisions = getIntervalSubdivisions()
-        var data = [ChartData]()
-        
-        for (_, subdivision) in subdivisions.enumerated() {
-            let sessionsInInterval = sessions.filter({ session in
-                session.completedTime > subdivision.interval.start && session.completedTime < subdivision.interval.end
-            })
-            
-            for workspace in workspaces
-            {
-                let sessionsInWorkspace = sessionsInInterval.filter({ $0.workspace.first == workspace })
-                
-                let total = sessionsInWorkspace.reduce(0, { current, session in
-                    current + session.duration
-                })
-                let average = total / Double(subdivision.numberOfDays)
-                
-                data.append(ChartData(intervalLabel: subdivision.label, seconds: average, workspace: workspace))
-            }
-        }
-        
-        return data
+        return []
+//        let workspaces = Array(WorkspaceDB.getTopLevelWorkspaces())
+//        let subdivisions = getIntervalSubdivisions()
+//        var data = [ChartData]()
+//
+//        for (_, subdivision) in subdivisions.enumerated() {
+//            let sessionsInInterval = sessions.filter({ session in
+//                session.completedTime > subdivision.interval.start && session.completedTime < subdivision.interval.end
+//            })
+//
+//            for workspace in workspaces
+//            {
+//                let sessionsInWorkspace = sessionsInInterval.filter({ $0.workspace.first == workspace })
+//
+//                let total = sessionsInWorkspace.reduce(0, { current, session in
+//                    current + session.duration
+//                })
+//                let average = total / Double(subdivision.numberOfDays)
+//
+//                data.append(ChartData(intervalLabel: subdivision.label, seconds: average, workspace: workspace))
+//            }
+//        }
+//
+//        return data
     }
     
     func list() -> [ListData] {
-        let workspaces = Array(WorkspaceDB.getTopLevelWorkspaces())
-        var data = [ListData]()
-
-        for workspace in workspaces
-        {
-            var childrenListData = [ListData]()
-            for childWorkspace in [workspace] + workspace.children
-            {
-                let sessionsInChildWorkspace = sessions.filter({ $0.workspace.first == childWorkspace })
-
-                let total = sessionsInChildWorkspace.reduce(0, { current, session in
-                    current + session.duration
-                })
-                let average = total / Double(interval.durationInDays)
-
-                childrenListData.append(ListData(seconds: average, workspace: childWorkspace))
-            }
-
-            let total = childrenListData.reduce(0, { current, session in
-                current + session.seconds
-            })
-            
-            let average = total / Double(childrenListData.count)
-
-            data.append( ListData(seconds: average, workspace: workspace, children: childrenListData) )
-        }
-
-        return data
+        return []
+//        let workspaces = Array(WorkspaceDB.getTopLevelWorkspaces())
+//        var data = [ListData]()
+//
+//        for workspace in workspaces
+//        {
+//            var childrenListData = [ListData]()
+//            for childWorkspace in [workspace] + workspace.children
+//            {
+//                let sessionsInChildWorkspace = sessions.filter({ $0.workspace.first == childWorkspace })
+//
+//                let total = sessionsInChildWorkspace.reduce(0, { current, session in
+//                    current + session.duration
+//                })
+//                let average = total / Double(interval.durationInDays)
+//
+//                childrenListData.append(ListData(seconds: average, workspace: childWorkspace))
+//            }
+//
+//            let total = childrenListData.reduce(0, { current, session in
+//                current + session.seconds
+//            })
+//
+//            let average = total / Double(childrenListData.count)
+//
+//            data.append( ListData(seconds: average, workspace: workspace, children: childrenListData) )
+//        }
+//
+//        return data
     }
     
     func getIntervalSubdivisions() -> [IntervalSubdivision] {

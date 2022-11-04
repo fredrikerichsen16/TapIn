@@ -1,3 +1,81 @@
+//func delete(workspace: WorkspaceDB) {
+//    sidebarModel.selection = MenuItem.folder(workspace.folder)
+//    sidebarModel.outline = []
+//
+////        guard let folder = workspace.folder.thaw() else {
+////            return
+////        }
+//
+////        print("Num workspaces pre deletion: ", folder.workspaces.count, realm.objects(WorkspaceDB.self).count)
+//
+//    try? realm.write {
+////            guard let workspaceIndex = folder.workspaces.firstIndex(of: workspace) else {
+////                return
+////            }
+////
+////            folder.workspaces.remove(at: workspaceIndex)
+//
+//        if let workspace = realm.objects(WorkspaceDB.self).first(where: { $0.id == workspace.id }) {
+//            let folder = workspace._folder.first!
+//
+//            folder.workspaces.remove(at: 0)
+//
+//            realm.delete(workspace)
+//        }
+//
+////            realm.delete(workspace)
+//
+////            print("Num workspaces post deletion: ", folder.workspaces.count, realm.objects(WorkspaceDB.self).count)
+//    }
+//}
+
+
+
+
+
+// I LIKE THIS
+//func removeFolder() {
+//    guard let selection = sidebarModel.selection else {
+//        return
+//    }
+//
+//    var deletions: [Object] = []
+//
+//    // Figure out what to delete, and how to change selection
+//    if let folder = selection.folder
+//    {
+//        for workspace in folder.workspaces
+//        {
+//            deletions.append(workspace)
+//        }
+//
+//        deletions.append(folder)
+//
+//        sidebarModel.selection = nil
+//    }
+//    else if let workspace = selection.workspace
+//    {
+//        deletions.append(workspace)
+//
+//        sidebarModel.selection = MenuItem.folder(workspace.folder)
+//    }
+//
+//    try? realm.write {
+//        // Perform deletion(s)
+//        for object in deletions
+//        {
+//            if let folder = object as? FolderDB {
+//                realm.delete(folder)
+//            } else if let workspace = object as? WorkspaceDB {
+//                realm.delete(workspace)
+//            }
+//        }
+//    }
+//}
+
+
+
+
 //    func loadData() {
 //        let realm = RealmManager.shared.realm
 //        let workspaces = Array(realm.objects(WorkspaceDB.self))
@@ -56,8 +134,8 @@
 //
 //            for workspace in workspaces
 //            {
-//                let sessionsInWorkspace = sessionsInInterval.filter({ $0.isIn(workspace: workspace) })
-////                let sessionsInWorkspace = sessionsInInterval.filter({ $0.isIn(workspace: workspace) })
+//                let sessionsInWorkspace = sessionsInInterval.filter({ $0.workspace.first == workspace })
+////                let sessionsInWorkspace = sessionsInInterval.filter({ $0.workspace.first == workspace })
 //                let average = Int(sessionsInWorkspace.average(of: \.duration) ?? 0)
 //
 //                subdivisions[idx].data = average //.append(StatisticsData(averageMinutes: average))

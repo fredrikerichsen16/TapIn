@@ -18,7 +18,7 @@ class RealmManager {
             }
             else
             {
-                let config = Realm.Configuration(schemaVersion: 3)
+                let config = Realm.Configuration(schemaVersion: 5)
                 self.realm = try Realm(configuration: config)
 //                addData()
             }
@@ -31,14 +31,13 @@ class RealmManager {
     
     func addData() {
         try! realm.write {
-            for workspace in realm.objects(WorkspaceDB.self)
-            {
-                print("Deleting: ")
-                print(workspace.name)
-                realm.delete(workspace)
-            }
+            realm.deleteAll()
             
             let workNames = ["University", "Coding"]
+            
+            let folder = FolderDB(name: "Working")
+            
+            realm.add(folder)
             
             for name in workNames
             {
@@ -62,7 +61,7 @@ class RealmManager {
                     }
                 }
                 
-                realm.add(ws)
+                folder.workspaces.append(ws)
             }
         }
     }
