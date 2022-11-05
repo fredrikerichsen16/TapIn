@@ -50,7 +50,6 @@ enum MenuItem {
 }
 
 extension MenuItem: Identifiable {
-    
     var id: String {
         switch self
         {
@@ -64,7 +63,6 @@ extension MenuItem: Identifiable {
             return folder.id.stringValue
         }
     }
-    
 }
 
 extension MenuItem: Hashable {}

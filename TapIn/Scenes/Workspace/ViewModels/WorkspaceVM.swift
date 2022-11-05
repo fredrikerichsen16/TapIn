@@ -116,11 +116,11 @@ class WorkspaceVM: ObservableObject {
 
     // MARK: Tab states
     
-    var pomodoroState: PomodoroState!
-    var timeTrackerState: TimeTrackerState!
-    var radioState: RadioState!
-    var launcherState: LauncherState!
-    var blockerState: BlockerState!
+    let pomodoroState: PomodoroState
+    let timeTrackerState: TimeTrackerState
+    let radioState: RadioState
+    let launcherState: LauncherState
+    let blockerState: BlockerState
     
     // MARK: Tab
     
@@ -136,4 +136,7 @@ class WorkspaceVM: ObservableObject {
     
     @Published var bottomMenuTab: WorkspaceTab = .pomodoro
     
+    deinit {
+        print("WorkspaceVM DID DEINITIALIZE")
+    }
 }

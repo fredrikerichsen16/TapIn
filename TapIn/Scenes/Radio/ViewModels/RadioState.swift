@@ -79,4 +79,8 @@ final class RadioState: WorkspaceComponentViewModel {
     func initializePlayer() {
         self.player = RadioPlayer(channel: currentChannel, isPlaying: isActive)
     }
+    
+    deinit {
+        print("WAS DEINITIALIZED")
+    }
 }
