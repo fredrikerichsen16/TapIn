@@ -10,17 +10,11 @@ enum TimeGranularity: String {
 class SessionHistoryQueryer {
     let calendar = Calendar.current
     var sessions: Results<SessionDB>
+    var workspaces: Results<WorkspaceDB>
 
-    init(sessions: Results<SessionDB>? = nil) {
-        if let sessions = sessions
-        {
-            self.sessions = sessions
-        }
-        else
-        {
-            let realm = RealmManager.shared.realm
-            self.sessions = realm.objects(SessionDB.self)
-        }
+    init(realm: Realm) {
+        self.sessions = realm.objects(SessionDB.self)
+        self.workspaces = realm.objects(WorkspaceDB.self)
     }
 
     // MARK: Date filtering
@@ -100,50 +94,49 @@ class SessionHistoryQueryer {
     }
     
     func getCharter(for interval: IntervalHolder) -> SessionHistoryCharter {
-        return SessionHistoryCharter(sessions: Array(sessions), interval: interval)
+        return SessionHistoryCharter(sessions: Array(sessions), workspaces: Array(workspaces), interval: interval)
     }
 }
 
 class SessionHistoryCharter {
     var sessions: [SessionDB]
+    var workspaces: [WorkspaceDB]
     let interval: IntervalHolder
     let calendar = Calendar.current
     
-    init(sessions: [SessionDB], interval: IntervalHolder) {
+    init(sessions: [SessionDB], workspaces: [WorkspaceDB], interval: IntervalHolder) {
         self.sessions = sessions
+        self.workspaces = workspaces
         self.interval = interval
     }
     
     func chart() -> [ChartData] {
-        return []
-//        let workspaces = Array(WorkspaceDB.getTopLevelWorkspaces())
-//        let subdivisions = getIntervalSubdivisions()
-//        var data = [ChartData]()
-//
-//        for (_, subdivision) in subdivisions.enumerated() {
-//            let sessionsInInterval = sessions.filter({ session in
-//                session.completedTime > subdivision.interval.start && session.completedTime < subdivision.interval.end
-//            })
-//
-//            for workspace in workspaces
-//            {
-//                let sessionsInWorkspace = sessionsInInterval.filter({ $0.workspace.first == workspace })
-//
-//                let total = sessionsInWorkspace.reduce(0, { current, session in
-//                    current + session.duration
-//                })
-//                let average = total / Double(subdivision.numberOfDays)
-//
-//                data.append(ChartData(intervalLabel: subdivision.label, seconds: average, workspace: workspace))
-//            }
-//        }
-//
-//        return data
+        let subdivisions = getIntervalSubdivisions()
+        var data = [ChartData]()
+
+        for (_, subdivision) in subdivisions.enumerated() {
+            let sessionsInInterval = sessions.filter({ session in
+                session.completedTime > subdivision.interval.start && session.completedTime < subdivision.interval.end && session.workspace.first != nil
+            })
+
+            for workspace in workspaces
+            {
+                let sessionsInWorkspace = sessionsInInterval.filter({ $0.workspace.first == workspace })
+
+                let total = sessionsInWorkspace.reduce(0, { current, session in
+                    current + session.duration
+                })
+                let average = total / Double(subdivision.numberOfDays)
+
+                data.append(ChartData(intervalLabel: subdivision.label, seconds: average, workspace: workspace))
+            }
+        }
+
+        return data
     }
     
     func list() -> [ListData] {
         return []
-//        let workspaces = Array(WorkspaceDB.getTopLevelWorkspaces())
 //        var data = [ListData]()
 //
 //        for workspace in workspaces

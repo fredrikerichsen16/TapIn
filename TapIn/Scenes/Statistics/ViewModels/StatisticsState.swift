@@ -141,14 +141,19 @@ class StatisticsState: ObservableObject {
     }
 
     func submit() {
-        // Query
-        let queryer = SessionHistoryQueryer()
-            queryer.completed(within: interval)
+        let frozen = realm.freeze()
         
-        let charter = queryer.getCharter(for: interval)
-        
-        self.chartData = charter.chart()
-        self.listData = charter.list()
+        Task {
+            let queryer = SessionHistoryQueryer(realm: frozen)
+                queryer.completed(within: interval)
+
+            let charter = queryer.getCharter(for: interval)
+
+            DispatchQueue.main.async {
+                self.chartData = charter.chart()
+                self.listData = charter.list()
+            }
+        }
     }
     
     @Published var chartData = [ChartData]()

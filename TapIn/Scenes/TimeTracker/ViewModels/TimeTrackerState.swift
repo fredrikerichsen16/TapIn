@@ -9,17 +9,26 @@ class TimeTrackerState: WorkspaceComponentViewModel {
     }
 
     func setContent() {
-        // Query
-        let queryer = SessionHistoryQueryer()
-            queryer.completedThisWeek()
-            queryer.inWorkspace(workspace: workspace)
+        let frozen = realm.freeze()
+        guard let workspaceInFrozenRealm = frozen.objects(WorkspaceDB.self).first(where: { $0.id == workspace.id }) else {
+            return
+        }
         
-        // Get Results
-        let numSessions = queryer.getNumSessionsCompleted()
-        let workDuration = queryer.getWorkDurationFormatted()
-        
-        self.numberOfSessions = numSessions
-        self.workDuration = workDuration
+        Task {
+            // Query
+            let queryer = SessionHistoryQueryer(realm: frozen)
+                queryer.completedThisWeek()
+              queryer.inWorkspace(workspace: workspaceInFrozenRealm)
+            
+            // Get Results
+            let numSessions = queryer.getNumSessionsCompleted()
+            let workDuration = queryer.getWorkDurationFormatted()
+            
+            DispatchQueue.main.async {
+                self.numberOfSessions = numSessions
+                self.workDuration = workDuration
+            }
+        }
     }
     
     @Published var numberOfSessions = 0
