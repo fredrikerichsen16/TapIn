@@ -1,19 +1,19 @@
 import SwiftUI
 import RealmSwift
 
-struct WorkspaceBrowseIntermediate: View {
-    @EnvironmentObject var workspace: WorkspaceVM
-    @EnvironmentObject var sidebar: SidebarVM
-    
-    var body: some View {
-        WorkspaceBrowse()
-            .environmentObject(workspace.pomodoroState)
-            .environmentObject(workspace.timeTrackerState)
-            .environmentObject(workspace.launcherState)
-            .environmentObject(workspace.blockerState)
-            .environmentObject(workspace.radioState)
-    }
-}
+//struct WorkspaceBrowseIntermediate: View {
+//    @EnvironmentObject var workspace: WorkspaceVM
+//    @EnvironmentObject var sidebar: SidebarVM
+//    
+//    var body: some View {
+//        WorkspaceBrowse()
+//            .environmentObject(workspace.pomodoroState)
+//            .environmentObject(workspace.timeTrackerState)
+//            .environmentObject(workspace.launcherState)
+//            .environmentObject(workspace.blockerState)
+//            .environmentObject(workspace.radioState)
+//    }
+//}
 
 struct WorkspaceBrowse: View {
     @EnvironmentObject var workspace: WorkspaceVM

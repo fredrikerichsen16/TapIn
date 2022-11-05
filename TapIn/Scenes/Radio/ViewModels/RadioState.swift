@@ -12,7 +12,7 @@ final class RadioState: WorkspaceComponentViewModel {
 //        RadioChannel(key: "GregorianChants", title: "Gregorian Chants", numberOfSongs: 0)
     ]
     
-    var currentChannelIndex: Int = 0 {
+    @Published var currentChannelIndex: Int = 0 {
         didSet {
             currentChannel = channels[currentChannelIndex]
         }

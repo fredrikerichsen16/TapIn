@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 class ComponentActivityTracker {
     let componentDidChangeActivityStatus: NSNotification.Name = NSNotification.Name("ComponentDidChangeActivityStatus")
@@ -13,22 +14,22 @@ class ComponentActivityTracker {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(pomodoroComponentDidChangeStatus(_:)),
                                                name: componentDidChangeActivityStatus,
-                                               object: workspace.pomodoroState)
+                                               object: workspace.pomodoro)
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(timeTrackerComponentDidChangeStatus(_:)),
                                                name: componentDidChangeActivityStatus,
-                                               object: workspace.timeTrackerState)
+                                               object: workspace.timeTracker)
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(radioComponentDidChangeStatus(_:)),
                                                name: componentDidChangeActivityStatus,
-                                               object: workspace.radioState)
+                                               object: workspace.radio)
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(blockerComponentDidChangeStatus(_:)),
                                                name: componentDidChangeActivityStatus,
-                                               object: workspace.blockerState)
+                                               object: workspace.blocker)
     }
     
     // MARK: Keeping Track of which workspaces are active and doing cascading launch
@@ -90,11 +91,11 @@ class WorkspaceVM: ObservableObject {
         let workspace = realm.objects(WorkspaceDB.self).first!
         let workspaceVM = WorkspaceVM(workspace: workspace)
         
-        workspaceVM.pomodoroState.realm = realm
-        workspaceVM.timeTrackerState.realm = realm
-        workspaceVM.radioState.realm = realm
-        workspaceVM.launcherState.realm = realm
-        workspaceVM.blockerState.realm = realm
+        workspaceVM.pomodoro.realm = realm
+        workspaceVM.timeTracker.realm = realm
+        workspaceVM.radio.realm = realm
+        workspaceVM.launcher.realm = realm
+        workspaceVM.blocker.realm = realm
         
         return workspaceVM
     }()
@@ -106,21 +107,43 @@ class WorkspaceVM: ObservableObject {
     
     init(workspace: WorkspaceDB) {
         self.workspace = workspace
-        self.pomodoroState = PomodoroState(workspace: workspace)
-        self.timeTrackerState = TimeTrackerState(workspace: workspace)
-        self.radioState = RadioState(workspace: workspace)
-        self.launcherState = LauncherState(workspace: workspace)
-        self.blockerState = BlockerState(workspace: workspace)
+        self.pomodoro = PomodoroState(workspace: workspace)
+        self.timeTracker = TimeTrackerState(workspace: workspace)
+        self.radio = RadioState(workspace: workspace)
+        self.launcher = LauncherState(workspace: workspace)
+        self.blocker = BlockerState(workspace: workspace)
         self.componentActivityTracker = ComponentActivityTracker(workspace: self)
+        
+        pomodoro.objectWillChange.sink { [weak self] (_) in
+            self?.objectWillChange.send()
+        }.store(in: &cancellable)
+        
+        timeTracker.objectWillChange.sink { [weak self] (_) in
+            self?.objectWillChange.send()
+        }.store(in: &cancellable)
+        
+        radio.objectWillChange.sink { [weak self] (_) in
+            self?.objectWillChange.send()
+        }.store(in: &cancellable)
+        
+        launcher.objectWillChange.sink { [weak self] (_) in
+            self?.objectWillChange.send()
+        }.store(in: &cancellable)
+        
+        blocker.objectWillChange.sink { [weak self] (_) in
+            self?.objectWillChange.send()
+        }.store(in: &cancellable)
     }
+    
+    var cancellable = Set<AnyCancellable>()
 
     // MARK: Tab states
     
-    let pomodoroState: PomodoroState
-    let timeTrackerState: TimeTrackerState
-    let radioState: RadioState
-    let launcherState: LauncherState
-    let blockerState: BlockerState
+    @Published var pomodoro: PomodoroState
+    @Published var timeTracker: TimeTrackerState
+    @Published var radio: RadioState
+    @Published var launcher: LauncherState
+    @Published var blocker: BlockerState
     
     // MARK: Tab
     
@@ -136,7 +159,63 @@ class WorkspaceVM: ObservableObject {
     
     @Published var bottomMenuTab: WorkspaceTab = .pomodoro
     
-    deinit {
-        print("WorkspaceVM DID DEINITIALIZE")
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//// First ViewModel
+//class FirstViewModel: ObservableObject {
+//    var facadeViewModel: FacadeViewModels
+//
+//    facadeViewModel.firstViewModelUpdateSecondViewModel()
+//}
+//
+//// Second ViewModel
+//class SecondViewModel: ObservableObject {
+//
+//}
+//
+//// FacadeViewModels Combine Both
+//
+//import Combine // so you can update thru nested Observable Objects
+//
+//class FacadeViewModels: ObservableObject {
+//    lazy var firstViewModel: FirstViewModel = FirstViewModel(facadeViewModel: self)
+//    @Published var secondViewModel = secondViewModel()
+//}
+//
+//    var anyCancellable = Set<AnyCancellable>()
+//
+//    init() {
+//        firstViewModel.objectWillChange.sink {
+//                    self.objectWillChange.send()
+//                }.store(in: &anyCancellable)
+//
+//        secondViewModel.objectWillChange.sink {
+//                    self.objectWillChange.send()
+//                }.store(in: &anyCancellable)
+//    }
+//
+//    func firstViewModelUpdateSecondViewModel() {
+//        //Change something on secondViewModel
+//        secondViewModel
+//    }
+//}

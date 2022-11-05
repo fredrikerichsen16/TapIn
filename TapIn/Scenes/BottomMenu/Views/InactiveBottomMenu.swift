@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct InactiveBottomMenu: View {
-    @Environment(\.workspaceCoordinator) var workspaceCoordinator
     @EnvironmentObject var sidebar: SidebarVM
     @StateObject var activeWorkspace: WorkspaceDB
     
