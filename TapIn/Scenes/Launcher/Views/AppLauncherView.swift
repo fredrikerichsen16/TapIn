@@ -15,7 +15,7 @@ import RealmSwift
 //}
 
 struct AppLauncherView: View {
-    @StateObject var launcherState: LauncherState
+    @EnvironmentObject var workspace: WorkspaceVM
     var launcherInstance: LauncherInstanceDB
     
     @State private var hideOnLaunch: Bool = false
@@ -34,7 +34,7 @@ struct AppLauncherView: View {
             Toggle("Hide app on launch", isOn: $hideOnLaunch)
                 .toggleStyle(.checkbox)
                 .onChange(of: hideOnLaunch) { value in
-                    launcherState.toggleHideOnLaunch(instance: launcherInstance, value: value)
+                    workspace.launcher.toggleHideOnLaunch(instance: launcherInstance, value: value)
                 }
         }.onAppear(perform: {
             hideOnLaunch = launcherInstance.hideOnLaunch

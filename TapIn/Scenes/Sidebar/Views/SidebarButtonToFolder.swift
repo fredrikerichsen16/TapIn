@@ -13,7 +13,6 @@ struct SidebarButtonToFolder: View {
             Text("Yes hello!")
         }) {
             Label(menuItem.label, systemImage: menuItem.icon)
-                .padding(.vertical, 5)
         }
         .tag(menuItem)
         .contextMenu(ContextMenu(menuItems: {

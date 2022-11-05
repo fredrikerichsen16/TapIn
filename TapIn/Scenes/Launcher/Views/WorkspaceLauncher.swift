@@ -5,7 +5,7 @@ import QuickLook
 struct WorkspaceLauncher: View {
     @State private var selectedInstance: ObjectId? = nil
     
-    @EnvironmentObject var launcherState: LauncherState
+    @EnvironmentObject var workspace: WorkspaceVM
 	
     var body: some View {
 		VStack(alignment: .leading) {
@@ -13,7 +13,7 @@ struct WorkspaceLauncher: View {
 
 			NavigationView {
                 VStack(alignment: .leading) {
-                    List(launcherState.launcherInstances, id: \.id, selection: $selectedInstance) { instance in
+                    List(workspace.launcher.launcherInstances, id: \.id, selection: $selectedInstance) { instance in
                         launcherInstanceListItem(instance: instance)
                     }
                     .frame(width: 210, alignment: .center)
@@ -55,7 +55,7 @@ struct WorkspaceLauncher: View {
     private func navigationLinkDestination(instance: LauncherInstanceDB) -> some View {
         switch instance.fullType {
             case .app:
-                AppLauncherView(launcherState: launcherState, launcherInstance: instance)
+                AppLauncherView(launcherInstance: instance)
             case .file:
                 FileLauncherView(launcherInstance: instance)
             case .folder:
@@ -83,7 +83,7 @@ struct WorkspaceLauncher: View {
             }
             
             Button("Duplicate") {
-                launcherState.duplicate(launcherInstance: instance)
+                workspace.launcher.duplicate(launcherInstance: instance)
             }
             
             Button("Quick Look") {
@@ -93,7 +93,7 @@ struct WorkspaceLauncher: View {
             
             Button("Delete") {
                 selectedInstance = nil
-                launcherState.delete(launcherInstance: instance)
+                workspace.launcher.delete(launcherInstance: instance)
             }
             .keyboardShortcut("d")
         }
@@ -102,7 +102,7 @@ struct WorkspaceLauncher: View {
 
 /// The plus and minus buttons below the list of launcher list items, for adding or removing launcher instances
 struct LauncherInstanceListControlButtons: View {
-    @EnvironmentObject var launcherState: LauncherState
+    @EnvironmentObject var workspace: WorkspaceVM
     @Binding var selectedInstance: ObjectId?
     @State var appSelection: Int? = nil
     @State var showingPopover = false
@@ -124,7 +124,7 @@ struct LauncherInstanceListControlButtons: View {
                 guard let id = selectedInstance else { return }
                 
                 selectedInstance = nil
-                launcherState.deleteInstance(by: id)
+                workspace.launcher.deleteInstance(by: id)
             }, label: {
                 Image(systemName: "minus")
                     .font(.system(size: 16.0))

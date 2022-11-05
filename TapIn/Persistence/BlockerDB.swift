@@ -6,25 +6,13 @@ final class BlockerDB: Object, ObjectKeyIdentifiable {
     var id: ObjectId
     
     @Persisted
-    var blacklistedWebsites = RealmSwift.List<String>()
+    var blacklistedWebsites = List<String>()
     
     @Persisted
     var blockerStrength: BlockerStrength = .normal
     
     @Persisted(originProperty: "blocker")
     var workspace: LinkingObjects<WorkspaceDB>
-    
-//    func getWorkspace() -> WorkspaceDB {
-//        return workspace.first!
-//    }
-//
-//    func addBlacklistedWebsite(_ realm: Realm, url: String) {
-//        try? realm.write {
-//            blacklistedWebsites.append(url)
-//            print(blacklistedWebsites)
-//        }
-//    }
-    
 }
 
 enum BlockerStrength: String, PersistableEnum {

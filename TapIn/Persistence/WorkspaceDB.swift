@@ -32,7 +32,7 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     var note: NoteDB!
     
     @Persisted
-    var sessions = RealmSwift.List<SessionDB>()
+    var sessions = List<SessionDB>()
         
     convenience init(name: String) {
         self.init()

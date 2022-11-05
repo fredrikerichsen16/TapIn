@@ -28,7 +28,7 @@ struct SidebarButtonToWorkspace: View {
         else
         {
             NavigationLink(destination: {
-                WorkspaceBrowseIntermediate()
+                WorkspaceBrowse()
                     .environmentObject(workspaceCoordinator.getWorkspaceVM(for: workspace))
             }) {
                 Label(menuItem.label, systemImage: menuItem.icon)

@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct InactiveBottomMenu: View {
-    @Environment(\.workspaceCoordinator) var workspaceCoordinator
     @EnvironmentObject var sidebar: SidebarVM
     @StateObject var activeWorkspace: WorkspaceDB
     
@@ -11,11 +10,7 @@ struct InactiveBottomMenu: View {
                 Text("Active Workspace: \(activeWorkspace.name)")
                 HStack {
                     Button("Go to", action: {
-                        sidebar.objectWillChange.send()
                         sidebar.sidebarModel.selection = MenuItem.workspace(activeWorkspace)
-                    })
-                    Button("Cancel", action: {
-                        workspaceCoordinator.disactivate()
                     })
                 }
             }

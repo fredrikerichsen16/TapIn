@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct WorkspaceBlocker: View {
-    @EnvironmentObject var blockerState: BlockerState
+    @EnvironmentObject var workspace: WorkspaceVM
     @State private var addWebsiteFieldValue = ""
     @State private var tableSelection: Set<Int> = Set()
     
@@ -9,7 +9,7 @@ struct WorkspaceBlocker: View {
         VStack {
             Text("Blocked Websites").font(.headline)
             
-            Table(blockerState.blacklist, selection: $tableSelection) {
+            Table(workspace.blocker.blacklist, selection: $tableSelection) {
                 TableColumn("URL", value: \.url)
             }
             
@@ -27,7 +27,7 @@ struct WorkspaceBlocker: View {
                             return
                         }
                         
-                        blockerState.deleteBlacklistedWebsite(by: tableSelection)
+                        workspace.blocker.deleteBlacklistedWebsite(by: tableSelection)
                         
                         tableSelection = Set()
                     }
@@ -39,7 +39,7 @@ struct WorkspaceBlocker: View {
     }
     
     func add() {
-        blockerState.addBlacklistedWebsite(url: addWebsiteFieldValue)
+        workspace.blocker.addBlacklistedWebsite(url: addWebsiteFieldValue)
         addWebsiteFieldValue = ""
     }
 }
@@ -50,6 +50,6 @@ struct WorkspaceBlocker_Preview: PreviewProvider {
         
         WorkspaceBlocker()
             .environmentObject(workspace)
-            .environmentObject(workspace.blockerState)
+            .environmentObject(workspace.blocker)
     }
 }

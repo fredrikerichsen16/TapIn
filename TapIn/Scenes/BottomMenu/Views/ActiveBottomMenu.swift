@@ -58,23 +58,23 @@ struct ActiveBottomMenu: View {
 }
 
 struct TimeTrackerBottomMenuController: View {
-    @EnvironmentObject var timeTracker: TimeTrackerState
+    @EnvironmentObject var workspace: WorkspaceVM
     
     var body: some View {
         VStack {
             Text("Time Tracker").font(.body)
             
             HStack {
-                if timeTracker.isActive
+                if workspace.timeTracker.isActive
                 {
                     Button("Stop Time Tracker") {
-                        timeTracker.endSession()
+                        workspace.timeTracker.endSession()
                     }
                 }
                 else
                 {
                     Button("Start Time Tracker") {
-                        timeTracker.startSession()
+                        workspace.timeTracker.startSession()
                     }
                 }
             }
@@ -83,23 +83,23 @@ struct TimeTrackerBottomMenuController: View {
 }
 
 struct BlockerBottomMenuController: View {
-    @EnvironmentObject var blocker: BlockerState
+    @EnvironmentObject var workspace: WorkspaceVM
     
     var body: some View {
         VStack {
             Text("Blocker").font(.body)
             
             HStack {
-                if blocker.isActive
+                if workspace.blocker.isActive
                 {
                     Button("Stop Blocking") {
-                        blocker.endSession()
+                        workspace.blocker.endSession()
                     }
                 }
                 else
                 {
                     Button("Start Blocking") {
-                        blocker.startSession()
+                        workspace.blocker.startSession()
                     }
                 }
             }
@@ -108,27 +108,27 @@ struct BlockerBottomMenuController: View {
 }
 
 struct LauncherBottomMenuController: View {
-    @EnvironmentObject var launcherState: LauncherState
+    @EnvironmentObject var workspace: WorkspaceVM
     
     var body: some View {
         VStack {
             Text("Launcher").font(.body)
             
             Button("Launch") {
-                launcherState.launcher.openAll()
+                workspace.launcher.launcher.openAll()
             }
         }
     }
 }
 
 struct PomodoroBottomMenuController: View {
-    @EnvironmentObject var pomodoroState: PomodoroState
+    @EnvironmentObject var workspace: WorkspaceVM
 
     var body: some View {
         VStack {
             Text("Pomodoro").font(.body)
             HStack {
-                ForEach(pomodoroState.getButtons(), id: \.rawValue) { button in
+                ForEach(workspace.pomodoro.getButtons(), id: \.rawValue) { button in
                     PomodoroButtonView(button: button)
                 }
             }
@@ -138,18 +138,18 @@ struct PomodoroBottomMenuController: View {
 
 struct PomodoroButtonView: View {
     @Environment(\.workspaceCoordinator) var workspaceCoordinator
-    @EnvironmentObject var pomodoroState: PomodoroState
+    @EnvironmentObject var workspace: WorkspaceVM
     let button: PomodoroButton
     
     var body: some View {
         switch button
         {
         case .start, .resume:
-            Button(button.rawValue, action: pomodoroState.startSession)
+            Button(button.rawValue, action: workspace.pomodoro.startSession)
         case .pause:
-            Button(button.rawValue, action: pomodoroState.pauseSession)
+            Button(button.rawValue, action: workspace.pomodoro.pauseSession)
         case .cancel, .skip:
-            Button(button.rawValue, action: pomodoroState.cancelSession)
+            Button(button.rawValue, action: workspace.pomodoro.cancelSession)
         }
     }
 }

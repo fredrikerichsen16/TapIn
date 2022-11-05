@@ -26,12 +26,12 @@ class SidebarVM: ObservableObject {
     var token: NotificationToken? = nil
 
     func setToken() {
-        self.token = folders.observe({ [unowned self] (changes) in
+        self.token = folders.observe(keyPaths: [\FolderDB.workspaces, \FolderDB.name], { [unowned self] (changes) in
             switch changes
             {
             case .update(_, deletions: _, insertions: _, modifications: _):
                 objectWillChange.send()
-                self.sidebarModel.setOutline(with: folders)
+                sidebarModel.setOutline(with: folders)
             default:
                 break
             }
@@ -92,6 +92,7 @@ class SidebarVM: ObservableObject {
         
         try? realm.write
         {
+            folder.workspaces.removeAll()
             realm.delete(folder)
         }
     }
