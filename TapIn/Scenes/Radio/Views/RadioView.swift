@@ -1,23 +1,27 @@
 import SwiftUI
 
 struct RadioView: View {
+    @Environment(\.workspaceCoordinator) var workspaceCoordinator
+    @EnvironmentObject var workspace: WorkspaceVM
     @EnvironmentObject var radioState: RadioState
 
     private func getToggleButtonLabel() -> Image {
-        return radioState.radioIsPlaying
-            ? Image(systemName: "pause.fill")
-            : Image(systemName: "play.fill")
+        return radioState.isActive ? Image(systemName: "pause.fill") : Image(systemName: "play.fill")
     }
     
     private func toggleButtonAction() {
-        if radioState.radioIsPlaying
+        if radioState.isActive
         {
-            radioState.pause()
+            radioState.endSession()
         }
         else
         {
-            radioState.play()
+            radioState.startSession()
         }
+    }
+    
+    var playButtonDisabled: Bool {
+        workspaceCoordinator.otherWorkspaceIsActive(than: workspace.workspace)
     }
 
     var body: some View {
@@ -39,6 +43,7 @@ struct RadioView: View {
                     })
 
                     Button(action: toggleButtonAction, label: getToggleButtonLabel)
+                        .disabled(playButtonDisabled)
 
                     Button(action: radioState.goToNextChannel, label: {
                         Image(systemName: "arrowtriangle.right.fill")

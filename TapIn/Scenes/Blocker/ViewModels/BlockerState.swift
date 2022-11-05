@@ -1,14 +1,7 @@
 import Foundation
 import RealmSwift
 
-struct BlacklistedWebsite: Identifiable {
-    let id: Int
-    let url: String
-}
-
-class BlockerState: ObservableObject {
-    var realm: Realm
-
+class BlockerState: WorkspaceComponentViewModel {
     var token: NotificationToken?
     
     @Published var blocker: BlockerDB
@@ -27,7 +20,8 @@ class BlockerState: ObservableObject {
     
     init(workspace: WorkspaceDB) {
         self.blocker = workspace.blocker
-        self.realm = RealmManager.shared.realm
+        super.init(workspace: workspace, realm: RealmManager.shared.realm)
+        
         self.updateBlacklist()
 
         self.token = blocker.observe({ [weak self] (changes) in
@@ -46,15 +40,8 @@ class BlockerState: ObservableObject {
         })
     }
 
-//    func validateUrl(url: String) -> Bool {
-//        let url = URL(string: url)
-//        return url != nil
-//    }
-
     func validateUrl(url: String) -> Bool {
-        // try? NSRegularExpression(pattern: "https?:\\/\\/([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:\\/~+#-]*[\\w@?^=%&\\/~+#-])")
-
-        guard let linkRegex = try? NSRegularExpression(pattern: "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$", options: .caseInsensitive) else { return false }
+        guard let linkRegex = try? NSRegularExpression(pattern: "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$") else { return false }
         return linkRegex.firstMatch(in: url, options: [], range: NSRange(location: 0, length: url.count)) != nil
     }
     
@@ -85,5 +72,19 @@ class BlockerState: ObservableObject {
                 blocker.blacklistedWebsites.remove(at: id)
             }
         }
+    }
+    
+    // MARK: Start and end session
+    
+    @Published var isActive = false
+    
+    func startSession() {
+        isActive = true
+        sendStatusChangeNotification(status: .running)
+    }
+    
+    func endSession() {
+        isActive = false
+        sendStatusChangeNotification(status: .initial)
     }
 }

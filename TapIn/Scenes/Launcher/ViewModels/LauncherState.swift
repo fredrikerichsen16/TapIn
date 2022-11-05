@@ -33,6 +33,8 @@ class LauncherState: ObservableObject {
         })
     }
     
+    let isActive = false
+    
     // MARK: Sidebar
     
     func duplicate(launcherInstance: LauncherInstanceDB) {

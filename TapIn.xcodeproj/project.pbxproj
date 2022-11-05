@@ -12,6 +12,9 @@
 		35693E5929157D5200F1966D /* FolderDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5829157D5200F1966D /* FolderDB.swift */; };
 		35693E5B2915851500F1966D /* SidebarButtonToFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5A2915851500F1966D /* SidebarButtonToFolder.swift */; };
 		35693E5D2915895900F1966D /* OutlineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5C2915895900F1966D /* OutlineNode.swift */; };
+		35693E5F2915C34400F1966D /* WorkspaceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5E2915C34400F1966D /* WorkspaceCoordinator.swift */; };
+		35693E622915DAD000F1966D /* WorkspaceComponentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E612915DAD000F1966D /* WorkspaceComponentViewModel.swift */; };
+		35693E652915DFF300F1966D /* BlacklistedWebsite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E642915DFF300F1966D /* BlacklistedWebsite.swift */; };
 		359780032913FB44004FBDAE /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359780022913FB44004FBDAE /* StatisticsView.swift */; };
 		3597800529141729004FBDAE /* SessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597800429141729004FBDAE /* SessionModel.swift */; };
 		35A1AAAD29147C2C00B8158D /* SidebarSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A1AAAC29147C2C00B8158D /* SidebarSettingsView.swift */; };
@@ -52,7 +55,7 @@
 		35E000C32911F531009D284D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000782911F531009D284D /* Settings.swift */; };
 		35E000C42911F531009D284D /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000792911F531009D284D /* GeneralSettingsView.swift */; };
 		35E000C52911F531009D284D /* WorkspaceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0007A2911F531009D284D /* WorkspaceSettingsView.swift */; };
-		35E000C62911F531009D284D /* TimeTrackerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0007D2911F531009D284D /* TimeTrackerModel.swift */; };
+		35E000C62911F531009D284D /* TimeTrackerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0007D2911F531009D284D /* TimeTrackerState.swift */; };
 		35E000C72911F531009D284D /* LauncherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000822911F531009D284D /* LauncherState.swift */; };
 		35E000C82911F531009D284D /* LauncherModelExtra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000842911F531009D284D /* LauncherModelExtra.swift */; };
 		35E000C92911F531009D284D /* WorkspaceLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000862911F531009D284D /* WorkspaceLauncher.swift */; };
@@ -67,7 +70,6 @@
 		35E000D22911F531009D284D /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000922911F531009D284D /* RadioPlayer.swift */; };
 		35E000D32911F531009D284D /* RadioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000942911F531009D284D /* RadioView.swift */; };
 		35E000D42911F531009D284D /* WorkspaceVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000972911F531009D284D /* WorkspaceVM.swift */; };
-		35E000D52911F531009D284D /* WorkspaceViewModelHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000992911F531009D284D /* WorkspaceViewModelHolder.swift */; };
 		35E000D62911F531009D284D /* WorkspaceBrowse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0009B2911F531009D284D /* WorkspaceBrowse.swift */; };
 		35E000D72911F531009D284D /* BlockerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0009E2911F531009D284D /* BlockerState.swift */; };
 		35E000D82911F531009D284D /* WorkspaceBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000A02911F531009D284D /* WorkspaceBlocker.swift */; };
@@ -108,6 +110,9 @@
 		35693E5829157D5200F1966D /* FolderDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDB.swift; sourceTree = "<group>"; };
 		35693E5A2915851500F1966D /* SidebarButtonToFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButtonToFolder.swift; sourceTree = "<group>"; };
 		35693E5C2915895900F1966D /* OutlineNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineNode.swift; sourceTree = "<group>"; };
+		35693E5E2915C34400F1966D /* WorkspaceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceCoordinator.swift; sourceTree = "<group>"; };
+		35693E612915DAD000F1966D /* WorkspaceComponentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceComponentViewModel.swift; sourceTree = "<group>"; };
+		35693E642915DFF300F1966D /* BlacklistedWebsite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlacklistedWebsite.swift; sourceTree = "<group>"; };
 		359780022913FB44004FBDAE /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		3597800429141729004FBDAE /* SessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionModel.swift; sourceTree = "<group>"; };
 		35A1AAAC29147C2C00B8158D /* SidebarSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSettingsView.swift; sourceTree = "<group>"; };
@@ -152,7 +157,7 @@
 		35E000782911F531009D284D /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		35E000792911F531009D284D /* GeneralSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		35E0007A2911F531009D284D /* WorkspaceSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceSettingsView.swift; sourceTree = "<group>"; };
-		35E0007D2911F531009D284D /* TimeTrackerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTrackerModel.swift; sourceTree = "<group>"; };
+		35E0007D2911F531009D284D /* TimeTrackerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTrackerState.swift; sourceTree = "<group>"; };
 		35E000822911F531009D284D /* LauncherState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherState.swift; sourceTree = "<group>"; };
 		35E000842911F531009D284D /* LauncherModelExtra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherModelExtra.swift; sourceTree = "<group>"; };
 		35E000862911F531009D284D /* WorkspaceLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceLauncher.swift; sourceTree = "<group>"; };
@@ -167,7 +172,6 @@
 		35E000922911F531009D284D /* RadioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioPlayer.swift; sourceTree = "<group>"; };
 		35E000942911F531009D284D /* RadioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioView.swift; sourceTree = "<group>"; };
 		35E000972911F531009D284D /* WorkspaceVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceVM.swift; sourceTree = "<group>"; };
-		35E000992911F531009D284D /* WorkspaceViewModelHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceViewModelHolder.swift; sourceTree = "<group>"; };
 		35E0009B2911F531009D284D /* WorkspaceBrowse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceBrowse.swift; sourceTree = "<group>"; };
 		35E0009E2911F531009D284D /* BlockerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockerState.swift; sourceTree = "<group>"; };
 		35E000A02911F531009D284D /* WorkspaceBlocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceBlocker.swift; sourceTree = "<group>"; };
@@ -215,6 +219,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35693E602915DA8A00F1966D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				35693E5E2915C34400F1966D /* WorkspaceCoordinator.swift */,
+				35693E612915DAD000F1966D /* WorkspaceComponentViewModel.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		35693E632915DFEA00F1966D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				35693E642915DFF300F1966D /* BlacklistedWebsite.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		35AD05F72912EB6D00837016 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,7 +505,7 @@
 		35E0007C2911F531009D284D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				35E0007D2911F531009D284D /* TimeTrackerModel.swift */,
+				35E0007D2911F531009D284D /* TimeTrackerState.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -582,6 +603,7 @@
 		35E000952911F531009D284D /* Workspace */ = {
 			isa = PBXGroup;
 			children = (
+				35693E602915DA8A00F1966D /* Other */,
 				35E000962911F531009D284D /* ViewModels */,
 				35E000982911F531009D284D /* Models */,
 				35E0009A2911F531009D284D /* Views */,
@@ -600,7 +622,6 @@
 		35E000982911F531009D284D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				35E000992911F531009D284D /* WorkspaceViewModelHolder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -616,6 +637,7 @@
 		35E0009C2911F531009D284D /* Blocker */ = {
 			isa = PBXGroup;
 			children = (
+				35693E632915DFEA00F1966D /* Models */,
 				35E0009D2911F531009D284D /* ViewModels */,
 				35E0009F2911F531009D284D /* Views */,
 			);
@@ -927,9 +949,9 @@
 				35E000C92911F531009D284D /* WorkspaceLauncher.swift in Sources */,
 				35E000BE2911F531009D284D /* SidebarButtonToPage.swift in Sources */,
 				35E000B92911F531009D284D /* SidebarVM.swift in Sources */,
+				35693E652915DFF300F1966D /* BlacklistedWebsite.swift in Sources */,
 				35E000CE2911F531009D284D /* LauncherPopups.swift in Sources */,
 				35E000DA2911F531009D284D /* WorkspaceTab.swift in Sources */,
-				35E000D52911F531009D284D /* WorkspaceViewModelHolder.swift in Sources */,
 				35E000602911F4F4009D284D /* SessionDB.swift in Sources */,
 				35E000442911F415009D284D /* URL+.swift in Sources */,
 				35E000392911F382009D284D /* NuclearWasteland.swift in Sources */,
@@ -952,6 +974,7 @@
 				35E000492911F43B009D284D /* CustomPersistables.swift in Sources */,
 				35AD05FD2912EDF800837016 /* NotesView.swift in Sources */,
 				35E000CB2911F531009D284D /* EmptyLauncherView.swift in Sources */,
+				35693E5F2915C34400F1966D /* WorkspaceCoordinator.swift in Sources */,
 				35E000D02911F531009D284D /* RadioState.swift in Sources */,
 				35E000D32911F531009D284D /* RadioView.swift in Sources */,
 				35E000BF2911F531009D284D /* SidebarView.swift in Sources */,
@@ -974,11 +997,12 @@
 				35E000DB2911F531009D284D /* Direction.swift in Sources */,
 				35E0004E2911F46B009D284D /* MenuItem.swift in Sources */,
 				35E000522911F493009D284D /* WorkspaceDB.swift in Sources */,
+				35693E622915DAD000F1966D /* WorkspaceComponentViewModel.swift in Sources */,
 				35A1AAAD29147C2C00B8158D /* SidebarSettingsView.swift in Sources */,
 				35E000462911F41F009D284D /* String+.swift in Sources */,
 				35E000C42911F531009D284D /* GeneralSettingsView.swift in Sources */,
 				35E000562911F4AB009D284D /* PomodoroDB.swift in Sources */,
-				35E000C62911F531009D284D /* TimeTrackerModel.swift in Sources */,
+				35E000C62911F531009D284D /* TimeTrackerState.swift in Sources */,
 				35E000422911F40C009D284D /* Collection+.swift in Sources */,
 				35E0005A2911F4C6009D284D /* TimeTrackerDB.swift in Sources */,
 				3597800529141729004FBDAE /* SessionModel.swift in Sources */,

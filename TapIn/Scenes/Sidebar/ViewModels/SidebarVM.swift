@@ -15,11 +15,6 @@ class SidebarVM: ObservableObject {
         self.sidebarModel.setOutline(with: folders)
     }
     
-    // MARK: General
-    
-    @Published var selectedWorkspace: WorkspaceDB? = nil
-    @Published var activeWorkspace: WorkspaceDB? = nil
-    
     // MARK: Sidebar
     
     @Published var folders: Results<FolderDB>
@@ -41,23 +36,6 @@ class SidebarVM: ObservableObject {
                 break
             }
         })
-    }
-    
-    // MARK: Navigation
-    
-    func onNavigation(to workspace: WorkspaceDB) {
-        selectedWorkspace = workspace
-        sidebarModel.selection = MenuItem.workspace(workspace)
-    }
-    
-    func onNavigation(to folder: FolderDB) {
-        selectedWorkspace = nil
-        sidebarModel.selection = MenuItem.folder(folder)
-    }
-    
-    func navigate(to workspace: WorkspaceDB) {
-        selectedWorkspace = workspace
-        sidebarModel.selection = MenuItem.workspace(workspace)
     }
         
     // MARK: CRUD

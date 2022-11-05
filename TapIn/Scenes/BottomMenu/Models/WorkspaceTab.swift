@@ -49,4 +49,26 @@ enum WorkspaceTab {
             fatalError("This should never happen")
         }
     }
+    
+    func hasBottomMenuTool() -> Bool {
+        return self != .notes
+    }
+    
+    var label: String {
+        switch self
+        {
+        case .pomodoro:
+            return "Pomodoro"
+        case .timetracking:
+            return "Time Tracker"
+        case .launcher:
+            return "Launcher"
+        case .blocker:
+            return "Blocker"
+        case .radio:
+            return "Radio"
+        case .notes:
+            return "Scratchpad"
+        }
+    }
 }

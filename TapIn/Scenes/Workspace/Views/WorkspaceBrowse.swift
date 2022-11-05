@@ -12,52 +12,40 @@ struct WorkspaceBrowseIntermediate: View {
             .environmentObject(workspace.launcherState)
             .environmentObject(workspace.blockerState)
             .environmentObject(workspace.radioState)
-            .onAppear(perform: {
-                sidebar.onNavigation(to: workspace.workspace)
-            })
     }
 }
 
 struct WorkspaceBrowse: View {
     @EnvironmentObject var workspace: WorkspaceVM
     
-    @State private var expanded = false
+    @State private var tabViewSelection: WorkspaceTab = .pomodoro
     
     var body: some View {    
         VStack {
-            TabView {
+            TabView(selection: $workspace.workspaceTab) {
                 WorkspacePomodoro()
-                    .tabItem { Text("Pomodoro") }
-                    .onAppear {
-                        workspace.workspaceTab = .pomodoro
-                    }
+                    .tabItem { tabItemBuilder(tab: .pomodoro) }
+                    .tag(WorkspaceTab.pomodoro)
                 
                 WorkspaceTimeTracking()
-                    .tabItem { Text("Time Tracking") }
-                    .onAppear {
-                        workspace.workspaceTab = .timetracking
-                    }
+                    .tabItem { tabItemBuilder(tab: .timetracking) }
+                    .tag(WorkspaceTab.timetracking)
                 
                 WorkspaceLauncher()
-                    .tabItem({ Text("Launcher") })
-                    .onAppear {
-                        workspace.workspaceTab = .launcher
-                    }
+                    .tabItem({ tabItemBuilder(tab: .launcher) })
+                    .tag(WorkspaceTab.launcher)
                 
                 WorkspaceBlocker()
-                    .tabItem({ Text("Blocker") })
-                    .onAppear {
-                        workspace.workspaceTab = .blocker
-                    }
+                    .tabItem({ tabItemBuilder(tab: .blocker) })
+                    .tag(WorkspaceTab.blocker)
                 
                 RadioView()
-                    .tabItem({ Text("Radio") })
-                    .onAppear {
-                        workspace.workspaceTab = .radio
-                    }
+                    .tabItem({ tabItemBuilder(tab: .radio) })
+                    .tag(WorkspaceTab.radio)
                 
                 NotesView(note: workspace.workspace.note)
-                    .tabItem({ Text("Scratchpad") })
+                    .tabItem({ tabItemBuilder(tab: .notes) })
+                    .tag(WorkspaceTab.notes)
             }
             
             Spacer()
@@ -65,5 +53,11 @@ struct WorkspaceBrowse: View {
             BottomMenu()
         }
         .edgesIgnoringSafeArea([.bottom, .horizontal])
+    }
+    
+    @ViewBuilder
+    func tabItemBuilder(tab: WorkspaceTab) -> some View {
+        Text(tab.label)
+//            .fontWeight(workspace.componentActivityTracker.activeComponents.contains(tab) ? .bold : .regular)
     }
 }

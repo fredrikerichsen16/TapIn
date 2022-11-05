@@ -4,19 +4,17 @@ struct RadioBottomMenuController: View {
     @EnvironmentObject var radioState: RadioState
     
     private func getToggleButtonLabel() -> Image {
-        return radioState.radioIsPlaying
-            ? Image(systemName: "pause.fill")
-            : Image(systemName: "play.fill")
+        return radioState.isActive ? Image(systemName: "pause.fill") : Image(systemName: "play.fill")
     }
     
     private func toggleButtonAction() {
-        if radioState.radioIsPlaying
+        if radioState.isActive
         {
-            radioState.pause()
+            radioState.endSession()
         }
         else
         {
-            radioState.play()
+            radioState.startSession()
         }
     }
     

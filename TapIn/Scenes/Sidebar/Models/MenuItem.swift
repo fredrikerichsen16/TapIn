@@ -59,7 +59,7 @@ extension MenuItem: Identifiable {
         case .statistics:
             return "statistics"
         case .workspace(let workspace):
-            return "workspace-" + workspace.id.stringValue
+            return workspace.id.stringValue
         case .folder(let folder):
             return folder.id.stringValue
         }
@@ -67,6 +67,4 @@ extension MenuItem: Identifiable {
     
 }
 
-extension MenuItem: Hashable {
-    
-}
+extension MenuItem: Hashable {}

@@ -44,9 +44,9 @@ struct SidebarView: View {
                     Spacer()
                 }
             }
-            .listStyle(SidebarListStyle())
+            .listStyle(.sidebar)
             .padding()
-            .frame(minWidth: 180, idealWidth: 250, maxWidth: 400, maxHeight: .infinity)
+            .frame(minWidth: 200, idealWidth: 300, maxWidth: 500, maxHeight: .infinity)
         }
     }
     

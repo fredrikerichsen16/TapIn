@@ -28,6 +28,10 @@ class RadioPlayer: NSObject, AVAudioPlayerDelegate {
         self.song.pause()
     }
     
+    var isPlaying: Bool {
+        return self.song.isPlaying
+    }
+    
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         self.song = try! channel.getNextSong()
         self.song.play()

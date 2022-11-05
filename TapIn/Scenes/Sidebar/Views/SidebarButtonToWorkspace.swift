@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SidebarButtonToWorkspace: View {
+    @Environment(\.workspaceCoordinator) var workspaceCoordinator
     @EnvironmentObject var sidebarVM: SidebarVM
     @State var menuItem: MenuItem
 
@@ -28,7 +29,7 @@ struct SidebarButtonToWorkspace: View {
         {
             NavigationLink(destination: {
                 WorkspaceBrowseIntermediate()
-                    .environmentObject(WorkspaceVM.getCurrent(for: workspace))
+                    .environmentObject(workspaceCoordinator.getWorkspaceVM(for: workspace))
             }) {
                 Label(menuItem.label, systemImage: menuItem.icon)
                     .padding(.vertical, 5)

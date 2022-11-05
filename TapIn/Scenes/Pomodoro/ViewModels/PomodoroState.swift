@@ -1,16 +1,17 @@
 import SwiftUI
 import RealmSwift
 
-final class PomodoroState: ObservableObject {
-    var realm: Realm
-    
-    public var workspace: WorkspaceDB
+final class PomodoroState: WorkspaceComponentViewModel {
     private var pomodoroDb: PomodoroDB
     
     @Published var remainingTimeString = "00:00"
     @Published var circleProgress: Double = 1.0
     
-    @Published var timerMode: TimerMode = .initial
+    @Published var timerMode: TimerMode = .initial {
+        didSet {
+            sendStatusChangeNotification(status: timerMode)
+        }
+    }
     
     var ticker: PomodoroTicker!
     
@@ -26,9 +27,9 @@ final class PomodoroState: ObservableObject {
     var longBreakStageState: PomodoroStageState!
     
     init(workspace: WorkspaceDB) {
-        self.workspace = workspace
         self.pomodoroDb = workspace.pomodoro
-        self.realm = RealmManager.shared.realm
+        
+        super.init(workspace: workspace, realm: RealmManager.shared.realm)
         
         self.initialTimerState = PomodoroInitialTimerState(self)
         self.runningTimerState = PomodoroRunningTimerState(self)
@@ -51,6 +52,10 @@ final class PomodoroState: ObservableObject {
         )
         
         self.zapTicker()
+    }
+    
+    var isActive: Bool {
+        return timerMode != .initial
     }
     
     // MARK: Pomodoro Timer States (State Pattern)

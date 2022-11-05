@@ -1,17 +1,13 @@
 import Foundation
 import RealmSwift
 
-class TimeTrackerState: ObservableObject {
-    var realm: Realm
-    private var workspace: WorkspaceDB
-    
+class TimeTrackerState: WorkspaceComponentViewModel {
     init(workspace: WorkspaceDB) {
-        self.workspace = workspace
-        self.realm = RealmManager.shared.realm
+        super.init(workspace: workspace, realm: RealmManager.shared.realm)
         
         setContent()
     }
-    
+
     func setContent() {
         // Query
         let queryer = SessionHistoryQueryer()
@@ -28,4 +24,18 @@ class TimeTrackerState: ObservableObject {
     
     @Published var numberOfSessions = 0
     @Published var workDuration = "? hours"
+    
+    // MARK: Start and end session
+    
+    @Published var isActive = false
+    
+    func startSession() {
+        isActive = true
+        sendStatusChangeNotification(status: .running)
+    }
+    
+    func endSession() {
+        isActive = false
+        sendStatusChangeNotification(status: .initial)
+    }
 }

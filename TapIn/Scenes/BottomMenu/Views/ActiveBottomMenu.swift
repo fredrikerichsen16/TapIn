@@ -6,17 +6,17 @@ struct ActiveBottomMenu: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            Spacer()
-            
             navigateButton(direction: .left)
+            
+            Spacer()
 
-            switch workspace.workspaceTab
+            switch workspace.bottomMenuTab
             {
             case .pomodoro:
                 PomodoroBottomMenuController()
                     .padding()
             case .timetracking:
-                Text("Tracker")
+                TimeTrackerBottomMenuController()
             case .launcher:
                 LauncherBottomMenuController()
                     .padding()
@@ -29,10 +29,11 @@ struct ActiveBottomMenu: View {
                 EmptyView()
             }
             
-            navigateButton(direction: .right)
-            
             Spacer()
+            
+            navigateButton(direction: .right)
         }
+        .padding(.horizontal, 15)
     }
 
     private func navigateButton(direction: Direction) -> some View {
@@ -41,38 +42,65 @@ struct ActiveBottomMenu: View {
 
         if direction == .right
         {
-            action = { workspace.workspaceTab.next() }
+            action = { workspace.bottomMenuTab.next() }
             icon = "chevron.right"
         }
         else
         {
-            action = { workspace.workspaceTab.previous() }
+            action = { workspace.bottomMenuTab.previous() }
             icon = "chevron.left"
         }
 
         return Button(action: action, label: {
             Image(systemName: icon)
-        }).buttonStyle(PlainButtonStyle())
+        })
+    }
+}
+
+struct TimeTrackerBottomMenuController: View {
+    @EnvironmentObject var timeTracker: TimeTrackerState
+    
+    var body: some View {
+        VStack {
+            Text("Time Tracker").font(.body)
+            
+            HStack {
+                if timeTracker.isActive
+                {
+                    Button("Stop Time Tracker") {
+                        timeTracker.endSession()
+                    }
+                }
+                else
+                {
+                    Button("Start Time Tracker") {
+                        timeTracker.startSession()
+                    }
+                }
+            }
+        }
     }
 }
 
 struct BlockerBottomMenuController: View {
-    @EnvironmentObject var workspace: WorkspaceVM
-    @EnvironmentObject var sidebar: SidebarVM
+    @EnvironmentObject var blocker: BlockerState
     
     var body: some View {
         VStack {
             Text("Blocker").font(.body)
             
             HStack {
-                Button("Start") {
-                    WorkspaceVM.current = workspace
-                    sidebar.activeWorkspace = workspace.workspace
+                if blocker.isActive
+                {
+                    Button("Stop Blocking") {
+                        blocker.endSession()
+                    }
                 }
-                
-                Button("End") {
-                    WorkspaceVM.current = nil
-                    sidebar.activeWorkspace = nil
+                else
+                {
+                    Button("Start Blocking") {
+                        blocker.startSession()
+                    }
                 }
             }
         }
@@ -109,6 +137,7 @@ struct PomodoroBottomMenuController: View {
 }
 
 struct PomodoroButtonView: View {
+    @Environment(\.workspaceCoordinator) var workspaceCoordinator
     @EnvironmentObject var pomodoroState: PomodoroState
     let button: PomodoroButton
     
