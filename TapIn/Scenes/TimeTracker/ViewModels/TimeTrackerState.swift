@@ -4,11 +4,12 @@ import RealmSwift
 class TimeTrackerState: WorkspaceComponentViewModel {
     init(workspace: WorkspaceDB) {
         super.init(workspace: workspace, realm: RealmManager.shared.realm)
-        
-        setContent()
     }
+    
+    // MARK: UI
 
-    func setContent() {
+    /// this method runs .onAppear
+    func fetch() {
         let frozen = realm.freeze()
         guard let workspaceInFrozenRealm = frozen.objects(WorkspaceDB.self).first(where: { $0.id == workspace.id }) else {
             return

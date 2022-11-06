@@ -25,9 +25,3 @@ struct WebInstanceNameAndUrlEditorView: View {
         }
     }
 }
-
-//struct WebInstanceNameAndUrlEditorView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WebInstanceNameAndUrlEditorView()
-//    }
-//}

@@ -1,4 +1,4 @@
-enum MenuItem {
+enum SidebarListItem {
     case home
     case statistics
     case workspace(WorkspaceDB)
@@ -49,7 +49,7 @@ enum MenuItem {
     }
 }
 
-extension MenuItem: Identifiable {
+extension SidebarListItem: Identifiable {
     var id: String {
         switch self
         {
@@ -65,4 +65,4 @@ extension MenuItem: Identifiable {
     }
 }
 
-extension MenuItem: Hashable {}
+extension SidebarListItem: Hashable {}

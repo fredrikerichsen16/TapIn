@@ -1,26 +1,26 @@
 import SwiftUI
 
 struct SidebarView: View {
-    @EnvironmentObject var sidebarVM: SidebarVM
+    @EnvironmentObject var sidebarState: SidebarState
     
     var body: some View {
         NavigationView {
-            List(selection: $sidebarVM.sidebarModel.selection) {
+            List(selection: $sidebarState.sidebarModel.selection) {
                 Section(header: Text("Pages")) {
-                    ForEach(sidebarVM.sidebarModel.pageLinks) { item in
-                        SidebarButtonToPage(menuItem: item)
+                    ForEach(sidebarState.sidebarModel.pageLinks) { item in
+                        sidebarButtonToPage(sidebarListItem: item)
                     }
                 }
                 
                 Section(header: Text("Workspaces")) {
-                    OutlineGroup(sidebarVM.sidebarModel.outline, children: \.children) { outlineItem in
-                        if outlineItem.menuItem.folder != nil
+                    OutlineGroup(sidebarState.sidebarModel.outline, children: \.children) { outlineItem in
+                        if outlineItem.sidebarListItem.folder != nil
                         {
-                            SidebarButtonToFolder(menuItem: outlineItem.menuItem)
+                            SidebarButtonToFolder(sidebarListItem: outlineItem.sidebarListItem)
                         }
-                        else if outlineItem.menuItem.workspace != nil
+                        else if outlineItem.sidebarListItem.workspace != nil
                         {
-                            SidebarButtonToWorkspace(menuItem: outlineItem.menuItem)
+                            SidebarButtonToWorkspace(sidebarListItem: outlineItem.sidebarListItem)
                         }
                     }
                 }
@@ -29,7 +29,7 @@ struct SidebarView: View {
                 Spacer()
                 
                 HStack {
-                    Button(action: sidebarVM.addFolder) {
+                    Button(action: sidebarState.addFolder) {
                         Image(systemName: "plus")
                     }
                     
@@ -37,16 +37,12 @@ struct SidebarView: View {
                         Image(systemName: "gearshape")
                     }
                     
-                    Button(action: sidebarVM.test) {
-                        Image(systemName: "heart.fill")
-                    }
-                    
                     Spacer()
                 }
             }
             .listStyle(.sidebar)
             .padding()
-            .frame(minWidth: 200, idealWidth: 300, maxWidth: 500, maxHeight: .infinity)
+            .frame(minWidth: 200, idealWidth: 300, maxWidth: 500, idealHeight: .infinity, maxHeight: .infinity)
         }
     }
     
@@ -56,5 +52,20 @@ struct SidebarView: View {
         } else {
             NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
         }
+    }
+    
+    @ViewBuilder
+    private func sidebarButtonToPage(sidebarListItem: SidebarListItem) -> some View {
+        CoreSidebarButton(sidebarListItem: sidebarListItem, destination: {
+            switch sidebarListItem
+            {
+            case .home:
+                Text(sidebarListItem.label).font(.largeTitle)
+            case .statistics:
+                StatisticsView()
+            default:
+                fatalError("1493403")
+            }
+        })
     }
 }

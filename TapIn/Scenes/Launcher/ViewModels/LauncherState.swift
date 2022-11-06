@@ -66,6 +66,18 @@ class LauncherState: ObservableObject {
     @Published var instances: [any BaseLauncherInstanceBehavior] = []
     @Published var selectedInstance: ObjectId? = nil
     
+    // MARK: Other
+    
+    func openAll() {
+        for instance in instances
+        {
+            if instance.object.active, let openableInstance = instance as? Openable
+            {
+                openableInstance.open()
+            }
+        }
+    }
+    
     // MARK: CRUD
     
     func deleteInstance(by id: ObjectId) {
@@ -76,6 +88,14 @@ class LauncherState: ObservableObject {
         
         try? realm.write {
             launcher.launcherInstances.remove(at: instanceIndex)
+        }
+    }
+    
+    func duplicate(_ instance: any BaseLauncherInstanceBehavior) {
+        let newInstance = LauncherInstanceDB(duplicate: instance.object)
+        
+        try? realm.write {
+            launcher.launcherInstances.append(newInstance)
         }
     }
     
@@ -91,68 +111,3 @@ class LauncherState: ObservableObject {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//func duplicate(launcherInstance: LauncherInstanceDB) {
-//    guard let launcher = launcher.thaw() else { return }
-//
-//    try? realm.write
-//    {
-//        let duplicatedLauncher = LauncherInstanceDB(duplicate: launcherInstance)
-//        launcher.launcherInstances.append(duplicatedLauncher)
-//    }
-//}
-//
-//func delete(launcherInstance: LauncherInstanceDB) {
-//    guard
-//        let launcher = launcher.thaw(),
-//        let instanceIndex = launcher.launcherInstances.firstIndex(where: { $0.id == launcherInstance.id })
-//    else { return }
-//
-//    try? realm.write {
-//        launcher.launcherInstances.remove(at: instanceIndex)
-//    }
-//}
-//
-//func deleteInstance(by id: ObjectId) {
-//    guard
-//        let launcher = launcher.thaw(),
-//        let instanceIndex = launcher.launcherInstances.firstIndex(where: { $0.id == id })
-//    else { return }
-//
-//    try? realm.write {
-//        launcher.launcherInstances.remove(at: instanceIndex)
-//    }
-//}
-//
-//// MARK: Popover
-//
-//
-//func toggleHideOnLaunch(instance: LauncherInstanceDB, value: Bool) {
-//    let instance = instance.thaw()
-//
-//    try? realm.write {
-//        instance?.hideOnLaunch = value
-//    }
-//}

@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct InactiveBottomMenu: View {
-    @EnvironmentObject var sidebar: SidebarVM
+    @EnvironmentObject var sidebar: SidebarState
     @StateObject var activeWorkspace: WorkspaceDB
     
     var body: some View {
@@ -10,7 +10,7 @@ struct InactiveBottomMenu: View {
                 Text("Active Workspace: \(activeWorkspace.name)")
                 HStack {
                     Button("Go to", action: {
-                        sidebar.sidebarModel.selection = MenuItem.workspace(activeWorkspace)
+                        sidebar.sidebarModel.selection = SidebarListItem.workspace(activeWorkspace)
                     })
                 }
             }

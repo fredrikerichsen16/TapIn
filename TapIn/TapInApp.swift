@@ -8,7 +8,7 @@ struct TapinApp: SwiftUI.App {
             SidebarView()
                 .environment(\.workspaceCoordinator, WorkspaceCoordinator.shared)
                 .environment(\.realm, RealmManager.shared.realm)
-                .environmentObject(SidebarVM())
+                .environmentObject(SidebarState())
                 .userPreferenceColorScheme()
         }
         .defaultSize(width: 600, height: 600)

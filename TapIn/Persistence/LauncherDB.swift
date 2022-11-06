@@ -10,10 +10,4 @@ final class LauncherDB: Object, ObjectKeyIdentifiable {
     
     @Persisted
     var launcherInstances = List<LauncherInstanceDB>()
-    
-    // MARK: CRUD
-    
-    func openAll() {
-        print("Out of service atm.")
-    }
 }

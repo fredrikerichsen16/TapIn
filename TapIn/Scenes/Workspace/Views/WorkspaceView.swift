@@ -1,41 +1,25 @@
 import SwiftUI
 import RealmSwift
 
-//struct WorkspaceBrowseIntermediate: View {
-//    @EnvironmentObject var workspace: WorkspaceVM
-//    @EnvironmentObject var sidebar: SidebarVM
-//    
-//    var body: some View {
-//        WorkspaceBrowse()
-//            .environmentObject(workspace.pomodoroState)
-//            .environmentObject(workspace.timeTrackerState)
-//            .environmentObject(workspace.launcherState)
-//            .environmentObject(workspace.blockerState)
-//            .environmentObject(workspace.radioState)
-//    }
-//}
-
-struct WorkspaceBrowse: View {
+struct WorkspaceView: View {
     @EnvironmentObject var workspace: WorkspaceVM
-    
-    @State private var tabViewSelection: WorkspaceTab = .pomodoro
     
     var body: some View {    
         VStack {
             TabView(selection: $workspace.workspaceTab) {
-                WorkspacePomodoro()
+                PomodoroView()
                     .tabItem { tabItemBuilder(tab: .pomodoro) }
                     .tag(WorkspaceTab.pomodoro)
                 
-                WorkspaceTimeTracking()
+                TimeTrackerView()
                     .tabItem { tabItemBuilder(tab: .timetracking) }
                     .tag(WorkspaceTab.timetracking)
                 
-                WorkspaceLauncher()
+                LauncherView()
                     .tabItem({ tabItemBuilder(tab: .launcher) })
                     .tag(WorkspaceTab.launcher)
                 
-                WorkspaceBlocker()
+                BlockerView()
                     .tabItem({ tabItemBuilder(tab: .blocker) })
                     .tag(WorkspaceTab.blocker)
                 

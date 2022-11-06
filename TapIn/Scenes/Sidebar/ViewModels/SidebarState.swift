@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-class SidebarVM: ObservableObject {
+class SidebarState: ObservableObject {
     
     var realm: Realm {
         RealmManager.shared.realm
@@ -10,9 +10,8 @@ class SidebarVM: ObservableObject {
     init() {
         let realm = RealmManager.shared.realm
         self.folders = realm.objects(FolderDB.self)
-        self.setToken()
         self.sidebarModel = SidebarModel()
-        self.sidebarModel.setOutline(with: folders)
+        self.setToken()
     }
     
     // MARK: Sidebar
@@ -29,6 +28,8 @@ class SidebarVM: ObservableObject {
         self.token = folders.observe(keyPaths: [\FolderDB.workspaces, \FolderDB.name], { [unowned self] (changes) in
             switch changes
             {
+            case .initial(let folders):
+                sidebarModel.setOutline(with: folders)
             case .update(_, deletions: _, insertions: _, modifications: _):
                 objectWillChange.send()
                 sidebarModel.setOutline(with: folders)
@@ -58,17 +59,9 @@ class SidebarVM: ObservableObject {
             workspace.name = name
         }
     }
-    
-    func test() {
-        guard let folder = sidebarModel.selection?.folder else {
-            return
-        }
-        
-        print("Num workspaces pre deletion: ", folder.workspaces.count, realm.objects(WorkspaceDB.self).count)
-    }
 
     func delete(workspace: WorkspaceDB) {
-        sidebarModel.selection = MenuItem.folder(workspace.folder)
+        sidebarModel.selection = SidebarListItem.folder(workspace.folder)
     
         guard let folder = workspace.folder.thaw() else {
             return

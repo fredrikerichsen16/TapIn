@@ -1,7 +1,7 @@
 import SwiftUI
 import RealmSwift
 
-struct Popover: View {
+struct LauncherTypeSelectionPopoverView: View {
     @EnvironmentObject var workspace: WorkspaceVM
     @Binding var showingPopover: Bool
     

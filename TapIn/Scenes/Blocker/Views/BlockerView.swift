@@ -1,7 +1,12 @@
 import SwiftUI
 
-struct WorkspaceBlocker: View {
+struct BlockerView: View {
     @EnvironmentObject var workspace: WorkspaceVM
+    
+    var vm: BlockerState {
+        workspace.blocker
+    }
+    
     @State private var addWebsiteFieldValue = ""
     @State private var tableSelection: Set<Int> = Set()
     
@@ -48,7 +53,7 @@ struct WorkspaceBlocker_Preview: PreviewProvider {
     static var previews: some View {
         let workspace = WorkspaceVM.preview
         
-        WorkspaceBlocker()
+        BlockerView()
             .environmentObject(workspace)
             .environmentObject(workspace.blocker)
     }

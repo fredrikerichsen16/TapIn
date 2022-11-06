@@ -3,6 +3,10 @@ import SwiftUI
 struct RadioView: View {
     @Environment(\.workspaceCoordinator) var workspaceCoordinator
     @EnvironmentObject var workspace: WorkspaceVM
+    
+    var vm: RadioState {
+        workspace.radio
+    }
 
     private func getToggleButtonLabel() -> Image {
         return workspace.radio.isActive ? Image(systemName: "pause.fill") : Image(systemName: "play.fill")
@@ -25,26 +29,26 @@ struct RadioView: View {
 
     var body: some View {
         HStack(spacing: 40) {
-            Image(workspace.radio.currentChannel.getIllustrationImage(), bundle: .main)
+            Image(vm.currentChannel.getIllustrationImage(), bundle: .main)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 340)
                 .cornerRadius(15)
 
             VStack(alignment: .leading, spacing: 14) {
-                Text(workspace.radio.currentChannel.title)
+                Text(vm.currentChannel.title)
                     .font(.title)
                     .fontWeight(.thin)
 
                 HStack(spacing: 8) {
-                    Button(action: workspace.radio.goToPrevChannel, label: {
+                    Button(action: vm.goToPrevChannel, label: {
                         Image(systemName: "arrowtriangle.left.fill")
                     })
 
                     Button(action: toggleButtonAction, label: getToggleButtonLabel)
                         .disabled(playButtonDisabled)
 
-                    Button(action: workspace.radio.goToNextChannel, label: {
+                    Button(action: vm.goToNextChannel, label: {
                         Image(systemName: "arrowtriangle.right.fill")
                     })
                 }

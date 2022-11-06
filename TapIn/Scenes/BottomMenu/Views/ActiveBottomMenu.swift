@@ -60,21 +60,23 @@ struct ActiveBottomMenu: View {
 struct TimeTrackerBottomMenuController: View {
     @EnvironmentObject var workspace: WorkspaceVM
     
+    var vm: TimeTrackerState {
+        workspace.timeTracker
+    }
+    
     var body: some View {
-        VStack {
-            Text("Time Tracker").font(.body)
-            
+        BottomMenuWorkspaceTabController(workspaceTab: .timetracking) {
             HStack {
-                if workspace.timeTracker.isActive
+                if vm.isActive
                 {
                     Button("Stop Time Tracker") {
-                        workspace.timeTracker.endSession()
+                        vm.endSession()
                     }
                 }
                 else
                 {
                     Button("Start Time Tracker") {
-                        workspace.timeTracker.startSession()
+                        vm.startSession()
                     }
                 }
             }
@@ -85,21 +87,23 @@ struct TimeTrackerBottomMenuController: View {
 struct BlockerBottomMenuController: View {
     @EnvironmentObject var workspace: WorkspaceVM
     
+    var vm: BlockerState {
+        workspace.blocker
+    }
+    
     var body: some View {
-        VStack {
-            Text("Blocker").font(.body)
-            
+        BottomMenuWorkspaceTabController(workspaceTab: .blocker) {
             HStack {
-                if workspace.blocker.isActive
+                if vm.isActive
                 {
                     Button("Stop Blocking") {
-                        workspace.blocker.endSession()
+                        vm.endSession()
                     }
                 }
                 else
                 {
                     Button("Start Blocking") {
-                        workspace.blocker.startSession()
+                        vm.startSession()
                     }
                 }
             }
@@ -111,11 +115,9 @@ struct LauncherBottomMenuController: View {
     @EnvironmentObject var workspace: WorkspaceVM
     
     var body: some View {
-        VStack {
-            Text("Launcher").font(.body)
-            
+        BottomMenuWorkspaceTabController(workspaceTab: .launcher) {
             Button("Launch") {
-                workspace.launcher.launcher.openAll()
+                workspace.launcher.openAll()
             }
         }
     }
@@ -125,8 +127,7 @@ struct PomodoroBottomMenuController: View {
     @EnvironmentObject var workspace: WorkspaceVM
 
     var body: some View {
-        VStack {
-            Text("Pomodoro").font(.body)
+        BottomMenuWorkspaceTabController(workspaceTab: .pomodoro) {
             HStack {
                 ForEach(workspace.pomodoro.getButtons(), id: \.rawValue) { button in
                     PomodoroButtonView(button: button)
@@ -150,6 +151,25 @@ struct PomodoroButtonView: View {
             Button(button.rawValue, action: workspace.pomodoro.pauseSession)
         case .cancel, .skip:
             Button(button.rawValue, action: workspace.pomodoro.cancelSession)
+        }
+    }
+}
+
+
+struct BottomMenuWorkspaceTabController<Content>: View where Content: View {
+    let workspaceTab: WorkspaceTab
+    let content: Content
+    
+    init(workspaceTab: WorkspaceTab, @ViewBuilder content: () -> Content) {
+        self.workspaceTab = workspaceTab
+        self.content = content()
+    }
+    
+    var body: some View {
+        VStack {
+            Text(workspaceTab.label).font(.body)
+            
+            content
         }
     }
 }
