@@ -10,7 +10,7 @@ struct Popover: View {
 		showingPopover = false
     }
     
-    @State private var launcherInstanceTypes: [RealmLauncherType] = [.app, .file] // [.app, .file, .folder, .website, .terminal]
+    @State private var launcherInstanceTypes: [RealmLauncherType] = [.app, .file, .folder, .website, .terminal]
 	
     var body: some View {
         List {
@@ -20,10 +20,10 @@ struct Popover: View {
                 }, label: {
                     Label(instanceType.label, systemImage: instanceType.icon)
                 })
-                .buttonStyle(PlainButtonStyle())
+                .buttonStyle(.plain)
             }
         }
-		.frame(width: 160, height: 165)
+        .frame(width: 160, height: 165)
 	}
 }
 

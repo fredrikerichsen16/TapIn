@@ -1,9 +1,7 @@
 import SwiftUI
 
-struct FileSystemInstanceLauncherView: View {
-//    @EnvironmentObject var workspace: WorkspaceVM
-    
-    @State var instance: any FileSystemBasedBehavior & BaseLauncherInstanceBehavior
+struct WebBasedInstanceLauncherView: View {
+    @State var instance: any WebBasedBehavior & BaseLauncherInstanceBehavior
     
     @State private var hideOnLaunch = false
     
@@ -11,15 +9,9 @@ struct FileSystemInstanceLauncherView: View {
         VStack {
             Spacer()
             
-            TappableAppIconView(instance: instance, onSubmitFile: { url in
-                instance.submittedFileWithPanel(url: url)
-            })
+            Image(nsImage: instance.getIcon(size: 128))
             
-            EditableLauncherNameView(name: instance.name, onSubmit: { name in
-                instance.write {
-                    instance.object.name = name
-                }
-            })
+            WebInstanceNameAndUrlEditorView(instance: instance)
             
             if let openableInstance = instance as? Openable {
                 Button("Open") {
@@ -55,5 +47,10 @@ struct FileSystemInstanceLauncherView: View {
             hideOnLaunch = instance.object.hideOnLaunch
         }
     }
-    
 }
+
+//struct WebBasedInstanceLauncherView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WebBasedInstanceLauncherView()
+//    }
+//}

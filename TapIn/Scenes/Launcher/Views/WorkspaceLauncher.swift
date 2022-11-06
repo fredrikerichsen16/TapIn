@@ -44,10 +44,17 @@ struct WorkspaceLauncher: View {
     
     @ViewBuilder
     private func navigationDestination(for instance: any BaseLauncherInstanceBehavior) -> some View {
-        if let fileSystemInstance = instance as? any FileSystemBasedBehavior & BaseLauncherInstanceBehavior {
+        if let fileSystemInstance = instance as? any FileSystemBasedBehavior & BaseLauncherInstanceBehavior
+        {
             FileSystemInstanceLauncherView(instance: fileSystemInstance)
-        } else {
-            Text("Balls!")
+        }
+        else if let webBasedInstance = instance as? any WebBasedBehavior & BaseLauncherInstanceBehavior
+        {
+            WebBasedInstanceLauncherView(instance: webBasedInstance)
+        }
+        else
+        {
+            Text("FAN!")
         }
     }
 }

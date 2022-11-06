@@ -18,7 +18,7 @@ class RealmManager {
             }
             else
             {
-                let config = Realm.Configuration(schemaVersion: 5)
+                let config = Realm.Configuration(schemaVersion: 6)
                 self.realm = try Realm(configuration: config)
 //                addData()
             }
@@ -42,7 +42,6 @@ class RealmManager {
             for name in workNames
             {
                 let ws = WorkspaceDB(name: name)
-                
                 ws.launcher.launcherInstances.append(LauncherInstanceDB(name: "Craft", type: .app, instantiated: true, appUrl: URL(string: "/Applications/Craft.app"), fileUrl: nil, launchDelay: 0.0, hideOnLaunch: false))
                 
                 ws.sessions.append(SessionDB(stage: .working(60)))

@@ -10,6 +10,9 @@
 		3505D2462911FBA9008B7274 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3505D2452911FBA9008B7274 /* Realm */; };
 		3505D2482911FBA9008B7274 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3505D2472911FBA9008B7274 /* RealmSwift */; };
 		3542DC2829172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC2729172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift */; };
+		3542DC2A2917568C00F7A9D8 /* DefaultAppSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC292917568C00F7A9D8 /* DefaultAppSelectorView.swift */; };
+		3542DC2D291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC2C291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift */; };
+		3542DC2F291763F700F7A9D8 /* WebInstanceNameAndUrlEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC2E291763F700F7A9D8 /* WebInstanceNameAndUrlEditorView.swift */; };
 		35693E5929157D5200F1966D /* FolderDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5829157D5200F1966D /* FolderDB.swift */; };
 		35693E5B2915851500F1966D /* SidebarButtonToFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5A2915851500F1966D /* SidebarButtonToFolder.swift */; };
 		35693E5D2915895900F1966D /* OutlineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5C2915895900F1966D /* OutlineNode.swift */; };
@@ -113,6 +116,9 @@
 
 /* Begin PBXFileReference section */
 		3542DC2729172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemInstanceLauncherView.swift; sourceTree = "<group>"; };
+		3542DC292917568C00F7A9D8 /* DefaultAppSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAppSelectorView.swift; sourceTree = "<group>"; };
+		3542DC2C291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBasedInstanceLauncherView.swift; sourceTree = "<group>"; };
+		3542DC2E291763F700F7A9D8 /* WebInstanceNameAndUrlEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebInstanceNameAndUrlEditorView.swift; sourceTree = "<group>"; };
 		35693E5829157D5200F1966D /* FolderDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDB.swift; sourceTree = "<group>"; };
 		35693E5A2915851500F1966D /* SidebarButtonToFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButtonToFolder.swift; sourceTree = "<group>"; };
 		35693E5C2915895900F1966D /* OutlineNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineNode.swift; sourceTree = "<group>"; };
@@ -229,6 +235,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3542DC2B2917569200F7A9D8 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3542DC292917568C00F7A9D8 /* DefaultAppSelectorView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		35693E602915DA8A00F1966D /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -568,6 +582,7 @@
 		35E000852911F531009D284D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3542DC2B2917569200F7A9D8 /* Components */,
 				35E000862911F531009D284D /* WorkspaceLauncher.swift */,
 				35E000872911F531009D284D /* SharedLauncherViewComponents.swift */,
 				35E000882911F531009D284D /* EmptyLauncherView.swift */,
@@ -576,6 +591,8 @@
 				35E0008B2911F531009D284D /* LauncherPopups.swift */,
 				35E0008C2911F531009D284D /* WebsiteLauncherView.swift */,
 				3542DC2729172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift */,
+				3542DC2C291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift */,
+				3542DC2E291763F700F7A9D8 /* WebInstanceNameAndUrlEditorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -956,6 +973,7 @@
 				35E000D62911F531009D284D /* WorkspaceBrowse.swift in Sources */,
 				35AD05FF2912F18700837016 /* NoteDB.swift in Sources */,
 				35693E5B2915851500F1966D /* SidebarButtonToFolder.swift in Sources */,
+				3542DC2A2917568C00F7A9D8 /* DefaultAppSelectorView.swift in Sources */,
 				35E000D82911F531009D284D /* WorkspaceBlocker.swift in Sources */,
 				35E0005E2911F4E5009D284D /* LauncherDB.swift in Sources */,
 				35E0005C2911F4D4009D284D /* LauncherInstanceDB.swift in Sources */,
@@ -988,6 +1006,7 @@
 				35E000542911F49F009D284D /* RealmManager.swift in Sources */,
 				35E000022911EEF2009D284D /* TapInApp.swift in Sources */,
 				35E000E22911F531009D284D /* PomodoroTimerState.swift in Sources */,
+				3542DC2F291763F700F7A9D8 /* WebInstanceNameAndUrlEditorView.swift in Sources */,
 				35E000492911F43B009D284D /* CustomPersistables.swift in Sources */,
 				35AD05FD2912EDF800837016 /* NotesView.swift in Sources */,
 				35E000CB2911F531009D284D /* EmptyLauncherView.swift in Sources */,
@@ -1008,6 +1027,7 @@
 				35E000C22911F531009D284D /* SettingsView.swift in Sources */,
 				35E000C52911F531009D284D /* WorkspaceSettingsView.swift in Sources */,
 				35E000E52911F531009D284D /* WorkspacePomodoro.swift in Sources */,
+				3542DC2D291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift in Sources */,
 				35E000C72911F531009D284D /* LauncherState.swift in Sources */,
 				35693E6B291624C100F1966D /* FileLauncherModel.swift in Sources */,
 				35AD06072913280D00837016 /* SessionHistoryQueryer.swift in Sources */,

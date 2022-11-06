@@ -3,42 +3,33 @@
 import SwiftUI
 import RealmSwift
 
-//struct EditableLauncherNameView: View {
-//    @ObservedRealmObject var launcherInstance: LauncherInstanceDB
-//    
-//    @State private var isEditing: Bool = false
-//    
-//    var body: some View {
-//        if isEditing
-//        {
-//            if #available(macOS 12.0, *)
-//            {
-//                TextField("App Name", text: $launcherInstance.name)
-//                    .font(.body)
-//                    .frame(width: 150, alignment: .center)
-//                    .onSubmit {
-//                        isEditing = false
-//                    }
-//            }
-//            else
-//            {
-//                TextField("App Name", text: $launcherInstance.name, onCommit: {
-//                    isEditing = false
-//                })
-//                .frame(width: 150, alignment: .center)
-//                .font(.body)
-//            }
-//        }
-//        else
-//        {
-//            Text(launcherInstance.name).font(.title2)
-//                .onTapGesture(count: 2) {
-//                    isEditing = true
-//                }
-//        }
-//    }
-//}
-//
+struct EditableLauncherNameView: View {
+    @State var name: String
+    var onSubmit: (_ name: String) -> Void
+    
+    @State private var isEditing: Bool = false
+    
+    var body: some View {
+        if isEditing
+        {
+            TextField("", text: $name)
+                .font(.body)
+                .frame(width: 150, alignment: .center)
+                .onSubmit {
+                    isEditing = false
+                    onSubmit(name)
+                }
+        }
+        else
+        {
+            Text(name).font(.title2)
+                .onTapGesture(count: 2) {
+                    isEditing = true
+                }
+        }
+    }
+}
+
 struct TappableAppIconView: View {
     @State var instance: any FileSystemBasedBehavior & BaseLauncherInstanceBehavior
     var onSubmitFile: (URL) -> Void

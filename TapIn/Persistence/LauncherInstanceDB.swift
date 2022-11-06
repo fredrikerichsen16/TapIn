@@ -1,18 +1,7 @@
 import Foundation
 import RealmSwift
 
-//struct LauncherInstance {
-//    
-//}
-
 final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
-    
-    func easyThaw() -> (LauncherInstanceDB, Realm) {
-        guard let thawed = self.thaw(),
-              let realm = thawed.realm else { fatalError("Easythaw failed") }
-        
-        return (thawed, realm)
-    }
     
     // MARK: Persisted properties
     
@@ -35,6 +24,9 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
     var hideOnLaunch: Bool = false
     
     @Persisted
+    var active: Bool = true
+
+    @Persisted
     var type: RealmLauncherType
     
     @Persisted
@@ -56,13 +48,6 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
         self.hideOnLaunch = hideOnLaunch
     }
     
-    convenience init(name: String, type: RealmLauncherType, instantiated: Bool) {
-        self.init()
-        self.name = name
-        self.type = type
-        self.instantiated = instantiated
-    }
-    
     convenience init(duplicate instance: LauncherInstanceDB) {
         self.init()
         self.name = instance.name
@@ -79,6 +64,10 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
         self.name = "New \(type.label)"
         self.type = type
         self.instantiated = false
+        
+        if type == .terminal, let terminalApp = URL(string: "/Applications/Utilities/Terminal.app/") {
+            self.appUrl = terminalApp
+        }
     }
 }
 

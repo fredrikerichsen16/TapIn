@@ -1,7 +1,7 @@
 import Foundation
 import Cocoa
 
-struct BaseAppLauncher: FileSystemBasedBehavior {
+struct BaseAppLauncher {
     func createPanel() -> NSOpenPanel {
         let panel = NSOpenPanel()
             panel.allowsMultipleSelection = false
@@ -27,15 +27,15 @@ struct BaseAppLauncher: FileSystemBasedBehavior {
 }
 
 struct UninstantiatedAppLauncher: BaseLauncherInstanceBehavior, FileSystemBasedBehavior {
-    let id = UUID()
-    var object: LauncherInstanceDB
-    
     init(instance: LauncherInstanceDB) {
         self.object = instance
     }
     
+    var object: LauncherInstanceDB
     let base = BaseAppLauncher()
     let type = RealmLauncherType.app
+    
+    // FileSystemBasedBehavior
     
     func createPanel() -> NSOpenPanel {
         return base.createPanel()
@@ -44,11 +44,14 @@ struct UninstantiatedAppLauncher: BaseLauncherInstanceBehavior, FileSystemBasedB
     func openPanel(with panel: NSOpenPanel) -> (URL?, Bool) {
         return base.openPanel(with: panel)
     }
+    
+    func submittedFileWithPanel(url: URL) {
+        print(url)
+        update(app: url, file: nil)
+    }
 }
 
 struct InstantiatedAppLauncher: BaseLauncherInstanceBehavior, FileSystemBasedBehavior, Openable, AppBehavior {
-    let id = UUID()
-    
     init(instance: LauncherInstanceDB) {
         self.object = instance
         self.app = object.appUrl!
@@ -66,7 +69,7 @@ struct InstantiatedAppLauncher: BaseLauncherInstanceBehavior, FileSystemBasedBeh
     // DisplayableBehavior
     
     func getIcon(size: Int) -> NSImage {
-        return getAppIcon(for: app, size: 40)
+        return getAppIcon(for: app, size: size)
     }
     
     // FileSystemBasedBehavior
@@ -77,6 +80,10 @@ struct InstantiatedAppLauncher: BaseLauncherInstanceBehavior, FileSystemBasedBeh
     
     func openPanel(with panel: NSOpenPanel) -> (URL?, Bool) {
         return base.openPanel(with: panel)
+    }
+    
+    func submittedFileWithPanel(url: URL) {
+        update(app: url, file: nil)
     }
 
     // Openable

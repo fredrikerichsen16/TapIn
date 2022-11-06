@@ -2,13 +2,16 @@ import Foundation
 import RealmSwift
 
 class LauncherState: ObservableObject {
+    public var realm: Realm
     private var workspace: WorkspaceDB
     
     init(workspace: WorkspaceDB) {
         self.workspace = workspace
         self.launcher = workspace.launcher
+        self.launcherInstances = workspace.launcher.launcherInstances
         self.realm = RealmManager.shared.realm
         self.fetch()
+        setToken()
     }
     
     func fetch() {
@@ -24,22 +27,53 @@ class LauncherState: ObservableObject {
         self.instances = instanceModels
     }
     
-    var realm: Realm
+    // MARK: Observing realm
+    
+    var token: NotificationToken? = nil
+    var launcherInstances: List<LauncherInstanceDB>
+    func setToken() {
+        self.token = launcherInstances.observe(keyPaths: [\LauncherInstanceDB.instantiated, \LauncherInstanceDB.appUrl, \LauncherInstanceDB.fileUrl, \LauncherInstanceDB.name], { [unowned self] (changes) in
+            switch changes
+            {
+            case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+                // Handle deletions
+                instances.remove(atOffsets: IndexSet(deletions))
+                
+                // Handle insertions
+                for index in insertions
+                {
+                    if let instanceModel = launcherInstanceFactory(instance: launcher.launcherInstances[index]) {
+                        instances.insert(instanceModel, at: index)
+                    }
+                }
+                
+                // Handle modifications
+                for index in modifications
+                {
+                    if let instanceModel = launcherInstanceFactory(instance: launcher.launcherInstances[index]) {
+                        instances.remove(at: index)
+                        instances.insert(instanceModel, at: index)
+                        selectedInstance = instanceModel.id
+                    }
+                }
+            default:
+                break
+            }
+        })
+    }
     
     @Published var launcher: LauncherDB
     @Published var instances: [any BaseLauncherInstanceBehavior] = []
-    @Published var selectedInstance: UUID? = nil
+    @Published var selectedInstance: ObjectId? = nil
     
     // MARK: CRUD
     
-    func deleteInstance(by id: UUID) {
+    func deleteInstance(by id: ObjectId) {
         guard
             let launcher = launcher.thaw(),
             let instanceIndex = instances.firstIndex(where: { $0.id == id })
         else { return }
         
-        instances.remove(at: instanceIndex)
-    
         try? realm.write {
             launcher.launcherInstances.remove(at: instanceIndex)
         }
@@ -48,14 +82,12 @@ class LauncherState: ObservableObject {
     func createEmptyInstance(type: RealmLauncherType) {
         let newInstance = LauncherInstanceDB(empty: type)
     
-        guard let launcher = launcher.thaw() else { return }
+        guard let launcher = launcher.thaw() else {
+            return
+        }
     
         try? realm.write {
             launcher.launcherInstances.append(newInstance)
-        }
-        
-        if let instanceModel = launcherInstanceFactory(instance: newInstance) {
-            instances.append(instanceModel)
         }
     }
 }
