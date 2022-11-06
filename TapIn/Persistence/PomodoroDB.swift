@@ -1,10 +1,7 @@
 import Foundation
 import RealmSwift
 
-final class PomodoroDB: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true)
-    var id: ObjectId
-    
+final class PomodoroDB: EmbeddedObject {
     @Persisted
     var pomodoroDuration: Int = 25 // in minutes
     

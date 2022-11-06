@@ -1,10 +1,7 @@
 import Foundation
 import RealmSwift
 
-final class TimeTrackerDB: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true)
-    var id: ObjectId
-    
+final class TimeTrackerDB: EmbeddedObject {
     @Persisted
     var trackPomodoroTime: Bool = true
     

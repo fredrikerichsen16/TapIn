@@ -1,10 +1,7 @@
 import Foundation
 import RealmSwift
 
-final class NoteDB: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true)
-    var id: ObjectId
-    
+final class NoteDB: EmbeddedObject {
     @Persisted
     var contents: String = ""
     

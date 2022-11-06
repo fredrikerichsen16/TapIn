@@ -27,7 +27,7 @@ struct WorkspaceView: View {
                     .tabItem({ tabItemBuilder(tab: .radio) })
                     .tag(WorkspaceTab.radio)
                 
-                NotesView(note: workspace.workspace.note)
+                NotesView(workspace: workspace.workspace)
                     .tabItem({ tabItemBuilder(tab: .notes) })
                     .tag(WorkspaceTab.notes)
             }

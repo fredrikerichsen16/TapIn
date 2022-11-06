@@ -11,6 +11,7 @@ struct SidebarView: View {
                         sidebarButtonToPage(sidebarListItem: item)
                     }
                 }
+                .collapsible(false)
                 
                 Section(header: Text("Workspaces")) {
                     OutlineGroup(sidebarState.sidebarModel.outline, children: \.children) { outlineItem in

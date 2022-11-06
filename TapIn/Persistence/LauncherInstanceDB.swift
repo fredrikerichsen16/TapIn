@@ -2,9 +2,6 @@ import Foundation
 import RealmSwift
 
 final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
-    
-    // MARK: Persisted properties
-    
     @Persisted(primaryKey: true)
     var id: ObjectId
     

@@ -1,10 +1,7 @@
 import Foundation
 import RealmSwift
 
-final class BlockerDB: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true)
-    var id: ObjectId
-    
+final class BlockerDB: Object {
     @Persisted
     var blacklistedWebsites = List<String>()
     

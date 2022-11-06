@@ -12,10 +12,10 @@ extension NSTextView {
 }
 
 struct NotesView: View {
-    @ObservedRealmObject var note: NoteDB
+    @ObservedRealmObject var workspace: WorkspaceDB
     
     var body: some View {
-        TextEditor(text: $note.contents)
+        TextEditor(text: $workspace.note.contents)
             .font(.system(size: 16, design: .monospaced))
             .lineSpacing(4)
             .padding()
