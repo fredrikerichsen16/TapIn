@@ -24,17 +24,9 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
     
     @Persisted
     var appUrl: URL?
-
-    var appPath: String? {
-        appUrl?.path
-    }
     
     @Persisted
     var fileUrl: URL?
-    
-    var filePath: String? {
-        fileUrl?.path
-    }
     
     @Persisted
     var launchDelay: TimeInterval = 0.0
@@ -47,10 +39,6 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
     
     @Persisted
     var instantiated: Bool = false
-    
-    var fullType: LauncherType {
-        type.convertToLauncherType(instantiated: instantiated)
-    }
     
     @Persisted(originProperty: "launcherInstances")
     var launcher: LinkingObjects<LauncherDB>
@@ -86,77 +74,12 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
         self.hideOnLaunch = instance.hideOnLaunch
     }
     
-    // MARK: Set up bridge
-    
-    lazy var appController: AppController = {
-        switch fullType
-        {
-        case .app:
-            return AppLauncherAppController(parent: self)
-        case .file:
-            return FileLauncherAppController(parent: self)
-        case .folder:
-            return FileLauncherAppController(parent: self)
-        case .website:
-            return WebsiteLauncherAppController(parent: self)
-        case .terminal:
-            fatalError("3131232144")
-        case .empty(_):
-            return EmptyLauncherAppController(parent: self)
-        }
-    }()
-
-    lazy var fileController: FileController = {
-        switch fullType
-        {
-        case .app:
-            return AppLauncherFileController(parent: self)
-        case .file:
-            return FileLauncherFileController(parent: self)
-        case .folder:
-            return FileLauncherFileController(parent: self)
-        case .website:
-            return WebsiteLauncherFileController(parent: self)
-        case .terminal:
-            fatalError("4234324")
-        case .empty(_):
-            return EmptyLauncherFileController(parent: self)
-        }
-    }()
-
-    lazy var opener: Opener = {
-        switch fullType
-        {
-        case .app:
-            return AppLauncherOpener(parent: self)
-        case .file:
-            return FileLauncherOpener(parent: self)
-        case .folder:
-            return FileLauncherOpener(parent: self)
-        case .website:
-            return WebsiteLauncherOpener(parent: self)
-        case .terminal:
-            fatalError("4234324")
-        case .empty(_):
-            return EmptyLauncherOpener(parent: self)
-        }
-    }()
-
-    lazy var panel: Panel = {
-        switch type {
-            case .app:
-                return AppLauncherPanel(parent: self)
-            case .file:
-                return FileLauncherPanel(parent: self)
-            case .folder:
-                return FolderLauncherPanel(parent: self)
-            case .website:
-                return WebsiteLauncherPanel(parent: self)
-            case .terminal:
-                fatalError("31037490")
-        }
-    }()
-    
+    convenience init(empty type: RealmLauncherType) {
+        self.init()
+        self.name = "New \(type.label)"
+        self.type = type
+        self.instantiated = false
+    }
 }
 
 enum RealmLauncherType: String, Equatable, PersistableEnum {
@@ -166,7 +89,7 @@ enum RealmLauncherType: String, Equatable, PersistableEnum {
     case website
     case terminal
     
-    func label() -> String {
+    var label: String {
         switch self {
         case .app:
             return "App"
@@ -181,7 +104,7 @@ enum RealmLauncherType: String, Equatable, PersistableEnum {
         }
     }
     
-    func icon() -> String {
+    var icon: String {
         switch self
         {
         case .app:
@@ -195,28 +118,5 @@ enum RealmLauncherType: String, Equatable, PersistableEnum {
         case .terminal:
             return "terminal"
         }
-    }
-    
-    func convertToLauncherType(instantiated: Bool) -> LauncherType {
-        var primaryType: LauncherType
-        
-        switch self {
-            case .app:
-                primaryType = LauncherType.app
-            case .file:
-                primaryType = LauncherType.file
-            case .folder:
-                primaryType = LauncherType.folder
-            case .terminal:
-                primaryType = LauncherType.terminal
-            case .website:
-                primaryType = LauncherType.website
-        }
-        
-        if !instantiated {
-            return LauncherType.empty(primaryType)
-        }
-        
-        return primaryType
     }
 }

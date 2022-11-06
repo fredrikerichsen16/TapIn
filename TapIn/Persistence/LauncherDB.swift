@@ -14,10 +14,6 @@ final class LauncherDB: Object, ObjectKeyIdentifiable {
     // MARK: CRUD
     
     func openAll() {
-        for launcher in launcherInstances
-        {
-            launcher.opener.openApp()
-        }
+        print("Out of service atm.")
     }
-    
 }

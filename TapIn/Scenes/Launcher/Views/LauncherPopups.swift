@@ -3,7 +3,6 @@ import RealmSwift
 
 struct Popover: View {
     @EnvironmentObject var workspace: WorkspaceVM
-    @Binding var selection: Int?
     @Binding var showingPopover: Bool
     
     func createEmptyInstance(type: RealmLauncherType) {
@@ -11,15 +10,15 @@ struct Popover: View {
 		showingPopover = false
     }
     
-    @State private var launcherInstanceTypes: [RealmLauncherType] = [.app, .file, .folder, .website, .terminal]
+    @State private var launcherInstanceTypes: [RealmLauncherType] = [.app, .file] // [.app, .file, .folder, .website, .terminal]
 	
     var body: some View {
         List {
-            ForEach(launcherInstanceTypes, id: \.self) { instance in
+            ForEach(launcherInstanceTypes, id: \.self) { instanceType in
                 Button(action: {
-                    createEmptyInstance(type: instance)
+                    createEmptyInstance(type: instanceType)
                 }, label: {
-                    Label(instance.label(), systemImage: instance.icon())
+                    Label(instanceType.label, systemImage: instanceType.icon)
                 })
                 .buttonStyle(PlainButtonStyle())
             }
