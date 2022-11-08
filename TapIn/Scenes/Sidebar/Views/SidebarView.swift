@@ -3,6 +3,8 @@ import SwiftUI
 struct SidebarView: View {
     @EnvironmentObject var sidebarState: SidebarState
     
+    @AppStorage("subscribed") var subscribed: Bool = false
+    
     var body: some View {
         NavigationView {
             List(selection: $sidebarState.sidebarModel.selection) {
@@ -28,6 +30,12 @@ struct SidebarView: View {
                 .collapsible(false)
                 
                 Spacer()
+                
+                if subscribed == true {
+                    Text("Subscribed")
+                } else {
+                    Text("Not subscribed")
+                }
                 
                 HStack {
                     Button(action: sidebarState.addFolder) {
@@ -61,7 +69,7 @@ struct SidebarView: View {
             switch sidebarListItem
             {
             case .home:
-                Text(sidebarListItem.label).font(.largeTitle)
+                Text("Home")
             case .statistics:
                 StatisticsView()
             default:

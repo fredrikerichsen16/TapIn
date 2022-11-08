@@ -12,6 +12,15 @@ class SidebarState: ObservableObject {
         self.folders = realm.objects(FolderDB.self)
         self.sidebarModel = SidebarModel()
         self.setToken()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(goToWorkspace(_:)),
+                                               name: NSNotification.Name("GoToWorkspace"),
+                                               object: nil)
+    }
+    
+    @objc func goToWorkspace(_ notification: Notification) {
+        print("What's up brah?")
     }
     
     // MARK: Sidebar

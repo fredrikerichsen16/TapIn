@@ -2,7 +2,6 @@ import Foundation
 import RealmSwift
 
 final class WorkspaceDB: Object, ObjectKeyIdentifiable {
-    
     @Persisted(primaryKey: true)
     var id: ObjectId
     
@@ -58,5 +57,4 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
         
         return sessionsToday.count
     }
-    
 }

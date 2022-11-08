@@ -21,3 +21,17 @@ class FolderDB: Object, ObjectKeyIdentifiable {
         self.isArchived = false
     }
 }
+
+//class FolderSettings: EmbeddedObject {
+//    @Persisted
+//    var pomodoroDuration: Int = 25
+//
+//    @Persisted
+//    var shortBreakDuration: Int = 5
+//
+//    @Persisted
+//    var longBreakDuration: Int = 15
+//
+//    @Persisted
+//    var longBreakFrequency: Int = 3
+//}

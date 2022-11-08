@@ -1,0 +1,85 @@
+{
+  "identifier" : "6BF83F9F",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "DEA88630",
+      "localizations" : [
+
+      ],
+      "name" : "Main",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "5",
+          "familyShareable" : true,
+          "groupNumber" : 1,
+          "internalID" : "C26AC2DE",
+          "introductoryOffer" : {
+            "internalID" : "0493799C",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P2W"
+          },
+          "localizations" : [
+            {
+              "description" : "Try TapIn Pro",
+              "displayName" : "Monthly subscription",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.tapin.monthlysubscription",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "monthly",
+          "subscriptionGroupID" : "DEA88630",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "3",
+          "familyShareable" : true,
+          "groupNumber" : 1,
+          "internalID" : "E0EFC34F",
+          "introductoryOffer" : {
+            "internalID" : "EA2851B9",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1M"
+          },
+          "localizations" : [
+            {
+              "description" : "Best value, save 40%",
+              "displayName" : "Yearly subscription",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.tapin.yearlysubscription",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "yearly",
+          "subscriptionGroupID" : "DEA88630",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}
