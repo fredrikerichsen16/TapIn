@@ -115,7 +115,7 @@ struct LauncherInstanceListControlButtons: View {
             Button(action: {
                 showingPopover.toggle()
             }, label: {
-                Image(systemName: "plus")
+                Image(systemName: IconKeys.plus)
                     .font(.system(size: 16.0))
             })
             .buttonStyle(.bordered)
@@ -129,7 +129,7 @@ struct LauncherInstanceListControlButtons: View {
                 workspace.launcher.selectedInstance = nil
                 workspace.launcher.deleteInstance(by: id)
             }, label: {
-                Image(systemName: "minus")
+                Image(systemName: IconKeys.minus)
                     .font(.system(size: 16.0))
             })
             .buttonStyle(.bordered)

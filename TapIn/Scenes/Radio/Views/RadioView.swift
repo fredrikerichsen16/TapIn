@@ -9,7 +9,7 @@ struct RadioView: View {
     }
 
     private func getToggleButtonLabel() -> Image {
-        return workspace.radio.isActive ? Image(systemName: "pause.fill") : Image(systemName: "play.fill")
+        return workspace.radio.isActive ? Image(systemName: IconKeys.pauseButton) : Image(systemName: IconKeys.playButton)
     }
     
     private func toggleButtonAction() {
@@ -42,14 +42,14 @@ struct RadioView: View {
 
                 HStack(spacing: 8) {
                     Button(action: vm.goToPrevChannel, label: {
-                        Image(systemName: "arrowtriangle.left.fill")
+                        Image(systemName: IconKeys.leftFilled)
                     })
 
                     Button(action: toggleButtonAction, label: getToggleButtonLabel)
                         .disabled(playButtonDisabled)
 
                     Button(action: vm.goToNextChannel, label: {
-                        Image(systemName: "arrowtriangle.right.fill")
+                        Image(systemName: IconKeys.rightFilled)
                     })
                 }
             }

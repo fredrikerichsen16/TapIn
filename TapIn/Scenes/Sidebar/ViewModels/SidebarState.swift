@@ -68,6 +68,18 @@ class SidebarState: ObservableObject {
             workspace.name = name
         }
     }
+    
+    func renameFolder(_ folder: FolderDB, name: String) {
+        guard let folder = folder.thaw() else { return }
+
+        if name == "" {
+            return
+        }
+
+        try? realm.write {
+            folder.name = name
+        }
+    }
 
     func delete(workspace: WorkspaceDB) {
         sidebarModel.selection = SidebarListItem.folder(workspace.folder)

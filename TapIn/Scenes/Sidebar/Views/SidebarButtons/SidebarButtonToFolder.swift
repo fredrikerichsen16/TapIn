@@ -40,7 +40,7 @@ struct SidebarButtonToFolder: View {
                 }
             },
             onSubmitChangeName: {(name) in
-                print("Change name to \(name)")
+                sidebarState.renameFolder(folder, name: name)
             }
         )
     }

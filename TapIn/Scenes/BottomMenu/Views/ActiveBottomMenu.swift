@@ -6,7 +6,7 @@ struct ActiveBottomMenu: View {
 
     var body: some View {
         HStack(alignment: .center) {
-            navigateButton(direction: .left)
+            navigateButton(.left)
             
             Spacer()
 
@@ -31,29 +31,25 @@ struct ActiveBottomMenu: View {
             
             Spacer()
             
-            navigateButton(direction: .right)
+            navigateButton(.right)
         }
         .padding(.horizontal, 15)
     }
-
-    private func navigateButton(direction: Direction) -> some View {
-        var action: () -> Void = {}
-        var icon: String = ""
-
-        if direction == .right
+    
+    @ViewBuilder
+    func navigateButton(_ direction: Direction) -> some View {
+        if direction == .left
         {
-            action = { workspace.bottomMenuTab.next() }
-            icon = "chevron.right"
+            Button(action: { workspace.bottomMenuTab.previous() }, label: {
+                Image(systemName: IconKeys.left)
+            })
         }
         else
         {
-            action = { workspace.bottomMenuTab.previous() }
-            icon = "chevron.left"
+            Button(action: { workspace.bottomMenuTab.next() }, label: {
+                Image(systemName: IconKeys.right)
+            })
         }
-
-        return Button(action: action, label: {
-            Image(systemName: icon)
-        })
     }
 }
 

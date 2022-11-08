@@ -39,11 +39,11 @@ struct SidebarView: View {
                 
                 HStack {
                     Button(action: sidebarState.addFolder) {
-                        Image(systemName: "plus")
+                        Image(systemName: IconKeys.plus)
                     }
                     
                     Button(action: openSettingsWindow) {
-                        Image(systemName: "gearshape")
+                        Image(systemName: IconKeys.settings)
                     }
                     
                     Spacer()
@@ -51,7 +51,7 @@ struct SidebarView: View {
             }
             .listStyle(.sidebar)
             .padding()
-            .frame(minWidth: 200, idealWidth: 300, maxWidth: 500, idealHeight: .infinity, maxHeight: .infinity)
+            .frame(minWidth: 200, idealWidth: 300, maxWidth: 500, maxHeight: .infinity)
         }
     }
     

@@ -26,7 +26,7 @@ struct TappableAppIconView: View {
     func ImageOverlay() -> some View {
         if hoveringOverAppIcon {
             ZStack {
-                Image(systemName: "play.fill")
+                Image(systemName: IconKeys.playButton)
                     .frame(width: 100, height: 100, alignment: .center)
                     .background(Color.black)
                     .opacity(0.5)

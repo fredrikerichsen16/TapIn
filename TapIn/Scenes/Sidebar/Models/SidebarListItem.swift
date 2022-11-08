@@ -22,13 +22,13 @@ enum SidebarListItem {
         switch self
         {
         case .home:
-            return "house"
+            return IconKeys.house
         case .statistics:
-            return "chart.pie.fill"
+            return IconKeys.piechart
         case .workspace(_):
-            return "hand.point.right.fill" // ["heart.fill", "bolt.fill", "square.fill", "app.fill", "hand.point.right.fill", "doc.fill", "doc.text.fill"].randomElement()!
+            return IconKeys.pointRight // ["heart.fill", "bolt.fill", "square.fill", "app.fill", "hand.point.right.fill", "doc.fill", "doc.text.fill"].randomElement()!
         case .folder(_):
-            return "folder.fill"
+            return IconKeys.folder
         }
     }
     

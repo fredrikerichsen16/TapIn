@@ -24,8 +24,8 @@ struct StatisticsView: View {
                 }
                 
                 Picker("", selection: $showChart) {
-                    Image(systemName: "chart.bar.fill").tag(true)
-                    Image(systemName: "list.bullet").tag(false)
+                    Image(systemName: IconKeys.piechart).tag(true)
+                    Image(systemName: IconKeys.bulletlist).tag(false)
                 }
                 .pickerStyle(.segmented)
                 .fixedSize()
@@ -33,13 +33,13 @@ struct StatisticsView: View {
                 Spacer()
 
                 Button(action: vm.reduceUnit, label: {
-                    Image(systemName: "chevron.left")
+                    Image(systemName: IconKeys.left)
                 })
 
                 Button("This \(vm.interval.granularity.rawValue)", action: vm.resetToNow)
 
                 Button(action: vm.increaseUnit, label: {
-                    Image(systemName: "chevron.right")
+                    Image(systemName: IconKeys.right)
                 })
             }
 
