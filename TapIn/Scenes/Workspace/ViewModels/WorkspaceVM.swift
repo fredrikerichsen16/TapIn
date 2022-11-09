@@ -2,9 +2,7 @@ import Foundation
 import Combine
 
 class ComponentActivityTracker {
-    let componentDidChangeActivityStatus: NSNotification.Name = NSNotification.Name("ComponentDidChangeActivityStatus")
     var coordinator: WorkspaceCoordinator = WorkspaceCoordinator.shared
-    
     let workspace: WorkspaceVM
     
     init(workspace: WorkspaceVM) {
@@ -12,76 +10,130 @@ class ComponentActivityTracker {
         
         // Observing
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(pomodoroComponentDidChangeStatus(_:)),
-                                               name: componentDidChangeActivityStatus,
+                                               selector: #selector(componentDidChangeStatus(_:)),
+                                               name: NSNotification.Name.componentDidChangeStatus,
                                                object: workspace.pomodoro)
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(timeTrackerComponentDidChangeStatus(_:)),
-                                               name: componentDidChangeActivityStatus,
+                                               selector: #selector(componentDidChangeStatus(_:)),
+                                               name: NSNotification.Name.componentDidChangeStatus,
                                                object: workspace.timeTracker)
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(radioComponentDidChangeStatus(_:)),
-                                               name: componentDidChangeActivityStatus,
+                                               selector: #selector(componentDidChangeStatus(_:)),
+                                               name: NSNotification.Name.componentDidChangeStatus,
                                                object: workspace.radio)
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(blockerComponentDidChangeStatus(_:)),
-                                               name: componentDidChangeActivityStatus,
+                                               selector: #selector(componentDidChangeStatus(_:)),
+                                               name: NSNotification.Name.componentDidChangeStatus,
                                                object: workspace.blocker)
     }
     
     // MARK: Keeping Track of which workspaces are active and doing cascading launch
     
-    var activeComponents: Set<WorkspaceTab> = Set()
+    var componentsStatus: [WorkspaceTab: TimerMode] = [
+        .pomodoro: .initial,
+        .timetracking: .initial,
+        .blocker: .initial,
+        .radio: .initial
+    ]
     
-    private func getStatus(from notification: Notification) -> TimerMode? {
+    private func getStatusAndComponent(from notification: Notification) -> (WorkspaceTab, TimerMode)? {
         guard let userInfo = notification.userInfo as? [String: Any] else {
             return nil
         }
         
-        return userInfo["status"] as? TimerMode
+        if let component = userInfo["component"] as? WorkspaceTab,
+           let status = userInfo["status"] as? TimerMode
+        {
+            return (component, status)
+        }
+        
+        return nil
     }
     
-    private func forNowAllOfThemHaveTheSameImplementation(notification: Notification, tab: WorkspaceTab) {
-        guard let status = getStatus(from: notification) else {
+    @objc func componentDidChangeStatus(_ notification: Notification) {
+        guard let (component, status) = getStatusAndComponent(from: notification) else {
             return
         }
         
-        if status.isActive()
+        componentsStatus[component] = status
+        
+        if componentsStatus.values.contains(where: { $0.isActive() })
         {
-            activeComponents.insert(tab)
-            
             coordinator.setActive(workspace: workspace)
         }
         else
         {
-            activeComponents.remove(tab)
-            
-            if activeComponents.isEmpty
-            {
-                coordinator.disactivate()
-            }
+            coordinator.disactivate()
         }
         
-        print(activeComponents)
+        if component == .pomodoro {
+            cascade(status: status)
+        }
+        
+        printStatus()
     }
     
-    @objc func pomodoroComponentDidChangeStatus(_ notification: Notification) {
-        forNowAllOfThemHaveTheSameImplementation(notification: notification, tab: .pomodoro)
+    // MARK: Cascading
+    
+    func cascade(status: TimerMode) {
+        let folder = workspace.workspace.folder
+        var components: Set<WorkspaceTab> = Set()
+        
+        switch status
+        {
+        case .initial:
+            components = Set(folder.cascadingSettings.pomodoroEndCascade)
+        case .paused:
+            components = Set(folder.cascadingSettings.pomodoroPauseCascade)
+        case .running:
+            components = Set(folder.cascadingSettings.pomodoroStartCascade)
+        }
+        
+        switch status
+        {
+        case .initial, .paused:
+            for component in components
+            {
+                switch component
+                {
+                case .timetracking:
+                    workspace.timeTracker.endSession()
+                case .blocker:
+                    workspace.blocker.endSession()
+                case .radio:
+                    workspace.radio.endSession()
+                default:
+                    break
+                }
+            }
+        case .running:
+            for component in components
+            {
+                switch component
+                {
+                case .timetracking:
+                    workspace.timeTracker.startSession()
+                case .blocker:
+                    workspace.blocker.startSession()
+                case .radio:
+                    workspace.radio.startSession()
+                case .launcher:
+                    workspace.launcher.openAll()
+                default:
+                    break
+                }
+            }
+        }
     }
     
-    @objc func timeTrackerComponentDidChangeStatus(_ notification: Notification) {
-        forNowAllOfThemHaveTheSameImplementation(notification: notification, tab: .timetracking)
-    }
-    
-    @objc func radioComponentDidChangeStatus(_ notification: Notification) {
-        forNowAllOfThemHaveTheSameImplementation(notification: notification, tab: .radio)
-    }
-    
-    @objc func blockerComponentDidChangeStatus(_ notification: Notification) {
-        forNowAllOfThemHaveTheSameImplementation(notification: notification, tab: .blocker)
+    func printStatus() {
+        for (key, value) in componentsStatus
+        {
+            print("\(key.label): \(value)")
+        }
     }
 }
 

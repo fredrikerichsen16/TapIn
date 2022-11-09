@@ -7,7 +7,7 @@ class BlockerState: WorkspaceComponentViewModel {
 
     init(workspace: WorkspaceDB) {
         self.blocker = workspace.blocker
-        super.init(workspace: workspace, realm: RealmManager.shared.realm)
+        super.init(workspace: workspace, realm: RealmManager.shared.realm, tab: .blocker)
         setToken()
     }
     

@@ -26,7 +26,7 @@ final class RadioState: WorkspaceComponentViewModel {
         self.currentChannelIndex = 0
         self.currentChannel = channels[0]
         
-        super.init(workspace: workspace, realm: RealmManager.shared.realm)
+        super.init(workspace: workspace, realm: RealmManager.shared.realm, tab: .radio)
         
         initializePlayer()
     }

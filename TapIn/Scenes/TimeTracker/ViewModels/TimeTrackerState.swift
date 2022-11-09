@@ -3,7 +3,7 @@ import RealmSwift
 
 class TimeTrackerState: WorkspaceComponentViewModel {
     init(workspace: WorkspaceDB) {
-        super.init(workspace: workspace, realm: RealmManager.shared.realm)
+        super.init(workspace: workspace, realm: RealmManager.shared.realm, tab: .timetracking)
     }
     
     // MARK: UI

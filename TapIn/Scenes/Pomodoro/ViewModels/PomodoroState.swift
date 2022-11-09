@@ -29,7 +29,7 @@ final class PomodoroState: WorkspaceComponentViewModel {
     init(workspace: WorkspaceDB) {
         self.pomodoroDb = workspace.pomodoro
         
-        super.init(workspace: workspace, realm: RealmManager.shared.realm)
+        super.init(workspace: workspace, realm: RealmManager.shared.realm, tab: .pomodoro)
         
         self.initialTimerState = PomodoroInitialTimerState(self)
         self.runningTimerState = PomodoroRunningTimerState(self)
