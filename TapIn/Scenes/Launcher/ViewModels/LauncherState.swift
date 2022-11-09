@@ -6,10 +6,11 @@ class LauncherState: ObservableObject {
     private var workspace: WorkspaceDB
     
     init(workspace: WorkspaceDB) {
+        self.realm = RealmManager.shared.realm
+//        let workspace = realm.object(ofType: WorkspaceDB.self, forPrimaryKey: workspace.id)!
         self.workspace = workspace
         self.launcher = workspace.launcher
         self.launcherInstances = workspace.launcher.launcherInstances
-        self.realm = RealmManager.shared.realm
         self.fetch()
         setToken()
     }
@@ -85,6 +86,7 @@ class LauncherState: ObservableObject {
     func deleteInstance(by id: ObjectId) {
         guard
             let launcher = launcher.thaw(),
+            let instance = realm.object(ofType: LauncherInstanceDB.self, forPrimaryKey: id),
             let instanceIndex = instances.firstIndex(where: { $0.id == id })
         else { return }
         

@@ -85,33 +85,64 @@ class SidebarState: ObservableObject {
         }
     }
 
-    func delete(workspace: WorkspaceDB) {
-        sidebarModel.selection = SidebarListItem.folder(workspace.folder)
+//    func delete(workspace: WorkspaceDB) {
+//        sidebarModel.selection = nil // SidebarListItem.folder(workspace.folder)
+//        sidebarModel.outline = []
+//
+//        let realm = realm.thaw()
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+//            guard let workspace = realm.object(ofType: WorkspaceDB.self, forPrimaryKey: workspace.id) else {
+//                return
+//            }
+//
+//            let folder = workspace.folder
+//
+//            try? realm.write {
+//                guard let workspaceIndex = folder.workspaces.firstIndex(of: workspace) else {
+//                    return
+//                }
+//
+//                folder.workspaces.remove(at: workspaceIndex)
+//
+//                realm.delete(workspace)
+//            }
+//        })
+//    }
     
-        guard let folder = workspace.folder.thaw() else {
-            return
-        }
+    func delete(workspace: WorkspaceDB) {
+        sidebarModel.selection = nil // SidebarListItem.folder(workspace.folder)
+        sidebarModel.outline = []
+        
+        let folder = workspace.folder
 
-        try? realm.write {
-            guard let workspaceIndex = folder.workspaces.firstIndex(of: workspace) else {
-                return
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+            try? self.realm.write {
+                guard let workspaceIndex = folder.workspaces.firstIndex(of: workspace) else {
+                    return
+                }
+                
+                folder.workspaces.remove(at: workspaceIndex)
+                self.realm.delete(workspace)
             }
-
-            folder.workspaces.remove(at: workspaceIndex)
-        }
+        })
     }
 
     func delete(folder: FolderDB) {
-        guard let folder = folder.thaw() else {
-            return
-        }
-        
         sidebarModel.selection = nil
         
-        try? realm.write
+        do
         {
-            folder.workspaces.removeAll()
-            realm.delete(folder)
+            try realm.write {
+                let workspaces = folder.workspaces
+                folder.workspaces.removeAll()
+                realm.delete(workspaces)
+                folder.isArchived = true
+            }
+        }
+        catch let error as NSError
+        {
+            fatalError("Error: \(error)")
         }
     }
 
@@ -125,6 +156,10 @@ class SidebarState: ObservableObject {
         try? realm.write {
             folder.workspaces.append(workspace)
         }
+    }
+    
+    deinit {
+        token?.invalidate()
     }
     
 }

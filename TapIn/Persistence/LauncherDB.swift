@@ -9,7 +9,7 @@ final class LauncherDB: Object, ObjectKeyIdentifiable {
     var workspace: LinkingObjects<WorkspaceDB>
     
     @Persisted
-    var launcherInstances = List<LauncherInstanceDB>()
+    var launcherInstances = RealmSwift.List<LauncherInstanceDB>()
     
     // Default setting
     @Persisted

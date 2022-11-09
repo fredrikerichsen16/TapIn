@@ -13,8 +13,9 @@ struct SidebarButtonToWorkspace: View {
         DynamicSidebarButton(
             sidebarListItem: sidebarListItem,
             destination: {
-                WorkspaceView()
-                    .environmentObject(workspaceCoordinator.getWorkspaceVM(for: workspace))
+                Text("pikk")
+//                WorkspaceView()
+//                    .environmentObject(workspaceCoordinator.getWorkspaceVM(for: workspace))
             },
             contextMenu: {
                 Button("Add workspace to folder") {
