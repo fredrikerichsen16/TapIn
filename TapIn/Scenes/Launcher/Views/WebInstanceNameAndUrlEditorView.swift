@@ -9,13 +9,11 @@ struct WebInstanceNameAndUrlEditorView: View {
     var body: some View {
         Form {
             TextField("Name", text: $name)
-                .onSubmit {
-                    instance.setName(name: name)
-                }
             TextField("URL", text: $url)
-                .onSubmit {
-                    instance.setUrl(urlString: url)
-                }
+        }
+        .onSubmit {
+            instance.setName(name: name)
+            instance.setUrl(urlString: url)
         }
         .onAppear {
             name = instance.name

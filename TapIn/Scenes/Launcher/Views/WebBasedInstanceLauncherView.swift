@@ -28,9 +28,3 @@ struct WebBasedInstanceLauncherView: View {
         .padding()
     }
 }
-
-//struct WebBasedInstanceLauncherView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WebBasedInstanceLauncherView()
-//    }
-//}
