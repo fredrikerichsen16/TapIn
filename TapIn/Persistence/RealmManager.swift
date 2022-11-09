@@ -20,7 +20,7 @@ class RealmManager {
             {
                 let config = Realm.Configuration(schemaVersion: 15)
                 self.realm = try Realm(configuration: config)
-                addData()
+//                addData()
             }
         }
         catch

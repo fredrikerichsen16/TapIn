@@ -108,20 +108,4 @@ struct StatisticsView: View {
             }
         }
     }
-    
-//    var chart: some View {
-//        // Create  table showing contents of sessions
-//        List(vm.sessions) { session in
-//            HStack {
-//                Text(session.workspace.name)
-//                Text("\(session.duration) min")
-//                Text("\(session.completedTime)")
-//            }
-//        }
-//
-//        List {
-//            Text("Number completed sessions: \(vm.numSessions)")
-//            Text("Duration worked: \(vm.workDuration)")
-//        }
-//    }
 }

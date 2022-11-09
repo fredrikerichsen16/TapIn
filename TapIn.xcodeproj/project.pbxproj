@@ -107,6 +107,9 @@
 		35F3D575291B5DD70050E3A9 /* ComponentActivityTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D574291B5DD70050E3A9 /* ComponentActivityTracker.swift */; };
 		35F3D577291B64DD0050E3A9 /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D576291B64DD0050E3A9 /* PropertyWrappers.swift */; };
 		35F3D579291B74BE0050E3A9 /* LauncherInstanceListControlButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D578291B74BE0050E3A9 /* LauncherInstanceListControlButtons.swift */; };
+		35F3D57B291B82AD0050E3A9 /* SessionHistoryCharter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D57A291B82AD0050E3A9 /* SessionHistoryCharter.swift */; };
+		35F3D57D291B82CF0050E3A9 /* TimeGranularity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D57C291B82CF0050E3A9 /* TimeGranularity.swift */; };
+		35F3D57F291B83280050E3A9 /* IntervalHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D57E291B83280050E3A9 /* IntervalHolder.swift */; };
 		DC0280BE4E4B255B10AA9422 /* StatisticsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC02823F03E1DB59824ADC39 /* StatisticsState.swift */; };
 /* End PBXBuildFile section */
 
@@ -231,6 +234,9 @@
 		35F3D574291B5DD70050E3A9 /* ComponentActivityTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ComponentActivityTracker.swift; path = TapIn/Scenes/Workspace/Other/ComponentActivityTracker.swift; sourceTree = SOURCE_ROOT; };
 		35F3D576291B64DD0050E3A9 /* PropertyWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrappers.swift; sourceTree = "<group>"; };
 		35F3D578291B74BE0050E3A9 /* LauncherInstanceListControlButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherInstanceListControlButtons.swift; sourceTree = "<group>"; };
+		35F3D57A291B82AD0050E3A9 /* SessionHistoryCharter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryCharter.swift; sourceTree = "<group>"; };
+		35F3D57C291B82CF0050E3A9 /* TimeGranularity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGranularity.swift; sourceTree = "<group>"; };
+		35F3D57E291B83280050E3A9 /* IntervalHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalHolder.swift; sourceTree = "<group>"; };
 		DC02823F03E1DB59824ADC39 /* StatisticsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -399,6 +405,9 @@
 			children = (
 				35AD06062913280D00837016 /* SessionHistoryQueryer.swift */,
 				3597800429141729004FBDAE /* SessionModel.swift */,
+				35F3D57A291B82AD0050E3A9 /* SessionHistoryCharter.swift */,
+				35F3D57C291B82CF0050E3A9 /* TimeGranularity.swift */,
+				35F3D57E291B83280050E3A9 /* IntervalHolder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1103,6 +1112,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35F3D575291B5DD70050E3A9 /* ComponentActivityTracker.swift in Sources */,
+				35F3D57D291B82CF0050E3A9 /* TimeGranularity.swift in Sources */,
 				35F3D567291B0A6F0050E3A9 /* FolderView.swift in Sources */,
 				3542DC462917E50500F7A9D8 /* SubscriptionSettingsView.swift in Sources */,
 				3542DC35291795A500F7A9D8 /* CoreSidebarButton.swift in Sources */,
@@ -1133,6 +1143,7 @@
 				35E000D42911F531009D284D /* WorkspaceState.swift in Sources */,
 				35E000DF2911F531009D284D /* PomodoroState.swift in Sources */,
 				35E000D72911F531009D284D /* BlockerState.swift in Sources */,
+				35F3D57B291B82AD0050E3A9 /* SessionHistoryCharter.swift in Sources */,
 				35E000C12911F531009D284D /* TimeTrackerView.swift in Sources */,
 				35E000402911F400009D284D /* Color+.swift in Sources */,
 				35E000BD2911F531009D284D /* SidebarButtonToWorkspace.swift in Sources */,
@@ -1182,6 +1193,7 @@
 				35A1AAAD29147C2C00B8158D /* SidebarSettingsView.swift in Sources */,
 				35693E712916256600F1966D /* AppLauncher.swift in Sources */,
 				35F3D579291B74BE0050E3A9 /* LauncherInstanceListControlButtons.swift in Sources */,
+				35F3D57F291B83280050E3A9 /* IntervalHolder.swift in Sources */,
 				35F3D56B291B0D560050E3A9 /* FormInputs.swift in Sources */,
 				3542DC312917805200F7A9D8 /* EditableLauncherNameView.swift in Sources */,
 				35E000462911F41F009D284D /* String+.swift in Sources */,
