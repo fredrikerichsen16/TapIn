@@ -83,18 +83,19 @@ struct StatisticsView: View {
         VStack {
             ForEach(vm.listData) { data in
                 HStack {
-                    Text(data.workspace.name)
+                    Text(data.name)
                     Spacer()
                     Text(data.formattedDuration)
                 }
                 .padding()
                 .background(Color.gray)
                 
-                if let children = data.children {
+                if let children = data.children
+                {
                     VStack {
                         ForEach(children) { child in
                             HStack {
-                                Text(child.workspace.name)
+                                Text(child.name)
                                 Spacer()
                                 Text(child.formattedDuration)
                             }

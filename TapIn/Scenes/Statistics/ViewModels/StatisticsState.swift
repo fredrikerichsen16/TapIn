@@ -10,6 +10,8 @@ struct IntervalHolder {
     var month: Int
     var week: Int
     var granularity: TimeGranularity
+    
+    private let calendar: Calendar
 
     init() {
         let date = Date()
@@ -22,6 +24,8 @@ struct IntervalHolder {
         self.month = currentMonth
         self.week = currentWeek
         self.granularity = .week
+        
+        self.calendar = calendar
     }
 
     mutating func reduceUnit() {
@@ -94,7 +98,7 @@ struct IntervalHolder {
         }
     }
     
-    var durationInDays: Int {
+    var numberOfDays: Int {
         // Get the duration of the year/week/month taking into account that months have different lengths and e.g. don't go further than today's date\
         // but for now, just doing a simple one
         

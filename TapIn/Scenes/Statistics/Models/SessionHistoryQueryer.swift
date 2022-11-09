@@ -126,44 +126,57 @@ class SessionHistoryCharter {
                 let total = sessionsInWorkspace.reduce(0, { current, session in
                     current + session.duration
                 })
+                
                 let average = total / Double(subdivision.numberOfDays)
 
                 data.append(ChartData(intervalLabel: subdivision.label, seconds: average, workspace: workspace))
             }
         }
+        
+        // Filter out folders that have insignificant amount of work done
+        data = data.filter({ $0.seconds > 120 })
 
         return data
     }
     
     func list() -> [ListData] {
-        return []
-//        var data = [ListData]()
-//
-//        for workspace in workspaces
-//        {
-//            var childrenListData = [ListData]()
-//            for childWorkspace in [workspace] + workspace.children
-//            {
-//                let sessionsInChildWorkspace = sessions.filter({ $0.workspace.first == childWorkspace })
-//
-//                let total = sessionsInChildWorkspace.reduce(0, { current, session in
-//                    current + session.duration
-//                })
-//                let average = total / Double(interval.durationInDays)
-//
-//                childrenListData.append(ListData(seconds: average, workspace: childWorkspace))
-//            }
-//
-//            let total = childrenListData.reduce(0, { current, session in
-//                current + session.seconds
-//            })
-//
-//            let average = total / Double(childrenListData.count)
-//
-//            data.append( ListData(seconds: average, workspace: workspace, children: childrenListData) )
-//        }
-//
-//        return data
+        // Get folders
+        var folders: [FolderDB] = []
+        
+        for workspace in workspaces
+        {
+            folders.append(workspace.folder)
+        }
+        
+        folders = Array(Set(folders))
+        
+        // Get data
+        var data: [ListData] = []
+
+        for folder in folders
+        {
+            var workspacesData: [ListData] = []
+            
+            for workspace in folder.workspaces
+            {
+                let sessionsInWorkspace = sessions.filter({ $0.workspace.first == workspace })
+                
+                let total = sessionsInWorkspace.reduce(0, { current, session in
+                    current + session.duration
+                })
+                
+                let average = total / Double(interval.numberOfDays)
+                
+                workspacesData.append(ListData(seconds: average, name: workspace.name))
+            }
+            
+            let total = workspacesData.reduce(0, { $0 + $1.seconds })
+            let average = total / Double(workspacesData.count)
+            
+            data.append(ListData(seconds: average, name: folder.name, children: workspacesData))
+        }
+
+        return data
     }
     
     func getIntervalSubdivisions() -> [IntervalSubdivision] {
