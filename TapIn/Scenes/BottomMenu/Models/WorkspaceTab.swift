@@ -1,6 +1,7 @@
 import Foundation
+import RealmSwift
 
-enum WorkspaceTab {
+enum WorkspaceTab: String, PersistableEnum {
     case pomodoro
     case timetracking
     case launcher

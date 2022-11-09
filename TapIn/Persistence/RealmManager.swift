@@ -18,7 +18,7 @@ class RealmManager {
             }
             else
             {
-                let config = Realm.Configuration(schemaVersion: 12)
+                let config = Realm.Configuration(schemaVersion: 15)
                 self.realm = try Realm(configuration: config)
 //                addData()
             }

@@ -97,6 +97,10 @@
 		35E9CE4329198A7B0019DDE8 /* SubscriptionSettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E9CE4229198A7B0019DDE8 /* SubscriptionSettingsState.swift */; };
 		35E9CE482919AEEE0019DDE8 /* SubscriptionProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E9CE472919AEEE0019DDE8 /* SubscriptionProducts.swift */; };
 		35E9CE4A2919B6EA0019DDE8 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E9CE492919B6EA0019DDE8 /* SubscriptionManager.swift */; };
+		35F3D560291B09000050E3A9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D55F291B09000050E3A9 /* HomeView.swift */; };
+		35F3D567291B0A6F0050E3A9 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D566291B0A6F0050E3A9 /* FolderView.swift */; };
+		35F3D569291B0A900050E3A9 /* FolderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D568291B0A900050E3A9 /* FolderState.swift */; };
+		35F3D56B291B0D560050E3A9 /* FormInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D56A291B0D560050E3A9 /* FormInputs.swift */; };
 		DC0280BE4E4B255B10AA9422 /* StatisticsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC02823F03E1DB59824ADC39 /* StatisticsState.swift */; };
 /* End PBXBuildFile section */
 
@@ -211,6 +215,10 @@
 		35E9CE4229198A7B0019DDE8 /* SubscriptionSettingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSettingsState.swift; sourceTree = "<group>"; };
 		35E9CE472919AEEE0019DDE8 /* SubscriptionProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionProducts.swift; sourceTree = "<group>"; };
 		35E9CE492919B6EA0019DDE8 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
+		35F3D55F291B09000050E3A9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		35F3D566291B0A6F0050E3A9 /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
+		35F3D568291B0A900050E3A9 /* FolderState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderState.swift; sourceTree = "<group>"; };
+		35F3D56A291B0D560050E3A9 /* FormInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputs.swift; sourceTree = "<group>"; };
 		DC02823F03E1DB59824ADC39 /* StatisticsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -490,6 +498,8 @@
 		35E000652911F531009D284D /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				35F3D561291B0A590050E3A9 /* Folder */,
+				35F3D55D291B08F40050E3A9 /* Home */,
 				35AD0601291327CF00837016 /* Statistics */,
 				35AD05F72912EB6D00837016 /* Notes */,
 				35E000662911F531009D284D /* Sidebar */,
@@ -885,6 +895,48 @@
 			path = General;
 			sourceTree = "<group>";
 		};
+		35F3D55D291B08F40050E3A9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				35F3D55F291B09000050E3A9 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		35F3D561291B0A590050E3A9 /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				35F3D564291B0A610050E3A9 /* Models */,
+				35F3D563291B0A5F0050E3A9 /* Views */,
+				35F3D562291B0A5C0050E3A9 /* ViewModels */,
+			);
+			path = Folder;
+			sourceTree = "<group>";
+		};
+		35F3D562291B0A5C0050E3A9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				35F3D568291B0A900050E3A9 /* FolderState.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		35F3D563291B0A5F0050E3A9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35F3D566291B0A6F0050E3A9 /* FolderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		35F3D564291B0A610050E3A9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				35F3D56A291B0D560050E3A9 /* FormInputs.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1040,6 +1092,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35F3D567291B0A6F0050E3A9 /* FolderView.swift in Sources */,
 				3542DC462917E50500F7A9D8 /* SubscriptionSettingsView.swift in Sources */,
 				3542DC35291795A500F7A9D8 /* CoreSidebarButton.swift in Sources */,
 				35E000E12911F531009D284D /* TimerMode.swift in Sources */,
@@ -1086,6 +1139,7 @@
 				3542DC37291795C300F7A9D8 /* DynamicSidebarButton.swift in Sources */,
 				35693E5F2915C34400F1966D /* WorkspaceCoordinator.swift in Sources */,
 				35E000D02911F531009D284D /* RadioState.swift in Sources */,
+				35F3D569291B0A900050E3A9 /* FolderState.swift in Sources */,
 				35E000D32911F531009D284D /* RadioView.swift in Sources */,
 				35E000BF2911F531009D284D /* SidebarView.swift in Sources */,
 				35693E6F2916251400F1966D /* WebLauncherModel.swift in Sources */,
@@ -1097,6 +1151,7 @@
 				35E000C82911F531009D284D /* LauncherModelExtra.swift in Sources */,
 				35693E5929157D5200F1966D /* FolderDB.swift in Sources */,
 				35E9CE4329198A7B0019DDE8 /* SubscriptionSettingsState.swift in Sources */,
+				35F3D560291B09000050E3A9 /* HomeView.swift in Sources */,
 				35E000E02911F531009D284D /* PomodoroStageState.swift in Sources */,
 				35E000C22911F531009D284D /* SettingsView.swift in Sources */,
 				35E000C52911F531009D284D /* WorkspaceSettingsView.swift in Sources */,
@@ -1113,6 +1168,7 @@
 				35693E622915DAD000F1966D /* WorkspaceComponentViewModel.swift in Sources */,
 				35A1AAAD29147C2C00B8158D /* SidebarSettingsView.swift in Sources */,
 				35693E712916256600F1966D /* AppLauncher.swift in Sources */,
+				35F3D56B291B0D560050E3A9 /* FormInputs.swift in Sources */,
 				3542DC312917805200F7A9D8 /* EditableLauncherNameView.swift in Sources */,
 				35E000462911F41F009D284D /* String+.swift in Sources */,
 				35E000C42911F531009D284D /* GeneralSettingsView.swift in Sources */,

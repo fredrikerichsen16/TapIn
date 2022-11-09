@@ -10,4 +10,8 @@ final class LauncherDB: Object, ObjectKeyIdentifiable {
     
     @Persisted
     var launcherInstances = List<LauncherInstanceDB>()
+    
+    // Default setting
+    @Persisted
+    var hideOnLaunch = false
 }

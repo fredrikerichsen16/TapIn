@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     private enum Tabs: Hashable {
-        case general, workspace, sidebar, subscription
+        case general, sidebar, subscription
     }
     
     @State private var selection: Tabs = .general
@@ -14,12 +14,6 @@ struct SettingsView: View {
                     Label("General", systemImage: "gear")
                 }
                 .tag(Tabs.general)
-            
-            WorkspaceSettingsView()
-                .tabItem {
-                    Label("Workspaces", systemImage: "star")
-                }
-                .tag(Tabs.workspace)
             
             SidebarSettingsView()
                 .tabItem {

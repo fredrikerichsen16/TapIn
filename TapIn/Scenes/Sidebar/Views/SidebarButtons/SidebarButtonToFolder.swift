@@ -12,7 +12,8 @@ struct SidebarButtonToFolder: View {
         DynamicSidebarButton(
             sidebarListItem: sidebarListItem,
             destination: {
-                Text("Balls")
+                FolderView()
+                    .environmentObject(FolderState(folder: folder))
             },
             contextMenu: {
                 Button("Add workspace") {

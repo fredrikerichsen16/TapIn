@@ -61,6 +61,7 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
         self.name = "New \(type.label)"
         self.type = type
         self.instantiated = false
+        self.hideOnLaunch = launcher.first?.hideOnLaunch ?? false
         
         if type == .terminal, let terminalApp = URL(string: "/Applications/Utilities/Terminal.app/") {
             self.appUrl = terminalApp
