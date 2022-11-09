@@ -2,7 +2,7 @@ import SwiftUI
 
 struct BottomMenu: View {
     @Environment(\.workspaceCoordinator) var workspaceCoordinator
-    @EnvironmentObject var workspaceVM: WorkspaceVM
+    @EnvironmentObject var workspaceVM: WorkspaceState
     
     let height: CGFloat = 80.0
     

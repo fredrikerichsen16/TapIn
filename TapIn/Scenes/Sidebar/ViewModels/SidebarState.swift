@@ -2,6 +2,19 @@ import Foundation
 import RealmSwift
 
 class SidebarState: ObservableObject {
+    // MARK: Preview
+    static var preview: SidebarState = {
+        return SidebarState(preview: true)
+    }()
+        
+    init(preview: Bool) {
+        let realm = RealmManager.preview.realm
+        self.folders = realm.objects(FolderDB.self)
+        self.sidebarModel = SidebarModel()
+        self.setToken()
+    }
+    
+    // MARK: Normal
     
     var realm: Realm {
         RealmManager.shared.realm
@@ -12,15 +25,6 @@ class SidebarState: ObservableObject {
         self.folders = realm.objects(FolderDB.self)
         self.sidebarModel = SidebarModel()
         self.setToken()
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(goToWorkspace(_:)),
-                                               name: NSNotification.Name("GoToWorkspace"),
-                                               object: nil)
-    }
-    
-    @objc func goToWorkspace(_ notification: Notification) {
-        print("What's up brah?")
     }
     
     // MARK: Sidebar

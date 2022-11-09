@@ -10,6 +10,7 @@ final class PomodoroState: WorkspaceComponentViewModel {
     @Published var timerMode: TimerMode = .initial {
         didSet {
             sendStatusChangeNotification(status: timerMode)
+            isActive = timerMode != .initial
         }
     }
     
@@ -54,13 +55,9 @@ final class PomodoroState: WorkspaceComponentViewModel {
         self.zapTicker()
     }
     
-    var isActive: Bool {
-        return timerMode != .initial
-    }
-    
     // MARK: Pomodoro Timer States (State Pattern)
     
-    func startSession() {
+    override func startSession() {
         timerState.start()
     }
     

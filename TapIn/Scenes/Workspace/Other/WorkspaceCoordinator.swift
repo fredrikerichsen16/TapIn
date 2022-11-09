@@ -3,20 +3,20 @@ import SwiftUI
 
 class WorkspaceCoordinator {
     static let shared = WorkspaceCoordinator()
-    private var currentWorkspace: WorkspaceVM? = nil
+    private var currentWorkspace: WorkspaceState? = nil
     
     private init() {}
     
-    func getWorkspaceVM(for workspace: WorkspaceDB) -> WorkspaceVM {
+    func getWorkspaceVM(for workspace: WorkspaceDB) -> WorkspaceState {
         if let current = currentWorkspace, current.workspace == workspace
         {
             return current
         }
 
-        return WorkspaceVM(workspace: workspace)
+        return WorkspaceState(workspace: workspace)
     }
     
-    func getActiveWorkspace() -> WorkspaceVM? {
+    func getActiveWorkspace() -> WorkspaceState? {
         return currentWorkspace
     }
     
@@ -30,7 +30,7 @@ class WorkspaceCoordinator {
         return false
     }
     
-    func setActive(workspace: WorkspaceVM) {
+    func setActive(workspace: WorkspaceState) {
         self.currentWorkspace = workspace
     }
     

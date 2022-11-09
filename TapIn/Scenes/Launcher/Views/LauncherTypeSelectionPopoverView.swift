@@ -2,7 +2,7 @@ import SwiftUI
 import RealmSwift
 
 struct LauncherTypeSelectionPopoverView: View {
-    @EnvironmentObject var workspace: WorkspaceVM
+    @EnvironmentObject var workspace: WorkspaceState
     @Binding var showingPopover: Bool
     
     func createEmptyInstance(type: RealmLauncherType) {

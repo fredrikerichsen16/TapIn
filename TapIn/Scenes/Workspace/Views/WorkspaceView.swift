@@ -2,7 +2,7 @@ import SwiftUI
 import RealmSwift
 
 struct WorkspaceView: View {
-    @EnvironmentObject var workspace: WorkspaceVM
+    @EnvironmentObject var workspace: WorkspaceState
     
     var body: some View {    
         VStack {

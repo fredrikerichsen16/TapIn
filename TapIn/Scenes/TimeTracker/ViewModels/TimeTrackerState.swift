@@ -34,18 +34,4 @@ class TimeTrackerState: WorkspaceComponentViewModel {
     
     @Published var numberOfSessions = 0
     @Published var workDuration = "? hours"
-    
-    // MARK: Start and end session
-    
-    @Published var isActive = false
-    
-    func startSession() {
-        isActive = true
-        sendStatusChangeNotification(status: .running)
-    }
-    
-    func endSession() {
-        isActive = false
-        sendStatusChangeNotification(status: .initial)
-    }
 }

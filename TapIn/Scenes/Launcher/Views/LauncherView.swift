@@ -3,7 +3,7 @@ import RealmSwift
 import QuickLook
 
 struct LauncherView: View {
-    @EnvironmentObject var workspace: WorkspaceVM
+    @EnvironmentObject var workspace: WorkspaceState
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -17,7 +17,7 @@ struct LauncherView: View {
                     .frame(width: 210, alignment: .center)
                     // TODO: Change background color to clear
 
-                    LauncherInstanceListControlButtons()
+                    LauncherInstanceListControlButtonsView()
                 }
                 .padding()
 
@@ -105,35 +105,11 @@ struct LauncherView: View {
     }
 }
 
-/// The plus and minus buttons below the list of launcher list items, for adding or removing launcher instances
-struct LauncherInstanceListControlButtons: View {
-    @EnvironmentObject var workspace: WorkspaceVM
-    @State var showingPopover = false
-    
-    var body: some View {
-        HStack(alignment: .center, spacing: 5) {
-            Button(action: {
-                showingPopover.toggle()
-            }, label: {
-                Image(systemName: IconKeys.plus)
-                    .font(.system(size: 16.0))
-            })
-            .buttonStyle(.bordered)
-            .popover(isPresented: $showingPopover) {
-                LauncherTypeSelectionPopoverView(showingPopover: $showingPopover)
-            }
-            
-            Button(action: {
-                guard let id = workspace.launcher.selectedInstance else { return }
-                
-                workspace.launcher.selectedInstance = nil
-                workspace.launcher.deleteInstance(by: id)
-            }, label: {
-                Image(systemName: IconKeys.minus)
-                    .font(.system(size: 16.0))
-            })
-            .buttonStyle(.bordered)
-            .disabled(workspace.launcher.selectedInstance == nil)
-        }
+struct LauncherView_Preview: PreviewProvider {
+    static var previews: some View {
+        let workspace = WorkspaceState.preview
+        
+        LauncherView()
+            .environmentObject(workspace)
     }
 }

@@ -70,3 +70,11 @@ struct SidebarView: View {
         })
     }
 }
+
+struct SidebarView_Preview: PreviewProvider {
+    static var previews: some View {
+        SidebarView()
+            .environmentObject(SidebarState.preview)
+    }
+}
+

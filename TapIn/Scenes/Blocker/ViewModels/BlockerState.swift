@@ -19,8 +19,6 @@ class BlockerState: WorkspaceComponentViewModel {
         self.token = blocker.blacklistedWebsites.observe({ [weak self] (changes) in
             switch changes
             {
-            case .initial(_):
-                self?.fetch()
             case .update(_, deletions: _, insertions: _, modifications: _):
                 self?.fetch()
             default:
@@ -73,15 +71,13 @@ class BlockerState: WorkspaceComponentViewModel {
 
     // MARK: Start and end session
 
-    @Published var isActive = false
-
-    func startSession() {
-        isActive = true
-        sendStatusChangeNotification(status: .running)
+    override func startSession() {
+        super.startSession()
+        // do something extra
     }
 
-    func endSession() {
-        isActive = false
-        sendStatusChangeNotification(status: .initial)
+    override func endSession() {
+        super.endSession()
+        // do something extra
     }
 }

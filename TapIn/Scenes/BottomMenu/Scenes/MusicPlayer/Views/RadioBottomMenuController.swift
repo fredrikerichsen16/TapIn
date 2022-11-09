@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct RadioBottomMenuController: View {
-    @EnvironmentObject var workspace: WorkspaceVM
+    @EnvironmentObject var workspace: WorkspaceState
     
     private func getToggleButtonLabel() -> Image {
         return workspace.radio.isActive ? Image(systemName: IconKeys.pauseButton) : Image(systemName: IconKeys.playButton)

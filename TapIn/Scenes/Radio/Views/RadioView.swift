@@ -2,7 +2,7 @@ import SwiftUI
 
 struct RadioView: View {
     @Environment(\.workspaceCoordinator) var workspaceCoordinator
-    @EnvironmentObject var workspace: WorkspaceVM
+    @EnvironmentObject var workspace: WorkspaceState
     
     var vm: RadioState {
         workspace.radio
@@ -55,5 +55,15 @@ struct RadioView: View {
             }
         }
         .padding()
+    }
+}
+
+struct RadioView_Preview: PreviewProvider {
+    static var previews: some View {
+        let workspace = WorkspaceState.preview
+        
+        RadioView()
+            .environmentObject(workspace)
+            .environment(\.workspaceCoordinator, WorkspaceCoordinator.shared)
     }
 }

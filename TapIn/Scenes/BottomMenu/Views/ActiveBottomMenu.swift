@@ -2,7 +2,7 @@ import SwiftUI
 import RealmSwift
 
 struct ActiveBottomMenu: View {
-    @EnvironmentObject var workspace: WorkspaceVM
+    @EnvironmentObject var workspace: WorkspaceState
 
     var body: some View {
         HStack(alignment: .center) {
@@ -54,7 +54,7 @@ struct ActiveBottomMenu: View {
 }
 
 struct TimeTrackerBottomMenuController: View {
-    @EnvironmentObject var workspace: WorkspaceVM
+    @EnvironmentObject var workspace: WorkspaceState
     
     var vm: TimeTrackerState {
         workspace.timeTracker
@@ -81,7 +81,7 @@ struct TimeTrackerBottomMenuController: View {
 }
 
 struct BlockerBottomMenuController: View {
-    @EnvironmentObject var workspace: WorkspaceVM
+    @EnvironmentObject var workspace: WorkspaceState
     
     var vm: BlockerState {
         workspace.blocker
@@ -108,7 +108,7 @@ struct BlockerBottomMenuController: View {
 }
 
 struct LauncherBottomMenuController: View {
-    @EnvironmentObject var workspace: WorkspaceVM
+    @EnvironmentObject var workspace: WorkspaceState
     
     var body: some View {
         BottomMenuWorkspaceTabController(workspaceTab: .launcher) {
@@ -120,7 +120,7 @@ struct LauncherBottomMenuController: View {
 }
 
 struct PomodoroBottomMenuController: View {
-    @EnvironmentObject var workspace: WorkspaceVM
+    @EnvironmentObject var workspace: WorkspaceState
 
     var body: some View {
         BottomMenuWorkspaceTabController(workspaceTab: .pomodoro) {
@@ -135,7 +135,7 @@ struct PomodoroBottomMenuController: View {
 
 struct PomodoroButtonView: View {
     @Environment(\.workspaceCoordinator) var workspaceCoordinator
-    @EnvironmentObject var workspace: WorkspaceVM
+    @EnvironmentObject var workspace: WorkspaceState
     let button: PomodoroButton
     
     var body: some View {

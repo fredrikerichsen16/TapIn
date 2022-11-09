@@ -12,8 +12,22 @@ class WorkspaceComponentViewModel: ObservableObject {
         self.tab = tab
     }
     
+    // MARK: Start and end session
+    
     func sendStatusChangeNotification(status: TimerMode) {
         NotificationCenter.default.post(name: Notification.Name.componentDidChangeStatus, object: self, userInfo: ["status": status, "component": tab])
+    }
+    
+    @Published var isActive = false
+    
+    func startSession() {
+        isActive = true
+        sendStatusChangeNotification(status: .running)
+    }
+    
+    func endSession() {
+        isActive = false
+        sendStatusChangeNotification(status: .initial)
     }
 }
 

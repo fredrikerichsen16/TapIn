@@ -42,7 +42,8 @@ class LauncherState: ObservableObject {
                 // Handle insertions
                 for index in insertions
                 {
-                    if let instanceModel = launcherInstanceFactory(instance: launcher.launcherInstances[index]) {
+                    if let instanceModel = launcherInstanceFactory(instance: launcher.launcherInstances[index])
+                    {
                         instances.insert(instanceModel, at: index)
                     }
                 }
@@ -50,7 +51,8 @@ class LauncherState: ObservableObject {
                 // Handle modifications
                 for index in modifications
                 {
-                    if let instanceModel = launcherInstanceFactory(instance: launcher.launcherInstances[index]) {
+                    if let instanceModel = launcherInstanceFactory(instance: launcher.launcherInstances[index])
+                    {
                         instances.remove(at: index)
                         instances.insert(instanceModel, at: index)
                         selectedInstance = instanceModel.id

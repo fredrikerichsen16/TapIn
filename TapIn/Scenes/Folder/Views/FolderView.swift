@@ -12,7 +12,8 @@ struct FolderView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 25) {
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Folder Settings").font(.title)
+                    Text("Folder Settings")
+                        .font(.title)
                     Text("Set folder information and also apply default preferences that apply to all workspaces in this folder")
                         .foregroundColor(.gray)
                 }

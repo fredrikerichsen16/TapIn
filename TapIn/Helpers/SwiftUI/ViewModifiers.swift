@@ -10,12 +10,13 @@ struct UserPreferenceColorScheme: ViewModifier {
     @AppStorage("colorScheme") private var colorScheme = "dark"
     
     func body(content: Content) -> some View {
-        if colorScheme == "system" {
-            content
-        } else {
-            content
-                .environment(\.colorScheme, colorScheme == "dark" ? .dark : .light)
-        }
+        content.environment(\.colorScheme, .dark)
+//        if colorScheme == "system" {
+//            content
+//        } else {
+//            content
+//                .environment(\.colorScheme, colorScheme == "dark" ? .dark : .light)
+//        }
     }
 }
 

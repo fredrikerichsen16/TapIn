@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct BlockerView: View {
-    @EnvironmentObject var workspace: WorkspaceVM
+    @EnvironmentObject var workspace: WorkspaceState
     
     var vm: BlockerState {
         workspace.blocker
@@ -41,6 +41,9 @@ struct BlockerView: View {
             }
         }
         .padding()
+        .onAppear {
+            vm.fetch()
+        }
     }
     
     func add() {
@@ -51,7 +54,7 @@ struct BlockerView: View {
 
 struct WorkspaceBlocker_Preview: PreviewProvider {
     static var previews: some View {
-        let workspace = WorkspaceVM.preview
+        let workspace = WorkspaceState.preview
         
         BlockerView()
             .environmentObject(workspace)

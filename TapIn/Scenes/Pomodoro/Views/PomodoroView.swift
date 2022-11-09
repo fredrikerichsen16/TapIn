@@ -2,7 +2,7 @@ import SwiftUI
 import RealmSwift
 
 struct PomodoroView: View {
-    @EnvironmentObject var workspace: WorkspaceVM
+    @EnvironmentObject var workspace: WorkspaceState
     
     var vm: PomodoroState {
         workspace.pomodoro
