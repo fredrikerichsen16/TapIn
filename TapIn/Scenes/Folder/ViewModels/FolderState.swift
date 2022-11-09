@@ -10,14 +10,9 @@ class FolderState: ObservableObject {
     
     init(folder: FolderDB) {
         self.folder = folder
-        
-        let formInputs = FormInputs(folder: folder)
-        self.originalFormInputs = formInputs
-        self.formInputs = formInputs
+        self.formInputs = FormInputs(folder: folder)
     }
-    
-    let originalFormInputs: FormInputs
-    
+        
     @Published var formInputs: FormInputs
     
     func onSubmit() {

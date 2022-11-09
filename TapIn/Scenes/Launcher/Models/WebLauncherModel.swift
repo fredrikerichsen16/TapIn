@@ -65,19 +65,6 @@ struct InstantiatedWebLauncher: BaseLauncherInstanceBehavior, FileBehavior, Open
             }
         }
         
-        if let userSelectedApp = object.appUrl {
-            if let indexInCompatibleApps = URLs.firstIndex(of: userSelectedApp)
-            {
-                URLs.move(fromOffsets: IndexSet(integer: indexInCompatibleApps), toOffset: 0)
-            }
-            else
-            {
-                write {
-                    object.appUrl = nil
-                }
-            }
-        }
-        
         return URLs
     }
     
@@ -107,8 +94,12 @@ struct InstantiatedWebLauncher: BaseLauncherInstanceBehavior, FileBehavior, Open
     }
     
     func setUrl(urlString: String) {
+        guard let url = convertURL(urlString: urlString) else {
+            return
+        }
+        
         write {
-            object.fileUrl = URL(filePath: urlString)
+            object.fileUrl = url
         }
     }
     

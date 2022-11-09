@@ -112,19 +112,6 @@ struct InstantiatedFolderLauncher: BaseLauncherInstanceBehavior, FileSystemBased
             }
         }
         
-        if let userSelectedApp = object.appUrl {
-            if let indexInCompatibleApps = URLs.firstIndex(of: userSelectedApp)
-            {
-                URLs.move(fromOffsets: IndexSet(integer: indexInCompatibleApps), toOffset: 0)
-            }
-            else
-            {
-                write {
-                    object.appUrl = nil
-                }
-            }
-        }
-        
         return URLs
     }
     

@@ -100,11 +100,7 @@ class LauncherState: ObservableObject {
     }
     
     func createEmptyInstance(type: RealmLauncherType) {
-        let newInstance = LauncherInstanceDB(empty: type)
-    
-        guard let launcher = launcher.thaw() else {
-            return
-        }
+        let newInstance = LauncherInstanceDB(empty: type, hideOnLaunch: launcher.hideOnLaunch)
     
         try? realm.write {
             launcher.launcherInstances.append(newInstance)

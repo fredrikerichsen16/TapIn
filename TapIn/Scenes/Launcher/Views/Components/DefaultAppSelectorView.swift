@@ -20,6 +20,8 @@ struct DefaultAppSelectorView: View {
                     vm.didChangeSelection(value)
                 }
             }
+            .fixedSize()
+            .frame(width: 150)
         }
     }
 }
@@ -27,9 +29,25 @@ struct DefaultAppSelectorView: View {
 class DefaultAppSelectorVM: ObservableObject {
     init(instance: any BaseLauncherInstanceBehavior & FileBehavior) {
         self.instance = instance
-        self.compatibleApps = instance.getCompatibleApps().map({ CompatibleApp(url: $0) })
+        
+        let compatibleAppUrls = instance.getCompatibleApps()
+        if compatibleAppUrls.count == 0 {
+            self.compatibleApps = []
+            self.selection = UUID()
+            return
+        }
+        
+        let defaultSelection = CompatibleApp(default: compatibleAppUrls[0])
+        self.compatibleApps = [defaultSelection] + compatibleAppUrls.map({ CompatibleApp(url: $0) })
+        
         self.selection = UUID()
         self.selection = compatibleApps[0].id
+        
+        if let app = instance.object.appUrl,
+           let shouldSelect = compatibleApps.first(where: { $0.url == app })
+        {
+            self.selection = shouldSelect.id
+        }
     }
     
     @Published var instance: any BaseLauncherInstanceBehavior & FileBehavior
@@ -49,13 +67,19 @@ class DefaultAppSelectorVM: ObservableObject {
 
 struct CompatibleApp: Identifiable {
     let id = UUID()
-    let url: URL
+    let url: URL?
     let name: String
     let icon: NSImage
     
     init(url: URL) {
         self.url = url
         self.name = applicationReadableName(url: url)
+        self.icon = getAppIcon(for: url, size: 16)
+    }
+    
+    init(default url: URL) {
+        self.url = nil
+        self.name = "Default app (\(applicationReadableName(url: url)))"
         self.icon = getAppIcon(for: url, size: 16)
     }
 }

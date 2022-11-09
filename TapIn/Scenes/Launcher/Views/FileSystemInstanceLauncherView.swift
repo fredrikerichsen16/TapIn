@@ -1,11 +1,7 @@
 import SwiftUI
 
 struct FileSystemInstanceLauncherView: View {
-//    @EnvironmentObject var workspace: WorkspaceVM
-    
     @State var instance: any FileSystemBasedBehavior & BaseLauncherInstanceBehavior
-    
-    @State private var hideOnLaunch = false
     
     var body: some View {
         VStack {
@@ -33,27 +29,8 @@ struct FileSystemInstanceLauncherView: View {
             
             Spacer()
             
-            if instance.object.instantiated
-            {
-                HStack {
-                    Toggle("Hide app on launch", isOn: $hideOnLaunch)
-                        .toggleStyle(.checkbox)
-                        .onChange(of: hideOnLaunch) { value in
-                            instance.write {
-                                instance.object.hideOnLaunch = value
-                            }
-                        }
-                    
-                    Spacer()
-                    
-                    Text("Delay launch?")
-                }
-            }
+            BottomBarLauncherSettingsView(instance: instance)
         }
         .padding()
-        .onAppear {
-            hideOnLaunch = instance.object.hideOnLaunch
-        }
     }
-    
 }

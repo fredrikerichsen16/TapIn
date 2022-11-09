@@ -46,7 +46,6 @@ struct UninstantiatedAppLauncher: BaseLauncherInstanceBehavior, FileSystemBasedB
     }
     
     func submittedFileWithPanel(url: URL) {
-        print(url)
         update(app: url, file: nil)
     }
 }

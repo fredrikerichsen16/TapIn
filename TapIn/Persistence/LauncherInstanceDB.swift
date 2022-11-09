@@ -56,12 +56,12 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
         self.hideOnLaunch = instance.hideOnLaunch
     }
     
-    convenience init(empty type: RealmLauncherType) {
+    convenience init(empty type: RealmLauncherType, hideOnLaunch: Bool = false) {
         self.init()
         self.name = "New \(type.label)"
         self.type = type
         self.instantiated = false
-        self.hideOnLaunch = launcher.first?.hideOnLaunch ?? false
+        self.hideOnLaunch = hideOnLaunch
         
         if type == .terminal, let terminalApp = URL(string: "/Applications/Utilities/Terminal.app/") {
             self.appUrl = terminalApp

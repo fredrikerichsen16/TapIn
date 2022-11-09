@@ -28,21 +28,37 @@ func applicationReadableName(url: URL) -> String {
 }
 
 func convertURL(urlString: String) -> URL? {
-    var str = urlString.lowercased().trim()
-
-    if !(str.starts(with: "https://") || str.starts(with: "http://")) {
-        str = "https://" + str
+    var cleanString = urlString.lowercased().trim()
+    
+    cleanString.replace("https://", with: "")
+    cleanString.replace("http://", with: "")
+    cleanString.replace("www.", with: "")
+    
+    cleanString = "https://www." + cleanString
+    
+    guard let urlComponents = URLComponents(string: cleanString) else {
+        return nil
     }
-
+    
+    if urlComponents.queryItems != nil {
+        return nil
+    }
+    
+    guard let scheme = urlComponents.scheme, let host = urlComponents.host else {
+        return nil
+    }
+    
+    let urlString = "\(scheme)://\(host)\(urlComponents.path)"
+    
     let regex = "^(https?:\\/\\/)?([\\da-z\\.-]+\\.[a-z\\.]{2,6}|[\\d\\.]+)([\\/:?=&#]{1}[\\da-z\\.-]+)*[\\/\\?]?$"
     // adding [c] after the comparator (MATCHES) makes it case insensitive
     let predicate = NSPredicate(format:"SELF MATCHES[c] %@", argumentArray:[regex])
 
-    if predicate.evaluate(with: str) == false {
+    if predicate.evaluate(with: urlString) == false {
         return nil
     }
 
-    return URL(string: str)
+    return URL(string: urlString)
 }
 
 // MAIN PART
