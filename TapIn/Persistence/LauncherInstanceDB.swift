@@ -1,9 +1,9 @@
 import Foundation
 import RealmSwift
 
-final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true)
-    var id: ObjectId
+final class LauncherInstanceDB: EmbeddedObject {
+    @Persisted
+    var id = ObjectId.generate()
     
     @Persisted
     var name: String

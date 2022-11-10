@@ -9,11 +9,7 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
     var name: String = "New Workspace"
     
     @Persisted(originProperty: "workspaces")
-    var _folder: LinkingObjects<FolderDB>
-    
-    var folder: FolderDB {
-        _folder.first!
-    }
+    var folder: LinkingObjects<FolderDB>
     
     @Persisted
     var pomodoro: PomodoroDB!

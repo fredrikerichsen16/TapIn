@@ -1,10 +1,7 @@
 import Foundation
 import RealmSwift
 
-final class LauncherDB: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true)
-    var id: ObjectId
-    
+final class LauncherDB: EmbeddedObject {
     @Persisted(originProperty: "launcher")
     var workspace: LinkingObjects<WorkspaceDB>
     

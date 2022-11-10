@@ -18,9 +18,9 @@ class RealmManager {
             }
             else
             {
-                let config = Realm.Configuration(schemaVersion: 15)
+                let config = Realm.Configuration(schemaVersion: 16)
                 self.realm = try Realm(configuration: config)
-//                addData()
+                addData()
             }
         }
         catch
@@ -62,6 +62,18 @@ class RealmManager {
                 
                 folder.workspaces.append(ws)
             }
+        }
+    }
+    
+    func cleanUpRealm() {
+        try? realm.write {
+            let objects = realm.objects(WorkspaceDB.self).filter({ $0.folder.first == nil })
+            
+            for object in objects {
+                print(object.name)
+            }
+            
+            realm.delete(objects)
         }
     }
 }

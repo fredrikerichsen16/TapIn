@@ -78,7 +78,10 @@ class ComponentActivityTracker {
     // MARK: Cascading
     
     func cascade(status: TimerMode) {
-        let folder = workspace.workspace.folder
+        guard let folder = workspace.workspace.folder.first else {
+            return
+        }
+        
         var components: Set<WorkspaceTab> = Set()
         
         switch status

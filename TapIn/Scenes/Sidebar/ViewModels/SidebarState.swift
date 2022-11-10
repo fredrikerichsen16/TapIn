@@ -86,11 +86,9 @@ class SidebarState: ObservableObject {
     }
 
     func delete(workspace: WorkspaceDB) {
-        sidebarModel.selection = SidebarListItem.folder(workspace.folder)
-    
-        guard let folder = workspace.folder.thaw() else {
-            return
-        }
+        let folder = workspace.folder.first!
+        
+        sidebarModel.selection = SidebarListItem.folder(folder)
 
         try? realm.write {
             guard let workspaceIndex = folder.workspaces.firstIndex(of: workspace) else {
