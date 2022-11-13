@@ -37,6 +37,7 @@
 		35AD05FD2912EDF800837016 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD05FC2912EDF800837016 /* NotesView.swift */; };
 		35AD05FF2912F18700837016 /* NoteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD05FE2912F18700837016 /* NoteDB.swift */; };
 		35AD06072913280D00837016 /* SessionHistoryQueryer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD06062913280D00837016 /* SessionHistoryQueryer.swift */; };
+		35AE0D332920763D003438EF /* RealmObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AE0D322920763D003438EF /* RealmObject.swift */; };
 		35E000022911EEF2009D284D /* TapInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000012911EEF2009D284D /* TapInApp.swift */; };
 		35E000062911EEF3009D284D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E000052911EEF3009D284D /* Assets.xcassets */; };
 		35E000092911EEF3009D284D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E000082911EEF3009D284D /* Preview Assets.xcassets */; };
@@ -160,6 +161,7 @@
 		35AD05FC2912EDF800837016 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		35AD05FE2912F18700837016 /* NoteDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDB.swift; sourceTree = "<group>"; };
 		35AD06062913280D00837016 /* SessionHistoryQueryer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryQueryer.swift; sourceTree = "<group>"; };
+		35AE0D322920763D003438EF /* RealmObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmObject.swift; sourceTree = "<group>"; };
 		35E000012911EEF2009D284D /* TapInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInApp.swift; sourceTree = "<group>"; };
 		35E000052911EEF3009D284D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35E000082911EEF3009D284D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -500,6 +502,7 @@
 				35E0005F2911F4F4009D284D /* SessionDB.swift */,
 				35AD05FE2912F18700837016 /* NoteDB.swift */,
 				35693E5829157D5200F1966D /* FolderDB.swift */,
+				35AE0D322920763D003438EF /* RealmObject.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -1125,6 +1128,7 @@
 				35E9CE4A2919B6EA0019DDE8 /* SubscriptionManager.swift in Sources */,
 				3542DC2A2917568C00F7A9D8 /* DefaultAppSelectorView.swift in Sources */,
 				35E000D82911F531009D284D /* BlockerView.swift in Sources */,
+				35AE0D332920763D003438EF /* RealmObject.swift in Sources */,
 				35E0005E2911F4E5009D284D /* LauncherDB.swift in Sources */,
 				35E0005C2911F4D4009D284D /* LauncherInstanceDB.swift in Sources */,
 				35E000CA2911F531009D284D /* TappableAppIconView.swift in Sources */,
@@ -1283,6 +1287,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1337,6 +1342,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
