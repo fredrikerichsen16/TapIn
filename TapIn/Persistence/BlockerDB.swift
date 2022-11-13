@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-final class BlockerDB: Object {
+final class BlockerDB: EmbeddedObject {
     @Persisted
     var blacklistedWebsites = List<String>()
     

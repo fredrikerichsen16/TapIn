@@ -8,33 +8,28 @@ class LauncherState: ObservableObject {
     init(workspace: WorkspaceDB) {
         self.workspace = workspace
         self.launcher = workspace.launcher
-        self.launcherInstances = workspace.launcher.launcherInstances
         self.realm = RealmManager.shared.realm
-        self.fetch()
         setToken()
-    }
-    
-    func fetch() {
-        var instanceModels: [any BaseLauncherInstanceBehavior] = []
-        
-        for instance in launcher.launcherInstances
-        {
-            if let instanceModel = launcherInstanceFactory(instance: instance) {
-                instanceModels.append(instanceModel)
-            }
-        }
-        
-        self.instances = instanceModels
     }
     
     // MARK: Observing realm
     
     var token: NotificationToken? = nil
-    var launcherInstances: List<LauncherInstanceDB>
     func setToken() {
-        self.token = launcherInstances.observe(keyPaths: [\LauncherInstanceDB.instantiated, \LauncherInstanceDB.appUrl, \LauncherInstanceDB.fileUrl, \LauncherInstanceDB.name], { [unowned self] (changes) in
+        self.token = workspace.launcher.launcherInstances.observe(keyPaths: [\LauncherInstanceDB.instantiated, \LauncherInstanceDB.appUrl, \LauncherInstanceDB.fileUrl, \LauncherInstanceDB.name], { [unowned self] (changes) in
             switch changes
             {
+            case .initial(let launcherInstances):
+                var instanceModels: [any BaseLauncherInstanceBehavior] = []
+                
+                for instance in launcherInstances
+                {
+                    if let instanceModel = launcherInstanceFactory(instance: instance) {
+                        instanceModels.append(instanceModel)
+                    }
+                }
+                
+                self.instances = instanceModels
             case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
                 // Handle deletions
                 instances.remove(atOffsets: IndexSet(deletions))
@@ -58,13 +53,15 @@ class LauncherState: ObservableObject {
                         selectedInstance = instanceModel.id
                     }
                 }
+                
+                self.objectWillChange.send()
             default:
                 break
             }
         })
     }
     
-    @Published var launcher: LauncherDB
+    var launcher: LauncherDB
     @Published var instances: [any BaseLauncherInstanceBehavior] = []
     @Published var selectedInstance: ObjectId? = nil
     

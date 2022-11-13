@@ -10,7 +10,7 @@ struct TapinApp: SwiftUI.App {
             SidebarView()
                 .environment(\.workspaceCoordinator, WorkspaceCoordinator.shared)
                 .environment(\.realm, RealmManager.shared.realm)
-//                .environment(\.subscriptionManager, SubscriptionManager.shared)
+                .environment(\.subscriptionManager, SubscriptionManager.shared)
                 .environmentObject(SidebarState())
                 .userPreferenceColorScheme()
                 .onAppear {

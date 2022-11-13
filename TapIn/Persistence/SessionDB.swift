@@ -1,18 +1,7 @@
 import Foundation
 import RealmSwift
 
-final class SessionDB: Object, ObjectKeyIdentifiable {
-    
-    func easyThaw() -> (SessionDB, Realm) {
-        guard let thawed = self.thaw(),
-              let realm = thawed.realm else { fatalError("Easythaw failed") }
-        
-        return (thawed, realm)
-    }
-    
-    @Persisted(primaryKey: true)
-    var id: ObjectId
-    
+final class SessionDB: EmbeddedObject {
     @Persisted
     var completedTime: Date
     
@@ -22,13 +11,8 @@ final class SessionDB: Object, ObjectKeyIdentifiable {
     @Persisted(originProperty: "sessions")
     var workspace: LinkingObjects<WorkspaceDB>
     
-//    func getWorkspace() -> WorkspaceDB {
-//        return workspace.first!
-//    }
-    
     convenience init(stage: PomodoroStage) {
         self.init()
-        self.id = ObjectId.generate()
         self.completedTime = Date()
         self.duration = stage.getDurationInSeconds()
     }

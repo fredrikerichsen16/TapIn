@@ -5,13 +5,17 @@ import QuickLook
 struct LauncherView: View {
     @EnvironmentObject var workspace: WorkspaceState
     
+    var vm: LauncherState {
+        workspace.launcher
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
 
             NavigationView {
                 VStack(alignment: .leading) {
-                    List(workspace.launcher.instances, id: \.id, selection: $workspace.launcher.selectedInstance) { instance in
+                    List(vm.instances, id: \.id, selection: $workspace.launcher.selectedInstance) { instance in
                         listItem(for: instance)
                     }
                     .frame(width: 210, alignment: .center)
@@ -80,7 +84,7 @@ struct LauncherView: View {
         }
 
         Button("Duplicate") {
-            workspace.launcher.duplicate(instance)
+            vm.duplicate(instance)
         }
 
         if let fileInstance = instance as? FileBehavior
@@ -97,10 +101,10 @@ struct LauncherView: View {
         }
 
         Button("Delete") {
-            guard let id = workspace.launcher.selectedInstance else { return }
+            guard let id = vm.selectedInstance else { return }
             
-            workspace.launcher.selectedInstance = nil
-            workspace.launcher.deleteInstance(by: id)
+            vm.selectedInstance = nil
+            vm.deleteInstance(by: id)
         }
     }
 }

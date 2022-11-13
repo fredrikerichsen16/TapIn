@@ -12,8 +12,7 @@ struct SidebarModel {
     var selection: SidebarListItem? = nil
     
     /// Set the outline property on initialization of the view and after any potential updates
-    mutating func setOutline(with folders: Results<FolderDB>) {
-        let folders = Array(folders)
+    mutating func setOutline(with folders: [FolderDB]) {
         let outlineNodes = folders.map({ folder in
             OutlineNode(folder: folder, children: folder.workspaces.map({ workspace in
                 OutlineNode(workspace: workspace)

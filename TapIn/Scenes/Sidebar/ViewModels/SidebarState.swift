@@ -9,7 +9,7 @@ class SidebarState: ObservableObject {
         
     init(preview: Bool) {
         let realm = RealmManager.preview.realm
-        self.folders = realm.objects(FolderDB.self)
+        self.folders = realm.objects(FolderDB.self).where({ $0.isDeleted == false })
         self.sidebarModel = SidebarModel()
         self.setToken()
     }
@@ -22,7 +22,7 @@ class SidebarState: ObservableObject {
     
     init() {
         let realm = RealmManager.shared.realm
-        self.folders = realm.objects(FolderDB.self)
+        self.folders = realm.objects(FolderDB.self).where({ $0.isDeleted == false })
         self.sidebarModel = SidebarModel()
         self.setToken()
     }
@@ -42,10 +42,10 @@ class SidebarState: ObservableObject {
             switch changes
             {
             case .initial(let folders):
-                sidebarModel.setOutline(with: folders)
-            case .update(_, deletions: _, insertions: _, modifications: _):
-                objectWillChange.send()
-                sidebarModel.setOutline(with: folders)
+                sidebarModel.setOutline(with: Array(folders))
+            case .update(let folders, deletions: _, insertions: _, modifications: _):
+                sidebarModel.setOutline(with: Array(folders))
+                self.objectWillChange.send()
             default:
                 break
             }
@@ -86,11 +86,11 @@ class SidebarState: ObservableObject {
     }
 
     func delete(workspace: WorkspaceDB) {
-        sidebarModel.selection = SidebarListItem.folder(workspace.folder)
-    
-        guard let folder = workspace.folder.thaw() else {
+        guard let folder = workspace.folder.first?.thaw() else {
             return
         }
+        
+        sidebarModel.selection = SidebarListItem.folder(folder)
 
         try? realm.write {
             guard let workspaceIndex = folder.workspaces.firstIndex(of: workspace) else {
@@ -98,6 +98,7 @@ class SidebarState: ObservableObject {
             }
 
             folder.workspaces.remove(at: workspaceIndex)
+            workspace.isDeleted = true
         }
     }
 
@@ -110,8 +111,13 @@ class SidebarState: ObservableObject {
         
         try? realm.write
         {
+            for workspace in folder.workspaces
+            {
+                workspace.isDeleted = true
+            }
+            
             folder.workspaces.removeAll()
-            realm.delete(folder)
+            folder.isDeleted = true
         }
     }
 

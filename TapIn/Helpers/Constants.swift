@@ -22,4 +22,7 @@ struct IconKeys {
     static let pauseButton = "pause.fill"
     static let leftFilled = "arrowtriangle.left.fill"
     static let rightFilled = "arrowtriangle.right.fill"
+    
+    // Launcher
+    static let replace = "repeat"
 }

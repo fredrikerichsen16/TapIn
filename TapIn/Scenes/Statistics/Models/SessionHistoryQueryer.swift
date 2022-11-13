@@ -3,12 +3,17 @@ import RealmSwift
 
 class SessionHistoryQueryer {
     let calendar = Calendar.current
-    var sessions: Results<SessionDB>
-    var workspaces: Results<WorkspaceDB>
+    var sessions: [SessionDB]
+    var workspaces: [WorkspaceDB]
 
     init(realm: Realm) {
-        self.sessions = realm.objects(SessionDB.self)
-        self.workspaces = realm.objects(WorkspaceDB.self)
+        self.workspaces = Array(realm.objects(WorkspaceDB.self))
+        self.sessions = []
+        
+        for workspace in workspaces
+        {
+            self.sessions.append(contentsOf: Array(workspace.sessions))
+        }
     }
 
     // MARK: Date filtering
@@ -45,7 +50,9 @@ class SessionHistoryQueryer {
         
         let interval = self.getDateInterval(year: year, month: month, week: week)
         
-        self.sessions = sessions.filter("completedTime BETWEEN {%@, %@}", interval.start, interval.end)
+        self.sessions = sessions.filter({ session in
+            session.completedTime > interval.start && session.completedTime < interval.end
+        })
     }
     
     func completedThisWeek() {
@@ -58,8 +65,8 @@ class SessionHistoryQueryer {
     // MARK: Workspace Filtering
     
     func inWorkspace(workspace: WorkspaceDB) {
-        self.sessions = sessions.where({ session in
-            session.workspace == workspace
+        self.sessions = sessions.filter({ session in
+            session.workspace.first == workspace
         })
     }
     
@@ -70,7 +77,7 @@ class SessionHistoryQueryer {
     }
     
     func getWorkDuration() -> Double {
-        return self.sessions.sum(of: \.duration)
+        return self.sessions.reduce(0, { $0 + $1.duration })
     }
     
     func getWorkDurationFormatted() -> String {

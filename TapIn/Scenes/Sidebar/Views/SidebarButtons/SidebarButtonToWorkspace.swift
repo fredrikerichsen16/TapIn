@@ -18,7 +18,11 @@ struct SidebarButtonToWorkspace: View {
             },
             contextMenu: {
                 Button("Add workspace to folder") {
-                    sidebarState.addWorkspace(to: workspace.folder)
+                    guard let folder = workspace.getFolder() else {
+                        return
+                    }
+                    
+                    sidebarState.addWorkspace(to: folder)
                 }
                 
                 Button("Delete") {

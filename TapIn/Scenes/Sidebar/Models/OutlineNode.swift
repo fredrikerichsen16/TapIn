@@ -11,7 +11,7 @@ struct OutlineNode: Identifiable {
     }
     
     init(folder: FolderDB, children: [OutlineNode]) {
-        self.sidebarListItem = .folder(folder)
+        self.sidebarListItem = SidebarListItem.folder(folder)
         self.id = self.sidebarListItem.id
         self.children = children
     }

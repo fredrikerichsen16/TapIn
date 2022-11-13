@@ -47,7 +47,9 @@ class SessionHistoryCharter {
         
         for workspace in workspaces
         {
-            folders.append(workspace.folder)
+            if let folder = workspace.folder.first {
+                folders.append(folder)
+            }
         }
         
         folders = Array(Set(folders))

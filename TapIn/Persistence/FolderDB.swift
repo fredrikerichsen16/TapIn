@@ -1,38 +1,34 @@
 import RealmSwift
 
 // Create a simple Realm model called FolderDB
-class FolderDB: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true)
-    var id: ObjectId
-
+class FolderDB: RealmObject {
     @Persisted
     var name: String
     
     @Persisted
     var workspaces: List<WorkspaceDB>
-
-    @Persisted
-    var isArchived: Bool
     
     // MARK: Settings
     
     @Persisted
-    var pomodoroSettings: PomodoroSettings! = PomodoroSettings()
+    var pomodoroSettings: PomodoroSettings!
     
     @Persisted
-    var launcherSettings: LauncherSettings! = LauncherSettings()
+    var launcherSettings: LauncherSettings!
     
     @Persisted
-    var blockerSettings: BlockerSettings! = BlockerSettings()
+    var blockerSettings: BlockerSettings!
     
     @Persisted
-    var cascadingSettings: CascadingSettings! = CascadingSettings()
+    var cascadingSettings: CascadingSettings!
 
     convenience init(name: String = "New Folder") {
         self.init()
-        self.id = ObjectId.generate()
         self.name = name
-        self.isArchived = false
+        self.pomodoroSettings = PomodoroSettings()
+        self.launcherSettings = LauncherSettings()
+        self.blockerSettings = BlockerSettings()
+        self.cascadingSettings = CascadingSettings()
     }
     
     func updateSettings(with formInputs: FormInputs) {

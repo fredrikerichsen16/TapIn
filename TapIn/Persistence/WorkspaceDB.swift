@@ -1,18 +1,15 @@
 import Foundation
 import RealmSwift
 
-final class WorkspaceDB: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true)
-    var id: ObjectId
-    
+final class WorkspaceDB: RealmObject {
     @Persisted
     var name: String = "New Workspace"
     
     @Persisted(originProperty: "workspaces")
-    var _folder: LinkingObjects<FolderDB>
+    var folder: LinkingObjects<FolderDB>
     
-    var folder: FolderDB {
-        _folder.first!
+    func getFolder() -> FolderDB? {
+        return folder.first
     }
     
     @Persisted
@@ -35,9 +32,7 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
         
     convenience init(name: String) {
         self.init()
-        self.id = ObjectId.generate()
         self.name = name
-        
         self.pomodoro = PomodoroDB()
         self.blocker = BlockerDB()
         self.timeTracker = TimeTrackerDB()
