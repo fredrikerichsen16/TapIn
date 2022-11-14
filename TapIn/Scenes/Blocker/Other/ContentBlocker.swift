@@ -39,6 +39,12 @@ class ContentBlocker: NSObject {
         return extensionBundle
     }()
     
+    private var blacklist: [String] = []
+    
+    func setBlacklist(_ blacklist: [String]) {
+        self.blacklist = blacklist
+    }
+    
     func start() {
         status = .indeterminate
         
@@ -58,13 +64,6 @@ class ContentBlocker: NSObject {
     }
     
     func stop() {
-//        guard let extensionIdentifier = extensionBundle.bundleIdentifier else {
-//            return
-//        }
-        
-//        let deactivationRequest = OSSystemExtensionRequest.deactivationRequest(forExtensionWithIdentifier: extensionIdentifier, queue: .main)
-//        OSSystemExtensionManager.shared.submitRequest(deactivationRequest)
-        
         NEFilterManager.shared().isEnabled = false
         NEFilterManager.shared().saveToPreferences { error in
             if let error
@@ -81,26 +80,24 @@ class ContentBlocker: NSObject {
         
         guard !filterManager.isEnabled else {
             print("Already enabled")
-//            registerWithProvider()
             return
         }
         
         loadFilterConfiguration(success: {
-            if filterManager.providerConfiguration == nil {
-                let providerConfiguration = NEFilterProviderConfiguration()
-                    providerConfiguration.filterPackets = false
-                    providerConfiguration.filterSockets = true
-                    providerConfiguration.username = "Tapin"
-                    providerConfiguration.organization = "Tapin"
-//                    providerConfiguration.filterDataProviderBundleIdentifier = self.extensionBundle.bundleIdentifier
-                
-                filterManager.providerConfiguration = providerConfiguration
-            }
+            let providerConfiguration = NEFilterProviderConfiguration()
+                providerConfiguration.filterPackets = false
+                providerConfiguration.filterSockets = true
+                providerConfiguration.username = "Tapin"
+                providerConfiguration.organization = "Tapin"
+                providerConfiguration.vendorConfiguration = [:]
+                providerConfiguration.vendorConfiguration!["blacklist"] = self.blacklist
+                providerConfiguration.filterDataProviderBundleIdentifier = self.extensionBundle.bundleIdentifier
             
+            filterManager.providerConfiguration = providerConfiguration
             filterManager.isEnabled = true
             
-            filterManager.saveToPreferences { saveError in
-                if let error = saveError {
+            filterManager.saveToPreferences { error in
+                if let error {
                     print("Failed to save _the_ filter configuration: \(error.localizedDescription)")
                     self.status = .inactive
                     return
@@ -114,9 +111,9 @@ class ContentBlocker: NSObject {
     }
     
     func loadFilterConfiguration(success: @escaping () -> Void, failure: @escaping () -> Void) {
-        NEFilterManager.shared().loadFromPreferences { loadError in
+        NEFilterManager.shared().loadFromPreferences { error in
             DispatchQueue.main.async {
-                if let error = loadError {
+                if let error {
                     print("Failed to load the filter configuration: \(error.localizedDescription)")
                     return failure()
                 }
@@ -131,7 +128,6 @@ class ContentBlocker: NSObject {
 extension ContentBlocker: OSSystemExtensionRequestDelegate {
 
     // MARK: OSSystemExtensionActivationRequestDelegate
-
     func request(_ request: OSSystemExtensionRequest, didFinishWithResult result: OSSystemExtensionRequest.Result) {
         guard result == .completed else {
             print("Unexpected result \(result.rawValue) for system extension request")

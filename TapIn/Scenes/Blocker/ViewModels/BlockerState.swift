@@ -4,6 +4,7 @@ import RealmSwift
 class BlockerState: WorkspaceComponentViewModel {
     @Published var blocker: BlockerDB
     @Published var blacklist: [BlacklistedWebsite] = []
+    @Published var error: Swift.Error? = nil
 
     init(workspace: WorkspaceDB) {
         self.blocker = workspace.blocker
@@ -74,12 +75,25 @@ class BlockerState: WorkspaceComponentViewModel {
     override func startSession() {
         super.startSession()
         
+        ContentBlocker.shared.setBlacklist(Array(blocker.blacklistedWebsites))
         ContentBlocker.shared.start()
     }
 
     override func endSession() {
         super.endSession()
         
+        ContentBlocker.shared.stop()
+    }
+    
+    func requestEndSession() {
+        if blocker.blockerStrength == .lenient {
+            endSession()
+        } else {
+            error = BlockerError.blockerStrengthStrict
+        }
+    }
+    
+    func stopBlocker() {
         ContentBlocker.shared.stop()
     }
 }

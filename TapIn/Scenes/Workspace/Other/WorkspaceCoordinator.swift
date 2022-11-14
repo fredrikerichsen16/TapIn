@@ -37,4 +37,16 @@ class WorkspaceCoordinator {
     func disactivate() {
         self.currentWorkspace = nil
     }
+    
+    /// App was terminated
+    func terminate() {
+        guard let workspace = currentWorkspace else {
+            return
+        }
+        
+        let blocker = workspace.blocker
+        if blocker.isActive && [BlockerStrength.lenient, BlockerStrength.normal].contains(blocker.blocker.blockerStrength) {
+            blocker.stopBlocker()
+        }
+    }
 }

@@ -19,6 +19,9 @@ struct TapinApp: SwiftUI.App {
                         self.subscribed = subscription.isPremium()
                     }
                 }
+                .onReceive(NotificationCenter.default.publisher(for: NSApplication.willTerminateNotification), perform: { output in
+                    WorkspaceCoordinator.shared.terminate()
+                })
         }
         .defaultSize(width: 600, height: 600)
         .windowStyle(HiddenTitleBarWindowStyle())
