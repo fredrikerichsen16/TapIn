@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		3505D2462911FBA9008B7274 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3505D2452911FBA9008B7274 /* Realm */; };
 		3505D2482911FBA9008B7274 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3505D2472911FBA9008B7274 /* RealmSwift */; };
+		351C42F12920A99400B6A843 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356FB74C29208A1500266E0B /* NetworkExtension.framework */; };
+		351C42F42920A99400B6A843 /* FilterDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C42F32920A99400B6A843 /* FilterDataProvider.swift */; };
+		351C42F62920A99400B6A843 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C42F52920A99400B6A843 /* main.swift */; };
+		351C42FB2920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 351C42F02920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3542DC2829172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC2729172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift */; };
 		3542DC2A2917568C00F7A9D8 /* DefaultAppSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC292917568C00F7A9D8 /* DefaultAppSelectorView.swift */; };
 		3542DC2D291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC2C291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift */; };
@@ -21,6 +25,7 @@
 		3542DC3C2917C39300F7A9D8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC3B2917C39300F7A9D8 /* Constants.swift */; };
 		3542DC3F2917E2BA00F7A9D8 /* StoreKitConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 3542DC3E2917E2BA00F7A9D8 /* StoreKitConfig.storekit */; };
 		3542DC462917E50500F7A9D8 /* SubscriptionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC452917E50500F7A9D8 /* SubscriptionSettingsView.swift */; };
+		354BDD30292190FA002AA4C1 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356FB74C29208A1500266E0B /* NetworkExtension.framework */; };
 		35693E5929157D5200F1966D /* FolderDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5829157D5200F1966D /* FolderDB.swift */; };
 		35693E5B2915851500F1966D /* SidebarButtonToFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5A2915851500F1966D /* SidebarButtonToFolder.swift */; };
 		35693E5D2915895900F1966D /* OutlineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5C2915895900F1966D /* OutlineNode.swift */; };
@@ -31,6 +36,7 @@
 		35693E6F2916251400F1966D /* WebLauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E6E2916251400F1966D /* WebLauncherModel.swift */; };
 		35693E712916256600F1966D /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E702916256600F1966D /* AppLauncher.swift */; };
 		35693E732916261A00F1966D /* FolderLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E722916261A00F1966D /* FolderLauncher.swift */; };
+		356FB763292099D900266E0B /* ContentBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356FB762292099D900266E0B /* ContentBlocker.swift */; };
 		359780032913FB44004FBDAE /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359780022913FB44004FBDAE /* StatisticsView.swift */; };
 		3597800529141729004FBDAE /* SessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597800429141729004FBDAE /* SessionModel.swift */; };
 		35A1AAAD29147C2C00B8158D /* SidebarSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A1AAAC29147C2C00B8158D /* SidebarSettingsView.swift */; };
@@ -115,6 +121,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		351C42F92920A99400B6A843 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 35E0FFF62911EEF2009D284D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 351C42EF2920A99400B6A843;
+			remoteInfo = ContentFilterExtension;
+		};
 		35E000102911EEF3009D284D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 35E0FFF62911EEF2009D284D /* Project object */;
@@ -131,7 +144,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		356FB7422920872D00266E0B /* Embed System Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(SYSTEM_EXTENSIONS_FOLDER_PATH)";
+			dstSubfolderSpec = 16;
+			files = (
+				351C42FB2920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension in Embed System Extensions */,
+			);
+			name = "Embed System Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		351C42F02920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = tapin.TapIn.ContentFilterExtension.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
+		351C42F32920A99400B6A843 /* FilterDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDataProvider.swift; sourceTree = "<group>"; };
+		351C42F52920A99400B6A843 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		351C42F72920A99400B6A843 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		351C42F82920A99400B6A843 /* ContentFilterExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ContentFilterExtension.entitlements; sourceTree = "<group>"; };
 		3525F779291AFB62006A3A7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3542DC2729172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemInstanceLauncherView.swift; sourceTree = "<group>"; };
 		3542DC292917568C00F7A9D8 /* DefaultAppSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAppSelectorView.swift; sourceTree = "<group>"; };
@@ -155,6 +187,8 @@
 		35693E6E2916251400F1966D /* WebLauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebLauncherModel.swift; sourceTree = "<group>"; };
 		35693E702916256600F1966D /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
 		35693E722916261A00F1966D /* FolderLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderLauncher.swift; sourceTree = "<group>"; };
+		356FB74C29208A1500266E0B /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		356FB762292099D900266E0B /* ContentBlocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlocker.swift; sourceTree = "<group>"; };
 		359780022913FB44004FBDAE /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		3597800429141729004FBDAE /* SessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionModel.swift; sourceTree = "<group>"; };
 		35A1AAAC29147C2C00B8158D /* SidebarSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarSettingsView.swift; sourceTree = "<group>"; };
@@ -243,6 +277,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		351C42ED2920A99400B6A843 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				351C42F12920A99400B6A843 /* NetworkExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		35E0000C2911EEF3009D284D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -262,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3505D2482911FBA9008B7274 /* RealmSwift in Frameworks */,
+				354BDD30292190FA002AA4C1 /* NetworkExtension.framework in Frameworks */,
 				3505D2462911FBA9008B7274 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +312,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		351C42F22920A99400B6A843 /* ContentFilterExtension */ = {
+			isa = PBXGroup;
+			children = (
+				351C42F32920A99400B6A843 /* FilterDataProvider.swift */,
+				351C42F52920A99400B6A843 /* main.swift */,
+				351C42F72920A99400B6A843 /* Info.plist */,
+				351C42F82920A99400B6A843 /* ContentFilterExtension.entitlements */,
+			);
+			path = ContentFilterExtension;
+			sourceTree = "<group>";
+		};
 		3542DC2B2917569200F7A9D8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,6 +406,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		356FB74B29208A1500266E0B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				356FB74C29208A1500266E0B /* NetworkExtension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		35AD05F72912EB6D00837016 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,10 +484,17 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		35AE0D342920816F003438EF /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				356FB762292099D900266E0B /* ContentBlocker.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		35E000002911EEF2009D284D /* TapIn */ = {
 			isa = PBXGroup;
 			children = (
-				3525F779291AFB62006A3A7B /* Info.plist */,
 				3542DC3D2917E27D00F7A9D8 /* Config */,
 				35E000652911F531009D284D /* Scenes */,
 				35E000072911EEF3009D284D /* Preview Content */,
@@ -435,6 +504,7 @@
 				35E000012911EEF2009D284D /* TapInApp.swift */,
 				35E000052911EEF3009D284D /* Assets.xcassets */,
 				35E0000A2911EEF3009D284D /* TapIn.entitlements */,
+				3525F779291AFB62006A3A7B /* Info.plist */,
 				35E000382911F382009D284D /* NuclearWasteland.swift */,
 			);
 			path = TapIn;
@@ -765,6 +835,7 @@
 		35E0009C2911F531009D284D /* Blocker */ = {
 			isa = PBXGroup;
 			children = (
+				35AE0D342920816F003438EF /* Other */,
 				35693E632915DFEA00F1966D /* Models */,
 				35E0009D2911F531009D284D /* ViewModels */,
 				35E0009F2911F531009D284D /* Views */,
@@ -894,6 +965,8 @@
 				35E000002911EEF2009D284D /* TapIn */,
 				35E000122911EEF3009D284D /* TapInTests */,
 				35E0001C2911EEF3009D284D /* TapInUITests */,
+				351C42F22920A99400B6A843 /* ContentFilterExtension */,
+				356FB74B29208A1500266E0B /* Frameworks */,
 				35E0FFFF2911EEF2009D284D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -904,6 +977,7 @@
 				35E0FFFE2911EEF2009D284D /* TapIn.app */,
 				35E0000F2911EEF3009D284D /* TapInTests.xctest */,
 				35E000192911EEF3009D284D /* TapInUITests.xctest */,
+				351C42F02920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -962,6 +1036,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		351C42EF2920A99400B6A843 /* ContentFilterExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 351C42FE2920A99400B6A843 /* Build configuration list for PBXNativeTarget "ContentFilterExtension" */;
+			buildPhases = (
+				351C42EC2920A99400B6A843 /* Sources */,
+				351C42ED2920A99400B6A843 /* Frameworks */,
+				351C42EE2920A99400B6A843 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ContentFilterExtension;
+			productName = ContentFilterExtension;
+			productReference = 351C42F02920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension */;
+			productType = "com.apple.product-type.system-extension";
+		};
 		35E0000E2911EEF3009D284D /* TapInTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 35E000262911EEF3009D284D /* Build configuration list for PBXNativeTarget "TapInTests" */;
@@ -1005,10 +1096,12 @@
 				35E0FFFA2911EEF2009D284D /* Sources */,
 				35E0FFFB2911EEF2009D284D /* Frameworks */,
 				35E0FFFC2911EEF2009D284D /* Resources */,
+				356FB7422920872D00266E0B /* Embed System Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				351C42FA2920A99400B6A843 /* PBXTargetDependency */,
 			);
 			name = TapIn;
 			packageProductDependencies = (
@@ -1029,6 +1122,9 @@
 				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
+					351C42EF2920A99400B6A843 = {
+						CreatedOnToolsVersion = 14.1;
+					};
 					35E0000E2911EEF3009D284D = {
 						CreatedOnToolsVersion = 14.1;
 						TestTargetID = 35E0FFFD2911EEF2009D284D;
@@ -1061,11 +1157,19 @@
 				35E0FFFD2911EEF2009D284D /* TapIn */,
 				35E0000E2911EEF3009D284D /* TapInTests */,
 				35E000182911EEF3009D284D /* TapInUITests */,
+				351C42EF2920A99400B6A843 /* ContentFilterExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		351C42EE2920A99400B6A843 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		35E0000D2911EEF3009D284D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1093,6 +1197,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		351C42EC2920A99400B6A843 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				351C42F62920A99400B6A843 /* main.swift in Sources */,
+				351C42F42920A99400B6A843 /* FilterDataProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		35E0000B2911EEF3009D284D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1156,6 +1269,7 @@
 				35E000DC2911F531009D284D /* InactiveBottomMenu.swift in Sources */,
 				35E000BB2911F531009D284D /* SidebarModel.swift in Sources */,
 				35E0004C2911F44E009D284D /* ViewModifiers.swift in Sources */,
+				356FB763292099D900266E0B /* ContentBlocker.swift in Sources */,
 				35E000542911F49F009D284D /* RealmManager.swift in Sources */,
 				35F3D56F291B37C40050E3A9 /* BottomBarLauncherSettings.swift in Sources */,
 				35E000022911EEF2009D284D /* TapInApp.swift in Sources */,
@@ -1217,6 +1331,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		351C42FA2920A99400B6A843 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 351C42EF2920A99400B6A843 /* ContentFilterExtension */;
+			targetProxy = 351C42F92920A99400B6A843 /* PBXContainerItemProxy */;
+		};
 		35E000112911EEF3009D284D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 35E0FFFD2911EEF2009D284D /* TapIn */;
@@ -1230,6 +1349,70 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		351C42FC2920A99400B6A843 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ContentFilterExtension/ContentFilterExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = S83364QYM6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ContentFilterExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ContentFilterExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tapin.TapIn.ContentFilterExtension;
+				PRODUCT_NAME = "$(inherited)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = TapInContentFilterExtensionProvisioningProfile;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		351C42FD2920A99400B6A843 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ContentFilterExtension/ContentFilterExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = S83364QYM6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ContentFilterExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ContentFilterExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tapin.TapIn.ContentFilterExtension;
+				PRODUCT_NAME = "$(inherited)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = TapInContentFilterExtensionProvisioningProfile;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		35E000212911EEF3009D284D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1350,11 +1533,11 @@
 		35E000242911EEF3009D284D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TapIn/TapIn.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1374,6 +1557,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tapin.TapIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1382,11 +1566,11 @@
 		35E000252911EEF3009D284D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TapIn/TapIn.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1406,6 +1590,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tapin.TapIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -1490,6 +1675,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		351C42FE2920A99400B6A843 /* Build configuration list for PBXNativeTarget "ContentFilterExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				351C42FC2920A99400B6A843 /* Debug */,
+				351C42FD2920A99400B6A843 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		35E000232911EEF3009D284D /* Build configuration list for PBXNativeTarget "TapIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

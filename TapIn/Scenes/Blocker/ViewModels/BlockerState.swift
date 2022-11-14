@@ -68,16 +68,18 @@ class BlockerState: WorkspaceComponentViewModel {
             blocker.blacklistedWebsites.remove(atOffsets: IndexSet(ids))
         }
     }
-
+    
     // MARK: Start and end session
-
+    
     override func startSession() {
         super.startSession()
-        // do something extra
+        
+        ContentBlocker.shared.start()
     }
 
     override func endSession() {
         super.endSession()
-        // do something extra
+        
+        ContentBlocker.shared.stop()
     }
 }
