@@ -137,4 +137,8 @@ class ComponentActivityTracker {
             print("\(key.label): \(value)")
         }
     }
+    
+    func sessionIsInProgress() -> Bool {
+        return componentsStatus[.pomodoro] != .initial || componentsStatus[.timetracking] == .running
+    }
 }

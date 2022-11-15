@@ -41,11 +41,9 @@ class ContentBlocker: NSObject {
     
     private var blacklist: [String] = []
     
-    func setBlacklist(_ blacklist: [String]) {
+    func start(withBlacklist blacklist: [String]) {
         self.blacklist = blacklist
-    }
-    
-    func start() {
+        
         status = .indeterminate
         
         guard !NEFilterManager.shared().isEnabled else {

@@ -75,8 +75,7 @@ class BlockerState: WorkspaceComponentViewModel {
     override func startSession() {
         super.startSession()
         
-        ContentBlocker.shared.setBlacklist(Array(blocker.blacklistedWebsites))
-        ContentBlocker.shared.start()
+        ContentBlocker.shared.start(withBlacklist: Array(blocker.blacklistedWebsites))
     }
 
     override func endSession() {
@@ -85,8 +84,8 @@ class BlockerState: WorkspaceComponentViewModel {
         ContentBlocker.shared.stop()
     }
     
-    func requestEndSession() {
-        if blocker.blockerStrength == .lenient {
+    func requestEndSession(sessionIsInProgress: Bool) {
+        if blocker.blockerStrength == .lenient || sessionIsInProgress == false {
             endSession()
         } else {
             error = BlockerError.blockerStrengthStrict

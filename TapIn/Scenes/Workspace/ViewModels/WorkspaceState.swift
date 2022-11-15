@@ -68,11 +68,9 @@ class WorkspaceState: ObservableObject {
         didSet {
             UserDefaultsManager.main.setLatestTab(for: workspace, tab: workspaceTab)
             
-            guard workspaceTab.hasBottomMenuTool() else {
-                return
+            if workspaceTab.hasBottomMenuTool() {
+                bottomMenuTab = workspaceTab
             }
-            
-            bottomMenuTab = workspaceTab
         }
     }
     

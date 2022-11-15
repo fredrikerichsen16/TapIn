@@ -93,7 +93,7 @@ struct BlockerBottomMenuController: View {
                 if vm.isActive
                 {
                     Button("Stop Blocking") {
-                        vm.requestEndSession()
+                        vm.requestEndSession(sessionIsInProgress: workspace.componentActivityTracker.sessionIsInProgress())
                     }
                     .errorAlert(error: $workspace.blocker.error)
                 }

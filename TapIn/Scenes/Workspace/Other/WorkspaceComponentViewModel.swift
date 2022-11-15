@@ -21,11 +21,19 @@ class WorkspaceComponentViewModel: ObservableObject {
     @Published var isActive = false
     
     func startSession() {
+        guard !isActive else {
+            return
+        }
+        
         isActive = true
         sendStatusChangeNotification(status: .running)
     }
     
     func endSession() {
+        guard isActive else {
+            return
+        }
+        
         isActive = false
         sendStatusChangeNotification(status: .initial)
     }
