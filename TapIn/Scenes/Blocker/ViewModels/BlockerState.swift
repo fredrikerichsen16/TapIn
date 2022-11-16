@@ -2,9 +2,18 @@ import Foundation
 import RealmSwift
 
 class BlockerState: WorkspaceComponentViewModel {
+    
+    // MARK: Properties
+    
     var blocker: BlockerDB
+    
     @Published var blacklist: [BlacklistedWebsite] = []
+    
+    @Published var addWebsiteFieldValue = ""
+    @Published var tableSelection: Set<Int> = Set()
     @Published var error: Swift.Error? = nil
+    
+    // MARK: Init
 
     init(workspace: WorkspaceDB) {
         self.blocker = workspace.blocker
@@ -42,34 +51,45 @@ class BlockerState: WorkspaceComponentViewModel {
     }
     
     // MARK: CRUD
+    
+    func add() {
+        let url = addWebsiteFieldValue.lowercased().trim()
+        
+        guard !url.isEmpty else {
+            return
+        }
 
-    func validateUrl(url: String) -> Bool {
-        guard let linkRegex = try? NSRegularExpression(pattern: "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$") else { return false }
-        return linkRegex.firstMatch(in: url, options: [], range: NSRange(location: 0, length: url.count)) != nil
-    }
-
-    func addBlacklistedWebsite(url: String) {
+        guard validateUrl(url: url) else {
+            error = BlockerError.invalidUrl
+            return
+        }
+        
         guard let blocker = blocker.thaw() else { return }
-
-        let url = url.lowercased().trim()
-
-        guard validateUrl(url: url) else { return }
 
         try? realm.write {
             blocker.blacklistedWebsites.append(url)
         }
+        
+        addWebsiteFieldValue = ""
     }
-
-    func deleteBlacklistedWebsite(by ids: Set<Int>) {
-        if ids.isEmpty {
+    
+    func delete() {
+        if tableSelection.isEmpty {
             return
         }
 
         guard let blocker = blocker.thaw() else { return }
 
         try? realm.write {
-            blocker.blacklistedWebsites.remove(atOffsets: IndexSet(ids))
+            blocker.blacklistedWebsites.remove(atOffsets: IndexSet(tableSelection))
         }
+        
+        tableSelection = Set()
+    }
+
+    private func validateUrl(url: String) -> Bool {
+        guard let linkRegex = try? NSRegularExpression(pattern: "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$") else { return false }
+        return linkRegex.firstMatch(in: url, options: [], range: NSRange(location: 0, length: url.count)) != nil
     }
     
     // MARK: Start and end session
@@ -87,12 +107,9 @@ class BlockerState: WorkspaceComponentViewModel {
     }
     
     func requestEndSession(sessionIsInProgress: Bool) {
-        if blocker.blockerStrength == .lenient || sessionIsInProgress == false
-        {
+        if blocker.blockerStrength == .lenient || sessionIsInProgress == false {
             endSession()
-        }
-        else
-        {
+        } else {
             error = BlockerError.blockerStrengthStrict
         }
     }

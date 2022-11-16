@@ -7,45 +7,28 @@ struct BlockerView: View {
         workspace.blocker
     }
     
-    @State private var addWebsiteFieldValue = ""
-    @State private var tableSelection: Set<Int> = Set()
-    
     var body: some View {
         VStack {
             Text("Blocked Websites").font(.headline)
             
-            Table(workspace.blocker.blacklist, selection: $tableSelection) {
+            Table(vm.blacklist, selection: $workspace.blocker.tableSelection) {
                 TableColumn("URL", value: \.url)
             }
             
             Form {
                 HStack {
-                    TextField("Add Website to Blacklist", text: $addWebsiteFieldValue)
-                        .onSubmit {
-                            add()
-                        }
+                    TextField("Add Website to Blacklist", text: $workspace.blocker.addWebsiteFieldValue)
+                        .onSubmit(vm.add)
                     
-                    Button("Add", action: add)
+                    Button("Add", action: vm.add)
+                        .errorAlert(error: $workspace.blocker.error)
                     
-                    Button("Delete") {
-                        if tableSelection.isEmpty {
-                            return
-                        }
-                        
-                        workspace.blocker.deleteBlacklistedWebsite(by: tableSelection)
-                        
-                        tableSelection = Set()
-                    }
-                    .disabled(tableSelection.isEmpty)
+                    Button("Delete", action: vm.delete)
+                        .disabled(vm.tableSelection.isEmpty)
                 }
             }
         }
         .padding()
-    }
-    
-    func add() {
-        workspace.blocker.addBlacklistedWebsite(url: addWebsiteFieldValue)
-        addWebsiteFieldValue = ""
     }
 }
 
