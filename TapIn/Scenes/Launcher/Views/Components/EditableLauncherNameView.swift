@@ -26,7 +26,6 @@ struct EditableLauncherNameView: View {
                     .offset(x: isHovering ? 0 : 10)
                 
                 Image(systemName: IconKeys.pencil)
-                    .foregroundColor(.white)
                     .opacity(isHovering ? 1 : 0)
                     .fixedSize()
                     .frame(width: 14, height: 14)

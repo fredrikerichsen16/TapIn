@@ -24,14 +24,16 @@ struct TapinApp: SwiftUI.App {
                 })
         }
         .defaultSize(width: 600, height: 600)
-        .windowStyle(HiddenTitleBarWindowStyle())
+        .windowStyle(.hiddenTitleBar)
         .commands {
             SidebarCommands()
         }
         
-        SwiftUI.Settings {
+        Settings {
             SettingsView()
+                .userPreferenceColorScheme()
         }
+        .windowStyle(.hiddenTitleBar)
     }
     
 //    @StateObject var menuBarState = MenuBarState()

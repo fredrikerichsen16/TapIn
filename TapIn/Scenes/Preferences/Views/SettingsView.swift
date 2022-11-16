@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @State private var selection: Tabs = .general
+    
     private enum Tabs: Hashable {
         case general, subscription
     }
-    
-    @State private var selection: Tabs = .general
     
     var body: some View {
         TabView(selection: $selection) {
@@ -22,7 +22,6 @@ struct SettingsView: View {
                 .tag(Tabs.subscription)
         }
         .frame(minWidth: 300, idealWidth: 450, maxWidth: 1200, minHeight: 300, idealHeight: 450, maxHeight: 1200, alignment: .center)
-        .padding(20)
     }
 }
 

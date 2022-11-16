@@ -2,14 +2,14 @@ import SwiftUI
 
 struct BottomMenu: View {
     @Environment(\.workspaceCoordinator) var workspaceCoordinator
-    @EnvironmentObject var workspaceVM: WorkspaceState
+    @EnvironmentObject var workspace: WorkspaceState
     
     let height: CGFloat = 80.0
     
     var body: some View {
-        if let activeWorkspaceVM = workspaceCoordinator.getActiveWorkspace(), activeWorkspaceVM.workspace != workspaceVM.workspace
+        if let activeWorkspaceState = workspaceCoordinator.getActiveWorkspace(), activeWorkspaceState.workspace != workspace.workspace
         {
-            InactiveBottomMenu(activeWorkspace: activeWorkspaceVM.workspace)
+            InactiveBottomMenu(activeWorkspace: activeWorkspaceState.workspace)
                 .frame(maxWidth: .infinity, minHeight: height, idealHeight: height, maxHeight: height, alignment: .center)
                 .background(Color("BottomMenuColor"))
         }

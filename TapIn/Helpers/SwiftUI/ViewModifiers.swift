@@ -15,6 +15,7 @@ struct UserPreferenceColorScheme: ViewModifier {
         } else {
             content
                 .environment(\.colorScheme, colorScheme == "dark" ? .dark : .light)
+                .preferredColorScheme(colorScheme == "dark" ? .dark : .light)
         }
     }
 }

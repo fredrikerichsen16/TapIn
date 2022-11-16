@@ -10,23 +10,21 @@ struct LauncherView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            NavigationView {
-                VStack(alignment: .leading) {
-                    List(vm.instances, id: \.id, selection: $workspace.launcher.selectedInstance) { instance in
-                        listItem(for: instance)
-                    }
-                    .frame(width: 210, alignment: .center)
-                    // TODO: Change background color to clear
-
-                    LauncherInstanceListControlButtonsView()
+        NavigationView {
+            VStack(alignment: .leading) {
+                List(vm.instances, id: \.id, selection: $workspace.launcher.selectedInstance) { instance in
+                    listItem(for: instance)
                 }
-                .padding()
-
-                Text("Select one of the launch items or click \"+\" to create a new one").font(.callout)
+                .scrollContentBackground(.hidden)
+                .frame(width: 210, alignment: .center)
+                
+                LauncherInstanceListControlButtonsView()
             }
-            .quickLookPreview($quickLookURL)
+            .padding()
+
+            Text("Select one of the launch items or click \"+\" to create a new one").font(.callout)
         }
+        .quickLookPreview($quickLookURL)
     }
     
     @ViewBuilder

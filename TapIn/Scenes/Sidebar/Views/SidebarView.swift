@@ -2,7 +2,6 @@ import SwiftUI
 
 struct SidebarView: View {
     @EnvironmentObject var sidebarState: SidebarState
-    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         NavigationView {
@@ -45,7 +44,6 @@ struct SidebarView: View {
             .listStyle(.sidebar)
             .padding()
         }
-        .background(colorScheme == .light ? Color.white : nil)
         .edgesIgnoringSafeArea([.all])
     }
     
