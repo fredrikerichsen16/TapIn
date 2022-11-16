@@ -1,7 +1,10 @@
 import RealmSwift
 
 // Create a simple Realm model called FolderDB
-class FolderDB: RealmObject {
+class FolderDB: Object, ObjectKeyIdentifiable {
+    @Persisted(primaryKey: true)
+    var id: ObjectId
+    
     @Persisted
     var name: String
     
@@ -28,6 +31,8 @@ class FolderDB: RealmObject {
     }
     
     func updateSettings(with formInputs: FormInputs) {
+        name = formInputs.folderName
+        
         // Update default settings
         pomodoroSettings.pomodoroDuration = formInputs.pomodoroDuration
         pomodoroSettings.shortBreakDuration = formInputs.shortBreakDuration

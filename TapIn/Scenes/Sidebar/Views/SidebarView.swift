@@ -7,21 +7,21 @@ struct SidebarView: View {
         NavigationView {
             List(selection: $sidebarState.sidebarModel.selection) {
                 Section(header: Text("Pages")) {
-                    ForEach(sidebarState.sidebarModel.pageLinks) { item in
-                        sidebarButtonToPage(sidebarListItem: item)
+                    ForEach(sidebarState.sidebarModel.pageLinks) { listItem in
+                        sidebarButtonToPage(listItem: listItem)
                     }
                 }
                 .collapsible(false)
                 
                 Section(header: Text("Workspaces")) {
-                    OutlineGroup(sidebarState.sidebarModel.outline, children: \.children) { outlineItem in
-                        if outlineItem.sidebarListItem.folder != nil
+                    OutlineGroup(sidebarState.sidebarModel.outline, id: \.hashValue, children: \.children) { listItem in
+                        if listItem.folder == true
                         {
-                            SidebarButtonToFolder(sidebarListItem: outlineItem.sidebarListItem)
+                            SidebarButtonToFolder(listItem: listItem)
                         }
-                        else if outlineItem.sidebarListItem.workspace != nil
+                        else
                         {
-                            SidebarButtonToWorkspace(sidebarListItem: outlineItem.sidebarListItem)
+                            SidebarButtonToWorkspace(listItem: listItem)
                         }
                     }
                 }
@@ -43,7 +43,6 @@ struct SidebarView: View {
             }
             .listStyle(.sidebar)
             .padding()
-            .frame(minWidth: 200, idealWidth: 300, maxWidth: 500, maxHeight: .infinity)
         }
     }
     
@@ -56,16 +55,16 @@ struct SidebarView: View {
     }
     
     @ViewBuilder
-    private func sidebarButtonToPage(sidebarListItem: SidebarListItem) -> some View {
-        CoreSidebarButton(sidebarListItem: sidebarListItem, destination: {
-            switch sidebarListItem
+    private func sidebarButtonToPage(listItem: SidebarListItem) -> some View {
+        CoreSidebarButton(listItem: listItem, destination: {
+            switch listItem.id
             {
-            case .home:
+            case "home":
                 HomeView()
-            case .statistics:
+            case "statistics":
                 StatisticsView()
             default:
-                fatalError("1493403")
+                EmptyView()
             }
         })
     }

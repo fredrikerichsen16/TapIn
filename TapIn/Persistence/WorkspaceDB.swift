@@ -1,16 +1,15 @@
 import Foundation
 import RealmSwift
 
-final class WorkspaceDB: RealmObject {
+final class WorkspaceDB: Object, ObjectKeyIdentifiable {
+    @Persisted(primaryKey: true)
+    var id: ObjectId
+    
     @Persisted
     var name: String = "New Workspace"
     
     @Persisted(originProperty: "workspaces")
     var folder: LinkingObjects<FolderDB>
-    
-    func getFolder() -> FolderDB? {
-        return folder.first
-    }
     
     @Persisted
     var pomodoro: PomodoroDB!

@@ -2,26 +2,30 @@ import SwiftUI
 
 struct SidebarButtonToFolder: View {
     @EnvironmentObject var sidebarState: SidebarState
-    @State var sidebarListItem: SidebarListItem
-
-    var folder: FolderDB {
-        sidebarListItem.folder!
-    }
+    @State var listItem: SidebarListItem
 
     var body: some View {
         DynamicSidebarButton(
-            sidebarListItem: sidebarListItem,
+            listItem: listItem,
             destination: {
-                FolderView()
-                    .environmentObject(FolderState(folder: folder))
+                if let folder = listItem.getFolder()
+                {
+                    FolderView()
+                        .environmentObject(FolderState(folder: folder))
+                        .environment(\.listItem, listItem)
+                }
+                else
+                {
+                    EmptyView()
+                }
             },
             contextMenu: {
                 Button("Add workspace") {
-                    sidebarState.addWorkspace(to: folder)
+                    sidebarState.addWorkspace(toFolder: listItem)
                 }
     
                 Button("Delete") {
-                    sidebarState.delete(folder: folder)
+                    sidebarState.delete(folder: listItem)
                 }
     
                 Button("Create new folder") {
@@ -41,7 +45,7 @@ struct SidebarButtonToFolder: View {
                 }
             },
             onSubmitChangeName: {(name) in
-                sidebarState.renameFolder(folder, name: name)
+                sidebarState.rename(listItem, name: name)
             }
         )
     }

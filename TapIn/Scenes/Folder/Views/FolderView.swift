@@ -3,6 +3,7 @@ import SwiftUI
 struct FolderView: View {
     @EnvironmentObject var sidebarState: SidebarState
     @EnvironmentObject var folderState: FolderState
+    @Environment(\.listItem) var listItem
     
     var pomodoroNumberFormatter: ClampedFormatter = {
         return ClampedFormatter(min: 1, max: 240)
@@ -17,35 +18,35 @@ struct FolderView: View {
                     Text("Set folder information and also apply default preferences that apply to all workspaces in this folder")
                         .foregroundColor(.gray)
                 }
-                
+
                 Form {
                     Section("Folder") {
-                        TextField("Folder Name", text: $folderState.folder.name)
+                        TextField("Folder Name", text: $folderState.formInputs.folderName)
                         HStack {
                             Button("Add workspace") {
-                                sidebarState.addWorkspace(to: folderState.folder)
+                                sidebarState.addWorkspace(toFolder: listItem)
                             }
-                            
+
                             Button("Delete folder") {
-                                sidebarState.delete(folder: folderState.folder)
+                                sidebarState.delete(folder: listItem)
                             }
                         }
                     }
-                    
+
                     Section("Pomodoro") {
                         TextField("Pomodoro Duration (minutes)", value: $folderState.formInputs.pomodoroDuration, formatter: pomodoroNumberFormatter)
-                        
+
                         TextField("Short Break Duration (minutes)", value: $folderState.formInputs.shortBreakDuration, formatter: pomodoroNumberFormatter)
-                        
+
                         TextField("Long Break Duration (minutes)", value: $folderState.formInputs.longBreakDuration, formatter: pomodoroNumberFormatter)
-                        
+
                         TextField("Long Break Frequency", value: $folderState.formInputs.longBreakFrequency, formatter: pomodoroNumberFormatter)
                     }
-                    
+
                     Section("Launcher") {
                         Toggle("Hide app on launch by default", isOn: $folderState.formInputs.hideOnLaunch)
                     }
-                    
+
                     Section("Blocker") {
                         Picker(selection: $folderState.formInputs.blockerStrength, content: {
                             ForEach(BlockerStrength.allCases, id: \.self) { strength in
@@ -56,13 +57,15 @@ struct FolderView: View {
                             })
                         .pickerStyle(.inline)
                     }
-                    
+
                     Button("Save changes") {
+                        let name = folderState.formInputs.folderName
+                        sidebarState.sidebarModel.update(listItem, name: name)
                         folderState.onSubmit()
                     }
                 }
                 .formStyle(.grouped)
-                
+
                 Spacer()
             }
         }

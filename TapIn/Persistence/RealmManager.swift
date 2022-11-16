@@ -20,7 +20,7 @@ class RealmManager {
             {
                 let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
                 self.realm = try Realm(configuration: config)
-                addData()
+//                addData()
             }
         }
         catch

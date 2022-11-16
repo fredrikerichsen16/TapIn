@@ -12,7 +12,7 @@ class FolderState: ObservableObject {
         self.folder = folder
         self.formInputs = FormInputs(folder: folder)
     }
-        
+    
     @Published var formInputs: FormInputs
     
     func onSubmit() {

@@ -3,7 +3,7 @@ import SwiftUI
 struct DynamicSidebarButton<ContentA, ContentB>: View where ContentA: View, ContentB: View {
     @EnvironmentObject var sidebarState: SidebarState
     
-    let sidebarListItem: SidebarListItem
+    let listItem: SidebarListItem
     let destination: ContentA
     let contextMenu: ContentB
     let onSubmitChangeName: (_ name: String) -> Void
@@ -13,8 +13,8 @@ struct DynamicSidebarButton<ContentA, ContentB>: View where ContentA: View, Cont
     
     @Namespace var mainNamespace
     
-    init(sidebarListItem: SidebarListItem, @ViewBuilder destination: () -> ContentA, @ViewBuilder contextMenu: () -> ContentB, onSubmitChangeName: @escaping (String) -> Void) {
-        self.sidebarListItem = sidebarListItem
+    init(listItem: SidebarListItem, @ViewBuilder destination: () -> ContentA, @ViewBuilder contextMenu: () -> ContentB, onSubmitChangeName: @escaping (String) -> Void) {
+        self.listItem = listItem
         self.destination = destination()
         self.contextMenu = contextMenu()
         self.onSubmitChangeName = onSubmitChangeName
@@ -34,10 +34,10 @@ struct DynamicSidebarButton<ContentA, ContentB>: View where ContentA: View, Cont
         else
         {
             NavigationLink(destination: destination) {
-                Label(sidebarListItem.label, systemImage: sidebarListItem.icon)
+                Label(listItem.name, systemImage: listItem.icon)
                     .padding(.vertical, 5)
             }
-            .tag(sidebarListItem)
+            .tag(listItem.id)
             .contextMenu {
                 contextMenu
                 
@@ -49,21 +49,8 @@ struct DynamicSidebarButton<ContentA, ContentB>: View where ContentA: View, Cont
     }
     
     func beginRenamingWorkspace() {
-        if let workspace = sidebarListItem.workspace
-        {
-            nameField = workspace.name
-            isRenaming = true
-        }
-        else if let folder = sidebarListItem.folder
-        {
-            nameField = folder.name
-            isRenaming = true
-        }
-        else
-        {
-            nameField = ""
-            isRenaming = false
-        }
+        nameField = listItem.name
+        isRenaming = true
     }
 }
 

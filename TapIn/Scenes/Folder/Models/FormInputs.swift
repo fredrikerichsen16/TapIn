@@ -1,6 +1,8 @@
 import Foundation
 
 struct FormInputs {
+    var folderName: String = ""
+    
     // MARK: Pomodoro
     
     var pomodoroDuration = 25
@@ -19,6 +21,8 @@ struct FormInputs {
     init() {}
     
     init(folder: FolderDB) {
+        self.folderName = folder.name
+        
         // Pomodoro
         self.pomodoroDuration = folder.pomodoroSettings.pomodoroDuration
         self.shortBreakDuration = folder.pomodoroSettings.shortBreakDuration

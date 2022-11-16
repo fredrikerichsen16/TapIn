@@ -10,7 +10,7 @@ struct InactiveBottomMenu: View {
                 Text("Active Workspace: \(activeWorkspace.name)")
                 HStack {
                     Button("Go to", action: {
-                        sidebar.sidebarModel.selection = SidebarListItem.workspace(activeWorkspace)
+                        sidebar.sidebarModel.selection = activeWorkspace.id.stringValue
                     })
                 }
             }

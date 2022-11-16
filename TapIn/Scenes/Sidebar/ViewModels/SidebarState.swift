@@ -9,7 +9,7 @@ class SidebarState: ObservableObject {
         
     init(preview: Bool) {
         let realm = RealmManager.preview.realm
-        self.folders = realm.objects(FolderDB.self).where({ $0.isDeleted == false })
+        self.folders = realm.objects(FolderDB.self)
         self.sidebarModel = SidebarModel()
         self.setToken()
     }
@@ -22,7 +22,7 @@ class SidebarState: ObservableObject {
     
     init() {
         let realm = RealmManager.shared.realm
-        self.folders = realm.objects(FolderDB.self).where({ $0.isDeleted == false })
+        self.folders = realm.objects(FolderDB.self)
         self.sidebarModel = SidebarModel()
         self.setToken()
     }
@@ -38,14 +38,13 @@ class SidebarState: ObservableObject {
     var token: NotificationToken? = nil
 
     func setToken() {
-        self.token = folders.observe(keyPaths: [\FolderDB.workspaces, \FolderDB.name], { [unowned self] (changes) in
+        self.token = folders.observe(keyPaths: [\FolderDB.workspaces], { [unowned self] (changes) in
             switch changes
             {
             case .initial(let folders):
                 sidebarModel.setOutline(with: Array(folders))
             case .update(let folders, deletions: _, insertions: _, modifications: _):
                 sidebarModel.setOutline(with: Array(folders))
-                self.objectWillChange.send()
             default:
                 break
             }
@@ -60,52 +59,38 @@ class SidebarState: ObservableObject {
             realm.add(folder)
         }
     }
-
-    func renameWorkspace(_ workspace: WorkspaceDB, name: String) {
-        guard let workspace = workspace.thaw() else { return }
-
-        if name == "" {
-            return
-        }
-
-        try? realm.write {
-            workspace.name = name
-        }
-    }
     
-    func renameFolder(_ folder: FolderDB, name: String) {
-        guard let folder = folder.thaw() else { return }
-
-        if name == "" {
-            return
-        }
-
-        try? realm.write {
-            folder.name = name
-        }
-    }
-
-    func delete(workspace: WorkspaceDB) {
-        guard let folder = workspace.folder.first?.thaw() else {
-            return
-        }
+    func rename(_ listItem: SidebarListItem, name: String) {
+        sidebarModel.update(listItem, name: name)
         
-        sidebarModel.selection = SidebarListItem.folder(folder)
-
-        try? realm.write {
-            guard let workspaceIndex = folder.workspaces.firstIndex(of: workspace) else {
-                return
+        if let folder = listItem.getFolder()?.thaw()
+        {
+            try? realm.write {
+                folder.name = name
             }
-
-            folder.workspaces.remove(at: workspaceIndex)
-            workspace.isDeleted = true
+        }
+        else if let workspace = listItem.getWorkspace()?.thaw()
+        {
+            try? realm.write {
+                workspace.name = name
+            }
         }
     }
 
-    func delete(folder: FolderDB) {
-        guard let folder = folder.thaw() else {
-            return
+    func delete(workspace listItem: SidebarListItem) {
+        guard listItem.folder == false,
+              let workspace = listItem.getWorkspace()
+        else { return }
+
+        try? realm.write {
+            realm.delete(workspace)
         }
+    }
+
+    func delete(folder listItem: SidebarListItem) {
+        guard listItem.folder == true,
+              let folder = listItem.getFolder()
+        else { return }
         
         sidebarModel.selection = nil
         
@@ -113,18 +98,17 @@ class SidebarState: ObservableObject {
         {
             for workspace in folder.workspaces
             {
-                workspace.isDeleted = true
+                realm.delete(workspace)
             }
             
-            folder.workspaces.removeAll()
-            folder.isDeleted = true
+            realm.delete(folder)
         }
     }
 
-    func addWorkspace(to folder: FolderDB) {
-        guard let folder = folder.thaw() else {
-            return
-        }
+    func addWorkspace(toFolder listItem: SidebarListItem) {
+        guard listItem.folder == true,
+              let folder = listItem.getFolder()
+        else { return }
         
         let workspace = WorkspaceDB(name: "New Workspace")
 

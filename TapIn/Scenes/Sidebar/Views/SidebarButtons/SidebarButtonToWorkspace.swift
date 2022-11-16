@@ -3,30 +3,25 @@ import SwiftUI
 struct SidebarButtonToWorkspace: View {
     @Environment(\.workspaceCoordinator) var workspaceCoordinator
     @EnvironmentObject var sidebarState: SidebarState
-    @State var sidebarListItem: SidebarListItem
-    
-    var workspace: WorkspaceDB {
-        sidebarListItem.workspace!
-    }
+    @State var listItem: SidebarListItem
     
     var body: some View {
         DynamicSidebarButton(
-            sidebarListItem: sidebarListItem,
+            listItem: listItem,
             destination: {
-                WorkspaceView()
-                    .environmentObject(workspaceCoordinator.getWorkspaceVM(for: workspace))
+                if let workspace = listItem.getWorkspace()
+                {
+                    WorkspaceView()
+                        .environmentObject(workspaceCoordinator.getWorkspaceVM(for: workspace))
+                }
+                else
+                {
+                    EmptyView()
+                }
             },
             contextMenu: {
-                Button("Add workspace to folder") {
-                    guard let folder = workspace.getFolder() else {
-                        return
-                    }
-                    
-                    sidebarState.addWorkspace(to: folder)
-                }
-                
                 Button("Delete") {
-                    sidebarState.delete(workspace: workspace)
+                    sidebarState.delete(workspace: listItem)
                 }
                 
                 Button("Settings") {
@@ -42,7 +37,7 @@ struct SidebarButtonToWorkspace: View {
                 }
             },
             onSubmitChangeName: {(name) in
-                sidebarState.renameWorkspace(workspace, name: name)
+                sidebarState.rename(listItem, name: name)
             }
         )
     }

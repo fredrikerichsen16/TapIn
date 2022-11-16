@@ -45,7 +45,8 @@ class WorkspaceCoordinator {
         }
         
         let blocker = workspace.blocker
-        if blocker.isActive && [BlockerStrength.lenient, BlockerStrength.normal].contains(blocker.blocker.blockerStrength) {
+        let blockerStrength = blocker.blocker.blockerStrength
+        if blocker.isActive && blockerStrength < BlockerStrength.extreme {
             blocker.stopBlocker()
         }
     }
