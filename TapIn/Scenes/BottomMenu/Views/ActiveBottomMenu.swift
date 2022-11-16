@@ -112,19 +112,15 @@ struct PomodoroButtonView: View {
     var body: some View {
         switch button
         {
-        case .start, .resume:
+        case .start:
             ButtonWithPopover(buttonTitle: button.rawValue, buttonAction: workspace.pomodoro.startSession, popover: {
-                CascadingSettingsPopoverView(tabs: [.launcher, .blocker, .radio], keypath: \.cascadingStart, action: "start")
+                CascadingSettingsPopoverView(tabs: [.launcher, .blocker, .radio])
             })
+        case .resume:
+            Button(button.rawValue, action: workspace.pomodoro.startSession)
         case .pause:
-            ButtonWithPopover(buttonTitle: button.rawValue, buttonAction: workspace.pomodoro.pauseSession, popover: {
-                CascadingSettingsPopoverView(tabs: [.blocker, .radio], keypath: \.cascadingPause, action: "pause")
-            })
-        case .cancel:
-            ButtonWithPopover(buttonTitle: button.rawValue, buttonAction: workspace.pomodoro.cancelSession, popover: {
-                CascadingSettingsPopoverView(tabs: [.blocker, .radio], keypath: \.cascadingStop, action: "stop")
-            })
-        case .skip:
+            Button(button.rawValue, action: workspace.pomodoro.pauseSession)
+        case .cancel, .skip:
             Button(button.rawValue, action: workspace.pomodoro.cancelSession)
         }
     }
@@ -133,23 +129,19 @@ struct PomodoroButtonView: View {
 struct CascadingSettingsPopoverView: View {
     @State private var tabs: [WorkspaceTab]
     @State private var selectedTabs: Set<WorkspaceTab> = Set()
-    private let keypath: WritableKeyPath<UserDefaultsManager, Set<WorkspaceTab>>
-    private let action: String
     
-    init(tabs: [WorkspaceTab], keypath: WritableKeyPath<UserDefaultsManager, Set<WorkspaceTab>>, action: String) {
+    init(tabs: [WorkspaceTab]) {
         self.tabs = tabs
-        self.keypath = keypath
-        self.action = action
     }
     
     func insert(_ tab: WorkspaceTab) {
         selectedTabs.insert(tab)
-        UserDefaultsManager.main[keyPath: keypath] = Set(Array(selectedTabs))
+        UserDefaultsManager.main.cascadingOptions = selectedTabs
     }
     
     func remove(_ tab: WorkspaceTab) {
         selectedTabs.remove(tab)
-        UserDefaultsManager.main[keyPath: keypath] = Set(Array(selectedTabs))
+        UserDefaultsManager.main.cascadingOptions = selectedTabs
     }
     
     func contains(_ tab: WorkspaceTab) -> Bool {
@@ -159,7 +151,7 @@ struct CascadingSettingsPopoverView: View {
     var body: some View {
         Form {
             Section("Cascading Options") {
-                Text("Also \(action) the following ...")
+                Text("Also start/stop the following when session begins/ends")
                 
                 ForEach(tabs, id: \.self) { tab in
                     Toggle(tab.label, isOn: Binding(
@@ -174,7 +166,7 @@ struct CascadingSettingsPopoverView: View {
         .formStyle(.grouped)
         .frame(width: 240)
         .onAppear {
-            selectedTabs = UserDefaultsManager.main[keyPath: keypath]
+            selectedTabs = UserDefaultsManager.main.cascadingOptions
         }
     }
 }

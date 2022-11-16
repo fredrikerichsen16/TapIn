@@ -26,19 +26,19 @@ class ComponentActivityTracker {
     
     // MARK: Keeping Track of which workspaces are active and doing cascading launch
     
-    var componentsStatus: [WorkspaceTab: TimerMode] = [
-        .pomodoro: .initial,
-        .blocker: .initial,
-        .radio: .initial
+    var componentsStatus: [WorkspaceTab: WorkspaceComponentStatus] = [
+        .pomodoro: false,
+        .blocker: false,
+        .radio: false
     ]
     
-    private func getStatusAndComponent(from notification: Notification) -> (WorkspaceTab, TimerMode)? {
+    private func getStatusAndComponent(from notification: Notification) -> (WorkspaceTab, WorkspaceComponentStatus)? {
         guard let userInfo = notification.userInfo as? [String: Any] else {
             return nil
         }
         
         if let component = userInfo["component"] as? WorkspaceTab,
-           let status = userInfo["status"] as? TimerMode
+           let status = userInfo["status"] as? WorkspaceComponentStatus
         {
             return (component, status)
         }
@@ -53,7 +53,7 @@ class ComponentActivityTracker {
         
         componentsStatus[component] = status
         
-        if componentsStatus.values.contains(where: { $0.isActive() })
+        if componentsStatus.values.contains(where: { $0 == true })
         {
             coordinator.setActive(workspace: workspace)
         }
@@ -71,64 +71,25 @@ class ComponentActivityTracker {
     
     // MARK: Cascading
     
-    func cascade(status: TimerMode) {
-        var components: Set<WorkspaceTab> = Set()
+    func cascade(status: WorkspaceComponentStatus) {
+        let components: Set<WorkspaceTab> = UserDefaultsManager.main.cascadingOptions
         
-        switch status
+        for component in components
         {
-        case .initial:
-            components = UserDefaultsManager.main.cascadingStop
-        case .paused:
-            components = UserDefaultsManager.main.cascadingPause
-        case .running:
-            components = UserDefaultsManager.main.cascadingStart
-        }
-        
-        switch status
-        {
-        case .initial:
-            for component in components
+            switch (component, status)
             {
-                switch component
-                {
-                case .blocker:
-                    workspace.blocker.endSession()
-                case .radio:
-                    workspace.radio.endSession()
-                default:
-                    break
-                }
-            }
-        case .paused:
-            for component in components
-            {
-                switch component
-                {
-                case .blocker:
-                    let blockerStrength = workspace.workspace.blocker.blockerStrength
-                    if blockerStrength == .lenient {
-                        workspace.blocker.endSession()
-                    }
-                case .radio:
-                    workspace.radio.endSession()
-                default:
-                    break
-                }
-            }
-        case .running:
-            for component in components
-            {
-                switch component
-                {
-                case .blocker:
-                    workspace.blocker.startSession()
-                case .radio:
-                    workspace.radio.startSession()
-                case .launcher:
-                    workspace.launcher.openAll()
-                default:
-                    break
-                }
+            case (.blocker, true):
+                workspace.blocker.startSession()
+            case (.blocker, false):
+                workspace.blocker.endSession()
+            case (.radio, true):
+                workspace.radio.startSession()
+            case (.radio, false):
+                workspace.radio.endSession()
+            case (.launcher, true):
+                workspace.launcher.openAll()
+            default:
+                break
             }
         }
     }
@@ -141,6 +102,6 @@ class ComponentActivityTracker {
     }
     
     func sessionIsInProgress() -> Bool {
-        return componentsStatus[.pomodoro] != .initial
+        return componentsStatus[.pomodoro] == true
     }
 }

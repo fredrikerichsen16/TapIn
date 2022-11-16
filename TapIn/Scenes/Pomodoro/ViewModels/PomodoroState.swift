@@ -3,16 +3,11 @@ import RealmSwift
 
 final class PomodoroState: WorkspaceComponentViewModel {
     private var pomodoroDb: PomodoroDB
-    
+        
     @Published var remainingTimeString = "00:00"
     @Published var circleProgress: Double = 1.0
-    
     @Published var timerMode: TimerMode = .initial {
-        didSet {
-            // TODO: Make paused = paused while running, and initial = initial OR in a break (for the purposes of status of app)
-            sendStatusChangeNotification(status: timerMode)
-            isActive = timerMode != .initial
-        }
+        didSet { updateActivityStatus() }
     }
     
     var ticker: PomodoroTicker!
@@ -23,7 +18,9 @@ final class PomodoroState: WorkspaceComponentViewModel {
     var runningTimerState: PomodoroTimerState!
     var pausedTimerState: PomodoroTimerState!
     
-    var stageState: PomodoroStageState!
+    var stageState: PomodoroStageState! {
+        didSet { updateActivityStatus() }
+    }
     var workingStageState: PomodoroStageState!
     var shortBreakStageState: PomodoroStageState!
     var longBreakStageState: PomodoroStageState!
@@ -54,6 +51,17 @@ final class PomodoroState: WorkspaceComponentViewModel {
         )
         
         self.zapTicker()
+    }
+    
+    func updateActivityStatus() {
+        let newStatus = stageState.status && timerMode != .initial
+        let currentStatus = isActive
+        
+        if newStatus != currentStatus
+        {
+            isActive = newStatus
+            sendStatusChangeNotification(status: newStatus)
+        }
     }
     
     // MARK: Pomodoro Timer States (State Pattern)
@@ -109,11 +117,11 @@ final class PomodoroState: WorkspaceComponentViewModel {
     func completedSession() {
         if case .working(_) = stageState.stage
         {
-            guard let workspace = workspace.thaw() else {
-                return
-            }
+//            guard let workspace = workspace.thaw() else {
+//                return
+//            }
         
-            try! realm.write {
+            try? realm.write {
                 workspace.sessions.append(SessionDB(stage: stageState.stage))
             }
         }

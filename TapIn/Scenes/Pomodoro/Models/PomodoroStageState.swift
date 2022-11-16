@@ -7,10 +7,12 @@ import UserNotifications
 class PomodoroStageState {
     var pomodoroState: PomodoroState
     var stage: PomodoroStage
+    var status: WorkspaceComponentStatus
     
     init(pomodoroState: PomodoroState, stage: PomodoroStage) {
         self.pomodoroState = pomodoroState
         self.stage = stage
+        self.status = false
     }
     
     func transitionToNextState(withNotification: Bool) {
@@ -56,6 +58,7 @@ class PomodoroStageState {
 class PomodoroWorkingStageState: PomodoroStageState {
     init(_ pomodoroState: PomodoroState, duration: Int) {
         super.init(pomodoroState: pomodoroState, stage: .working(duration))
+        self.status = true
     }
     
     override func transitionToNextState(withNotification: Bool) {
@@ -89,6 +92,7 @@ class PomodoroWorkingStageState: PomodoroStageState {
 final class PomodoroShortBreakStageState: PomodoroStageState {
     init(_ pomodoroState: PomodoroState, duration: Int) {
         super.init(pomodoroState: pomodoroState, stage: .shortBreak(duration))
+        self.status = false
     }
     
     override func transitionToNextState(withNotification: Bool) {
@@ -110,6 +114,7 @@ final class PomodoroShortBreakStageState: PomodoroStageState {
 final class PomodoroLongBreakStageState: PomodoroStageState {
     init(_ pomodoroState: PomodoroState, duration: Int) {
         super.init(pomodoroState: pomodoroState, stage: .longBreak(duration))
+        self.status = false
     }
     
     override func transitionToNextState(withNotification: Bool) {

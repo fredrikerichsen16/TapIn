@@ -57,65 +57,21 @@ class UserDefaultsManager {
     
     // cascading
     
-//    var cascadingStart: Set<WorkspaceTab> {
-//        get {
-//            return defaults.object(forKey: "cascadingStart") as? Set<WorkspaceTab> ?? Set([])
-//        }
-//        set {
-//            defaults.set(newValue, forKey: "cascadingStart")
-//        }
-//    }
-//
-//    var cascadingPause: Set<WorkspaceTab> {
-//        get {
-//            return defaults.object(forKey: "cascadingPause") as? Set<WorkspaceTab> ?? Set([])
-//        }
-//        set {
-//            defaults.set(newValue, forKey: "cascadingPause")
-//        }
-//    }
-    
-    private func getCascading(key: String) -> Set<WorkspaceTab> {
-        guard let stringRepresentation = defaults.stringArray(forKey: key) else {
-            return Set()
-        }
-        
-        let enumRepresentation = stringRepresentation.compactMap({ WorkspaceTab(rawValue: $0) })
-        
-        return Set(enumRepresentation)
-    }
-    
-    private func setCascading(key: String, value: Set<WorkspaceTab>) {
-        let arrayRepresentation = Array(value)
-        let stringArrayRepresentation = arrayRepresentation.map({ $0.rawValue })
-        
-        defaults.set(stringArrayRepresentation, forKey: key)
-    }
-    
-    var cascadingStart: Set<WorkspaceTab> {
+    var cascadingOptions: Set<WorkspaceTab> {
         get {
-            return getCascading(key: "cascadingStart")
+            guard let stringRepresentation = defaults.stringArray(forKey: "cascadingOptions") else {
+                return Set()
+            }
+            
+            let enumRepresentation = stringRepresentation.compactMap({ WorkspaceTab(rawValue: $0) })
+            
+            return Set(enumRepresentation)
         }
         set {
-            setCascading(key: "cascadingStart", value: newValue)
-        }
-    }
-    
-    var cascadingPause: Set<WorkspaceTab> {
-        get {
-            return getCascading(key: "cascadingPause")
-        }
-        set {
-            setCascading(key: "cascadingPause", value: newValue)
-        }
-    }
-    
-    var cascadingStop: Set<WorkspaceTab> {
-        get {
-            return getCascading(key: "cascadingStop")
-        }
-        set {
-            setCascading(key: "cascadingStop", value: newValue)
+            let arrayRepresentation = Array(newValue)
+            let stringArrayRepresentation = arrayRepresentation.map({ $0.rawValue })
+            
+            defaults.set(stringArrayRepresentation, forKey: "cascadingOptions")
         }
     }
     

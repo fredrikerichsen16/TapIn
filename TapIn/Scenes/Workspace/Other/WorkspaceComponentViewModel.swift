@@ -14,7 +14,7 @@ class WorkspaceComponentViewModel: ObservableObject {
     
     // MARK: Start and end session
     
-    func sendStatusChangeNotification(status: TimerMode) {
+    func sendStatusChangeNotification(status: WorkspaceComponentStatus) {
         NotificationCenter.default.post(name: Notification.Name.componentDidChangeStatus, object: self, userInfo: ["status": status, "component": tab])
     }
     
@@ -26,7 +26,7 @@ class WorkspaceComponentViewModel: ObservableObject {
         }
         
         isActive = true
-        sendStatusChangeNotification(status: .running)
+        sendStatusChangeNotification(status: true)
     }
     
     func endSession() {
@@ -35,13 +35,6 @@ class WorkspaceComponentViewModel: ObservableObject {
         }
         
         isActive = false
-        sendStatusChangeNotification(status: .initial)
+        sendStatusChangeNotification(status: false)
     }
 }
-
-// For now I will just use TimerMode from Pomodoro, but it might be a good idea to have a different enum.
-//enum WorkspaceComponentStatus {
-//    case inactive
-//    case active
-//    case paused
-//}

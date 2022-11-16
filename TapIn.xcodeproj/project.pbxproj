@@ -25,6 +25,7 @@
 		3542DC3C2917C39300F7A9D8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC3B2917C39300F7A9D8 /* Constants.swift */; };
 		3542DC3F2917E2BA00F7A9D8 /* StoreKitConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 3542DC3E2917E2BA00F7A9D8 /* StoreKitConfig.storekit */; };
 		3542DC462917E50500F7A9D8 /* SubscriptionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC452917E50500F7A9D8 /* SubscriptionSettingsView.swift */; };
+		354A59B52924A2FE0034B2E0 /* WorkspaceComponentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354A59B42924A2FE0034B2E0 /* WorkspaceComponentStatus.swift */; };
 		354BDD30292190FA002AA4C1 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356FB74C29208A1500266E0B /* NetworkExtension.framework */; };
 		3565B4BD2923557B00A5AB8C /* ButtonWithPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3565B4BC2923557B00A5AB8C /* ButtonWithPopover.swift */; };
 		35693E5929157D5200F1966D /* FolderDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5829157D5200F1966D /* FolderDB.swift */; };
@@ -176,6 +177,7 @@
 		3542DC3B2917C39300F7A9D8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3542DC3E2917E2BA00F7A9D8 /* StoreKitConfig.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKitConfig.storekit; sourceTree = "<group>"; };
 		3542DC452917E50500F7A9D8 /* SubscriptionSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSettingsView.swift; sourceTree = "<group>"; };
+		354A59B42924A2FE0034B2E0 /* WorkspaceComponentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WorkspaceComponentStatus.swift; path = TapIn/Helpers/Components/WorkspaceComponentStatus.swift; sourceTree = SOURCE_ROOT; };
 		3565B4BC2923557B00A5AB8C /* ButtonWithPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithPopover.swift; sourceTree = "<group>"; };
 		35693E5829157D5200F1966D /* FolderDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDB.swift; sourceTree = "<group>"; };
 		35693E5A2915851500F1966D /* SidebarButtonToFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButtonToFolder.swift; sourceTree = "<group>"; };
@@ -793,6 +795,7 @@
 		35E000982911F531009D284D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				354A59B42924A2FE0034B2E0 /* WorkspaceComponentStatus.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1289,6 +1292,7 @@
 				35F3D56B291B0D560050E3A9 /* FormInputs.swift in Sources */,
 				3542DC312917805200F7A9D8 /* EditableLauncherNameView.swift in Sources */,
 				35E000462911F41F009D284D /* String+.swift in Sources */,
+				354A59B52924A2FE0034B2E0 /* WorkspaceComponentStatus.swift in Sources */,
 				35E000C42911F531009D284D /* GeneralSettingsView.swift in Sources */,
 				35E000562911F4AB009D284D /* PomodoroDB.swift in Sources */,
 				35E000422911F40C009D284D /* Collection+.swift in Sources */,
