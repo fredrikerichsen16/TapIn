@@ -4,8 +4,7 @@ import UserNotifications
 struct GeneralSettingsView: View {
     @AppStorage("colorScheme") private var colorScheme = "dark"
     @AppStorage("displayToolbarWidget") private var displayToolbarWidget = true
-    
-    @State private var enableNotifications = false
+    @AppStorage("notificationsEnabled") private var notificationsEnabled = false
     
     var body: some View {
         Form {
@@ -15,29 +14,16 @@ struct GeneralSettingsView: View {
                 Text("Light").tag("light")
             }
             
-            Toggle("Display toolbar widget", isOn: $displayToolbarWidget)
+            Toggle("Display toolbar icon", isOn: $displayToolbarWidget)
             
-            Toggle(isOn: $enableNotifications, label: {
-                VStack {
-                    Text("Enable notifications")
-                    Text("TapIn only shows notifications during active use of the app. E.g. telling you that a session has ended.")
-                }
+            Toggle(isOn: $notificationsEnabled, label: {
+                Text("Enable notifications")
+                Text("TapIn only shows notifications during active use of the app. E.g. telling you that a session has ended.")
             })
-            .onChange(of: enableNotifications) { enable in
-                guard enable else {
-                    return
+            .onChange(of: notificationsEnabled) { enable in
+                if enable {
+                    NotificationManager.main.requestAuthorization()
                 }
-                
-                UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound, .alert], completionHandler: { (success, error) in
-                    if success
-                    {
-                        print("Notifications activated")
-                    }
-                    else if let error
-                    {
-                        print(error.localizedDescription)
-                    }
-                })
             }
         }
         .formStyle(.grouped)

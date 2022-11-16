@@ -4,18 +4,18 @@ import RealmSwift
 class WorkspaceComponentViewModel: ObservableObject {
     var realm: Realm
     let workspace: WorkspaceDB
-    let tab: WorkspaceTab
+    let component: WorkspaceTab
     
-    init(workspace: WorkspaceDB, realm: Realm, tab: WorkspaceTab) {
+    init(workspace: WorkspaceDB, realm: Realm, component: WorkspaceTab) {
         self.workspace = workspace
         self.realm = realm
-        self.tab = tab
+        self.component = component
     }
     
     // MARK: Start and end session
     
     func sendStatusChangeNotification(status: WorkspaceComponentStatus) {
-        NotificationCenter.default.post(name: Notification.Name.componentDidChangeStatus, object: self, userInfo: ["status": status, "component": tab])
+        NotificationCenter.default.post(name: Notification.Name.componentDidChangeStatus, object: self, userInfo: ["status": status, "component": component])
     }
     
     @Published var isActive = false

@@ -97,10 +97,10 @@
 		35E000E32911F531009D284D /* PomodoroStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B52911F531009D284D /* PomodoroStage.swift */; };
 		35E000E42911F531009D284D /* PomodoroTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B62911F531009D284D /* PomodoroTicker.swift */; };
 		35E000E52911F531009D284D /* PomodoroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B82911F531009D284D /* PomodoroView.swift */; };
+		35E6F1802924EFB70066E7A2 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E6F17F2924EFB70066E7A2 /* NotificationManager.swift */; };
 		35E9CE4329198A7B0019DDE8 /* SubscriptionSettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E9CE4229198A7B0019DDE8 /* SubscriptionSettingsState.swift */; };
 		35E9CE482919AEEE0019DDE8 /* SubscriptionProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E9CE472919AEEE0019DDE8 /* SubscriptionProducts.swift */; };
 		35E9CE4A2919B6EA0019DDE8 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E9CE492919B6EA0019DDE8 /* SubscriptionManager.swift */; };
-		35F3D560291B09000050E3A9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D55F291B09000050E3A9 /* HomeView.swift */; };
 		35F3D567291B0A6F0050E3A9 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D566291B0A6F0050E3A9 /* FolderView.swift */; };
 		35F3D569291B0A900050E3A9 /* FolderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D568291B0A900050E3A9 /* FolderState.swift */; };
 		35F3D56B291B0D560050E3A9 /* FormInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3D56A291B0D560050E3A9 /* FormInputs.swift */; };
@@ -250,10 +250,10 @@
 		35E000B62911F531009D284D /* PomodoroTicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroTicker.swift; sourceTree = "<group>"; };
 		35E000B82911F531009D284D /* PomodoroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroView.swift; sourceTree = "<group>"; };
 		35E0FFFE2911EEF2009D284D /* TapIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TapIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		35E6F17F2924EFB70066E7A2 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		35E9CE4229198A7B0019DDE8 /* SubscriptionSettingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSettingsState.swift; sourceTree = "<group>"; };
 		35E9CE472919AEEE0019DDE8 /* SubscriptionProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionProducts.swift; sourceTree = "<group>"; };
 		35E9CE492919B6EA0019DDE8 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
-		35F3D55F291B09000050E3A9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		35F3D566291B0A6F0050E3A9 /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
 		35F3D568291B0A900050E3A9 /* FolderState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderState.swift; sourceTree = "<group>"; };
 		35F3D56A291B0D560050E3A9 /* FormInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormInputs.swift; sourceTree = "<group>"; };
@@ -559,6 +559,7 @@
 				3542DC3B2917C39300F7A9D8 /* Constants.swift */,
 				35F3D572291B58E90050E3A9 /* UserDefaultsManager.swift */,
 				35F3D576291B64DD0050E3A9 /* PropertyWrappers.swift */,
+				35E6F17F2924EFB70066E7A2 /* NotificationManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -600,7 +601,6 @@
 			isa = PBXGroup;
 			children = (
 				35F3D561291B0A590050E3A9 /* Folder */,
-				35F3D55D291B08F40050E3A9 /* Home */,
 				35AD0601291327CF00837016 /* Statistics */,
 				35AD05F72912EB6D00837016 /* Notes */,
 				35E000662911F531009D284D /* Sidebar */,
@@ -957,14 +957,6 @@
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		35F3D55D291B08F40050E3A9 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				35F3D55F291B09000050E3A9 /* HomeView.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
 		35F3D561291B0A590050E3A9 /* Folder */ = {
 			isa = PBXGroup;
 			children = (
@@ -1257,7 +1249,6 @@
 				35E000C82911F531009D284D /* LauncherModelExtra.swift in Sources */,
 				35693E5929157D5200F1966D /* FolderDB.swift in Sources */,
 				35E9CE4329198A7B0019DDE8 /* SubscriptionSettingsState.swift in Sources */,
-				35F3D560291B09000050E3A9 /* HomeView.swift in Sources */,
 				35E000E02911F531009D284D /* PomodoroStageState.swift in Sources */,
 				35F3D571291B45C90050E3A9 /* NSNotification.Name+.swift in Sources */,
 				35E000C22911F531009D284D /* SettingsView.swift in Sources */,
@@ -1267,6 +1258,7 @@
 				35E000C72911F531009D284D /* LauncherState.swift in Sources */,
 				35693E6B291624C100F1966D /* FileLauncherModel.swift in Sources */,
 				35D366B22923036D004C262A /* BlockerError.swift in Sources */,
+				35E6F1802924EFB70066E7A2 /* NotificationManager.swift in Sources */,
 				35AD06072913280D00837016 /* SessionHistoryQueryer.swift in Sources */,
 				3565B4BD2923557B00A5AB8C /* ButtonWithPopover.swift in Sources */,
 				35E000D92911F531009D284D /* RadioBottomMenuController.swift in Sources */,

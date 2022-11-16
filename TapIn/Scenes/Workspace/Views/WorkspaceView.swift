@@ -8,23 +8,23 @@ struct WorkspaceView: View {
         VStack {
             TabView(selection: $workspace.workspaceTab) {
                 PomodoroView()
-                    .tabItem { tabItemBuilder(tab: .pomodoro) }
+                    .tabItem { Text(WorkspaceTab.pomodoro.label) }
                     .tag(WorkspaceTab.pomodoro)
                 
                 LauncherView()
-                    .tabItem({ tabItemBuilder(tab: .launcher) })
+                    .tabItem({ Text(WorkspaceTab.launcher.label) })
                     .tag(WorkspaceTab.launcher)
                 
                 BlockerView()
-                    .tabItem({ tabItemBuilder(tab: .blocker) })
+                    .tabItem({ Text(WorkspaceTab.blocker.label) })
                     .tag(WorkspaceTab.blocker)
                 
                 RadioView()
-                    .tabItem({ tabItemBuilder(tab: .radio) })
+                    .tabItem({ Text(WorkspaceTab.radio.label) })
                     .tag(WorkspaceTab.radio)
                 
                 NotesView(workspace: workspace.workspace)
-                    .tabItem({ tabItemBuilder(tab: .notes) })
+                    .tabItem({ Text(WorkspaceTab.notes.label) })
                     .tag(WorkspaceTab.notes)
             }
             
@@ -33,11 +33,5 @@ struct WorkspaceView: View {
             BottomMenu()
         }
         .edgesIgnoringSafeArea([.bottom, .horizontal])
-    }
-    
-    @ViewBuilder
-    func tabItemBuilder(tab: WorkspaceTab) -> some View {
-        Text(tab.label)
-//            .fontWeight(workspace.componentActivityTracker.activeComponents.contains(tab) ? .bold : .regular)
     }
 }

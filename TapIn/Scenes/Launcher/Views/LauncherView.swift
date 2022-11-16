@@ -11,8 +11,6 @@ struct LauncherView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Spacer()
-
             NavigationView {
                 VStack(alignment: .leading) {
                     List(vm.instances, id: \.id, selection: $workspace.launcher.selectedInstance) { instance in
@@ -28,8 +26,6 @@ struct LauncherView: View {
                 Text("Select one of the launch items or click \"+\" to create a new one").font(.callout)
             }
             .quickLookPreview($quickLookURL)
-
-            Spacer()
         }
     }
     

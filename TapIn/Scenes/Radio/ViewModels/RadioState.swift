@@ -2,16 +2,15 @@ import SwiftUI
 import RealmSwift
 
 fileprivate let channels: [RadioChannel] = [
-//        RadioChannel(key: "LofiBeats", title: "Lofi Beats", numberOfSongs: 0),
     RadioChannel(key: "Classical", title: "Classical", numberOfSongs: 4),
-//        RadioChannel(key: "DarkAcademia", title: "Dark Academia", numberOfSongs: 0),
-//        RadioChannel(key: "TechnoBops", title: "Techno Bops", numberOfSongs: 0),
     RadioChannel(key: "JazzyJazz", title: "Jazzy Jazz", numberOfSongs: 3),
     RadioChannel(key: "Dramatic", title: "Dramatic", numberOfSongs: 3),
-//        RadioChannel(key: "GregorianChants", title: "Gregorian Chants", numberOfSongs: 0)
 ]
 
 final class RadioState: WorkspaceComponentViewModel {
+    
+    // MARK: Main properties
+    
     @IndexingCollection(collectionLength: channels.count)
     private var currentChannelIndex: Int = 0 {
         didSet {
@@ -24,15 +23,19 @@ final class RadioState: WorkspaceComponentViewModel {
     
     private var player: RadioPlayer? = nil
     
+    // MARK: Init
+    
     init(workspace: WorkspaceDB) {
         let currentChannelIndex = UserDefaultsManager.main.radioChannelIndex
         self.currentChannelIndex = currentChannelIndex
         self.currentChannel = channels[currentChannelIndex]
         
-        super.init(workspace: workspace, realm: RealmManager.shared.realm, tab: .radio)
+        super.init(workspace: workspace, realm: RealmManager.shared.realm, component: .radio)
         
         initializePlayer()
     }
+    
+    // MARK: Changing channel
     
     func goToPrevChannel() {
         currentChannelIndex -= 1
@@ -56,7 +59,7 @@ final class RadioState: WorkspaceComponentViewModel {
         player?.pause()
     }
     
-    func initializePlayer() {
+    private func initializePlayer() {
         self.player = RadioPlayer(channel: currentChannel, isPlaying: isActive)
     }
     

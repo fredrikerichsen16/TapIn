@@ -48,7 +48,7 @@ class WorkspaceState: ObservableObject {
     
     var cancellable = Set<AnyCancellable>()
 
-    // MARK: Tab states
+    // MARK: Component states
     
     @Published var pomodoro: PomodoroState
     @Published var radio: RadioState

@@ -2,13 +2,13 @@ import Foundation
 import RealmSwift
 
 class BlockerState: WorkspaceComponentViewModel {
-    @Published var blocker: BlockerDB
+    var blocker: BlockerDB
     @Published var blacklist: [BlacklistedWebsite] = []
     @Published var error: Swift.Error? = nil
 
     init(workspace: WorkspaceDB) {
         self.blocker = workspace.blocker
-        super.init(workspace: workspace, realm: RealmManager.shared.realm, tab: .blocker)
+        super.init(workspace: workspace, realm: RealmManager.shared.realm, component: .blocker)
         setToken()
     }
     
@@ -16,12 +16,14 @@ class BlockerState: WorkspaceComponentViewModel {
     
     var token: NotificationToken? = nil
     
-    func setToken() {
-        self.token = blocker.blacklistedWebsites.observe({ [weak self] (changes) in
+    private func setToken() {
+        self.token = blocker.blacklistedWebsites.observe({ [unowned self] (changes) in
             switch changes
             {
+            case .initial(_):
+                self.fetch()
             case .update(_, deletions: _, insertions: _, modifications: _):
-                self?.fetch()
+                self.fetch()
             default:
                 break
             }
@@ -85,14 +87,13 @@ class BlockerState: WorkspaceComponentViewModel {
     }
     
     func requestEndSession(sessionIsInProgress: Bool) {
-        if blocker.blockerStrength == .lenient || sessionIsInProgress == false {
+        if blocker.blockerStrength == .lenient || sessionIsInProgress == false
+        {
             endSession()
-        } else {
+        }
+        else
+        {
             error = BlockerError.blockerStrengthStrict
         }
-    }
-    
-    func stopBlocker() {
-        ContentBlocker.shared.stop()
     }
 }

@@ -32,26 +32,11 @@ class PomodoroStageState {
     }
     
     func sendNotification(completed fromStage: PomodoroStage, transitioningTo toStage: PomodoroStage) {
-        let content = UNMutableNotificationContent()
-            
-        if fromStage.isBreak()
-        {
-            content.title = "Break is over"
-            content.subtitle = "Return to work for \(toStage.getDurationInMinutes()) minutes"
+        if fromStage.isBreak() {
+            NotificationManager.main.sendSimpleNotification(title: "Break is over", subtitle: "Return to work for \(toStage.getDurationInMinutes()) minutes")
+        } else {
+            NotificationManager.main.sendSimpleNotification(title: "Completed session", subtitle: "Good job! Now it is time for a \(toStage.getDurationInMinutes()) minute break.")
         }
-        else
-        {
-            content.title = "Completed session"
-            content.subtitle = "Good job! Now it is time for a \(toStage.getDurationInMinutes()) minute break."
-        }
-        
-        content.sound = UNNotificationSound.default
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request)
     }
 }
 

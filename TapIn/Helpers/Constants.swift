@@ -25,4 +25,5 @@ struct IconKeys {
     
     // Launcher
     static let replace = "repeat"
+    static let pencil = "pencil"
 }

@@ -75,4 +75,15 @@ class UserDefaultsManager {
         }
     }
     
+    // enableNotifications
+    
+    var notificationsEnabled: Bool {
+        get {
+            defaults.bool(forKey: "notificationsEnabled")
+        }
+        set {
+            defaults.set(newValue, forKey: "notificationsEnabled")
+        }
+    }
+    
 }

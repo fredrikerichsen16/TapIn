@@ -14,11 +14,17 @@ class SidebarState: ObservableObject {
         self.setToken()
     }
     
-    // MARK: Normal
+    // MARK: Properties
     
     var realm: Realm {
         RealmManager.shared.realm
     }
+    
+    @Published var folders: Results<FolderDB>
+    
+    @Published var sidebarModel: SidebarModel = SidebarModel()
+    
+    // MARK: Init
     
     init() {
         let realm = RealmManager.shared.realm
@@ -27,17 +33,11 @@ class SidebarState: ObservableObject {
         self.setToken()
     }
     
-    // MARK: Sidebar
-    
-    @Published var folders: Results<FolderDB>
-    
-    @Published var sidebarModel: SidebarModel = SidebarModel()
-    
     // MARK: Token
     
     var token: NotificationToken? = nil
-
-    func setToken() {
+    
+    private func setToken() {
         self.token = folders.observe(keyPaths: [\FolderDB.workspaces], { [unowned self] (changes) in
             switch changes
             {

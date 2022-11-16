@@ -41,9 +41,6 @@ struct BlockerView: View {
             }
         }
         .padding()
-        .onAppear {
-            vm.fetch()
-        }
     }
     
     func add() {

@@ -23,18 +23,6 @@ struct SidebarButtonToWorkspace: View {
                 Button("Delete") {
                     sidebarState.delete(workspace: listItem)
                 }
-                
-                Button("Settings") {
-                    let settingsWindowSelectorName: String
-                    
-                    if #available(macOS 13.0, *) {
-                        settingsWindowSelectorName = "showSettingsWindow:"
-                    } else {
-                        settingsWindowSelectorName = "showPreferencesWindow:"
-                    }
-                    
-                    NSApp.sendAction(Selector((settingsWindowSelectorName)), to: nil, from: nil)
-                }
             },
             onSubmitChangeName: {(name) in
                 sidebarState.rename(listItem, name: name)

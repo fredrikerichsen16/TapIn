@@ -59,8 +59,6 @@ struct SidebarView: View {
         CoreSidebarButton(listItem: listItem, destination: {
             switch listItem.id
             {
-            case "home":
-                HomeView()
             case "statistics":
                 StatisticsView()
             default:

@@ -2,8 +2,17 @@ import Foundation
 import RealmSwift
 
 class LauncherState: ObservableObject {
+    
+    // MARK: Properties
+    
     public var realm: Realm
     private var workspace: WorkspaceDB
+    private var launcher: LauncherDB
+    
+    @Published var instances: [any BaseLauncherInstanceBehavior] = []
+    @Published var selectedInstance: ObjectId? = nil
+    
+    // MARK: Init
     
     init(workspace: WorkspaceDB) {
         self.workspace = workspace
@@ -15,7 +24,7 @@ class LauncherState: ObservableObject {
     // MARK: Observing realm
     
     var token: NotificationToken? = nil
-    func setToken() {
+    private func setToken() {
         self.token = workspace.launcher.launcherInstances.observe(keyPaths: [\LauncherInstanceDB.instantiated, \LauncherInstanceDB.appUrl, \LauncherInstanceDB.fileUrl, \LauncherInstanceDB.name], { [unowned self] (changes) in
             switch changes
             {
@@ -61,22 +70,6 @@ class LauncherState: ObservableObject {
         })
     }
     
-    var launcher: LauncherDB
-    @Published var instances: [any BaseLauncherInstanceBehavior] = []
-    @Published var selectedInstance: ObjectId? = nil
-    
-    // MARK: Other
-    
-    func openAll() {
-        for instance in instances
-        {
-            if instance.object.active, let openableInstance = instance as? Openable
-            {
-                openableInstance.open()
-            }
-        }
-    }
-    
     // MARK: CRUD
     
     func deleteInstance(by id: ObjectId) {
@@ -105,4 +98,17 @@ class LauncherState: ObservableObject {
             launcher.launcherInstances.append(newInstance)
         }
     }
+    
+    // MARK: Other
+    
+    func openAll() {
+        for instance in instances
+        {
+            if instance.object.active, let openableInstance = instance as? Openable
+            {
+                openableInstance.open()
+            }
+        }
+    }
+
 }
