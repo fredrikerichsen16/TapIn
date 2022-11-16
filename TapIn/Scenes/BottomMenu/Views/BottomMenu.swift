@@ -11,13 +11,13 @@ struct BottomMenu: View {
         {
             InactiveBottomMenu(activeWorkspace: activeWorkspaceVM.workspace)
                 .frame(maxWidth: .infinity, minHeight: height, idealHeight: height, maxHeight: height, alignment: .center)
-                .background(Color(r: 37, g: 37, b: 42, opacity: 1))
+                .background(Color("BottomMenuColor"))
         }
         else
         {
             ActiveBottomMenu()
                 .frame(maxWidth: .infinity, minHeight: height, idealHeight: height, maxHeight: height, alignment: .center)
-                .background(Color(r: 37, g: 37, b: 42, opacity: 1))
+                .background(Color("BottomMenuColor"))
         }
     }
 }

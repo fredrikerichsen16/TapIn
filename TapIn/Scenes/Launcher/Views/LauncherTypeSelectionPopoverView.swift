@@ -13,7 +13,7 @@ struct LauncherTypeSelectionPopoverView: View {
     @State private var launcherInstanceTypes: [RealmLauncherType] = [.app, .file, .folder, .website, .terminal]
 	
     var body: some View {
-        List {
+        VStack(alignment: .leading, spacing: 8) {
             ForEach(launcherInstanceTypes, id: \.self) { instanceType in
                 Button(action: {
                     createEmptyInstance(type: instanceType)
@@ -23,12 +23,12 @@ struct LauncherTypeSelectionPopoverView: View {
                 .buttonStyle(.plain)
             }
         }
-        .frame(width: 160, height: 165)
+        .padding(20)
 	}
 }
 
 //struct Popover_Previews: PreviewProvider {
 //    static var previews: some View {
-//		Popover()
+//        LauncherTypeSelectionPopoverView(showingPopover: .constant(true))
 //    }
 //}
