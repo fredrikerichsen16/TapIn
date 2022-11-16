@@ -57,8 +57,6 @@ struct FolderView: View {
                         .pickerStyle(.inline)
                     }
                     
-                    cascadingSettingsSection
-                    
                     Button("Save changes") {
                         folderState.onSubmit()
                     }
@@ -77,69 +75,6 @@ struct FolderView: View {
         return "\(blockerStrength.label): \(blockerStrength.getExplanation())"
     }
 }
-
-extension FolderView {
-    var cascadingSettingsSection: some View {
-        Section(content: {
-            // Pomodoro Start
-            Text("When you start the pomodoro session, automatically start the following ...")
-            
-            ForEach(Array(zip([1, 2, 3, 4], [WorkspaceTab.timetracking, WorkspaceTab.launcher, WorkspaceTab.blocker, WorkspaceTab.radio])), id: \.0) { _, tab in
-                Toggle(tab.label, isOn: Binding(
-                    get: { folderState.formInputs.pomodoroStartCascade.contains(tab) },
-                    set: { val,_ in
-                        if val {
-                            folderState.formInputs.pomodoroStartCascade.insert(tab)
-                        } else {
-                            folderState.formInputs.pomodoroStartCascade.remove(tab)
-                        }
-                    }
-                ))
-            }
-            
-            Text("When you pause the pomodoro session, automatically pause the following ...")
-            
-            ForEach(Array(zip([11, 12, 13], [WorkspaceTab.timetracking, WorkspaceTab.blocker, WorkspaceTab.radio])), id: \.0) { _, tab in
-                Toggle(tab.label, isOn: Binding(
-                    get: { folderState.formInputs.pomodoroPauseCascade.contains(tab) },
-                    set: { val,_ in
-                        if val {
-                            folderState.formInputs.pomodoroPauseCascade.insert(tab)
-                        } else {
-                            folderState.formInputs.pomodoroPauseCascade.remove(tab)
-                        }
-                    }
-                ))
-            }
-            
-            Text("When you stop the pomodoro session, automatically stop the following ...")
-            
-            ForEach(Array(zip([21, 22, 23], [WorkspaceTab.timetracking, WorkspaceTab.blocker, WorkspaceTab.radio])), id: \.0) { _, tab in
-                Toggle(tab.label, isOn: Binding(
-                    get: { folderState.formInputs.pomodoroEndCascade.contains(tab) },
-                    set: { val,_ in
-                        if val {
-                            folderState.formInputs.pomodoroEndCascade.insert(tab)
-                        } else {
-                            folderState.formInputs.pomodoroEndCascade.remove(tab)
-                        }
-                    }
-                ))
-            }
-        }, header: {
-            Text("Cascading Settings")
-            Text("When you start/pause/end a pomodoro session, you can automatically start or end other components, like the time tracker or content blocker")
-                .foregroundColor(.gray)
-        })
-    }
-}
-
-
-
-
-
-
-
 
 //struct FolderView_Previews: PreviewProvider {
 //    static var previews: some View {

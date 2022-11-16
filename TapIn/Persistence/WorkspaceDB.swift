@@ -19,9 +19,6 @@ final class WorkspaceDB: RealmObject {
     var blocker: BlockerDB!
     
     @Persisted
-    var timeTracker: TimeTrackerDB!
-    
-    @Persisted
     var launcher: LauncherDB!
     
     @Persisted
@@ -35,7 +32,6 @@ final class WorkspaceDB: RealmObject {
         self.name = name
         self.pomodoro = PomodoroDB()
         self.blocker = BlockerDB()
-        self.timeTracker = TimeTrackerDB()
         self.launcher = LauncherDB()
         self.note = NoteDB()
     }

@@ -58,12 +58,12 @@ struct RadioView: View {
     }
 }
 
-struct RadioView_Preview: PreviewProvider {
-    static var previews: some View {
-        let workspace = WorkspaceState.preview
-        
-        RadioView()
-            .environmentObject(workspace)
-            .environment(\.workspaceCoordinator, WorkspaceCoordinator.shared)
-    }
-}
+//struct RadioView_Preview: PreviewProvider {
+//    static var previews: some View {
+//        let workspace = WorkspaceState.preview
+//
+//        RadioView()
+//            .environmentObject(workspace)
+//            .environment(\.workspaceCoordinator, WorkspaceCoordinator.shared)
+//    }
+//}

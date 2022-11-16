@@ -26,6 +26,7 @@
 		3542DC3F2917E2BA00F7A9D8 /* StoreKitConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 3542DC3E2917E2BA00F7A9D8 /* StoreKitConfig.storekit */; };
 		3542DC462917E50500F7A9D8 /* SubscriptionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC452917E50500F7A9D8 /* SubscriptionSettingsView.swift */; };
 		354BDD30292190FA002AA4C1 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356FB74C29208A1500266E0B /* NetworkExtension.framework */; };
+		3565B4BD2923557B00A5AB8C /* ButtonWithPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3565B4BC2923557B00A5AB8C /* ButtonWithPopover.swift */; };
 		35693E5929157D5200F1966D /* FolderDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5829157D5200F1966D /* FolderDB.swift */; };
 		35693E5B2915851500F1966D /* SidebarButtonToFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5A2915851500F1966D /* SidebarButtonToFolder.swift */; };
 		35693E5D2915895900F1966D /* OutlineNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5C2915895900F1966D /* OutlineNode.swift */; };
@@ -63,7 +64,6 @@
 		35E000542911F49F009D284D /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000532911F49F009D284D /* RealmManager.swift */; };
 		35E000562911F4AB009D284D /* PomodoroDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000552911F4AB009D284D /* PomodoroDB.swift */; };
 		35E000582911F4B6009D284D /* BlockerDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000572911F4B6009D284D /* BlockerDB.swift */; };
-		35E0005A2911F4C6009D284D /* TimeTrackerDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000592911F4C6009D284D /* TimeTrackerDB.swift */; };
 		35E0005C2911F4D4009D284D /* LauncherInstanceDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0005B2911F4D4009D284D /* LauncherInstanceDB.swift */; };
 		35E0005E2911F4E5009D284D /* LauncherDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0005D2911F4E5009D284D /* LauncherDB.swift */; };
 		35E000602911F4F4009D284D /* SessionDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0005F2911F4F4009D284D /* SessionDB.swift */; };
@@ -71,10 +71,8 @@
 		35E000BB2911F531009D284D /* SidebarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0006B2911F531009D284D /* SidebarModel.swift */; };
 		35E000BD2911F531009D284D /* SidebarButtonToWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0006E2911F531009D284D /* SidebarButtonToWorkspace.swift */; };
 		35E000BF2911F531009D284D /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000702911F531009D284D /* SidebarView.swift */; };
-		35E000C12911F531009D284D /* TimeTrackerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000762911F531009D284D /* TimeTrackerView.swift */; };
 		35E000C22911F531009D284D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000772911F531009D284D /* SettingsView.swift */; };
 		35E000C42911F531009D284D /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000792911F531009D284D /* GeneralSettingsView.swift */; };
-		35E000C62911F531009D284D /* TimeTrackerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E0007D2911F531009D284D /* TimeTrackerState.swift */; };
 		35E000C72911F531009D284D /* LauncherState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000822911F531009D284D /* LauncherState.swift */; };
 		35E000C82911F531009D284D /* LauncherModelExtra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000842911F531009D284D /* LauncherModelExtra.swift */; };
 		35E000C92911F531009D284D /* LauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000862911F531009D284D /* LauncherView.swift */; };
@@ -178,6 +176,7 @@
 		3542DC3B2917C39300F7A9D8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3542DC3E2917E2BA00F7A9D8 /* StoreKitConfig.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKitConfig.storekit; sourceTree = "<group>"; };
 		3542DC452917E50500F7A9D8 /* SubscriptionSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSettingsView.swift; sourceTree = "<group>"; };
+		3565B4BC2923557B00A5AB8C /* ButtonWithPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithPopover.swift; sourceTree = "<group>"; };
 		35693E5829157D5200F1966D /* FolderDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDB.swift; sourceTree = "<group>"; };
 		35693E5A2915851500F1966D /* SidebarButtonToFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButtonToFolder.swift; sourceTree = "<group>"; };
 		35693E5C2915895900F1966D /* OutlineNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineNode.swift; sourceTree = "<group>"; };
@@ -219,7 +218,6 @@
 		35E000532911F49F009D284D /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		35E000552911F4AB009D284D /* PomodoroDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroDB.swift; sourceTree = "<group>"; };
 		35E000572911F4B6009D284D /* BlockerDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerDB.swift; sourceTree = "<group>"; };
-		35E000592911F4C6009D284D /* TimeTrackerDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerDB.swift; sourceTree = "<group>"; };
 		35E0005B2911F4D4009D284D /* LauncherInstanceDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherInstanceDB.swift; sourceTree = "<group>"; };
 		35E0005D2911F4E5009D284D /* LauncherDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherDB.swift; sourceTree = "<group>"; };
 		35E0005F2911F4F4009D284D /* SessionDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDB.swift; sourceTree = "<group>"; };
@@ -227,10 +225,8 @@
 		35E0006B2911F531009D284D /* SidebarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarModel.swift; sourceTree = "<group>"; };
 		35E0006E2911F531009D284D /* SidebarButtonToWorkspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarButtonToWorkspace.swift; sourceTree = "<group>"; };
 		35E000702911F531009D284D /* SidebarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
-		35E000762911F531009D284D /* TimeTrackerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTrackerView.swift; sourceTree = "<group>"; };
 		35E000772911F531009D284D /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		35E000792911F531009D284D /* GeneralSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
-		35E0007D2911F531009D284D /* TimeTrackerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeTrackerState.swift; sourceTree = "<group>"; };
 		35E000822911F531009D284D /* LauncherState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherState.swift; sourceTree = "<group>"; };
 		35E000842911F531009D284D /* LauncherModelExtra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherModelExtra.swift; sourceTree = "<group>"; };
 		35E000862911F531009D284D /* LauncherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherView.swift; sourceTree = "<group>"; };
@@ -388,6 +384,14 @@
 				35E9CE492919B6EA0019DDE8 /* SubscriptionManager.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		3565B4BA2923556C00A5AB8C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3565B4BC2923557B00A5AB8C /* ButtonWithPopover.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		35693E602915DA8A00F1966D /* Other */ = {
@@ -553,6 +557,7 @@
 		35E0002E2911EF05009D284D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3565B4BA2923556C00A5AB8C /* Components */,
 				35E0004A2911F446009D284D /* SwiftUI */,
 				35E0004F2911F47D009D284D /* SwiftUIHelpers.swift */,
 				3542DC3B2917C39300F7A9D8 /* Constants.swift */,
@@ -569,7 +574,6 @@
 				35E000552911F4AB009D284D /* PomodoroDB.swift */,
 				35E000512911F493009D284D /* WorkspaceDB.swift */,
 				35E000572911F4B6009D284D /* BlockerDB.swift */,
-				35E000592911F4C6009D284D /* TimeTrackerDB.swift */,
 				35E0005B2911F4D4009D284D /* LauncherInstanceDB.swift */,
 				35E0005D2911F4E5009D284D /* LauncherDB.swift */,
 				35E0005F2911F4F4009D284D /* SessionDB.swift */,
@@ -606,7 +610,6 @@
 				35AD05F72912EB6D00837016 /* Notes */,
 				35E000662911F531009D284D /* Sidebar */,
 				35E000722911F531009D284D /* Preferences */,
-				35E0007B2911F531009D284D /* TimeTracker */,
 				35E000802911F531009D284D /* Launcher */,
 				35E0008D2911F531009D284D /* Radio */,
 				35E000952911F531009D284D /* Workspace */,
@@ -685,39 +688,6 @@
 				35E000772911F531009D284D /* SettingsView.swift */,
 				35E000792911F531009D284D /* GeneralSettingsView.swift */,
 				35A1AAAC29147C2C00B8158D /* SidebarSettingsView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		35E0007B2911F531009D284D /* TimeTracker */ = {
-			isa = PBXGroup;
-			children = (
-				35E0007C2911F531009D284D /* ViewModels */,
-				35E0007E2911F531009D284D /* Models */,
-				35E0007F2911F531009D284D /* Views */,
-			);
-			path = TimeTracker;
-			sourceTree = "<group>";
-		};
-		35E0007C2911F531009D284D /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				35E0007D2911F531009D284D /* TimeTrackerState.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		35E0007E2911F531009D284D /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		35E0007F2911F531009D284D /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				35E000762911F531009D284D /* TimeTrackerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1264,7 +1234,6 @@
 				35E000DF2911F531009D284D /* PomodoroState.swift in Sources */,
 				35E000D72911F531009D284D /* BlockerState.swift in Sources */,
 				35F3D57B291B82AD0050E3A9 /* SessionHistoryCharter.swift in Sources */,
-				35E000C12911F531009D284D /* TimeTrackerView.swift in Sources */,
 				35E000402911F400009D284D /* Color+.swift in Sources */,
 				35E000BD2911F531009D284D /* SidebarButtonToWorkspace.swift in Sources */,
 				35E000502911F47D009D284D /* SwiftUIHelpers.swift in Sources */,
@@ -1307,6 +1276,7 @@
 				35693E6B291624C100F1966D /* FileLauncherModel.swift in Sources */,
 				35D366B22923036D004C262A /* BlockerError.swift in Sources */,
 				35AD06072913280D00837016 /* SessionHistoryQueryer.swift in Sources */,
+				3565B4BD2923557B00A5AB8C /* ButtonWithPopover.swift in Sources */,
 				35E000D92911F531009D284D /* RadioBottomMenuController.swift in Sources */,
 				35E000DB2911F531009D284D /* Direction.swift in Sources */,
 				35E0004E2911F46B009D284D /* SidebarListItem.swift in Sources */,
@@ -1321,9 +1291,7 @@
 				35E000462911F41F009D284D /* String+.swift in Sources */,
 				35E000C42911F531009D284D /* GeneralSettingsView.swift in Sources */,
 				35E000562911F4AB009D284D /* PomodoroDB.swift in Sources */,
-				35E000C62911F531009D284D /* TimeTrackerState.swift in Sources */,
 				35E000422911F40C009D284D /* Collection+.swift in Sources */,
-				35E0005A2911F4C6009D284D /* TimeTrackerDB.swift in Sources */,
 				3597800529141729004FBDAE /* SessionModel.swift in Sources */,
 				35F3D573291B58E90050E3A9 /* UserDefaultsManager.swift in Sources */,
 				DC0280BE4E4B255B10AA9422 /* StatisticsState.swift in Sources */,

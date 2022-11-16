@@ -11,10 +11,6 @@ struct WorkspaceView: View {
                     .tabItem { tabItemBuilder(tab: .pomodoro) }
                     .tag(WorkspaceTab.pomodoro)
                 
-                TimeTrackerView()
-                    .tabItem { tabItemBuilder(tab: .timetracking) }
-                    .tag(WorkspaceTab.timetracking)
-                
                 LauncherView()
                     .tabItem({ tabItemBuilder(tab: .launcher) })
                     .tag(WorkspaceTab.launcher)

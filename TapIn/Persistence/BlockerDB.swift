@@ -12,13 +12,21 @@ final class BlockerDB: EmbeddedObject {
     var workspace: LinkingObjects<WorkspaceDB>
 }
 
-enum BlockerStrength: String, PersistableEnum {
-    case lenient // can be turned off
+enum BlockerStrength: Int, Comparable, PersistableEnum {
+    case lenient // can be turned off any time
     case normal  // can be turned off by closing app
     case extreme // can be turned off by restarting computer
     
     var label: String {
-        return self.rawValue.capitalized
+        switch self
+        {
+        case .lenient:
+            return "Lenient"
+        case .normal:
+            return "Normal"
+        case .extreme:
+            return "Extreme"
+        }
     }
     
     func getExplanation() -> String {
@@ -27,9 +35,9 @@ enum BlockerStrength: String, PersistableEnum {
         case .lenient:
             return "Blocker can be deactivated in the app while a work session is in progress."
         case .normal:
-            return "Blocker can be deactivated by closing the app or ending the work session."
+            return "Blocker can be deactivated by closing the app or ending the work session prematurely."
         case .extreme:
-            return "Blocker can only be deactivated by restarting computer."
+            return "Blocker cannot be deactivated (even by restarting computer) until session is completed (or, in the event that you close the app, that much time has elapsed)"
         }
     }
 }

@@ -18,9 +18,6 @@ class FolderDB: RealmObject {
     
     @Persisted
     var blockerSettings: BlockerSettings!
-    
-    @Persisted
-    var cascadingSettings: CascadingSettings!
 
     convenience init(name: String = "New Folder") {
         self.init()
@@ -28,7 +25,6 @@ class FolderDB: RealmObject {
         self.pomodoroSettings = PomodoroSettings()
         self.launcherSettings = LauncherSettings()
         self.blockerSettings = BlockerSettings()
-        self.cascadingSettings = CascadingSettings()
     }
     
     func updateSettings(with formInputs: FormInputs) {
@@ -41,18 +37,6 @@ class FolderDB: RealmObject {
         blockerSettings.blockerStrength = formInputs.blockerStrength
         
         launcherSettings.hideOnLaunch = formInputs.hideOnLaunch
-        
-        let set = MutableSet<WorkspaceTab>()
-        set.insert(objectsIn: formInputs.pomodoroStartCascade)
-        cascadingSettings.pomodoroStartCascade = set
-        
-        set.removeAll()
-        set.insert(objectsIn: formInputs.pomodoroPauseCascade)
-        cascadingSettings.pomodoroPauseCascade = set
-        
-        set.removeAll()
-        set.insert(objectsIn: formInputs.pomodoroEndCascade)
-        cascadingSettings.pomodoroEndCascade = set
         
         // Update child workspaces
         for workspace in workspaces
@@ -91,23 +75,4 @@ class LauncherSettings: EmbeddedObject {
 class BlockerSettings: EmbeddedObject {
     @Persisted
     var blockerStrength: BlockerStrength = BlockerStrength.normal
-}
-
-class CascadingSettings: EmbeddedObject {
-    @Persisted
-    var pomodoroStartCascade = MutableSet<WorkspaceTab>()
-    
-    @Persisted
-    var pomodoroPauseCascade = MutableSet<WorkspaceTab>()
-    
-    @Persisted
-    var pomodoroEndCascade = MutableSet<WorkspaceTab>()
-    
-    override init() {
-        super.init()
-        
-        pomodoroStartCascade.insert(objectsIn: [WorkspaceTab.timetracking, WorkspaceTab.blocker])
-        pomodoroPauseCascade.insert(objectsIn: [WorkspaceTab.timetracking])
-        pomodoroEndCascade.insert(objectsIn: [WorkspaceTab.timetracking, WorkspaceTab.blocker])
-    }
 }

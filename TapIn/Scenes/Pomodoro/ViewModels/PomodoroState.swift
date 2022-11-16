@@ -9,6 +9,7 @@ final class PomodoroState: WorkspaceComponentViewModel {
     
     @Published var timerMode: TimerMode = .initial {
         didSet {
+            // TODO: Make paused = paused while running, and initial = initial OR in a break (for the purposes of status of app)
             sendStatusChangeNotification(status: timerMode)
             isActive = timerMode != .initial
         }

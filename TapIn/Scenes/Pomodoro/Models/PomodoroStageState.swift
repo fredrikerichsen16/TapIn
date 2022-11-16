@@ -101,6 +101,7 @@ final class PomodoroShortBreakStageState: PomodoroStageState {
         if withNotification == false {
             return
         }
+        
         let transitioningToStage: PomodoroStage = pomodoroState.stageState.stage
         sendNotification(completed: completedStage, transitioningTo: transitioningToStage)
     }
@@ -121,6 +122,7 @@ final class PomodoroLongBreakStageState: PomodoroStageState {
         if withNotification == false {
             return
         }
+        
         let transitioningToStage: PomodoroStage = pomodoroState.stageState.stage
         sendNotification(completed: completedStage, transitioningTo: transitioningToStage)
     }

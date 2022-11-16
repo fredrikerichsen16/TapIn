@@ -15,8 +15,6 @@ struct ActiveBottomMenu: View {
             case .pomodoro:
                 PomodoroBottomMenuController()
                     .padding()
-            case .timetracking:
-                TimeTrackerBottomMenuController()
             case .launcher:
                 LauncherBottomMenuController()
                     .padding()
@@ -49,33 +47,6 @@ struct ActiveBottomMenu: View {
             Button(action: { workspace.bottomMenuTab.next() }, label: {
                 Image(systemName: IconKeys.right)
             })
-        }
-    }
-}
-
-struct TimeTrackerBottomMenuController: View {
-    @EnvironmentObject var workspace: WorkspaceState
-    
-    var vm: TimeTrackerState {
-        workspace.timeTracker
-    }
-    
-    var body: some View {
-        BottomMenuWorkspaceTabController(workspaceTab: .timetracking) {
-            HStack {
-                if vm.isActive
-                {
-                    Button("Stop Time Tracker") {
-                        vm.endSession()
-                    }
-                }
-                else
-                {
-                    Button("Start Time Tracker") {
-                        vm.startSession()
-                    }
-                }
-            }
         }
     }
 }
@@ -135,7 +106,6 @@ struct PomodoroBottomMenuController: View {
 }
 
 struct PomodoroButtonView: View {
-    @Environment(\.workspaceCoordinator) var workspaceCoordinator
     @EnvironmentObject var workspace: WorkspaceState
     let button: PomodoroButton
     
@@ -143,11 +113,68 @@ struct PomodoroButtonView: View {
         switch button
         {
         case .start, .resume:
-            Button(button.rawValue, action: workspace.pomodoro.startSession)
+            ButtonWithPopover(buttonTitle: button.rawValue, buttonAction: workspace.pomodoro.startSession, popover: {
+                CascadingSettingsPopoverView(tabs: [.launcher, .blocker, .radio], keypath: \.cascadingStart, action: "start")
+            })
         case .pause:
-            Button(button.rawValue, action: workspace.pomodoro.pauseSession)
-        case .cancel, .skip:
+            ButtonWithPopover(buttonTitle: button.rawValue, buttonAction: workspace.pomodoro.pauseSession, popover: {
+                CascadingSettingsPopoverView(tabs: [.blocker, .radio], keypath: \.cascadingPause, action: "pause")
+            })
+        case .cancel:
+            ButtonWithPopover(buttonTitle: button.rawValue, buttonAction: workspace.pomodoro.cancelSession, popover: {
+                CascadingSettingsPopoverView(tabs: [.blocker, .radio], keypath: \.cascadingStop, action: "stop")
+            })
+        case .skip:
             Button(button.rawValue, action: workspace.pomodoro.cancelSession)
+        }
+    }
+}
+
+struct CascadingSettingsPopoverView: View {
+    @State private var tabs: [WorkspaceTab]
+    @State private var selectedTabs: Set<WorkspaceTab> = Set()
+    private let keypath: WritableKeyPath<UserDefaultsManager, Set<WorkspaceTab>>
+    private let action: String
+    
+    init(tabs: [WorkspaceTab], keypath: WritableKeyPath<UserDefaultsManager, Set<WorkspaceTab>>, action: String) {
+        self.tabs = tabs
+        self.keypath = keypath
+        self.action = action
+    }
+    
+    func insert(_ tab: WorkspaceTab) {
+        selectedTabs.insert(tab)
+        UserDefaultsManager.main[keyPath: keypath] = Set(Array(selectedTabs))
+    }
+    
+    func remove(_ tab: WorkspaceTab) {
+        selectedTabs.remove(tab)
+        UserDefaultsManager.main[keyPath: keypath] = Set(Array(selectedTabs))
+    }
+    
+    func contains(_ tab: WorkspaceTab) -> Bool {
+        selectedTabs.contains(tab)
+    }
+
+    var body: some View {
+        Form {
+            Section("Cascading Options") {
+                Text("Also \(action) the following ...")
+                
+                ForEach(tabs, id: \.self) { tab in
+                    Toggle(tab.label, isOn: Binding(
+                        get: { contains(tab) },
+                        set: { val,_ in
+                            val ? insert(tab) : remove(tab)
+                        }
+                    ))
+                }
+            }
+        }
+        .formStyle(.grouped)
+        .frame(width: 240)
+        .onAppear {
+            selectedTabs = UserDefaultsManager.main[keyPath: keypath]
         }
     }
 }
@@ -170,3 +197,5 @@ struct BottomMenuWorkspaceTabController<Content>: View where Content: View {
         }
     }
 }
+
+       

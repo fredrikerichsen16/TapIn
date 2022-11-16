@@ -3,7 +3,6 @@ import RealmSwift
 
 enum WorkspaceTab: String, PersistableEnum {
     case pomodoro
-    case timetracking
     case launcher
     case blocker
     case radio
@@ -13,8 +12,6 @@ enum WorkspaceTab: String, PersistableEnum {
         switch self
         {
         case .pomodoro:
-            self = .timetracking
-        case .timetracking:
             self = .launcher
         case .launcher:
             self = .blocker
@@ -35,10 +32,8 @@ enum WorkspaceTab: String, PersistableEnum {
         {
         case .pomodoro:
             self = .radio
-        case .timetracking:
-            self = .pomodoro
         case .launcher:
-            self = .timetracking
+            self = .pomodoro
         case .blocker:
             self = .launcher
         case .radio:
@@ -60,8 +55,6 @@ enum WorkspaceTab: String, PersistableEnum {
         {
         case .pomodoro:
             return "Pomodoro"
-        case .timetracking:
-            return "Time Tracker"
         case .launcher:
             return "Launcher"
         case .blocker:

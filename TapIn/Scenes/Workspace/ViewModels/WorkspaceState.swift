@@ -8,7 +8,6 @@ class WorkspaceState: ObservableObject {
         let workspaceState = WorkspaceState(workspace: workspace)
         
         workspaceState.pomodoro.realm = realm
-        workspaceState.timeTracker.realm = realm
         workspaceState.radio.realm = realm
         workspaceState.launcher.realm = realm
         workspaceState.blocker.realm = realm
@@ -25,17 +24,12 @@ class WorkspaceState: ObservableObject {
         self.workspace = workspace
         self.workspaceTab = UserDefaultsManager.main.getLatestTab(for: workspace) ?? .pomodoro
         self.pomodoro = PomodoroState(workspace: workspace)
-        self.timeTracker = TimeTrackerState(workspace: workspace)
         self.radio = RadioState(workspace: workspace)
         self.launcher = LauncherState(workspace: workspace)
         self.blocker = BlockerState(workspace: workspace)
         self.componentActivityTracker = ComponentActivityTracker(workspace: self)
         
         pomodoro.objectWillChange.sink { [weak self] (_) in
-            self?.objectWillChange.send()
-        }.store(in: &cancellable)
-        
-        timeTracker.objectWillChange.sink { [weak self] (_) in
             self?.objectWillChange.send()
         }.store(in: &cancellable)
         
@@ -57,7 +51,6 @@ class WorkspaceState: ObservableObject {
     // MARK: Tab states
     
     @Published var pomodoro: PomodoroState
-    @Published var timeTracker: TimeTrackerState
     @Published var radio: RadioState
     @Published var launcher: LauncherState
     @Published var blocker: BlockerState

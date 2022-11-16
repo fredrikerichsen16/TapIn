@@ -16,11 +16,6 @@ class ComponentActivityTracker {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(componentDidChangeStatus(_:)),
                                                name: NSNotification.Name.componentDidChangeStatus,
-                                               object: workspace.timeTracker)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(componentDidChangeStatus(_:)),
-                                               name: NSNotification.Name.componentDidChangeStatus,
                                                object: workspace.radio)
         
         NotificationCenter.default.addObserver(self,
@@ -33,7 +28,6 @@ class ComponentActivityTracker {
     
     var componentsStatus: [WorkspaceTab: TimerMode] = [
         .pomodoro: .initial,
-        .timetracking: .initial,
         .blocker: .initial,
         .radio: .initial
     ]
@@ -78,33 +72,43 @@ class ComponentActivityTracker {
     // MARK: Cascading
     
     func cascade(status: TimerMode) {
-        guard let folder = workspace.workspace.getFolder() else {
-            return
-        }
-        
         var components: Set<WorkspaceTab> = Set()
         
         switch status
         {
         case .initial:
-            components = Set(folder.cascadingSettings.pomodoroEndCascade)
+            components = UserDefaultsManager.main.cascadingStop
         case .paused:
-            components = Set(folder.cascadingSettings.pomodoroPauseCascade)
+            components = UserDefaultsManager.main.cascadingPause
         case .running:
-            components = Set(folder.cascadingSettings.pomodoroStartCascade)
+            components = UserDefaultsManager.main.cascadingStart
         }
         
         switch status
         {
-        case .initial, .paused:
+        case .initial:
             for component in components
             {
                 switch component
                 {
-                case .timetracking:
-                    workspace.timeTracker.endSession()
                 case .blocker:
                     workspace.blocker.endSession()
+                case .radio:
+                    workspace.radio.endSession()
+                default:
+                    break
+                }
+            }
+        case .paused:
+            for component in components
+            {
+                switch component
+                {
+                case .blocker:
+                    let blockerStrength = workspace.workspace.blocker.blockerStrength
+                    if blockerStrength == .lenient {
+                        workspace.blocker.endSession()
+                    }
                 case .radio:
                     workspace.radio.endSession()
                 default:
@@ -116,8 +120,6 @@ class ComponentActivityTracker {
             {
                 switch component
                 {
-                case .timetracking:
-                    workspace.timeTracker.startSession()
                 case .blocker:
                     workspace.blocker.startSession()
                 case .radio:
@@ -139,6 +141,6 @@ class ComponentActivityTracker {
     }
     
     func sessionIsInProgress() -> Bool {
-        return componentsStatus[.pomodoro] != .initial || componentsStatus[.timetracking] == .running
+        return componentsStatus[.pomodoro] != .initial
     }
 }
