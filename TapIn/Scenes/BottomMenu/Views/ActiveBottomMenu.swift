@@ -64,9 +64,12 @@ struct BlockerBottomMenuController: View {
                 if vm.isActive
                 {
                     Button("Stop Blocking") {
-                        vm.requestEndSession(sessionIsInProgress: workspace.componentActivityTracker.sessionIsInProgress())
+                        vm.endSession()
                     }
                     .errorAlert(error: $workspace.blocker.error)
+                    .onAppear {
+                        vm.error = nil
+                    }
                 }
                 else
                 {

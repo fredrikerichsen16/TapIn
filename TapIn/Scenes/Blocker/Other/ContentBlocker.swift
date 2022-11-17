@@ -40,10 +40,14 @@ class ContentBlocker: NSObject {
     }()
     
     private var blacklist: [String] = []
+    private var terminateAtTime: TimeInterval = 0
     
-    func start(withBlacklist blacklist: [String]) {
+    func config(blacklist: [String], terminateAtDate: Date?) {
         self.blacklist = blacklist
-        
+        self.terminateAtTime = terminateAtDate?.timeIntervalSince1970 ?? Date(timeIntervalSinceNow: 60 * 60 * 6).timeIntervalSince1970
+    }
+    
+    func start() {
         status = .indeterminate
         
         guard !NEFilterManager.shared().isEnabled else {
@@ -89,6 +93,7 @@ class ContentBlocker: NSObject {
                 providerConfiguration.organization = "Tapin"
                 providerConfiguration.vendorConfiguration = [:]
                 providerConfiguration.vendorConfiguration!["blacklist"] = self.blacklist
+                providerConfiguration.vendorConfiguration!["terminateAtTime"] = self.terminateAtTime
                 providerConfiguration.filterDataProviderBundleIdentifier = self.extensionBundle.bundleIdentifier
             
             filterManager.providerConfiguration = providerConfiguration

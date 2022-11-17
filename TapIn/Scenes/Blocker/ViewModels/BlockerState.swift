@@ -6,6 +6,7 @@ class BlockerState: WorkspaceComponentViewModel {
     // MARK: Properties
     
     var blocker: BlockerDB
+    var componentsStatus: ComponentsStatus
     
     @Published var blacklist: [BlacklistedWebsite] = []
     
@@ -15,8 +16,9 @@ class BlockerState: WorkspaceComponentViewModel {
     
     // MARK: Init
 
-    init(workspace: WorkspaceDB) {
+    init(workspace: WorkspaceDB, componentsStatus: ComponentsStatus) {
         self.blocker = workspace.blocker
+        self.componentsStatus = componentsStatus
         super.init(workspace: workspace, realm: RealmManager.shared.realm, component: .blocker)
         setToken()
     }
@@ -94,23 +96,44 @@ class BlockerState: WorkspaceComponentViewModel {
     
     // MARK: Start and end session
     
+    var terminateAtDate: Date? = nil
+    
     override func startSession() {
         super.startSession()
         
-        ContentBlocker.shared.start(withBlacklist: Array(blocker.blacklistedWebsites))
+        terminateAtDate = nil
+        
+        if componentsStatus.isActive(.pomodoro) && blocker.blockerStrength == .extreme
+        {
+            let pomodoroDurationInSeconds = Double(workspace.pomodoro.pomodoroDuration * 60)
+            terminateAtDate = Date(timeIntervalSinceNow: pomodoroDurationInSeconds)
+        }
+        
+        ContentBlocker.shared.config(blacklist: Array(blocker.blacklistedWebsites), terminateAtDate: terminateAtDate)
+        ContentBlocker.shared.start()
     }
 
     override func endSession() {
-        super.endSession()
+        guard isActive else {
+            return
+        }
+        
+        let pomodoroIsActive = componentsStatus.isActive(.pomodoro)
+        
+        if blocker.blockerStrength == .extreme, let date = terminateAtDate, date > Date.now
+        {
+            error = BlockerError.extremeStrictnessError(date)
+            return
+        }
+        else if blocker.blockerStrength == .normal && pomodoroIsActive
+        {
+            error = BlockerError.normalStrictnessError
+            return
+        }
+        
+        isActive = false
+        sendStatusChangeNotification(status: false)
         
         ContentBlocker.shared.stop()
-    }
-    
-    func requestEndSession(sessionIsInProgress: Bool) {
-        if blocker.blockerStrength == .lenient || sessionIsInProgress == false {
-            endSession()
-        } else {
-            error = BlockerError.blockerStrengthStrict
-        }
     }
 }

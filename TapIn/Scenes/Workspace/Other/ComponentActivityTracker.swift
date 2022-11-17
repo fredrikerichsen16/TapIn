@@ -1,36 +1,60 @@
 import Foundation
 
-class ComponentActivityTracker {
-    var coordinator: WorkspaceCoordinator = WorkspaceCoordinator.shared
-    let workspace: WorkspaceState
-    
-    init(workspace: WorkspaceState) {
-        self.workspace = workspace
-        
-        // Observing
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(componentDidChangeStatus(_:)),
-                                               name: NSNotification.Name.componentDidChangeStatus,
-                                               object: workspace.pomodoro)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(componentDidChangeStatus(_:)),
-                                               name: NSNotification.Name.componentDidChangeStatus,
-                                               object: workspace.radio)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(componentDidChangeStatus(_:)),
-                                               name: NSNotification.Name.componentDidChangeStatus,
-                                               object: workspace.blocker)
-    }
-    
-    // MARK: Keeping Track of which workspaces are active and doing cascading launch
-    
+class ComponentsStatus {
     var componentsStatus: [WorkspaceTab: WorkspaceComponentStatus] = [
         .pomodoro: false,
         .blocker: false,
         .radio: false
     ]
+    
+    func set(component: WorkspaceTab, status: WorkspaceComponentStatus) {
+        componentsStatus[component] = status
+    }
+    
+    func anyActive() -> Bool {
+        return componentsStatus.values.contains(where: { $0 == true })
+    }
+    
+    func isActive(_ component: WorkspaceTab) -> Bool {
+        return componentsStatus[component] ?? false
+    }
+    
+    func printStatus() {
+        for (key, value) in componentsStatus
+        {
+            print("\(key.label): \(value)")
+        }
+    }
+}
+
+class ComponentActivityTracker {
+    var coordinator: WorkspaceCoordinator = WorkspaceCoordinator.shared
+    let workspace: WorkspaceState
+    
+    init(workspace: WorkspaceState, componentsStatus: ComponentsStatus) {
+        self.workspace = workspace
+        self.componentsStatus = componentsStatus
+        
+        // Observing
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(componentDidChangeStatus(_:)),
+                                               name: NSNotification.Name.ComponentDidChangeStatus,
+                                               object: workspace.pomodoro)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(componentDidChangeStatus(_:)),
+                                               name: NSNotification.Name.ComponentDidChangeStatus,
+                                               object: workspace.radio)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(componentDidChangeStatus(_:)),
+                                               name: NSNotification.Name.ComponentDidChangeStatus,
+                                               object: workspace.blocker)
+    }
+    
+    // MARK: Keeping Track of which workspaces are active and doing cascading launch
+    
+    var componentsStatus: ComponentsStatus
     
     private func getStatusAndComponent(from notification: Notification) -> (WorkspaceTab, WorkspaceComponentStatus)? {
         guard let userInfo = notification.userInfo as? [String: Any] else {
@@ -51,14 +75,11 @@ class ComponentActivityTracker {
             return
         }
         
-        componentsStatus[component] = status
+        componentsStatus.set(component: component, status: status)
         
-        if componentsStatus.values.contains(where: { $0 == true })
-        {
+        if componentsStatus.anyActive() {
             coordinator.setActive(workspace: workspace)
-        }
-        else
-        {
+        } else {
             coordinator.disactivate()
         }
         
@@ -95,13 +116,10 @@ class ComponentActivityTracker {
     }
     
     func printStatus() {
-        for (key, value) in componentsStatus
-        {
-            print("\(key.label): \(value)")
-        }
+        componentsStatus.printStatus()
     }
     
     func sessionIsInProgress() -> Bool {
-        return componentsStatus[.pomodoro] == true
+        return componentsStatus.isActive(.pomodoro)
     }
 }

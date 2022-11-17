@@ -1,6 +1,27 @@
 import Foundation
 import Combine
 
+struct WorkspaceComponentFactory {
+    let workspace: WorkspaceDB
+    let componentsStatus: ComponentsStatus
+    
+    func createPomodoroState() -> PomodoroState {
+        return PomodoroState(workspace: workspace)
+    }
+    
+    func createRadioState() -> RadioState {
+        return RadioState(workspace: workspace)
+    }
+    
+    func createLauncherState() -> LauncherState {
+        return LauncherState(workspace: workspace)
+    }
+    
+    func createBlockerState() -> BlockerState {
+        return BlockerState(workspace: workspace, componentsStatus: componentsStatus)
+    }
+}
+
 class WorkspaceState: ObservableObject {
     static var preview: WorkspaceState = {
         let realm = RealmManager.preview.realm
@@ -23,11 +44,16 @@ class WorkspaceState: ObservableObject {
     init(workspace: WorkspaceDB) {
         self.workspace = workspace
         self.workspaceTab = UserDefaultsManager.main.getLatestTab(for: workspace) ?? .pomodoro
-        self.pomodoro = PomodoroState(workspace: workspace)
-        self.radio = RadioState(workspace: workspace)
-        self.launcher = LauncherState(workspace: workspace)
-        self.blocker = BlockerState(workspace: workspace)
-        self.componentActivityTracker = ComponentActivityTracker(workspace: self)
+        
+        let componentsStatus = ComponentsStatus()
+        let factory = WorkspaceComponentFactory(workspace: workspace, componentsStatus: componentsStatus)
+        
+        self.pomodoro = factory.createPomodoroState()
+        self.radio = factory.createRadioState()
+        self.launcher = factory.createLauncherState()
+        self.blocker = factory.createBlockerState()
+        
+        self.componentActivityTracker = ComponentActivityTracker(workspace: self, componentsStatus: componentsStatus)
         
         pomodoro.objectWillChange.sink { [weak self] (_) in
             self?.objectWillChange.send()

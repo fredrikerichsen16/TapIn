@@ -15,7 +15,7 @@ class WorkspaceComponentViewModel: ObservableObject {
     // MARK: Start and end session
     
     func sendStatusChangeNotification(status: WorkspaceComponentStatus) {
-        NotificationCenter.default.post(name: Notification.Name.componentDidChangeStatus, object: self, userInfo: ["status": status, "component": component])
+        NotificationCenter.default.post(name: Notification.Name.ComponentDidChangeStatus, object: self, userInfo: ["status": status, "component": component])
     }
     
     @Published var isActive = false
