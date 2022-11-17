@@ -48,7 +48,7 @@ class SessionHistoryQueryer {
         let month = interval.granularity == .month ? interval.month : nil
         let week = interval.granularity == .week ? interval.week : nil
         
-        let interval = self.getDateInterval(year: year, month: month, week: week)
+        let interval = getDateInterval(year: year, month: month, week: week)
         
         self.sessions = sessions.filter({ session in
             session.completedTime > interval.start && session.completedTime < interval.end
@@ -65,7 +65,7 @@ class SessionHistoryQueryer {
     // MARK: Workspace Filtering
     
     func inWorkspace(workspace: WorkspaceDB) {
-        self.sessions = sessions.filter({ session in
+        sessions = sessions.filter({ session in
             session.workspace.first == workspace
         })
     }
@@ -73,11 +73,11 @@ class SessionHistoryQueryer {
     // MARK: Getting results
     
     func getNumSessionsCompleted() -> Int {
-        return self.sessions.count
+        return sessions.count
     }
     
     func getWorkDuration() -> Double {
-        return self.sessions.reduce(0, { $0 + $1.duration })
+        return sessions.reduce(0, { $0 + $1.duration })
     }
     
     func getWorkDurationFormatted() -> String {
@@ -95,6 +95,6 @@ class SessionHistoryQueryer {
     }
     
     func getCharter(for interval: IntervalHolder) -> SessionHistoryCharter {
-        return SessionHistoryCharter(sessions: Array(sessions), workspaces: Array(workspaces), interval: interval)
+        return SessionHistoryCharter(sessions: sessions, workspaces: workspaces, interval: interval)
     }
 }

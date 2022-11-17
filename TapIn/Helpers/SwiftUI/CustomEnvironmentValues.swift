@@ -15,7 +15,7 @@ private struct SubscriptionManagerKey: EnvironmentKey {
 // ListItem
 
 private struct ListItemKey: EnvironmentKey {
-    static let defaultValue: SidebarListItem = SidebarListItem(id: "", name: "", icon: "")
+    static let defaultValue: SidebarListItem = SidebarListItem(name: "", icon: "")
 }
 
 extension EnvironmentValues {

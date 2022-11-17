@@ -37,7 +37,7 @@ struct DynamicSidebarButton<ContentA, ContentB>: View where ContentA: View, Cont
                 Label(listItem.name, systemImage: listItem.icon)
                     .padding(.vertical, 5)
             }
-            .tag(listItem.id)
+            .tag(listItem)
             .contextMenu {
                 contextMenu
                 

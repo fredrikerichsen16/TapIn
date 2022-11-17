@@ -60,7 +60,7 @@ struct FolderView: View {
 
                     Button("Save changes") {
                         let name = folderState.formInputs.folderName
-                        sidebarState.sidebarModel.update(listItem, name: name)
+                        sidebarState.update(listItem, name: name)
                         folderState.onSubmit()
                     }
                 }

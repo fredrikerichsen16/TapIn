@@ -1,19 +1,16 @@
 import Foundation
 import RealmSwift
 
-struct SidebarListItem: Identifiable, Hashable {
-    let id: String
+struct SidebarListItem: Hashable {
+    var objectId: ObjectId?
     var name: String
     let icon: String
     var folder: Bool
+    var expanded: Bool = false
     var children: [SidebarListItem]?
     
-    var objectId: ObjectId? {
-        return try? ObjectId(string: id)
-    }
-    
-    init(id: String, name: String, icon: String) {
-        self.id = id
+    init(name: String, icon: String) {
+        self.objectId = nil
         self.name = name
         self.icon = icon
         self.folder = false
@@ -21,7 +18,7 @@ struct SidebarListItem: Identifiable, Hashable {
     }
     
     init(folder: FolderDB, children: [SidebarListItem]? = nil) {
-        self.id = folder.id.stringValue
+        self.objectId = folder.id
         self.name = folder.name
         self.icon = IconKeys.folder
         self.folder = true
@@ -29,7 +26,7 @@ struct SidebarListItem: Identifiable, Hashable {
     }
     
     init(workspace: WorkspaceDB) {
-        self.id = workspace.id.stringValue
+        self.objectId = workspace.id
         self.name = workspace.name
         self.icon = IconKeys.pointRight
         self.folder = false

@@ -31,6 +31,9 @@ class StatisticsState: ObservableObject {
         submit()
     }
 
+    @Published var chartData = [ChartData]()
+    @Published var listData = [ListData]()
+    
     func submit() {
         let frozen = realm.freeze()
         
@@ -46,7 +49,4 @@ class StatisticsState: ObservableObject {
             }
         }
     }
-    
-    @Published var chartData = [ChartData]()
-    @Published var listData = [ListData]()
 }

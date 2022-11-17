@@ -25,8 +25,8 @@ struct ChartData: Identifiable {
     let seconds: Double
     let workspace: WorkspaceStatisticsModel
     
-    var hours: Double {
-        return seconds / 3600
+    var minutes: Double {
+        return seconds / 60
     }
     
     init(intervalLabel: String, seconds: Double, workspace: WorkspaceDB) {
@@ -44,8 +44,8 @@ struct ListData: Identifiable {
     
     var formattedDuration: String {
         let formatter = DateComponentsFormatter()
-            formatter.unitsStyle = .abbreviated
-            formatter.allowedUnits = [.minute, .hour]
+            formatter.unitsStyle = .full
+            formatter.allowedUnits = [.minute, .hour, .day]
         
         return formatter.string(from: seconds)!
     }

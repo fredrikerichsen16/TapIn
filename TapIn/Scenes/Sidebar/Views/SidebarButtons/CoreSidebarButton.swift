@@ -14,6 +14,6 @@ struct CoreSidebarButton<Content>: View where Content: View {
             Label(listItem.name, systemImage: listItem.icon)
                 .padding(.vertical, 5)
         }
-        .tag(listItem.id)
+        .tag(listItem)
     }
 }

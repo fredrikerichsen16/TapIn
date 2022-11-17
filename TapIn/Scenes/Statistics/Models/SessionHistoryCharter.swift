@@ -18,14 +18,14 @@ class SessionHistoryCharter {
 
         for (_, subdivision) in subdivisions.enumerated() {
             let sessionsInInterval = sessions.filter({ session in
-                session.completedTime > subdivision.interval.start && session.completedTime < subdivision.interval.end && session.workspace.first != nil
+                session.completedTime > subdivision.interval.start && session.completedTime < subdivision.interval.end
             })
 
             for workspace in workspaces
             {
                 let sessionsInWorkspace = sessionsInInterval.filter({ $0.workspace.first == workspace })
 
-                let total = sessionsInWorkspace.reduce(0, { current, session in
+                let total = sessionsInWorkspace.reduce(0, { (current, session) in
                     current + session.duration
                 })
                 
@@ -34,9 +34,6 @@ class SessionHistoryCharter {
                 data.append(ChartData(intervalLabel: subdivision.label, seconds: average, workspace: workspace))
             }
         }
-        
-        // Filter out folders that have insignificant amount of work done
-        data = data.filter({ $0.seconds > 120 })
 
         return data
     }
@@ -69,16 +66,15 @@ class SessionHistoryCharter {
                     current + session.duration
                 })
                 
-                let average = total / Double(interval.numberOfDays)
-                
-                workspacesData.append(ListData(seconds: average, name: workspace.name))
+                workspacesData.append(ListData(seconds: total, name: workspace.name))
             }
             
             let total = workspacesData.reduce(0, { $0 + $1.seconds })
-            let average = total / Double(workspacesData.count)
             
-            data.append(ListData(seconds: average, name: folder.name, children: workspacesData))
+            data.append(ListData(seconds: total, name: folder.name, children: workspacesData))
         }
+        
+        data = data.sorted(by: { $0.seconds > $1.seconds })
 
         return data
     }

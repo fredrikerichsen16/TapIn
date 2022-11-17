@@ -5,24 +5,17 @@ struct SidebarView: View {
     
     var body: some View {
         NavigationView {
-            List(selection: $sidebarState.sidebarModel.selection) {
+            List(selection: $sidebarState.selection) {
                 Section(header: Text("Pages")) {
-                    ForEach(sidebarState.sidebarModel.pageLinks) { listItem in
+                    ForEach(sidebarState.pageLinks, id: \.self) { listItem in
                         sidebarButtonToPage(listItem: listItem)
                     }
                 }
                 .collapsible(false)
                 
                 Section(header: Text("Workspaces")) {
-                    OutlineGroup(sidebarState.sidebarModel.outline, id: \.hashValue, children: \.children) { listItem in
-                        if listItem.folder == true
-                        {
-                            SidebarButtonToFolder(listItem: listItem)
-                        }
-                        else
-                        {
-                            SidebarButtonToWorkspace(listItem: listItem)
-                        }
+                    ForEach(sidebarState.outline, id: \.self) { folder in
+                        FolderDisclosureGroup(folder: folder)
                     }
                 }
                 .collapsible(false)
@@ -58,9 +51,9 @@ struct SidebarView: View {
     @ViewBuilder
     private func sidebarButtonToPage(listItem: SidebarListItem) -> some View {
         CoreSidebarButton(listItem: listItem, destination: {
-            switch listItem.id
+            switch listItem.name
             {
-            case "statistics":
+            case "Statistics":
                 StatisticsView()
             default:
                 EmptyView()

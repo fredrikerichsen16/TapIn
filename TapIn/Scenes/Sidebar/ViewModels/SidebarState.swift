@@ -10,7 +10,6 @@ class SidebarState: ObservableObject {
     init(preview: Bool) {
         let realm = RealmManager.preview.realm
         self.folders = realm.objects(FolderDB.self)
-        self.sidebarModel = SidebarModel()
         self.setToken()
     }
     
@@ -22,15 +21,28 @@ class SidebarState: ObservableObject {
     
     @Published var folders: Results<FolderDB>
     
-    @Published var sidebarModel: SidebarModel = SidebarModel()
+    @Published var pageLinks: [SidebarListItem] = [SidebarListItem(name: "Statistics", icon: IconKeys.piechart)]
+    
+    @Published var outline = [SidebarListItem]()
+    
+    @Published var selection: SidebarListItem? = nil
     
     // MARK: Init
     
     init() {
         let realm = RealmManager.shared.realm
         self.folders = realm.objects(FolderDB.self)
-        self.sidebarModel = SidebarModel()
         self.setToken()
+    }
+    
+    func setOutline(with folders: [FolderDB]) {
+        let listItems = folders.map({ folder in
+            SidebarListItem(folder: folder, children: folder.workspaces.map({ workspace in
+                SidebarListItem(workspace: workspace)
+            }))
+        })
+        
+        self.outline = listItems
     }
     
     // MARK: Token
@@ -42,16 +54,52 @@ class SidebarState: ObservableObject {
             switch changes
             {
             case .initial(let folders):
-                sidebarModel.setOutline(with: Array(folders))
+                setOutline(with: Array(folders))
             case .update(let folders, deletions: _, insertions: _, modifications: _):
-                sidebarModel.setOutline(with: Array(folders))
+                setOutline(with: Array(folders))
             default:
                 break
             }
         })
     }
+    
+    // MARK: CRUD Model
+    
+    func update(_ listItem: SidebarListItem, name: String) {
+        for (i, folder) in outline.enumerated()
+        {
+            if folder.objectId == listItem.objectId {
+                outline[i].name = name
+                return
+            }
+
+            if let children = folder.children
+            {
+                for (j, workspace) in children.enumerated()
+                {
+                    if workspace.objectId == listItem.objectId {
+                        outline[i].children![j].name = name
+
+                        return
+                    }
+                }
+            }
+        }
+    }
+    
+    func selectListItem(by workspace: WorkspaceDB) {
+        for folder in outline
+        {
+            for workspaceListItem in folder.children ?? []
+            {
+                if workspaceListItem.objectId == workspace.id {
+                    selection = workspaceListItem
+                }
+            }
+        }
+    }
         
-    // MARK: CRUD
+    // MARK: CRUD Realm
     
     func addFolder() {
         try? realm.write {
@@ -61,7 +109,7 @@ class SidebarState: ObservableObject {
     }
     
     func rename(_ listItem: SidebarListItem, name: String) {
-        sidebarModel.update(listItem, name: name)
+        update(listItem, name: name)
         
         if let folder = listItem.getFolder()?.thaw()
         {
@@ -92,7 +140,7 @@ class SidebarState: ObservableObject {
               let folder = listItem.getFolder()
         else { return }
         
-        sidebarModel.selection = nil
+        selection = nil
         
         try? realm.write
         {

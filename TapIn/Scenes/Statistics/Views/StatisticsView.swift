@@ -46,10 +46,37 @@ struct StatisticsView: View {
             Text(vm.interval.label)
                 .font(.headline)
             
-            if showChart {
-                chart
-            } else {
-                table
+            if #available(macOS 13.0, *)
+            {
+                if showChart
+                {
+                    if vm.chartData.isEmpty
+                    {
+                        Spacer()
+                        Text("No work was logged in this period.")
+                    }
+                    else
+                    {
+                        chart
+                    }
+                }
+                else
+                {
+                    if vm.listData.isEmpty
+                    {
+                        Spacer()
+                        Text("No work was logged in this period.")
+                    }
+                    else
+                    {
+                        table
+                    }
+                }
+            }
+            else
+            {
+                Spacer()
+                Text("Chart is only supported by MacOS Ventura (13.0) and later.")
             }
             
             Spacer()
@@ -66,7 +93,7 @@ struct StatisticsView: View {
         Chart(vm.chartData) { data in
             BarMark(
                 x: .value("Time", data.intervalLabel),
-                y: .value("Minutes", data.hours)
+                y: .value("Minutes", data.minutes)
             )
             .foregroundStyle(by: .value("Workspace", data.workspace.name))
             .cornerRadius(2)
@@ -75,34 +102,26 @@ struct StatisticsView: View {
             Text("Period")
         }
         .chartYAxisLabel(position: .trailing, alignment: .center) {
-            Text("Average hours worked per day")
+            Text("Average minutes worked per day")
         }
     }
     
     var table: some View {
-        VStack {
-            ForEach(vm.listData) { data in
-                HStack {
-                    Text(data.name)
-                    Spacer()
-                    Text(data.formattedDuration)
-                }
-                .padding()
-                .background(Color.gray)
-                
-                if let children = data.children
-                {
-                    VStack {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Total time worked in this period by folder and workspace")
+                .font(.system(size: 20))
+        
+            ScrollView(showsIndicators: false) {
+                ForEach(vm.listData) { data in
+                    Spacer().frame(height: 30)
+                    
+                    TotalTimeWorkedBoxComponent(folder: true, data: data)
+                    
+                    if let children = data.children
+                    {
                         ForEach(children) { child in
-                            HStack {
-                                Text(child.name)
-                                Spacer()
-                                Text(child.formattedDuration)
-                            }
-                            .padding()
-                            .background(Color.blue)
+                            TotalTimeWorkedBoxComponent(folder: false, data: child)
                         }
-                        .offset(x: 20)
                     }
                 }
             }
