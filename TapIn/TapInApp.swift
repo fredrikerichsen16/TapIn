@@ -35,43 +35,4 @@ struct TapinApp: SwiftUI.App {
         }
         .windowStyle(.hiddenTitleBar)
     }
-    
-//    @StateObject var menuBarState = MenuBarState()
 }
-
-// MARK: MenuBarExtra
-//
-//extension TapinApp {
-//    var menuBarExtra: some Scene {
-//        MenuBarExtra(content: {
-//            Button("One") {
-//                NotificationCenter.default.post(name: Notification.Name("GoToWorkspace"), object: self)
-//            }
-//            .keyboardShortcut("1")
-//
-//            Button("Two") {
-//                menuBarState.pomodoroRemainingTime = "10:00"
-//            }
-//            .keyboardShortcut("2")
-//
-//            Button(menuBarState.pomodoroRemainingTime) {
-//                print("three")
-//            }
-//            .keyboardShortcut("3")
-//
-//            Divider()
-//
-//            Button("Quit") {
-//                NSApplication.shared.terminate(nil)
-//            }
-//            .keyboardShortcut("q")
-//        }, label: {
-//            Text("TapIn")
-//        })
-//        .menuBarExtraStyle(.menu)
-//    }
-//}
-//
-//class MenuBarState: ObservableObject {
-//    @Published var pomodoroRemainingTime = "25:00"
-//}
