@@ -8,19 +8,18 @@ struct TotalTimeWorkedBoxComponent: View {
     var body: some View {
         HStack {
             Image(systemName: folder ? IconKeys.folder : IconKeys.pointRight)
-                .foregroundColor(Color.blue)
+                .foregroundColor(.blue)
+            Spacer().frame(width: 15)
             Text(data.name)
             Spacer()
             Text(data.formattedDuration)
         }
-        .font(.system(size: 16))
+        .font(.system(size: 18))
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 30)
         .padding(.vertical, 20)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .inset(by: 2)
-                .stroke(.secondary, lineWidth: 2)
+        .background(
+            RoundedRectangle(cornerRadius: 10).fill(.ultraThickMaterial)
         )
     }
     
