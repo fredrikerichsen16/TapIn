@@ -1,10 +1,9 @@
 import SwiftUI
-import UserNotifications
 
 struct GeneralSettingsView: View {
-    @AppStorage("colorScheme") private var colorScheme = "dark"
-    @AppStorage("displayToolbarWidget") private var displayToolbarWidget = true
-    @AppStorage("notificationsEnabled") private var notificationsEnabled = false
+    @AppStorage(AppStorageKey.colorScheme) private var colorScheme = "dark"
+    @AppStorage(AppStorageKey.displayToolbarWidget) private var displayToolbarWidget = true
+    @AppStorage(AppStorageKey.notificationsEnabled) private var notificationsEnabled = false
     
     var body: some View {
         Form {

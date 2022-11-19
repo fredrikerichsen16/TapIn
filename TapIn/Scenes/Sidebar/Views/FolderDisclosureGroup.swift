@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct FolderDisclosureGroup: View {
-    @State private var isExpanded = false
+    @State private var isExpanded: Bool = false
     let folder: SidebarListItem
     
     var body: some View {
@@ -19,6 +19,16 @@ struct FolderDisclosureGroup: View {
                 SidebarButtonToFolder(listItem: folder)
             }
         )
+        .onChange(of: isExpanded, perform: { value in
+            if let objectId = folder.objectId {
+                UserDefaultsManager.main.setFolderIsExpanded(folderId: objectId.stringValue, value: value)
+            }
+        })
+        .onAppear {
+            if let objectId = folder.objectId {
+                isExpanded = UserDefaultsManager.main.getFolderIsExpanded(folderId: objectId.stringValue)
+            }
+        }
     }
 }
 

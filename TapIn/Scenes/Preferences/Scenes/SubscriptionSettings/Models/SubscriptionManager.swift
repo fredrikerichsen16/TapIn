@@ -29,7 +29,7 @@ class SubscriptionManager {
         return .none
     }
     
-    let productIdentifiers = Set([SubscriptionID.monthly, SubscriptionID.yearly])
+    let productIdentifiers = Set([SubscriptionProduct.monthly.rawValue, SubscriptionProduct.yearly.rawValue])
     var products: [Product] = []
     var currentSubscription = SubscriptionProduct.none
 }

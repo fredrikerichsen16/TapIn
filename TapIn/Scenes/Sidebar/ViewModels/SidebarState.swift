@@ -36,11 +36,13 @@ class SidebarState: ObservableObject {
     }
     
     func setOutline(with folders: [FolderDB]) {
-        let listItems = folders.map({ folder in
-            SidebarListItem(folder: folder, children: folder.workspaces.map({ workspace in
-                SidebarListItem(workspace: workspace)
-            }))
-        })
+        let listItems = folders
+            .map({ folder in
+                SidebarListItem(folder: folder, children: folder.workspaces
+                    .map({ workspace in
+                        SidebarListItem(workspace: workspace)
+                    }))
+            })
         
         self.outline = listItems
     }

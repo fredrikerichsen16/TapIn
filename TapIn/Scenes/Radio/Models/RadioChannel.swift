@@ -8,8 +8,8 @@ enum RadioError: Error {
 
 struct RadioSong {
     let file: String
-    let title: String = "Song title"
-    let singers: [String] = ["Beethoven"]
+    let title: String
+    let singers: [String]
     
     func getAudioPlayer(with radioChannelKey: String) throws -> AVAudioPlayer {
         let filePath = "RadioChannels/\(radioChannelKey)/\(file)"
@@ -19,6 +19,12 @@ struct RadioSong {
         }
         
         return try AVAudioPlayer(data: data)
+    }
+    
+    init(file: String, title: String = "Title", singer: String = "Artist") {
+        self.file = file
+        self.title = title
+        self.singers = [singer]
     }
 }
 

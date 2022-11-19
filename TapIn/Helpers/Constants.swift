@@ -27,3 +27,17 @@ struct IconKeys {
     static let replace = "repeat"
     static let pencil = "pencil"
 }
+
+struct AppStorageKey {
+    static let subscribed = "subscribed"
+    
+    static let cascadingOptions = "cascadingOptions"
+    
+    static let radioChannelIndex = "radioChannelIndex"
+    
+    static let notificationsEnabled = "notificationsEnabled"
+    
+    static let colorScheme = "colorScheme"
+    
+    static let displayToolbarWidget = "displayToolbarWidget"
+}

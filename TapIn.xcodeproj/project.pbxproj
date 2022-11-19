@@ -13,6 +13,7 @@
 		351C42F42920A99400B6A843 /* FilterDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C42F32920A99400B6A843 /* FilterDataProvider.swift */; };
 		351C42F62920A99400B6A843 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C42F52920A99400B6A843 /* main.swift */; };
 		351C42FB2920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 351C42F02920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		353FC188292623CB00C74571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E000052911EEF3009D284D /* Assets.xcassets */; };
 		3542DC2829172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC2729172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift */; };
 		3542DC2A2917568C00F7A9D8 /* DefaultAppSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC292917568C00F7A9D8 /* DefaultAppSelectorView.swift */; };
 		3542DC2D291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC2C291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift */; };
@@ -25,7 +26,6 @@
 		3542DC3C2917C39300F7A9D8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC3B2917C39300F7A9D8 /* Constants.swift */; };
 		3542DC3F2917E2BA00F7A9D8 /* StoreKitConfig.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 3542DC3E2917E2BA00F7A9D8 /* StoreKitConfig.storekit */; };
 		3542DC462917E50500F7A9D8 /* SubscriptionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC452917E50500F7A9D8 /* SubscriptionSettingsView.swift */; };
-		354A59B52924A2FE0034B2E0 /* WorkspaceComponentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354A59B42924A2FE0034B2E0 /* WorkspaceComponentStatus.swift */; };
 		354BDD30292190FA002AA4C1 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356FB74C29208A1500266E0B /* NetworkExtension.framework */; };
 		3565B4BD2923557B00A5AB8C /* ButtonWithPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3565B4BC2923557B00A5AB8C /* ButtonWithPopover.swift */; };
 		35693E5929157D5200F1966D /* FolderDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E5829157D5200F1966D /* FolderDB.swift */; };
@@ -39,6 +39,13 @@
 		35693E732916261A00F1966D /* FolderLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35693E722916261A00F1966D /* FolderLauncher.swift */; };
 		356E7F682925CEA700E81C67 /* TotalTimeWorkedBoxComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E7F672925CEA700E81C67 /* TotalTimeWorkedBoxComponent.swift */; };
 		356E7F6A2925D76A00E81C67 /* FolderDisclosureGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E7F692925D76A00E81C67 /* FolderDisclosureGroup.swift */; };
+		356E7F6D2926164E00E81C67 /* WorkspaceComponentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E7F6C2926164E00E81C67 /* WorkspaceComponentStatus.swift */; };
+		356E7F702926169200E81C67 /* BlockerBottomMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E7F6F2926169200E81C67 /* BlockerBottomMenuController.swift */; };
+		356E7F73292616AF00E81C67 /* LauncherBottomMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E7F72292616AF00E81C67 /* LauncherBottomMenuController.swift */; };
+		356E7F75292616CA00E81C67 /* PomodoroBottomMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E7F74292616CA00E81C67 /* PomodoroBottomMenuController.swift */; };
+		356E7F772926170900E81C67 /* PomodoroButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E7F762926170900E81C67 /* PomodoroButtonView.swift */; };
+		356E7F792926171F00E81C67 /* CascadingSettingsPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E7F782926171F00E81C67 /* CascadingSettingsPopoverView.swift */; };
+		356E7F7B2926175800E81C67 /* BottomMenuWorkspaceTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E7F7A2926175800E81C67 /* BottomMenuWorkspaceTabController.swift */; };
 		356FB763292099D900266E0B /* ContentBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356FB762292099D900266E0B /* ContentBlocker.swift */; };
 		359780032913FB44004FBDAE /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359780022913FB44004FBDAE /* StatisticsView.swift */; };
 		3597800529141729004FBDAE /* SessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597800429141729004FBDAE /* SessionModel.swift */; };
@@ -175,7 +182,6 @@
 		3542DC3B2917C39300F7A9D8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3542DC3E2917E2BA00F7A9D8 /* StoreKitConfig.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKitConfig.storekit; sourceTree = "<group>"; };
 		3542DC452917E50500F7A9D8 /* SubscriptionSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionSettingsView.swift; sourceTree = "<group>"; };
-		354A59B42924A2FE0034B2E0 /* WorkspaceComponentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WorkspaceComponentStatus.swift; path = TapIn/Helpers/Components/WorkspaceComponentStatus.swift; sourceTree = SOURCE_ROOT; };
 		3565B4BC2923557B00A5AB8C /* ButtonWithPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithPopover.swift; sourceTree = "<group>"; };
 		35693E5829157D5200F1966D /* FolderDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDB.swift; sourceTree = "<group>"; };
 		35693E5A2915851500F1966D /* SidebarButtonToFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButtonToFolder.swift; sourceTree = "<group>"; };
@@ -188,6 +194,13 @@
 		35693E722916261A00F1966D /* FolderLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderLauncher.swift; sourceTree = "<group>"; };
 		356E7F672925CEA700E81C67 /* TotalTimeWorkedBoxComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTimeWorkedBoxComponent.swift; sourceTree = "<group>"; };
 		356E7F692925D76A00E81C67 /* FolderDisclosureGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDisclosureGroup.swift; sourceTree = "<group>"; };
+		356E7F6C2926164E00E81C67 /* WorkspaceComponentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceComponentStatus.swift; sourceTree = "<group>"; };
+		356E7F6F2926169200E81C67 /* BlockerBottomMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerBottomMenuController.swift; sourceTree = "<group>"; };
+		356E7F72292616AF00E81C67 /* LauncherBottomMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherBottomMenuController.swift; sourceTree = "<group>"; };
+		356E7F74292616CA00E81C67 /* PomodoroBottomMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroBottomMenuController.swift; sourceTree = "<group>"; };
+		356E7F762926170900E81C67 /* PomodoroButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroButtonView.swift; sourceTree = "<group>"; };
+		356E7F782926171F00E81C67 /* CascadingSettingsPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CascadingSettingsPopoverView.swift; sourceTree = "<group>"; };
+		356E7F7A2926175800E81C67 /* BottomMenuWorkspaceTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenuWorkspaceTabController.swift; sourceTree = "<group>"; };
 		356FB74C29208A1500266E0B /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		356FB762292099D900266E0B /* ContentBlocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlocker.swift; sourceTree = "<group>"; };
 		359780022913FB44004FBDAE /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
@@ -387,7 +400,6 @@
 		3565B4BA2923556C00A5AB8C /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				3565B4BC2923557B00A5AB8C /* ButtonWithPopover.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -409,6 +421,33 @@
 				35D366B12923036D004C262A /* BlockerError.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		356E7F6B292615F400E81C67 /* Pomodoro */ = {
+			isa = PBXGroup;
+			children = (
+				3565B4BC2923557B00A5AB8C /* ButtonWithPopover.swift */,
+				356E7F74292616CA00E81C67 /* PomodoroBottomMenuController.swift */,
+				356E7F762926170900E81C67 /* PomodoroButtonView.swift */,
+				356E7F782926171F00E81C67 /* CascadingSettingsPopoverView.swift */,
+			);
+			path = Pomodoro;
+			sourceTree = "<group>";
+		};
+		356E7F6E2926168300E81C67 /* Blocker */ = {
+			isa = PBXGroup;
+			children = (
+				356E7F6F2926169200E81C67 /* BlockerBottomMenuController.swift */,
+			);
+			path = Blocker;
+			sourceTree = "<group>";
+		};
+		356E7F71292616AA00E81C67 /* Launcher */ = {
+			isa = PBXGroup;
+			children = (
+				356E7F72292616AF00E81C67 /* LauncherBottomMenuController.swift */,
+			);
+			path = Launcher;
 			sourceTree = "<group>";
 		};
 		356FB74B29208A1500266E0B /* Frameworks */ = {
@@ -556,7 +595,6 @@
 		35E0002E2911EF05009D284D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				3565B4BA2923556C00A5AB8C /* Components */,
 				35E0004A2911F446009D284D /* SwiftUI */,
 				35E0004F2911F47D009D284D /* SwiftUIHelpers.swift */,
 				3542DC3B2917C39300F7A9D8 /* Constants.swift */,
@@ -594,6 +632,7 @@
 		35E0004A2911F446009D284D /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				3565B4BA2923556C00A5AB8C /* Components */,
 				35E0004B2911F44E009D284D /* ViewModifiers.swift */,
 				3542DC32291787D100F7A9D8 /* CustomEnvironmentValues.swift */,
 			);
@@ -789,7 +828,8 @@
 		35E000982911F531009D284D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				354A59B42924A2FE0034B2E0 /* WorkspaceComponentStatus.swift */,
+				35E000A82911F531009D284D /* WorkspaceTab.swift */,
+				356E7F6C2926164E00E81C67 /* WorkspaceComponentStatus.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -850,31 +890,25 @@
 		35E000A32911F531009D284D /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				35E000A42911F531009D284D /* MusicPlayer */,
+				356E7F71292616AA00E81C67 /* Launcher */,
+				356E7F6E2926168300E81C67 /* Blocker */,
+				356E7F6B292615F400E81C67 /* Pomodoro */,
+				35E000A42911F531009D284D /* Radio */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		35E000A42911F531009D284D /* MusicPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				35E000A52911F531009D284D /* Views */,
-			);
-			path = MusicPlayer;
-			sourceTree = "<group>";
-		};
-		35E000A52911F531009D284D /* Views */ = {
+		35E000A42911F531009D284D /* Radio */ = {
 			isa = PBXGroup;
 			children = (
 				35E000A62911F531009D284D /* RadioBottomMenuController.swift */,
 			);
-			path = Views;
+			path = Radio;
 			sourceTree = "<group>";
 		};
 		35E000A72911F531009D284D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				35E000A82911F531009D284D /* WorkspaceTab.swift */,
 				35E000A92911F531009D284D /* Direction.swift */,
 			);
 			path = Models;
@@ -886,6 +920,7 @@
 				35E000AB2911F531009D284D /* InactiveBottomMenu.swift */,
 				35E000AC2911F531009D284D /* BottomMenu.swift */,
 				35E000AD2911F531009D284D /* ActiveBottomMenu.swift */,
+				356E7F7A2926175800E81C67 /* BottomMenuWorkspaceTabController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1129,6 +1164,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				353FC188292623CB00C74571 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1216,10 +1252,12 @@
 				35E000602911F4F4009D284D /* SessionDB.swift in Sources */,
 				3542DC3A2917ACE500F7A9D8 /* ProgressCircleView.swift in Sources */,
 				35E000392911F382009D284D /* NuclearWasteland.swift in Sources */,
+				356E7F73292616AF00E81C67 /* LauncherBottomMenuController.swift in Sources */,
 				359780032913FB44004FBDAE /* StatisticsView.swift in Sources */,
 				35E000E32911F531009D284D /* PomodoroStage.swift in Sources */,
 				35E000D42911F531009D284D /* WorkspaceState.swift in Sources */,
 				35E000DF2911F531009D284D /* PomodoroState.swift in Sources */,
+				356E7F6D2926164E00E81C67 /* WorkspaceComponentStatus.swift in Sources */,
 				35E000D72911F531009D284D /* BlockerState.swift in Sources */,
 				356E7F6A2925D76A00E81C67 /* FolderDisclosureGroup.swift in Sources */,
 				35F3D57B291B82AD0050E3A9 /* SessionHistoryCharter.swift in Sources */,
@@ -1230,6 +1268,7 @@
 				35E000DC2911F531009D284D /* InactiveBottomMenu.swift in Sources */,
 				35E0004C2911F44E009D284D /* ViewModifiers.swift in Sources */,
 				356FB763292099D900266E0B /* ContentBlocker.swift in Sources */,
+				356E7F7B2926175800E81C67 /* BottomMenuWorkspaceTabController.swift in Sources */,
 				35E000542911F49F009D284D /* RealmManager.swift in Sources */,
 				35F3D56F291B37C40050E3A9 /* BottomBarLauncherSettings.swift in Sources */,
 				35E000022911EEF2009D284D /* TapInApp.swift in Sources */,
@@ -1244,6 +1283,7 @@
 				35F3D569291B0A900050E3A9 /* FolderState.swift in Sources */,
 				35E000D32911F531009D284D /* RadioView.swift in Sources */,
 				35E000BF2911F531009D284D /* SidebarView.swift in Sources */,
+				356E7F702926169200E81C67 /* BlockerBottomMenuController.swift in Sources */,
 				35693E6F2916251400F1966D /* WebLauncherModel.swift in Sources */,
 				3542DC33291787D100F7A9D8 /* CustomEnvironmentValues.swift in Sources */,
 				35E000582911F4B6009D284D /* BlockerDB.swift in Sources */,
@@ -1254,6 +1294,7 @@
 				35693E5929157D5200F1966D /* FolderDB.swift in Sources */,
 				35E9CE4329198A7B0019DDE8 /* SubscriptionSettingsState.swift in Sources */,
 				35E000E02911F531009D284D /* PomodoroStageState.swift in Sources */,
+				356E7F75292616CA00E81C67 /* PomodoroBottomMenuController.swift in Sources */,
 				35F3D571291B45C90050E3A9 /* NSNotification.Name+.swift in Sources */,
 				35E000C22911F531009D284D /* SettingsView.swift in Sources */,
 				35E000E52911F531009D284D /* PomodoroView.swift in Sources */,
@@ -1267,6 +1308,7 @@
 				3565B4BD2923557B00A5AB8C /* ButtonWithPopover.swift in Sources */,
 				35E000D92911F531009D284D /* RadioBottomMenuController.swift in Sources */,
 				35E000DB2911F531009D284D /* Direction.swift in Sources */,
+				356E7F792926171F00E81C67 /* CascadingSettingsPopoverView.swift in Sources */,
 				35E0004E2911F46B009D284D /* SidebarListItem.swift in Sources */,
 				35E000522911F493009D284D /* WorkspaceDB.swift in Sources */,
 				35693E622915DAD000F1966D /* WorkspaceComponentViewModel.swift in Sources */,
@@ -1276,13 +1318,13 @@
 				35F3D56B291B0D560050E3A9 /* FormInputs.swift in Sources */,
 				3542DC312917805200F7A9D8 /* EditableLauncherNameView.swift in Sources */,
 				35E000462911F41F009D284D /* String+.swift in Sources */,
-				354A59B52924A2FE0034B2E0 /* WorkspaceComponentStatus.swift in Sources */,
 				35E000C42911F531009D284D /* GeneralSettingsView.swift in Sources */,
 				35E000562911F4AB009D284D /* PomodoroDB.swift in Sources */,
 				35E000422911F40C009D284D /* Collection+.swift in Sources */,
 				3597800529141729004FBDAE /* SessionModel.swift in Sources */,
 				35F3D573291B58E90050E3A9 /* UserDefaultsManager.swift in Sources */,
 				DC0280BE4E4B255B10AA9422 /* StatisticsState.swift in Sources */,
+				356E7F772926170900E81C67 /* PomodoroButtonView.swift in Sources */,
 				3542DC3C2917C39300F7A9D8 /* Constants.swift in Sources */,
 				35F3D56D291B2A790050E3A9 /* ClampedFormatter.swift in Sources */,
 			);
@@ -1496,6 +1538,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = TapIn/TapIn.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1529,6 +1572,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = TapIn/TapIn.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;

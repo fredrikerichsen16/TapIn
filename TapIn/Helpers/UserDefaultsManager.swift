@@ -18,10 +18,10 @@ class UserDefaultsManager {
     
     var subscribed: Bool {
         get {
-            defaults.bool(forKey: "subscribed")
+            defaults.bool(forKey: AppStorageKey.subscribed)
         }
         set {
-            defaults.set(newValue, forKey: "subscribed")
+            defaults.set(newValue, forKey: AppStorageKey.subscribed)
         }
     }
     
@@ -45,13 +45,27 @@ class UserDefaultsManager {
         }
     }
     
+    // folderIsExpanded
+    
+    func getFolderIsExpanded(folderId id: String) -> Bool {
+        let key = "folderIsExpanded-\(id)"
+        
+        return defaults.bool(forKey: key)
+    }
+    
+    func setFolderIsExpanded(folderId id: String, value: Bool) {
+        let key = "folderIsExpanded-\(id)"
+        
+        defaults.set(value, forKey: key)
+    }
+    
     // last radio channel
     
     var radioChannelIndex: Int {
         get {
-            defaults.integer(forKey: "radioChannelIndex")
+            defaults.integer(forKey: AppStorageKey.radioChannelIndex)
         } set {
-            defaults.set(newValue, forKey: "radioChannelIndex")
+            defaults.set(newValue, forKey: AppStorageKey.radioChannelIndex)
         }
     }
     
@@ -59,7 +73,7 @@ class UserDefaultsManager {
     
     var cascadingOptions: Set<WorkspaceTab> {
         get {
-            guard let stringRepresentation = defaults.stringArray(forKey: "cascadingOptions") else {
+            guard let stringRepresentation = defaults.stringArray(forKey: AppStorageKey.cascadingOptions) else {
                 return Set()
             }
             
@@ -71,7 +85,7 @@ class UserDefaultsManager {
             let arrayRepresentation = Array(newValue)
             let stringArrayRepresentation = arrayRepresentation.map({ $0.rawValue })
             
-            defaults.set(stringArrayRepresentation, forKey: "cascadingOptions")
+            defaults.set(stringArrayRepresentation, forKey: AppStorageKey.cascadingOptions)
         }
     }
     
@@ -79,10 +93,10 @@ class UserDefaultsManager {
     
     var notificationsEnabled: Bool {
         get {
-            defaults.bool(forKey: "notificationsEnabled")
+            defaults.bool(forKey: AppStorageKey.notificationsEnabled)
         }
         set {
-            defaults.set(newValue, forKey: "notificationsEnabled")
+            defaults.set(newValue, forKey: AppStorageKey.notificationsEnabled)
         }
     }
     

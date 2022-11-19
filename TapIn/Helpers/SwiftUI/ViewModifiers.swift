@@ -7,7 +7,7 @@ extension View {
 }
 
 struct UserPreferenceColorScheme: ViewModifier {
-    @AppStorage("colorScheme") private var colorScheme = "dark"
+    @AppStorage(AppStorageKey.colorScheme) private var colorScheme = "dark"
     
     func body(content: Content) -> some View {
         if colorScheme == "system" {

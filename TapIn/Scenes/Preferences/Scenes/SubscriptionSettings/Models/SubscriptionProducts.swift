@@ -1,10 +1,4 @@
 import Foundation
-import StoreKit
-
-struct SubscriptionID {
-    static let monthly = "com.tapin.monthlysubscription"
-    static let yearly = "com.tapin.yearlysubscription"
-}
 
 enum SubscriptionProduct: String {
     case none = ""

@@ -3,7 +3,7 @@ import RealmSwift
 
 @main
 struct TapinApp: SwiftUI.App {
-    @AppStorage("subscribed") var subscribed: Bool = false
+    @AppStorage(AppStorageKey.subscribed) var subscribed: Bool = false
     
     var body: some Scene {
         WindowGroup {
