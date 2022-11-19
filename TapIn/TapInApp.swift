@@ -10,15 +10,8 @@ struct TapinApp: SwiftUI.App {
             SidebarView()
                 .environment(\.workspaceCoordinator, WorkspaceCoordinator.shared)
                 .environment(\.realm, RealmManager.shared.realm)
-                .environment(\.subscriptionManager, SubscriptionManager.shared)
                 .environmentObject(SidebarState())
                 .userPreferenceColorScheme()
-                .onAppear {
-                    Task {
-                        let subscription = await SubscriptionManager.shared.getSubscriptionState()
-                        self.subscribed = subscription.isPremium()
-                    }
-                }
                 .onReceive(NotificationCenter.default.publisher(for: NSApplication.willTerminateNotification), perform: { output in
                     WorkspaceCoordinator.shared.terminate()
                 })

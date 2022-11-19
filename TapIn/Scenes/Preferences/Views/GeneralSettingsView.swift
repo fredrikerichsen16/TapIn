@@ -2,7 +2,6 @@ import SwiftUI
 
 struct GeneralSettingsView: View {
     @AppStorage(AppStorageKey.colorScheme) private var colorScheme = "dark"
-    @AppStorage(AppStorageKey.displayToolbarWidget) private var displayToolbarWidget = true
     @AppStorage(AppStorageKey.notificationsEnabled) private var notificationsEnabled = false
     
     var body: some View {
@@ -12,9 +11,7 @@ struct GeneralSettingsView: View {
                 Text("Dark").tag("dark")
                 Text("Light").tag("light")
             }
-            
-            Toggle("Display toolbar icon", isOn: $displayToolbarWidget)
-            
+
             Toggle(isOn: $notificationsEnabled, label: {
                 Text("Enable notifications")
                 Text("TapIn only shows notifications during active use of the app. E.g. telling you that a session has ended.")

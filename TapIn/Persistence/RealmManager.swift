@@ -18,9 +18,7 @@ class RealmManager {
             }
             else
             {
-                let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-                self.realm = try Realm(configuration: config)
-//                addData()
+                self.realm = try Realm()
             }
         }
         catch
@@ -30,8 +28,8 @@ class RealmManager {
     }
     
     func addData() {
-        try! realm.write {
-            realm.deleteAll()
+//        try! realm.write {
+//            realm.deleteAll()
 //
 //            let workNames = ["University", "Coding"]
 //
@@ -62,6 +60,6 @@ class RealmManager {
 //
 //                folder.workspaces.append(ws)
 //            }
-        }
+//        }
     }
 }

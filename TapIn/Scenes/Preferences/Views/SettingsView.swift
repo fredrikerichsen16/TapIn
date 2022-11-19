@@ -14,12 +14,6 @@ struct SettingsView: View {
                     Label("General", systemImage: "gear")
                 }
                 .tag(Tabs.general)
-            
-            SubscriptionSettingsView()
-                .tabItem {
-                    Label("Subscription", systemImage: "heart.fill")
-                }
-                .tag(Tabs.subscription)
         }
         .frame(minWidth: 300, idealWidth: 450, maxWidth: 1200, minHeight: 300, idealHeight: 450, maxHeight: 1200, alignment: .center)
     }
