@@ -7,13 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3505D2462911FBA9008B7274 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3505D2452911FBA9008B7274 /* Realm */; };
-		3505D2482911FBA9008B7274 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3505D2472911FBA9008B7274 /* RealmSwift */; };
 		351C42F12920A99400B6A843 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356FB74C29208A1500266E0B /* NetworkExtension.framework */; };
 		351C42F42920A99400B6A843 /* FilterDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C42F32920A99400B6A843 /* FilterDataProvider.swift */; };
 		351C42F62920A99400B6A843 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C42F52920A99400B6A843 /* main.swift */; };
 		351C42FB2920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 351C42F02920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		353FC188292623CB00C74571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E000052911EEF3009D284D /* Assets.xcassets */; };
 		3542DC2829172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC2729172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift */; };
 		3542DC2A2917568C00F7A9D8 /* DefaultAppSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC292917568C00F7A9D8 /* DefaultAppSelectorView.swift */; };
 		3542DC2D291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC2C291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift */; };
@@ -47,6 +44,9 @@
 		356E7F792926171F00E81C67 /* CascadingSettingsPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E7F782926171F00E81C67 /* CascadingSettingsPopoverView.swift */; };
 		356E7F7B2926175800E81C67 /* BottomMenuWorkspaceTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356E7F7A2926175800E81C67 /* BottomMenuWorkspaceTabController.swift */; };
 		356FB763292099D900266E0B /* ContentBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356FB762292099D900266E0B /* ContentBlocker.swift */; };
+		35757BD1292A3A3E00CEBC19 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 35757BD0292A3A3E00CEBC19 /* Realm */; };
+		35757BD3292A3A3E00CEBC19 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 35757BD2292A3A3E00CEBC19 /* RealmSwift */; };
+		35757BD4292A456700CEBC19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E000052911EEF3009D284D /* Assets.xcassets */; };
 		359780032913FB44004FBDAE /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359780022913FB44004FBDAE /* StatisticsView.swift */; };
 		3597800529141729004FBDAE /* SessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597800429141729004FBDAE /* SessionModel.swift */; };
 		35AD05FD2912EDF800837016 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD05FC2912EDF800837016 /* NotesView.swift */; };
@@ -312,9 +312,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3505D2482911FBA9008B7274 /* RealmSwift in Frameworks */,
+				35757BD3292A3A3E00CEBC19 /* RealmSwift in Frameworks */,
+				35757BD1292A3A3E00CEBC19 /* Realm in Frameworks */,
 				354BDD30292190FA002AA4C1 /* NetworkExtension.framework in Frameworks */,
-				3505D2462911FBA9008B7274 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1102,8 +1102,8 @@
 			);
 			name = TapIn;
 			packageProductDependencies = (
-				3505D2452911FBA9008B7274 /* Realm */,
-				3505D2472911FBA9008B7274 /* RealmSwift */,
+				35757BD0292A3A3E00CEBC19 /* Realm */,
+				35757BD2292A3A3E00CEBC19 /* RealmSwift */,
 			);
 			productName = TapIn;
 			productReference = 35E0FFFE2911EEF2009D284D /* TapIn.app */;
@@ -1145,7 +1145,7 @@
 			);
 			mainGroup = 35E0FFF52911EEF2009D284D;
 			packageReferences = (
-				3505D2442911FBA9008B7274 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				35757BCF292A3A3E00CEBC19 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 35E0FFFF2911EEF2009D284D /* Products */;
 			projectDirPath = "";
@@ -1164,7 +1164,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				353FC188292623CB00C74571 /* Assets.xcassets in Resources */,
+				35757BD4292A456700CEBC19 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1356,11 +1356,9 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ContentFilterExtension/ContentFilterExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = S83364QYM6;
+				DEVELOPMENT_TEAM = S83364QYM6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ContentFilterExtension/Info.plist;
@@ -1376,7 +1374,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = tapin.TapIn.ContentFilterExtension;
 				PRODUCT_NAME = "$(inherited)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = TapInContentFilterExtensionProvisioningProfile;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1388,11 +1385,9 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = ContentFilterExtension/ContentFilterExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = S83364QYM6;
+				DEVELOPMENT_TEAM = S83364QYM6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ContentFilterExtension/Info.plist;
@@ -1408,7 +1403,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = tapin.TapIn.ContentFilterExtension;
 				PRODUCT_NAME = "$(inherited)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = TapInContentFilterExtensionProvisioningProfile;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1419,6 +1413,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1447,15 +1442,15 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1481,6 +1476,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1509,12 +1505,12 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1525,6 +1521,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
@@ -1544,19 +1541,21 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = YES;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"TapIn/Preview Content\"";
 				DEVELOPMENT_TEAM = S83364QYM6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TapIn/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "TapIn - pomodoro timer, website blocke and app launcher";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tapin.TapIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1578,19 +1577,21 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = YES;
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_ASSET_PATHS = "\"TapIn/Preview Content\"";
 				DEVELOPMENT_TEAM = S83364QYM6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TapIn/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "TapIn - pomodoro timer, website blocke and app launcher";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tapin.TapIn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1605,6 +1606,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -1625,6 +1627,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -1644,6 +1647,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -1662,6 +1666,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -1727,7 +1732,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3505D2442911FBA9008B7274 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+		35757BCF292A3A3E00CEBC19 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -1738,14 +1743,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3505D2452911FBA9008B7274 /* Realm */ = {
+		35757BD0292A3A3E00CEBC19 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3505D2442911FBA9008B7274 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 35757BCF292A3A3E00CEBC19 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
-		3505D2472911FBA9008B7274 /* RealmSwift */ = {
+		35757BD2292A3A3E00CEBC19 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3505D2442911FBA9008B7274 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 35757BCF292A3A3E00CEBC19 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
