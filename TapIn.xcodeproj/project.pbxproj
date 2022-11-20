@@ -11,7 +11,6 @@
 		351C42F42920A99400B6A843 /* FilterDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C42F32920A99400B6A843 /* FilterDataProvider.swift */; };
 		351C42F62920A99400B6A843 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C42F52920A99400B6A843 /* main.swift */; };
 		351C42FB2920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 351C42F02920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		353FC188292623CB00C74571 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E000052911EEF3009D284D /* Assets.xcassets */; };
 		3542DC2829172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC2729172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift */; };
 		3542DC2A2917568C00F7A9D8 /* DefaultAppSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC292917568C00F7A9D8 /* DefaultAppSelectorView.swift */; };
 		3542DC2D291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC2C291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift */; };
@@ -47,6 +46,7 @@
 		356FB763292099D900266E0B /* ContentBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356FB762292099D900266E0B /* ContentBlocker.swift */; };
 		35757BD1292A3A3E00CEBC19 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 35757BD0292A3A3E00CEBC19 /* Realm */; };
 		35757BD3292A3A3E00CEBC19 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 35757BD2292A3A3E00CEBC19 /* RealmSwift */; };
+		35757BD4292A456700CEBC19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E000052911EEF3009D284D /* Assets.xcassets */; };
 		359780032913FB44004FBDAE /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359780022913FB44004FBDAE /* StatisticsView.swift */; };
 		3597800529141729004FBDAE /* SessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597800429141729004FBDAE /* SessionModel.swift */; };
 		35AD05FD2912EDF800837016 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD05FC2912EDF800837016 /* NotesView.swift */; };
@@ -1164,7 +1164,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				353FC188292623CB00C74571 /* Assets.xcassets in Resources */,
+				35757BD4292A456700CEBC19 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1413,6 +1413,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1475,6 +1476,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1519,7 +1521,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
