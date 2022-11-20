@@ -62,10 +62,6 @@ final class LauncherInstanceDB: Object, ObjectKeyIdentifiable {
         self.type = type
         self.instantiated = false
         self.hideOnLaunch = hideOnLaunch
-        
-        if type == .terminal, let terminalApp = URL(string: "/Applications/Utilities/Terminal.app/") {
-            self.appUrl = terminalApp
-        }
     }
 }
 
@@ -74,7 +70,6 @@ enum RealmLauncherType: String, Equatable, PersistableEnum {
     case file
     case folder
     case website
-    case terminal
     
     var label: String {
         switch self {
@@ -86,8 +81,6 @@ enum RealmLauncherType: String, Equatable, PersistableEnum {
             return "Folder"
         case .website:
             return "Website"
-        case .terminal:
-            return "Terminal"
         }
     }
     
@@ -102,8 +95,6 @@ enum RealmLauncherType: String, Equatable, PersistableEnum {
             return "folder"
         case .website:
             return "link"
-        case .terminal:
-            return "terminal"
         }
     }
 }
