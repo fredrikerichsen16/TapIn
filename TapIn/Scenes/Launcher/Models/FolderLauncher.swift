@@ -110,6 +110,10 @@ struct InstantiatedFolderLauncher: BaseLauncherInstanceBehavior, FileSystemBased
             for url in appUrls as! [URL] {
                 URLs.append(url)
             }
+            
+            if let terminalApp = URL(string: "file:///System/Applications/Utilities/Terminal.app") {
+                URLs.append(terminalApp)
+            }
         }
         
         return URLs

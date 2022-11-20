@@ -10,7 +10,7 @@ struct LauncherTypeSelectionPopoverView: View {
 		showingPopover = false
     }
     
-    @State private var launcherInstanceTypes: [RealmLauncherType] = [.app, .file, .folder, .website, .terminal]
+    var launcherInstanceTypes: [RealmLauncherType] = [.app, .file, .folder, .website]
 	
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {

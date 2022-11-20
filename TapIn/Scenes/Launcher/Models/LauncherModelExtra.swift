@@ -178,11 +178,5 @@ func launcherInstanceFactory(instance: LauncherInstanceDB) -> (any BaseLauncherI
         return InstantiatedWebLauncher(instance: instance)
     case (.website, false):
         return UninstantiatedWebLauncher(instance: instance)
-//    case (.terminal, true):
-//        return InstantiatedFolderLauncher(instance: instance)
-//    case (.terminal, false):
-//        return UninstantiatedFolderLauncher(instance: instance)
-    default:
-        return nil
     }
 }
