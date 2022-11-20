@@ -18,6 +18,8 @@ class RealmManager {
             }
             else
             {
+//                let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+//                self.realm = try Realm(configuration: config)
                 self.realm = try Realm()
             }
         }

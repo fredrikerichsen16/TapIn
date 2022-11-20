@@ -12,10 +12,8 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>$(TeamIdentifierPrefix).tapin.Tapin</string>
+		<string>$(TeamIdentifierPrefix)tapin.TapIn</string>
 	</array>
-	<key>com.apple.security.files.downloads.read-only</key>
-	<true/>
 	<key>com.apple.security.files.user-selected.read-only</key>
 	<true/>
 </dict>
