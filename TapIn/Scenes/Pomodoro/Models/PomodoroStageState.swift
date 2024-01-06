@@ -19,6 +19,16 @@ class PomodoroStageState {
         fatalError("Not implemented")
     }
     
+    func performTransition(fromStage: PomodoroStageState, toStage: PomodoroStageState, withNotification: Bool) {
+        pomodoroState.setStageState(toStage)
+        pomodoroState.setTimerState(.initial)
+        pomodoroState.ticker.updateUI()
+        
+        if withNotification {
+            sendNotification(completed: fromStage.stage, transitioningTo: toStage.stage)
+        }
+    }
+    
     func getLabel() -> String {
         return stage.getTitle()
     }
@@ -47,30 +57,16 @@ class PomodoroWorkingStageState: PomodoroStageState {
     }
     
     override func transitionToNextState(withNotification: Bool) {
-        // TODO: This is hte perfect case to use the pattern where you have part of an algorithm in subclasses, namely the ifelse in the middle varies, the stuff around is the same
+        let fromStage = self
+        let toStage: PomodoroStageState
         
-        let completedStage = stage
-        
-        if pomodoroState.longBreakDue()
-        {
-            pomodoroState.setStageState(pomodoroState.longBreakStageState)
-            pomodoroState.setTimerState(.initial)
-            pomodoroState.ticker.updateUI()
-        }
-        else
-        {
-            pomodoroState.setStageState(pomodoroState.shortBreakStageState)
-            pomodoroState.setTimerState(.initial)
-            pomodoroState.ticker.updateUI()
+        if pomodoroState.longBreakDue() {
+            toStage = pomodoroState.longBreakStageState
+        } else {
+            toStage = pomodoroState.shortBreakStageState
         }
         
-        if withNotification == false {
-            return
-        }
-        
-        let transitioningToStage: PomodoroStage = pomodoroState.stageState.stage
-        
-        sendNotification(completed: completedStage, transitioningTo: transitioningToStage)
+        performTransition(fromStage: fromStage, toStage: toStage, withNotification: withNotification)
     }
 }
 
@@ -81,18 +77,7 @@ final class PomodoroShortBreakStageState: PomodoroStageState {
     }
     
     override func transitionToNextState(withNotification: Bool) {
-        let completedStage = stage
-        
-        pomodoroState.setStageState(pomodoroState.workingStageState)
-        pomodoroState.setTimerState(.initial)
-        pomodoroState.ticker.updateUI()
-        
-        if withNotification == false {
-            return
-        }
-        
-        let transitioningToStage: PomodoroStage = pomodoroState.stageState.stage
-        sendNotification(completed: completedStage, transitioningTo: transitioningToStage)
+        performTransition(fromStage: self, toStage: pomodoroState.workingStageState, withNotification: withNotification)
     }
 }
 
@@ -103,17 +88,6 @@ final class PomodoroLongBreakStageState: PomodoroStageState {
     }
     
     override func transitionToNextState(withNotification: Bool) {
-        let completedStage = stage
-        
-        pomodoroState.setStageState(pomodoroState.workingStageState)
-        pomodoroState.setTimerState(.initial)
-        pomodoroState.ticker.updateUI()
-        
-        if withNotification == false {
-            return
-        }
-        
-        let transitioningToStage: PomodoroStage = pomodoroState.stageState.stage
-        sendNotification(completed: completedStage, transitioningTo: transitioningToStage)
+        performTransition(fromStage: self, toStage: pomodoroState.workingStageState, withNotification: withNotification)
     }
 }

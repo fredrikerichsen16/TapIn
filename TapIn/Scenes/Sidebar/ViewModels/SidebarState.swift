@@ -1,23 +1,11 @@
 import Foundation
 import RealmSwift
+import Factory
 
 class SidebarState: ObservableObject {
-    // MARK: Preview
-    static var preview: SidebarState = {
-        return SidebarState(preview: true)
-    }()
-        
-    init(preview: Bool) {
-        let realm = RealmManager.preview.realm
-        self.folders = realm.objects(FolderDB.self)
-        self.setToken()
-    }
-    
     // MARK: Properties
     
-    var realm: Realm {
-        RealmManager.shared.realm
-    }
+    @Injected(Container.realm) private var realm
     
     @Published var folders: Results<FolderDB>
     
@@ -26,11 +14,10 @@ class SidebarState: ObservableObject {
     @Published var outline = [SidebarListItem]()
     
     @Published var selection: SidebarListItem? = nil
-    
-    // MARK: Init
-    
+        
     init() {
-        let realm = RealmManager.shared.realm
+        let realm = Container.realm.callAsFunction()
+        
         self.folders = realm.objects(FolderDB.self)
         self.setToken()
     }

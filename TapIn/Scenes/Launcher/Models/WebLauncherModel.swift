@@ -14,9 +14,9 @@ struct UninstantiatedWebLauncher: BaseLauncherInstanceBehavior, WebBasedBehavior
         }
     }
     
-    func setUrl(urlString: String) {
+    func setUrl(urlString: String) throws {
         guard let url = convertURL(urlString: urlString) else {
-            return
+            throw BlockerError.invalidUrl
         }
         
         write {
@@ -93,9 +93,9 @@ struct InstantiatedWebLauncher: BaseLauncherInstanceBehavior, FileBehavior, Open
         }
     }
     
-    func setUrl(urlString: String) {
+    func setUrl(urlString: String) throws {
         guard let url = convertURL(urlString: urlString) else {
-            return
+            throw BlockerError.invalidUrl
         }
         
         write {

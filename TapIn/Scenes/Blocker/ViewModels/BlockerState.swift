@@ -1,7 +1,9 @@
 import Foundation
 import RealmSwift
+import Factory
 
 class BlockerState: WorkspaceComponentViewModel {
+    @Injected(Container.realm) private var realm
     
     // MARK: Properties
     
@@ -19,7 +21,7 @@ class BlockerState: WorkspaceComponentViewModel {
     init(workspace: WorkspaceDB, componentsStatus: ComponentsStatus) {
         self.blocker = workspace.blocker
         self.componentsStatus = componentsStatus
-        super.init(workspace: workspace, realm: RealmManager.shared.realm, component: .blocker)
+        super.init(workspace: workspace, realm: realm, component: .blocker)
         setToken()
     }
     

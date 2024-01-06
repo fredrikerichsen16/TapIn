@@ -1,11 +1,12 @@
 import Foundation
 import RealmSwift
+import Factory
 
 class LauncherState: ObservableObject {
     
     // MARK: Properties
     
-    public var realm: Realm
+    @Injected(Container.realm) var realm
     private var workspace: WorkspaceDB
     private var launcher: LauncherDB
     
@@ -17,7 +18,7 @@ class LauncherState: ObservableObject {
     init(workspace: WorkspaceDB) {
         self.workspace = workspace
         self.launcher = workspace.launcher
-        self.realm = RealmManager.shared.realm
+        
         setToken()
     }
     

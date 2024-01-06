@@ -88,13 +88,13 @@ enum RealmLauncherType: String, Equatable, PersistableEnum {
         switch self
         {
         case .app:
-            return "music.note"
+            return IconKeys.musicNote
         case .file:
-            return "doc"
+            return IconKeys.fileIcon
         case .folder:
-            return "folder"
+            return IconKeys.folder // "folder"
         case .website:
-            return "link"
+            return IconKeys.websiteIcon
         }
     }
 }

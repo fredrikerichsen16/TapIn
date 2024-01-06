@@ -11,6 +11,9 @@
 		351C42F42920A99400B6A843 /* FilterDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C42F32920A99400B6A843 /* FilterDataProvider.swift */; };
 		351C42F62920A99400B6A843 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C42F52920A99400B6A843 /* main.swift */; };
 		351C42FB2920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 351C42F02920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		35208D1B2987B7DA00D17BAD /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 35208D1A2987B7DA00D17BAD /* Factory */; };
+		35208D1D2987B87D00D17BAD /* DependencyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35208D1C2987B87D00D17BAD /* DependencyInjection.swift */; };
+		35208D1F2987BC5000D17BAD /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35208D1E2987BC5000D17BAD /* Store.swift */; };
 		3542DC2829172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC2729172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift */; };
 		3542DC2A2917568C00F7A9D8 /* DefaultAppSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC292917568C00F7A9D8 /* DefaultAppSelectorView.swift */; };
 		3542DC2D291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542DC2C291762ED00F7A9D8 /* WebBasedInstanceLauncherView.swift */; };
@@ -53,6 +56,8 @@
 		35AD05FF2912F18700837016 /* NoteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD05FE2912F18700837016 /* NoteDB.swift */; };
 		35AD06072913280D00837016 /* SessionHistoryQueryer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD06062913280D00837016 /* SessionHistoryQueryer.swift */; };
 		35D366B22923036D004C262A /* BlockerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D366B12923036D004C262A /* BlockerError.swift */; };
+		35D3A51129424CF800C188F3 /* CircleWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D3A51029424CF800C188F3 /* CircleWithIcon.swift */; };
+		35D3A51329424FB200C188F3 /* SongInfoPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D3A51229424FB200C188F3 /* SongInfoPopoverView.swift */; };
 		35E000022911EEF2009D284D /* TapInApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000012911EEF2009D284D /* TapInApp.swift */; };
 		35E000062911EEF3009D284D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E000052911EEF3009D284D /* Assets.xcassets */; };
 		35E000092911EEF3009D284D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E000082911EEF3009D284D /* Preview Assets.xcassets */; };
@@ -169,6 +174,8 @@
 		351C42F52920A99400B6A843 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		351C42F72920A99400B6A843 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		351C42F82920A99400B6A843 /* ContentFilterExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ContentFilterExtension.entitlements; sourceTree = "<group>"; };
+		35208D1C2987B87D00D17BAD /* DependencyInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjection.swift; sourceTree = "<group>"; };
+		35208D1E2987BC5000D17BAD /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		3525F779291AFB62006A3A7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3542DC2729172C0700F7A9D8 /* FileSystemInstanceLauncherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemInstanceLauncherView.swift; sourceTree = "<group>"; };
 		3542DC292917568C00F7A9D8 /* DefaultAppSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAppSelectorView.swift; sourceTree = "<group>"; };
@@ -209,6 +216,8 @@
 		35AD05FE2912F18700837016 /* NoteDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDB.swift; sourceTree = "<group>"; };
 		35AD06062913280D00837016 /* SessionHistoryQueryer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryQueryer.swift; sourceTree = "<group>"; };
 		35D366B12923036D004C262A /* BlockerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockerError.swift; sourceTree = "<group>"; };
+		35D3A51029424CF800C188F3 /* CircleWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleWithIcon.swift; sourceTree = "<group>"; };
+		35D3A51229424FB200C188F3 /* SongInfoPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongInfoPopoverView.swift; sourceTree = "<group>"; };
 		35E000012911EEF2009D284D /* TapInApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapInApp.swift; sourceTree = "<group>"; };
 		35E000052911EEF3009D284D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35E000082911EEF3009D284D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -315,6 +324,7 @@
 				35757BD3292A3A3E00CEBC19 /* RealmSwift in Frameworks */,
 				35757BD1292A3A3E00CEBC19 /* Realm in Frameworks */,
 				354BDD30292190FA002AA4C1 /* NetworkExtension.framework in Frameworks */,
+				35208D1B2987B7DA00D17BAD /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +410,7 @@
 		3565B4BA2923556C00A5AB8C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				35D3A51029424CF800C188F3 /* CircleWithIcon.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -601,6 +612,7 @@
 				35F3D572291B58E90050E3A9 /* UserDefaultsManager.swift */,
 				35F3D576291B64DD0050E3A9 /* PropertyWrappers.swift */,
 				35E6F17F2924EFB70066E7A2 /* NotificationManager.swift */,
+				35208D1C2987B87D00D17BAD /* DependencyInjection.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -802,6 +814,7 @@
 			isa = PBXGroup;
 			children = (
 				35E000942911F531009D284D /* RadioView.swift */,
+				35D3A51229424FB200C188F3 /* SongInfoPopoverView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -821,6 +834,7 @@
 			isa = PBXGroup;
 			children = (
 				35E000972911F531009D284D /* WorkspaceState.swift */,
+				35208D1E2987BC5000D17BAD /* Store.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1104,6 +1118,7 @@
 			packageProductDependencies = (
 				35757BD0292A3A3E00CEBC19 /* Realm */,
 				35757BD2292A3A3E00CEBC19 /* RealmSwift */,
+				35208D1A2987B7DA00D17BAD /* Factory */,
 			);
 			productName = TapIn;
 			productReference = 35E0FFFE2911EEF2009D284D /* TapIn.app */;
@@ -1146,6 +1161,7 @@
 			mainGroup = 35E0FFF52911EEF2009D284D;
 			packageReferences = (
 				35757BCF292A3A3E00CEBC19 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				35208D192987B7DA00D17BAD /* XCRemoteSwiftPackageReference "Factory" */,
 			);
 			productRefGroup = 35E0FFFF2911EEF2009D284D /* Products */;
 			projectDirPath = "";
@@ -1248,8 +1264,10 @@
 				35E000B92911F531009D284D /* SidebarState.swift in Sources */,
 				35693E652915DFF300F1966D /* BlacklistedWebsite.swift in Sources */,
 				35E000CE2911F531009D284D /* LauncherTypeSelectionPopoverView.swift in Sources */,
+				35208D1D2987B87D00D17BAD /* DependencyInjection.swift in Sources */,
 				35E000DA2911F531009D284D /* WorkspaceTab.swift in Sources */,
 				35E000602911F4F4009D284D /* SessionDB.swift in Sources */,
+				35D3A51129424CF800C188F3 /* CircleWithIcon.swift in Sources */,
 				3542DC3A2917ACE500F7A9D8 /* ProgressCircleView.swift in Sources */,
 				35E000392911F382009D284D /* NuclearWasteland.swift in Sources */,
 				356E7F73292616AF00E81C67 /* LauncherBottomMenuController.swift in Sources */,
@@ -1277,8 +1295,10 @@
 				3542DC2F291763F700F7A9D8 /* WebInstanceNameAndUrlEditorView.swift in Sources */,
 				35E000492911F43B009D284D /* CustomPersistables.swift in Sources */,
 				35AD05FD2912EDF800837016 /* NotesView.swift in Sources */,
+				35D3A51329424FB200C188F3 /* SongInfoPopoverView.swift in Sources */,
 				3542DC37291795C300F7A9D8 /* DynamicSidebarButton.swift in Sources */,
 				35693E5F2915C34400F1966D /* WorkspaceCoordinator.swift in Sources */,
+				35208D1F2987BC5000D17BAD /* Store.swift in Sources */,
 				35E000D02911F531009D284D /* RadioState.swift in Sources */,
 				35F3D569291B0A900050E3A9 /* FolderState.swift in Sources */,
 				35E000D32911F531009D284D /* RadioView.swift in Sources */,
@@ -1732,6 +1752,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		35208D192987B7DA00D17BAD /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		35757BCF292A3A3E00CEBC19 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -1743,6 +1771,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		35208D1A2987B7DA00D17BAD /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35208D192987B7DA00D17BAD /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
 		35757BD0292A3A3E00CEBC19 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 35757BCF292A3A3E00CEBC19 /* XCRemoteSwiftPackageReference "realm-swift" */;

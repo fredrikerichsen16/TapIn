@@ -1,15 +1,16 @@
 import Foundation
 import RealmSwift
+import Factory
 
 class StatisticsState: ObservableObject {
-    @Published var workspaces: Results<WorkspaceDB>
+    @Injected(Container.realm)
+    private var realm
     
-    var realm: Realm {
-        RealmManager.shared.realm
-    }
-
+    @Published
+    var workspaces: Results<WorkspaceDB>
+    
     init() {
-        let realm = RealmManager.shared.realm
+        let realm = Container.realm.callAsFunction()
         self.workspaces = realm.objects(WorkspaceDB.self)
     }
 

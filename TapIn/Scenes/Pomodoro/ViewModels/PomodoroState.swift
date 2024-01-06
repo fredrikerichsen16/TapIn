@@ -117,10 +117,6 @@ final class PomodoroState: WorkspaceComponentViewModel {
     func completedSession() {
         if case .working(_) = stageState.stage
         {
-//            guard let workspace = workspace.thaw() else {
-//                return
-//            }
-        
             try? realm.write {
                 workspace.sessions.append(SessionDB(stage: stageState.stage))
             }

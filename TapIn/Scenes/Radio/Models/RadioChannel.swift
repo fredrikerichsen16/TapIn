@@ -11,9 +11,11 @@ struct RadioSong {
     let title: String
     let singers: [String]
     
-    func getAudioPlayer(with radioChannelKey: String) throws -> AVAudioPlayer {
-        let filePath = "RadioChannels/\(radioChannelKey)/\(file)"
-        
+    var filePath: String {
+        return "RadioChannels/\(file)"
+    }
+    
+    func getAudioPlayer() throws -> AVAudioPlayer {
         guard let data = NSDataAsset(name: filePath)?.data else {
             throw RadioError.IncorrectAssetPath
         }
@@ -39,27 +41,12 @@ struct RadioChannel {
         self.songs = songs
     }
     
-    init(key: String, title: String, numberOfSongs: Int) {
-        self.key = key
-        self.title = title
-        
-        var songs = [RadioSong]()
-        for i in 0..<numberOfSongs {
-            songs.append(RadioSong(file: "song-\(i + 1)"))
-        }
-        self.songs = songs
-    }
-    
     func getIllustrationImage() -> String {
-        return "RadioChannels/\(key)/Illustration"
+        return "RadioChannels/Illustration_\(key)"
     }
     
-    func getNextSong() throws -> AVAudioPlayer {
-        guard let song = songs.randomElement() else {
-            throw RadioError.ChannelHasNoSongs
-        }
-        
-        return try song.getAudioPlayer(with: key)
+    func getNextSong() -> RadioSong {
+        return songs.randomElement()!
     }
 
 }

@@ -1,27 +1,44 @@
 import Foundation
 import RealmSwift
 
-class RealmManager {
-    public static let shared = RealmManager(preview: false)
-    public static let preview = RealmManager(preview: true)
+protocol RealmManagerProtocol {
+    var realm: Realm { get }
+}
+
+/// Singleton class with a property with an instance of Realm, so that the same instance of Realm can be accessed anywhere.
+/// Also does/can contain otther things, like adding dummy data.
+class RealmManager: RealmManagerProtocol {
+    let realm: Realm
     
-    private(set) var realm: Realm
-    
-    init(preview: Bool = false) {
+    init() {
         do
         {
-            if preview
-            {
-                let config = Realm.Configuration(inMemoryIdentifier: "preview")
-                self.realm = try Realm(configuration: config)
-                addData()
-            }
-            else
-            {
-                let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
-                self.realm = try Realm(configuration: config)
-//                addData()
-            }
+            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+            self.realm = try Realm(configuration: config)
+//            reset()
+        }
+        catch
+        {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    func reset() {
+        try! realm.write {
+            realm.deleteAll()
+        }
+    }
+}
+
+class RealmManagerMock: RealmManagerProtocol {
+    let realm: Realm
+    
+    init() {
+        do
+        {
+            let config = Realm.Configuration(inMemoryIdentifier: "preview")
+            self.realm = try Realm(configuration: config)
+            addData()
         }
         catch
         {

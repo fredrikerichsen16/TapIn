@@ -1,7 +1,7 @@
 import Foundation
 
 class UserDefaultsManager {
-    static var main = UserDefaultsManager()
+    static var standard = UserDefaultsManager()
     
     let defaults = UserDefaults.standard
     

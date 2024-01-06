@@ -9,7 +9,6 @@ struct TapinApp: SwiftUI.App {
         WindowGroup {
             SidebarView()
                 .environment(\.workspaceCoordinator, WorkspaceCoordinator.shared)
-                .environment(\.realm, RealmManager.shared.realm)
                 .environment(\.subscriptionManager, SubscriptionManager.shared)
                 .environmentObject(SidebarState())
                 .userPreferenceColorScheme()

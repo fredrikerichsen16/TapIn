@@ -5,15 +5,35 @@ struct WebInstanceNameAndUrlEditorView: View {
     
     @State private var name = ""
     @State private var url = ""
+    @State private var error: Swift.Error? = nil
     
     var body: some View {
         Form {
-            TextField("Name", text: $name)
-            TextField("URL", text: $url)
+            HStack(alignment: .center, spacing: 4) {
+                VStack(alignment: .leading) {
+                    Text("Name")
+                        .offset(x: 9)
+                    TextField("", text: $name)
+                }
+
+                VStack(alignment: .leading) {
+                    Text("URL")
+                        .offset(x: 9)
+                    TextField("", text: $url)
+                }
+            }
+            .frame(minWidth: 150, idealWidth: 350, maxWidth: 350)
         }
         .onSubmit {
-            instance.setName(name: name)
-            instance.setUrl(urlString: url)
+            do {
+                try instance.setUrl(urlString: url)
+                instance.setName(name: name)
+            }
+            catch {
+                if let error = error as? BlockerError {
+                    self.error = error
+                }
+            }
         }
         .onAppear {
             name = instance.name
@@ -21,5 +41,6 @@ struct WebInstanceNameAndUrlEditorView: View {
                 url = fileUrl.absoluteString
             }
         }
+        .errorAlert(error: $error)
     }
 }

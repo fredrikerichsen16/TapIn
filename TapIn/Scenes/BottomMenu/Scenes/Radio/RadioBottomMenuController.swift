@@ -2,19 +2,20 @@ import SwiftUI
 
 struct RadioBottomMenuController: View {
     @EnvironmentObject var workspace: WorkspaceState
-    
+
+    var vm: RadioState {
+        workspace.radio
+    }
+
     private func getToggleButtonLabel() -> Image {
-        return workspace.radio.isActive ? Image(systemName: IconKeys.pauseButton) : Image(systemName: IconKeys.playButton)
+        return vm.isActive ? Image(systemName: IconKeys.pauseButton) : Image(systemName: IconKeys.playButton)
     }
     
     private func toggleButtonAction() {
-        if workspace.radio.isActive
-        {
-            workspace.radio.endSession()
-        }
-        else
-        {
-            workspace.radio.startSession()
+        if vm.isActive {
+            vm.endSession()
+        } else {
+            vm.startSession()
         }
     }
     
@@ -23,7 +24,7 @@ struct RadioBottomMenuController: View {
             Text("Radio")
                 .font(.body)
             
-            Text(workspace.radio.currentChannel.title)
+            Text(vm.channelTitle)
                 .font(.caption)
             
             HStack(spacing: 8) {

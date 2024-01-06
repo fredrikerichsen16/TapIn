@@ -1,10 +1,9 @@
 import Foundation
 import RealmSwift
+import Factory
 
 class FolderState: ObservableObject {
-    var realm: Realm {
-        RealmManager.shared.realm
-    }
+    @Injected(Container.realm) private var realm
     
     var folder: FolderDB
     

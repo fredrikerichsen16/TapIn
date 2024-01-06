@@ -1,7 +1,8 @@
 import Foundation
 import Combine
+import Factory
 
-struct WorkspaceComponentFactory {
+fileprivate struct WorkspaceComponentFactory {
     let workspace: WorkspaceDB
     let componentsStatus: ComponentsStatus
     
@@ -23,8 +24,10 @@ struct WorkspaceComponentFactory {
 }
 
 class WorkspaceState: ObservableObject {
+    @Injected(Container.realm) private var realm
+    
     static var preview: WorkspaceState = {
-        let realm = RealmManager.preview.realm
+        let realm = Container.realm.callAsFunction()
         let workspace = realm.objects(WorkspaceDB.self).first!
         let workspaceState = WorkspaceState(workspace: workspace)
         
@@ -43,7 +46,7 @@ class WorkspaceState: ObservableObject {
     
     init(workspace: WorkspaceDB) {
         self.workspace = workspace
-        self.workspaceTab = UserDefaultsManager.main.getLatestTab(for: workspace) ?? .pomodoro
+        self.workspaceTab = UserDefaultsManager.standard.getLatestTab(for: workspace) ?? .pomodoro
         
         let componentsStatus = ComponentsStatus()
         let factory = WorkspaceComponentFactory(workspace: workspace, componentsStatus: componentsStatus)
@@ -85,7 +88,7 @@ class WorkspaceState: ObservableObject {
     
     @Published var workspaceTab: WorkspaceTab {
         didSet {
-            UserDefaultsManager.main.setLatestTab(for: workspace, tab: workspaceTab)
+            UserDefaultsManager.standard.setLatestTab(for: workspace, tab: workspaceTab)
             
             if workspaceTab.hasBottomMenuTool() {
                 bottomMenuTab = workspaceTab

@@ -21,12 +21,12 @@ struct FolderDisclosureGroup: View {
         )
         .onChange(of: isExpanded, perform: { value in
             if let objectId = folder.objectId {
-                UserDefaultsManager.main.setFolderIsExpanded(folderId: objectId.stringValue, value: value)
+                UserDefaultsManager.standard.setFolderIsExpanded(folderId: objectId.stringValue, value: value)
             }
         })
         .onAppear {
             if let objectId = folder.objectId {
-                isExpanded = UserDefaultsManager.main.getFolderIsExpanded(folderId: objectId.stringValue)
+                isExpanded = UserDefaultsManager.standard.getFolderIsExpanded(folderId: objectId.stringValue)
             }
         }
     }
