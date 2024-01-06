@@ -18,23 +18,23 @@ class StatisticsState: ObservableObject {
 
     func reduceUnit() {
         interval.reduceUnit()
-        submit()
+        refresh()
     }
 
     func increaseUnit() {
         interval.increaseUnit()
-        submit()
+        refresh()
     }
     
     func resetToNow() {
         interval.reset()
-        submit()
+        refresh()
     }
 
     @Published var chartData = [ChartData]()
     @Published var listData = [ListData]()
     
-    func submit() {
+    func refresh() {
         let frozen = realmManager.realm.freeze()
         
         Task {

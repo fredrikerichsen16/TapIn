@@ -1,10 +1,13 @@
 import Foundation
 
+/// This is a data model for the time period (a particular week, month or year) for which data is being shown in the graph. There are also mutating methods for changing the time interval, and some other stuff
 struct IntervalHolder {
+    // Current y/m/w in the real world
     private let currentYear: Int
     private let currentMonth: Int
     private let currentWeek: Int
 
+    // y/m/w that the user selects - variable
     var year: Int
     var month: Int
     var week: Int
@@ -13,12 +16,14 @@ struct IntervalHolder {
     private let calendar: Calendar
 
     init() {
+        // Set current y/m/w from current date
         let date = Date()
         let calendar = Calendar.current
         self.currentYear = calendar.component(.year, from: date)
         self.currentMonth = calendar.component(.month, from: date)
         self.currentWeek = calendar.component(.weekOfYear, from: date)
 
+        // Start with current date, and "week" as granularity
         self.year = currentYear
         self.month = currentMonth
         self.week = currentWeek
@@ -27,6 +32,7 @@ struct IntervalHolder {
         self.calendar = calendar
     }
 
+    /// Reduce the year, month, or week by one - taking into account that e.g. going back from "January 2024" becomes "December 2023"
     mutating func reduceUnit() {
         switch granularity
         {
@@ -50,7 +56,8 @@ struct IntervalHolder {
             }
         }
     }
-
+    
+    /// Increase the year, month, or week by one - taking into account that e.g. going forward from "December 2023" becomes "January 2024"
     mutating func increaseUnit() {
         switch granularity
         {
@@ -75,12 +82,15 @@ struct IntervalHolder {
         }
     }
 
+    /// Reset date to current date
     mutating func reset() {
         year = currentYear
         month = currentMonth
         week = currentWeek
     }
     
+    /// Readable label for the time period that the graph is showing data for.
+    /// E.g. "2023" or "March 2021" or "Week 5, 2023"
     var label: String {
         switch granularity
         {
@@ -97,10 +107,8 @@ struct IntervalHolder {
         }
     }
     
+    /// Get the number of days that the current interval contains. For now, just using simplified version
     var numberOfDays: Int {
-        // Get the duration of the year/week/month taking into account that months have different lengths and e.g. don't go further than today's date\
-        // but for now, just doing a simple one
-        
         switch granularity
         {
         case .year:

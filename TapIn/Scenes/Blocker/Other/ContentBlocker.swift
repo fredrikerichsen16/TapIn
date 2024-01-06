@@ -44,7 +44,7 @@ class ContentBlocker: NSObject {
     
     func config(blacklist: [String], terminateAtDate: Date?) {
         self.blacklist = blacklist
-        self.terminateAtTime = terminateAtDate?.timeIntervalSince1970 ?? Date(timeIntervalSinceNow: 60 * 60 * 6).timeIntervalSince1970
+        self.terminateAtTime = terminateAtDate?.timeIntervalSince1970 ?? Date(timeIntervalSinceNow: 60 * 60 * 1).timeIntervalSince1970
     }
     
     func start() {

@@ -7,6 +7,8 @@ struct EditableLauncherNameView: View {
     @State private var isEditing: Bool = false
     @State private var isHovering: Bool = false
     
+    @State var preEditName = "error"
+    
     var body: some View {
         if isEditing
         {
@@ -15,7 +17,16 @@ struct EditableLauncherNameView: View {
                 .frame(width: 150, alignment: .center)
                 .onSubmit {
                     isEditing = false
+                    
+                    guard name.count > 0 else {
+                        name = preEditName
+                        return
+                    }
+                    
                     onSubmit(name)
+                }
+                .onAppear {
+                    preEditName = name
                 }
         }
         else

@@ -19,7 +19,7 @@ struct BottomBarLauncherSettingsView: View {
                 
                 Spacer()
                 
-                Toggle("Disactivate", isOn: $disabled)
+                Toggle("Deactivate", isOn: $disabled)
                     .toggleStyle(.checkbox)
                     .onChange(of: disabled) { value in
                         instance.write {

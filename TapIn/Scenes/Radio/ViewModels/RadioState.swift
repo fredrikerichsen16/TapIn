@@ -157,7 +157,9 @@ struct RadioStatus {
          RadioSong(file: "qklpmtczclklxhjuzusugvhp", title: "Secret Agent T.", singer: "T. Bless & the Professionals"),
          RadioSong(file: "vkggyujdxhwwnhvmwmnaginp", title: "Richard Goes Stompin", singer: "Ziv Grinberg"),
          RadioSong(file: "uymosmyyxxfkzrrcauhfwkge", title: "Arak Deluxe", singer: "David Gives"),
-         RadioSong(file: "sruiylohotscviohogtqwvpn", title: "Morning in the Rain", singer: "Mark Yencheske")
+         RadioSong(file: "sruiylohotscviohogtqwvpn", title: "Morning in the Rain", singer: "Mark Yencheske"),
+         RadioSong(file: "yizuyuvplzopromjoujsjlnd", title: "I've seen it all", singer: "Idokay"),
+         RadioSong(file: "erdrpxxjoeitvvtmydsmpnhn", title: "Gymnopédie No. 1", singer: "T. Bless & the Professionals"),
      ]),
      RadioChannel(key: "Dramatic", title: "Dramatique", songs: [
          RadioSong(file: "gnxsdpvbnujzzsnrailnzeiv", title: "Still Life", singer: "ANBR"),

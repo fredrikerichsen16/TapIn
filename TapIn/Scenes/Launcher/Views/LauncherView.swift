@@ -71,7 +71,7 @@ struct LauncherView: View {
         }
 
         let enabled = instance.object.active
-        Button(enabled ? "Disactivate" : "Activate") {
+        Button(enabled ? "Deactivate" : "Activate") {
             instance.write {
                 instance.object.active = !enabled
             }

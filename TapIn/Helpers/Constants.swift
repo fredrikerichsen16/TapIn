@@ -1,5 +1,8 @@
 import Foundation
 
+let WINDOW_HEIGHT = 800.0
+let WINDOW_WIDTH = 800.0
+
 struct IconKeys {
     // Common
     static let left = "chevron.left"

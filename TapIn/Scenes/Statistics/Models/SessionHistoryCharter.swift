@@ -79,7 +79,10 @@ class SessionHistoryCharter {
         return data
     }
     
-    func getIntervalSubdivisions() -> [IntervalSubdivision] {
+    /// For the current interval under consideration, get the subdivisions of time to group results into.
+    /// For example, if it's weekly, the subdivisions are Monday-Sunday. If it's monthly, the subdivisions are weeks or partial weeks that are fully within that month (i.e. if a month starts on a wednesday and ends on a friday for example, then the first and last week period are cut short). If it's yearly, then it's Jan-Dec.
+    /// The method returns an array of InternalSubdivision structs, which contain the exact DateInterval and a human readable label for that period.
+    private func getIntervalSubdivisions() -> [IntervalSubdivision] {
         var intervals = [IntervalSubdivision]()
         
         switch interval.granularity
@@ -112,7 +115,7 @@ class SessionHistoryCharter {
                 currentDate = calendar.date(byAdding: addition, to: currentDate)!
 
                 let isSunday = calendar.component(.weekday, from: currentDate) == 1
-                let isLastDayOfMonth = calendar.component(.day, from: currentDate) == calendar.range(of: .day, in: .month, for: currentDate)!.count - 1
+                let isLastDayOfMonth = calendar.component(.day, from: currentDate) == calendar.range(of: .day, in: .month, for: currentDate)!.count
                 if isSunday || isLastDayOfMonth
                 {
                     let intervalEnd = calendar.date(byAdding: DateComponents(calendar: calendar, day: 1, second: -1), to: currentDate)!

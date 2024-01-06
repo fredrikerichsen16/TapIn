@@ -20,7 +20,7 @@ struct StatisticsView: View {
                 }
                 .fixedSize()
                 .onChange(of: vm.interval.granularity) { _ in
-                    vm.submit()
+                    vm.refresh()
                 }
                 
                 Picker("", selection: $showChart) {
@@ -82,7 +82,7 @@ struct StatisticsView: View {
             Spacer()
         }
         .onAppear {
-            vm.submit()
+            vm.refresh()
         }
         .padding(25)
     }

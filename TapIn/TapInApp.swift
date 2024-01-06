@@ -15,16 +15,16 @@ struct TapinApp: SwiftUI.App {
                     WorkspaceCoordinator.shared.terminate()
                 })
         }
-        .defaultSize(width: 600, height: 600)
+        .defaultSize(width: WINDOW_WIDTH, height: WINDOW_HEIGHT)
         .windowStyle(.hiddenTitleBar)
         .commands {
             SidebarCommands()
         }
         
-//        Settings {
-//            SettingsView()
-//                .userPreferenceColorScheme()
-//        }
-//        .windowStyle(.hiddenTitleBar)
+        Settings {
+            SettingsView()
+                .userPreferenceColorScheme()
+        }
+        .windowStyle(.hiddenTitleBar)
     }
 }
