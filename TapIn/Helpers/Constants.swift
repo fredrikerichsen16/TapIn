@@ -22,10 +22,15 @@ struct IconKeys {
     static let pauseButton = "pause.fill"
     static let leftFilled = "arrowtriangle.left.fill"
     static let rightFilled = "arrowtriangle.right.fill"
+    static let musicNote = "music.note"
+    static let thumbsUp = "hand.thumbsup"
+    static let thumbsDown = "hand.thumbsdown"
     
     // Launcher
     static let replace = "repeat"
     static let pencil = "pencil"
+    static let fileIcon = "doc"
+    static let websiteIcon = "link"
 }
 
 struct AppStorageKey {

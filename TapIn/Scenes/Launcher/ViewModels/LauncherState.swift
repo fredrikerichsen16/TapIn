@@ -1,11 +1,12 @@
 import Foundation
 import RealmSwift
+import Factory
 
 class LauncherState: ObservableObject {
     
     // MARK: Properties
     
-    public var realm: Realm
+    @Injected(\.realmManager) var realmManager: RealmManager
     private var workspace: WorkspaceDB
     private var launcher: LauncherDB
     
@@ -17,7 +18,6 @@ class LauncherState: ObservableObject {
     init(workspace: WorkspaceDB) {
         self.workspace = workspace
         self.launcher = workspace.launcher
-        self.realm = RealmManager.shared.realm
         setToken()
     }
     
@@ -78,7 +78,7 @@ class LauncherState: ObservableObject {
             let instanceIndex = instances.firstIndex(where: { $0.id == id })
         else { return }
         
-        try? realm.write {
+        try? realmManager.realm.write {
             launcher.launcherInstances.remove(at: instanceIndex)
         }
     }
@@ -86,7 +86,7 @@ class LauncherState: ObservableObject {
     func duplicate(_ instance: any BaseLauncherInstanceBehavior) {
         let newInstance = LauncherInstanceDB(duplicate: instance.object)
         
-        try? realm.write {
+        try? realmManager.realm.write {
             launcher.launcherInstances.append(newInstance)
         }
     }
@@ -94,7 +94,7 @@ class LauncherState: ObservableObject {
     func createEmptyInstance(type: RealmLauncherType) {
         let newInstance = LauncherInstanceDB(empty: type, hideOnLaunch: launcher.hideOnLaunch)
     
-        try? realm.write {
+        try? realmManager.realm.write {
             launcher.launcherInstances.append(newInstance)
         }
     }

@@ -93,7 +93,7 @@ class ComponentActivityTracker {
     // MARK: Cascading
     
     func cascade(status: WorkspaceComponentStatus) {
-        let components: Set<WorkspaceTab> = UserDefaultsManager.main.cascadingOptions
+        let components: Set<WorkspaceTab> = UserDefaultsManager.standard.cascadingOptions
         
         for component in components
         {

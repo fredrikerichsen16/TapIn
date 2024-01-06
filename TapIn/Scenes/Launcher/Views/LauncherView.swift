@@ -103,11 +103,11 @@ struct LauncherView: View {
     }
 }
 
-struct LauncherView_Preview: PreviewProvider {
-    static var previews: some View {
-        let workspace = WorkspaceState.preview
-        
-        LauncherView()
-            .environmentObject(workspace)
-    }
-}
+//struct LauncherView_Preview: PreviewProvider {
+//    static var previews: some View {
+//        let workspace = WorkspaceState.preview
+//
+//        LauncherView()
+//            .environmentObject(workspace)
+//    }
+//}

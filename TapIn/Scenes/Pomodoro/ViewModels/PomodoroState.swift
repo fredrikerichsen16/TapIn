@@ -1,5 +1,6 @@
 import SwiftUI
 import RealmSwift
+import Factory
 
 final class PomodoroState: WorkspaceComponentViewModel {
     private var pomodoroDb: PomodoroDB
@@ -28,7 +29,9 @@ final class PomodoroState: WorkspaceComponentViewModel {
     init(workspace: WorkspaceDB) {
         self.pomodoroDb = workspace.pomodoro
         
-        super.init(workspace: workspace, realm: RealmManager.shared.realm, component: .pomodoro)
+        let realm = Container.shared.realmManager.callAsFunction().realm
+        
+        super.init(workspace: workspace, realm: realm, component: .pomodoro)
         
         self.initialTimerState = PomodoroInitialTimerState(self)
         self.runningTimerState = PomodoroRunningTimerState(self)
@@ -116,11 +119,7 @@ final class PomodoroState: WorkspaceComponentViewModel {
     
     func completedSession() {
         if case .working(_) = stageState.stage
-        {
-//            guard let workspace = workspace.thaw() else {
-//                return
-//            }
-        
+        {        
             try? realm.write {
                 workspace.sessions.append(SessionDB(stage: stageState.stage))
             }

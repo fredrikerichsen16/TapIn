@@ -87,14 +87,14 @@ enum RealmLauncherType: String, Equatable, PersistableEnum {
     var icon: String {
         switch self
         {
-        case .app:
-            return "music.note"
-        case .file:
-            return "doc"
-        case .folder:
-            return "folder"
-        case .website:
-            return "link"
-        }
+         case .app:
+             return IconKeys.musicNote
+         case .file:
+             return IconKeys.fileIcon
+         case .folder:
+             return IconKeys.folder
+         case .website:
+             return IconKeys.websiteIcon
+         }
     }
 }

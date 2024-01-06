@@ -1,7 +1,9 @@
 import Foundation
 import RealmSwift
+import Factory
 
 class BlockerState: WorkspaceComponentViewModel {
+    @Injected(\.realmManager) var realmManager: RealmManager
     
     // MARK: Properties
     
@@ -17,9 +19,10 @@ class BlockerState: WorkspaceComponentViewModel {
     // MARK: Init
 
     init(workspace: WorkspaceDB, componentsStatus: ComponentsStatus) {
+        let realm = Container.shared.realmManager.callAsFunction().realm
         self.blocker = workspace.blocker
         self.componentsStatus = componentsStatus
-        super.init(workspace: workspace, realm: RealmManager.shared.realm, component: .blocker)
+        super.init(workspace: workspace, realm: realm, component: .blocker)
         setToken()
     }
     
@@ -68,7 +71,7 @@ class BlockerState: WorkspaceComponentViewModel {
         
         guard let blocker = blocker.thaw() else { return }
 
-        try? realm.write {
+        try? realmManager.realm.write {
             blocker.blacklistedWebsites.append(url)
         }
         
@@ -82,7 +85,7 @@ class BlockerState: WorkspaceComponentViewModel {
 
         guard let blocker = blocker.thaw() else { return }
 
-        try? realm.write {
+        try? realmManager.realm.write {
             blocker.blacklistedWebsites.remove(atOffsets: IndexSet(tableSelection))
         }
         

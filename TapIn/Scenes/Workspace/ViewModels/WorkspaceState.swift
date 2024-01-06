@@ -1,7 +1,8 @@
 import Foundation
 import Combine
+import Factory
 
-struct WorkspaceComponentFactory {
+fileprivate struct WorkspaceComponentFactory {
     let workspace: WorkspaceDB
     let componentsStatus: ComponentsStatus
     
@@ -23,18 +24,20 @@ struct WorkspaceComponentFactory {
 }
 
 class WorkspaceState: ObservableObject {
-    static var preview: WorkspaceState = {
-        let realm = RealmManager.preview.realm
-        let workspace = realm.objects(WorkspaceDB.self).first!
-        let workspaceState = WorkspaceState(workspace: workspace)
-        
-        workspaceState.pomodoro.realm = realm
-        workspaceState.radio.realm = realm
-        workspaceState.launcher.realm = realm
-        workspaceState.blocker.realm = realm
-        
-        return workspaceState
-    }()
+    @Injected(\.realmManager) var realmManager: RealmManager
+    
+//    static var preview: WorkspaceState = {
+//        let realm = Container.shared.realmManager.callAsFunction().realm
+//        let workspace = realm.objects(WorkspaceDB.self).first!
+//        let workspaceState = WorkspaceState(workspace: workspace)
+//        
+//        workspaceState.pomodoro.realm = realm
+//        workspaceState.radio.realm = realm
+//        workspaceState.launcher.realm = realm
+//        workspaceState.blocker.realm = realm
+//        
+//        return workspaceState
+//    }()
     
     // MARK: Init
     
@@ -43,7 +46,7 @@ class WorkspaceState: ObservableObject {
     
     init(workspace: WorkspaceDB) {
         self.workspace = workspace
-        self.workspaceTab = UserDefaultsManager.main.getLatestTab(for: workspace) ?? .pomodoro
+        self.workspaceTab = UserDefaultsManager.standard.getLatestTab(for: workspace) ?? .pomodoro
         
         let componentsStatus = ComponentsStatus()
         let factory = WorkspaceComponentFactory(workspace: workspace, componentsStatus: componentsStatus)
@@ -85,7 +88,7 @@ class WorkspaceState: ObservableObject {
     
     @Published var workspaceTab: WorkspaceTab {
         didSet {
-            UserDefaultsManager.main.setLatestTab(for: workspace, tab: workspaceTab)
+            UserDefaultsManager.standard.setLatestTab(for: workspace, tab: workspaceTab)
             
             if workspaceTab.hasBottomMenuTool() {
                 bottomMenuTab = workspaceTab

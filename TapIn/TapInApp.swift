@@ -9,7 +9,6 @@ struct TapinApp: SwiftUI.App {
         WindowGroup {
             SidebarView()
                 .environment(\.workspaceCoordinator, WorkspaceCoordinator.shared)
-                .environment(\.realm, RealmManager.shared.realm)
                 .environmentObject(SidebarState())
                 .userPreferenceColorScheme()
                 .onReceive(NotificationCenter.default.publisher(for: NSApplication.willTerminateNotification), perform: { output in
@@ -22,10 +21,10 @@ struct TapinApp: SwiftUI.App {
             SidebarCommands()
         }
         
-        Settings {
-            SettingsView()
-                .userPreferenceColorScheme()
-        }
-        .windowStyle(.hiddenTitleBar)
+//        Settings {
+//            SettingsView()
+//                .userPreferenceColorScheme()
+//        }
+//        .windowStyle(.hiddenTitleBar)
     }
 }

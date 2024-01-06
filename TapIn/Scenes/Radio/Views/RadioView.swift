@@ -4,6 +4,8 @@ struct RadioView: View {
     @Environment(\.workspaceCoordinator) var workspaceCoordinator
     @EnvironmentObject var workspace: WorkspaceState
     
+    @State private var showingSongInfoPopover = false
+    
     var vm: RadioState {
         workspace.radio
     }
@@ -13,15 +15,8 @@ struct RadioView: View {
     }
     
     private func toggleButtonAction() {
-        if workspace.radio.isActive
-        {
-            workspace.radio.endSession()
-        }
-        else
-        {
-            workspace.radio.startSession()
-        }
-    }
+        vm.isActive ? vm.endSession() : vm.startSession()
+     }
     
     var playButtonDisabled: Bool {
         workspaceCoordinator.otherWorkspaceIsActive(than: workspace.workspace)
@@ -29,14 +24,14 @@ struct RadioView: View {
 
     var body: some View {
         HStack(spacing: 40) {
-            Image(vm.currentChannel.getIllustrationImage(), bundle: .main)
+            Image(vm.radioStatus.currentChannel.getIllustrationImage(), bundle: .main)
                 .resizable()
                 .scaledToFit()
                 .frame(height: 340)
                 .cornerRadius(15)
 
             VStack(alignment: .leading, spacing: 14) {
-                Text(vm.currentChannel.title)
+                Text(vm.channelTitle)
                     .font(.title)
                     .fontWeight(.thin)
 
@@ -52,6 +47,21 @@ struct RadioView: View {
                         Image(systemName: IconKeys.rightFilled)
                     })
                 }
+                
+                HStack {
+                     Label(vm.songAndArtist, systemImage: IconKeys.musicNote)
+                         .underline(pattern: .dot)
+                         .foregroundColor(.gray)
+                         .lineLimit(1)
+                         .monospaced()
+                 }
+                 .frame(width: 200, alignment: .leading)
+                 .onTapGesture {
+                     showingSongInfoPopover = true
+                 }
+                 .popover(isPresented: $showingSongInfoPopover) {
+                     SongInfoPopoverView(song: vm.radioStatus.currentSong)
+                 }
             }
         }
         .padding()

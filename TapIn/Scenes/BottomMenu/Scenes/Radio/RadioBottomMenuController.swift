@@ -3,6 +3,10 @@ import SwiftUI
 struct RadioBottomMenuController: View {
     @EnvironmentObject var workspace: WorkspaceState
     
+//    var vm: RadioState {
+//        workspace.radio
+//    }
+    
     private func getToggleButtonLabel() -> Image {
         return workspace.radio.isActive ? Image(systemName: IconKeys.pauseButton) : Image(systemName: IconKeys.playButton)
     }
@@ -23,7 +27,7 @@ struct RadioBottomMenuController: View {
             Text("Radio")
                 .font(.body)
             
-            Text(workspace.radio.currentChannel.title)
+            Text(workspace.radio.channelTitle)
                 .font(.caption)
             
             HStack(spacing: 8) {

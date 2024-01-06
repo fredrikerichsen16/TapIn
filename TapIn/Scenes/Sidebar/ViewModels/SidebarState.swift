@@ -1,23 +1,11 @@
 import Foundation
 import RealmSwift
+import Factory
 
 class SidebarState: ObservableObject {
-    // MARK: Preview
-    static var preview: SidebarState = {
-        return SidebarState(preview: true)
-    }()
-        
-    init(preview: Bool) {
-        let realm = RealmManager.preview.realm
-        self.folders = realm.objects(FolderDB.self)
-        self.setToken()
-    }
-    
     // MARK: Properties
     
-    var realm: Realm {
-        RealmManager.shared.realm
-    }
+    @Injected(\.realmManager) var realmManager: RealmManager
     
     @Published var folders: Results<FolderDB>
     
@@ -26,11 +14,10 @@ class SidebarState: ObservableObject {
     @Published var outline = [SidebarListItem]()
     
     @Published var selection: SidebarListItem? = nil
-    
-    // MARK: Init
-    
+        
     init() {
-        let realm = RealmManager.shared.realm
+        let realm = Container.shared.realmManager.callAsFunction().realm
+        
         self.folders = realm.objects(FolderDB.self)
         self.setToken()
     }
@@ -104,6 +91,8 @@ class SidebarState: ObservableObject {
     // MARK: CRUD Realm
     
     func addFolder() {
+        let realm = realmManager.realm
+        
         try? realm.write {
             let folder = FolderDB(name: "New Folder")
             realm.add(folder)
@@ -111,6 +100,8 @@ class SidebarState: ObservableObject {
     }
     
     func rename(_ listItem: SidebarListItem, name: String) {
+        let realm = realmManager.realm
+        
         update(listItem, name: name)
         
         if let folder = listItem.getFolder()?.thaw()
@@ -128,6 +119,8 @@ class SidebarState: ObservableObject {
     }
 
     func delete(workspace listItem: SidebarListItem) {
+        let realm = realmManager.realm
+        
         guard listItem.folder == false,
               let workspace = listItem.getWorkspace()
         else { return }
@@ -138,6 +131,8 @@ class SidebarState: ObservableObject {
     }
 
     func delete(folder listItem: SidebarListItem) {
+        let realm = realmManager.realm
+        
         guard listItem.folder == true,
               let folder = listItem.getFolder()
         else { return }
@@ -156,6 +151,8 @@ class SidebarState: ObservableObject {
     }
 
     func addWorkspace(toFolder listItem: SidebarListItem) {
+        let realm = realmManager.realm
+        
         guard listItem.folder == true,
               let folder = listItem.getFolder()
         else { return }

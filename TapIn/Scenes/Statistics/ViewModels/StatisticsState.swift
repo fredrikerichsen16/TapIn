@@ -1,15 +1,15 @@
 import Foundation
 import RealmSwift
+import Factory
 
 class StatisticsState: ObservableObject {
-    @Published var workspaces: Results<WorkspaceDB>
+    @Injected(\.realmManager) var realmManager
     
-    var realm: Realm {
-        RealmManager.shared.realm
-    }
-
+    @Published
+    var workspaces: Results<WorkspaceDB>
+    
     init() {
-        let realm = RealmManager.shared.realm
+        let realm = Container.shared.realmManager.callAsFunction().realm
         self.workspaces = realm.objects(WorkspaceDB.self)
     }
 
@@ -35,7 +35,7 @@ class StatisticsState: ObservableObject {
     @Published var listData = [ListData]()
     
     func submit() {
-        let frozen = realm.freeze()
+        let frozen = realmManager.realm.freeze()
         
         Task {
             let queryer = SessionHistoryQueryer(realm: frozen)

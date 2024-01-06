@@ -10,12 +10,12 @@ struct CascadingSettingsPopoverView: View {
     
     func insert(_ tab: WorkspaceTab) {
         selectedTabs.insert(tab)
-        UserDefaultsManager.main.cascadingOptions = selectedTabs
+        UserDefaultsManager.standard.cascadingOptions = selectedTabs
     }
     
     func remove(_ tab: WorkspaceTab) {
         selectedTabs.remove(tab)
-        UserDefaultsManager.main.cascadingOptions = selectedTabs
+        UserDefaultsManager.standard.cascadingOptions = selectedTabs
     }
     
     func contains(_ tab: WorkspaceTab) -> Bool {
@@ -40,7 +40,7 @@ struct CascadingSettingsPopoverView: View {
         .formStyle(.grouped)
         .frame(width: 240)
         .onAppear {
-            selectedTabs = UserDefaultsManager.main.cascadingOptions
+            selectedTabs = UserDefaultsManager.standard.cascadingOptions
         }
     }
 }

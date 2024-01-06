@@ -2,38 +2,40 @@ import Foundation
 import AVKit
 
 class RadioPlayer: NSObject, AVAudioPlayerDelegate {
-    let channel: RadioChannel
-    var song: AVAudioPlayer
+    let song: RadioSong
+    let player: AVAudioPlayer!
+    let delegate: SimpleAudioPlayerDelegate
     
-    init(channel: RadioChannel, isPlaying: Bool) {
-        self.channel = channel
-        self.song = try! channel.getNextSong()
+    init(song: RadioSong, isPlaying: Bool, delegate: SimpleAudioPlayerDelegate) {
+        self.song = song
+        self.player = try! song.getAudioPlayer()
         
         if isPlaying {
-            self.song.play()
+            self.player.play()
         } else {
-            self.song.pause()
+            self.player.pause()
         }
+        
+        self.delegate = delegate
         
         super.init()
         
-        self.song.delegate = self
+        self.player.delegate = self
     }
     
     func play() {
-        self.song.play()
+        self.player.play()
     }
     
     func pause() {
-        self.song.pause()
+        self.player.pause()
     }
     
-    var isPlaying: Bool {
-        return self.song.isPlaying
-    }
+//    var isPlaying: Bool {
+//        return self.player.isPlaying
+//    }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        self.song = try! channel.getNextSong()
-        self.song.play()
+        self.delegate.audioPlayerDidFinishPlaying(player, successfully: flag)
     }
 }

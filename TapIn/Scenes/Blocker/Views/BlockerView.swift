@@ -32,12 +32,12 @@ struct BlockerView: View {
     }
 }
 
-struct WorkspaceBlocker_Preview: PreviewProvider {
-    static var previews: some View {
-        let workspace = WorkspaceState.preview
-        
-        BlockerView()
-            .environmentObject(workspace)
-            .environmentObject(workspace.blocker)
-    }
-}
+//struct WorkspaceBlocker_Preview: PreviewProvider {
+//    static var previews: some View {
+//        let workspace = WorkspaceState.preview
+//        
+//        BlockerView()
+//            .environmentObject(workspace)
+//            .environmentObject(workspace.blocker)
+//    }
+//}

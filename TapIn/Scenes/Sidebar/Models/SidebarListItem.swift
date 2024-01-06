@@ -1,5 +1,6 @@
 import Foundation
 import RealmSwift
+import Factory
 
 struct SidebarListItem: Hashable {
     var objectId: ObjectId?
@@ -36,12 +37,14 @@ struct SidebarListItem: Hashable {
     func getFolder() -> FolderDB? {
         guard let id = objectId else { return nil }
         
-        return RealmManager.shared.realm.object(ofType: FolderDB.self, forPrimaryKey: id)
+        let realm = Container.shared.realmManager.callAsFunction().realm
+        return realm.object(ofType: FolderDB.self, forPrimaryKey: id)
     }
     
     func getWorkspace() -> WorkspaceDB? {
         guard let id = objectId else { return nil }
         
-        return RealmManager.shared.realm.object(ofType: WorkspaceDB.self, forPrimaryKey: id)
+        let realm = Container.shared.realmManager.callAsFunction().realm
+        return realm.object(ofType: WorkspaceDB.self, forPrimaryKey: id)
     }
 }

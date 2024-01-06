@@ -5,7 +5,7 @@ struct DefaultAppSelectorView: View {
     
     var body: some View {
         VStack {
-            Text("Open file with app...")
+            Text("Open \(vm.instance.type.label.lowercased()) with app...")
             
             Picker("", selection: $vm.selection) {
                 ForEach(vm.compatibleApps) { app in

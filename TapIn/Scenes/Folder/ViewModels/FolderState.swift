@@ -1,10 +1,9 @@
 import Foundation
 import RealmSwift
+import Factory
 
 class FolderState: ObservableObject {
-    var realm: Realm {
-        RealmManager.shared.realm
-    }
+    @Injected(\.realmManager) var realmManager: RealmManager
     
     var folder: FolderDB
     
@@ -16,7 +15,7 @@ class FolderState: ObservableObject {
     @Published var formInputs: FormInputs
     
     func onSubmit() {
-        try? realm.write {
+        try? realmManager.realm.write {
             folder.updateSettings(with: formInputs)
         }
     }

@@ -1,5 +1,6 @@
 import Cocoa
 import RealmSwift
+import Factory
 
 // ------------------------
 // HELPER FUNCTIONS
@@ -50,9 +51,9 @@ func convertURL(urlString: String) -> URL? {
     
     let urlString = "\(scheme)://\(host)\(urlComponents.path)"
     
-    let regex = "^(https?:\\/\\/)?([\\da-z\\.-]+\\.[a-z\\.]{2,6}|[\\d\\.]+)([\\/:?=&#]{1}[\\da-z\\.-]+)*[\\/\\?]?$"
-    // adding [c] after the comparator (MATCHES) makes it case insensitive
-    let predicate = NSPredicate(format:"SELF MATCHES[c] %@", argumentArray:[regex])
+//    let regex = "^(https?:\\/\\/)?([\\da-z\\.-]+\\.[a-z\\.]{2,6}|[\\d\\.]+)([\\/:?=&#]{1}[\\da-z\\.-]+)*[\\/\\?]?$"
+    let regex = "^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$"
+    let predicate = NSPredicate(format:"SELF MATCHES[c] %@", argumentArray:[regex]) // [c] after the comparator (MATCHES) makes it case insensitive
 
     if predicate.evaluate(with: urlString) == false {
         return nil
@@ -93,7 +94,7 @@ extension BaseLauncherInstanceBehavior {
     }
     
     func update(app: URL?, file: URL?) {
-        let realm = RealmManager.shared.realm
+        let realm = Container.shared.realmManager.callAsFunction().realm
         guard let object = object.thaw() else { return }
         
         try? realm.write {
@@ -116,7 +117,7 @@ extension BaseLauncherInstanceBehavior {
     }
     
     func write(_ block: (() -> Void)) {
-        let realm = RealmManager.shared.realm
+        let realm = Container.shared.realmManager.callAsFunction().realm
         try? realm.write {
             block()
         }
@@ -140,7 +141,7 @@ protocol FileSystemBasedBehavior {
 
 protocol WebBasedBehavior {
     func setName(name: String)
-    func setUrl(urlString: String)
+    func setUrl(urlString: String) throws
 }
 
 protocol Openable {

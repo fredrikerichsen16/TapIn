@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		350483362B49AB40004B4B08 /* SongInfoPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350483352B49AB40004B4B08 /* SongInfoPopoverView.swift */; };
 		351C42F12920A99400B6A843 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356FB74C29208A1500266E0B /* NetworkExtension.framework */; };
 		351C42F42920A99400B6A843 /* FilterDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C42F32920A99400B6A843 /* FilterDataProvider.swift */; };
 		351C42F62920A99400B6A843 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351C42F52920A99400B6A843 /* main.swift */; };
@@ -49,6 +50,10 @@
 		35757BD4292A456700CEBC19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35E000052911EEF3009D284D /* Assets.xcassets */; };
 		359780032913FB44004FBDAE /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359780022913FB44004FBDAE /* StatisticsView.swift */; };
 		3597800529141729004FBDAE /* SessionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3597800429141729004FBDAE /* SessionModel.swift */; };
+		359F62D12B4992D00046C901 /* DependencyInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F62D02B4992D00046C901 /* DependencyInjection.swift */; };
+		359F62D42B4992E90046C901 /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = 359F62D32B4992E90046C901 /* Factory */; };
+		359F62D62B4993590046C901 /* CircleWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F62D52B4993590046C901 /* CircleWithIcon.swift */; };
+		359F62D82B4998D40046C901 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359F62D72B4998D40046C901 /* Store.swift */; };
 		35AD05FD2912EDF800837016 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD05FC2912EDF800837016 /* NotesView.swift */; };
 		35AD05FF2912F18700837016 /* NoteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD05FE2912F18700837016 /* NoteDB.swift */; };
 		35AD06072913280D00837016 /* SessionHistoryQueryer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35AD06062913280D00837016 /* SessionHistoryQueryer.swift */; };
@@ -164,6 +169,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		350483352B49AB40004B4B08 /* SongInfoPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongInfoPopoverView.swift; sourceTree = "<group>"; };
 		351C42F02920A99400B6A843 /* tapin.TapIn.ContentFilterExtension.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = tapin.TapIn.ContentFilterExtension.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
 		351C42F32920A99400B6A843 /* FilterDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDataProvider.swift; sourceTree = "<group>"; };
 		351C42F52920A99400B6A843 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -205,6 +211,9 @@
 		356FB762292099D900266E0B /* ContentBlocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlocker.swift; sourceTree = "<group>"; };
 		359780022913FB44004FBDAE /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		3597800429141729004FBDAE /* SessionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionModel.swift; sourceTree = "<group>"; };
+		359F62D02B4992D00046C901 /* DependencyInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjection.swift; sourceTree = "<group>"; };
+		359F62D52B4993590046C901 /* CircleWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleWithIcon.swift; sourceTree = "<group>"; };
+		359F62D72B4998D40046C901 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		35AD05FC2912EDF800837016 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		35AD05FE2912F18700837016 /* NoteDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDB.swift; sourceTree = "<group>"; };
 		35AD06062913280D00837016 /* SessionHistoryQueryer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionHistoryQueryer.swift; sourceTree = "<group>"; };
@@ -315,6 +324,7 @@
 				35757BD3292A3A3E00CEBC19 /* RealmSwift in Frameworks */,
 				35757BD1292A3A3E00CEBC19 /* Realm in Frameworks */,
 				354BDD30292190FA002AA4C1 /* NetworkExtension.framework in Frameworks */,
+				359F62D42B4992E90046C901 /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +410,7 @@
 		3565B4BA2923556C00A5AB8C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				359F62D52B4993590046C901 /* CircleWithIcon.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -601,6 +612,7 @@
 				35F3D572291B58E90050E3A9 /* UserDefaultsManager.swift */,
 				35F3D576291B64DD0050E3A9 /* PropertyWrappers.swift */,
 				35E6F17F2924EFB70066E7A2 /* NotificationManager.swift */,
+				359F62D02B4992D00046C901 /* DependencyInjection.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -802,6 +814,7 @@
 			isa = PBXGroup;
 			children = (
 				35E000942911F531009D284D /* RadioView.swift */,
+				350483352B49AB40004B4B08 /* SongInfoPopoverView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -821,6 +834,7 @@
 			isa = PBXGroup;
 			children = (
 				35E000972911F531009D284D /* WorkspaceState.swift */,
+				359F62D72B4998D40046C901 /* Store.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1104,6 +1118,7 @@
 			packageProductDependencies = (
 				35757BD0292A3A3E00CEBC19 /* Realm */,
 				35757BD2292A3A3E00CEBC19 /* RealmSwift */,
+				359F62D32B4992E90046C901 /* Factory */,
 			);
 			productName = TapIn;
 			productReference = 35E0FFFE2911EEF2009D284D /* TapIn.app */;
@@ -1146,6 +1161,7 @@
 			mainGroup = 35E0FFF52911EEF2009D284D;
 			packageReferences = (
 				35757BCF292A3A3E00CEBC19 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				359F62D22B4992E90046C901 /* XCRemoteSwiftPackageReference "Factory" */,
 			);
 			productRefGroup = 35E0FFFF2911EEF2009D284D /* Products */;
 			projectDirPath = "";
@@ -1225,6 +1241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				359F62D82B4998D40046C901 /* Store.swift in Sources */,
 				35F3D575291B5DD70050E3A9 /* ComponentActivityTracker.swift in Sources */,
 				35F3D57D291B82CF0050E3A9 /* TimeGranularity.swift in Sources */,
 				35F3D567291B0A6F0050E3A9 /* FolderView.swift in Sources */,
@@ -1249,12 +1266,15 @@
 				35693E652915DFF300F1966D /* BlacklistedWebsite.swift in Sources */,
 				35E000CE2911F531009D284D /* LauncherTypeSelectionPopoverView.swift in Sources */,
 				35E000DA2911F531009D284D /* WorkspaceTab.swift in Sources */,
+				359F62D12B4992D00046C901 /* DependencyInjection.swift in Sources */,
 				35E000602911F4F4009D284D /* SessionDB.swift in Sources */,
 				3542DC3A2917ACE500F7A9D8 /* ProgressCircleView.swift in Sources */,
 				35E000392911F382009D284D /* NuclearWasteland.swift in Sources */,
 				356E7F73292616AF00E81C67 /* LauncherBottomMenuController.swift in Sources */,
 				359780032913FB44004FBDAE /* StatisticsView.swift in Sources */,
+				359F62D62B4993590046C901 /* CircleWithIcon.swift in Sources */,
 				35E000E32911F531009D284D /* PomodoroStage.swift in Sources */,
+				350483362B49AB40004B4B08 /* SongInfoPopoverView.swift in Sources */,
 				35E000D42911F531009D284D /* WorkspaceState.swift in Sources */,
 				35E000DF2911F531009D284D /* PomodoroState.swift in Sources */,
 				356E7F6D2926164E00E81C67 /* WorkspaceComponentStatus.swift in Sources */,
@@ -1740,6 +1760,14 @@
 				kind = branch;
 			};
 		};
+		359F62D22B4992E90046C901 /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1752,6 +1780,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 35757BCF292A3A3E00CEBC19 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		359F62D32B4992E90046C901 /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 359F62D22B4992E90046C901 /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

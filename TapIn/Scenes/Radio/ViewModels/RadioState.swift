@@ -1,129 +1,48 @@
 import SwiftUI
 import RealmSwift
+import Factory
+import AVKit
 
-fileprivate let channels: [RadioChannel] = [
-    RadioChannel(key: "LofiBeats", title: "Lofi Beats", songs: [
-        RadioSong(file: "song-1", title: "Joy Ride", singer: "Aves"), // v
-        RadioSong(file: "song-2", title: "Old Sneakers", singer: "Cosmonkey"), // v
-        RadioSong(file: "song-3", title: "Passionate Choices", singer: "Mansij"),
-        RadioSong(file: "song-4", title: "Loose Tension", singer: "Reel Life"), // v
-        RadioSong(file: "song-5", title: "See For Your Shelf Instrumental", singer: "Sam Barsh"), // v
-        RadioSong(file: "song-6", title: "Cafe Radio", singer: "Nu Alkemi$t"), // v
-        RadioSong(file: "song-7", title: "Low Fidelity", singer: "Tide Electric"), // v
-        RadioSong(file: "song-8", title: "Lavender", singer: "VAULTZ"), // v
-        RadioSong(file: "song-9", title: "Cloud Pillow", singer: "Neon Beach"), // v
-        RadioSong(file: "song-10", title: "Wise As A Serpent", singer: "Ghost Beatz"), // v
-        RadioSong(file: "song-11", title: "Will You Dance with Me", singer: "Lalinea"), // v
-        RadioSong(file: "song-12", title: "By My Side", singer: "K. Solis"), // v
-        RadioSong(file: "song-13", title: "Marigolds in May", singer: "Jamie Bathgate"), // v
-        RadioSong(file: "song-14", title: "Café de Paris", singer: "MILANO") // v
-    ]),
-    RadioChannel(key: "TechnoBops", title: "Techno Bops", songs: [
-        RadioSong(file: "song-1", title: "nuer self", singer: "Far Away"), // v
-        RadioSong(file: "song-2", title: "Neon Affair", singer: "Notize"), // v
-        RadioSong(file: "song-3", title: "X-Lover", singer: "Thee Alchemist Oxford"), // v
-        RadioSong(file: "song-4", title: "Focuser", singer: "Neon Beach"), // v
-        RadioSong(file: "song-5", title: "How You Do", singer: "BRASKO"), // v
-        RadioSong(file: "song-6", title: "Open Your Eyes", singer: "Basketcase"), // v
-        RadioSong(file: "song-7", title: "In Your Atmosphere", singer: "Nu Alkemi$t"), // v
-        RadioSong(file: "song-8", title: "Cloud City", singer: "Neon Beach"), // v
-        RadioSong(file: "song-9", title: "Stargirl", singer: "élise"), // v
-        RadioSong(file: "song-10", title: "Spacewalk", singer: "Reveille"), // v
-        RadioSong(file: "song-11", title: "Glasgow", singer: "Falls"), // v
-        RadioSong(file: "song-12", title: "Raw Aesthetic", singer: "Falls"), // v
-        RadioSong(file: "song-13", title: "Outrun", singer: "Aardverk"), // v
-        RadioSong(file: "song-14", title: "Status", singer: "Jamie Bathgate") // v
-    ]),
-    RadioChannel(key: "Classical", title: "Classical", songs: [
-        RadioSong(file: "song-1", title: "Ballerina", singer: "Yehezkel Raz"), // v
-        RadioSong(file: "song-2", title: "Presence", singer: "Aija Alsina"), // v
-        RadioSong(file: "song-3", title: "Belonging", singer: "Muted"), // v
-        RadioSong(file: "song-4", title: "Air on a G String (Bach)", singer: "Ian Post"), // v
-        RadioSong(file: "song-5", title: "Gymnopédie no. 1", singer: "Romi Kopelman"), // v
-        RadioSong(file: "song-6", title: "Bachs Cello Suite - Reimagined", singer: "Ardie Son"), // v
-        RadioSong(file: "song-7", title: "Moonlight Sonata - Mvt. 1 (Beethoven)", singer: "Brooklyn Classical"), // v
-        RadioSong(file: "song-8", title: "Paris", singer: "Daniel Robinson"), // v
-        RadioSong(file: "song-9", title: "Canon in D Major - (Pachelbel) - Instrumental Version", singer: "Ian Post"), // v
-        RadioSong(file: "song-10", title: "Gnossienne no. 1", singer: "Romi Kopelman"), // v
-        RadioSong(file: "song-11", title: "Für Elise (Beethoven)", singer: "Brooklyn Classical"), // v
-        RadioSong(file: "song-12", title: "Flower Duet (Lakmé)", singer: "Hawkins"), // v
-        RadioSong(file: "song-13", title: "Dear Frédéric", singer: "Elise Solberg"), // v
-        RadioSong(file: "song-14", title: "Canon in D", singer: "Amanda Welch"), // v
-        RadioSong(file: "song-15", title: "Dawning Sprite", singer: "Lincoln Davis"), // v
-        RadioSong(file: "song-16", title: "High Class Klaus", singer: "Wild Wonder"), // v
-    ]),
-    RadioChannel(key: "JazzyJazz", title: "Smooth Jazz", songs: [
-        RadioSong(file: "song-1", title: "Lucky Me", singer: "Cast Of Characters"), // v
-        RadioSong(file: "song-2", title: "What's the Big Deal", singer: "Ryan Saranich"), // v
-        RadioSong(file: "song-3", title: "Lazy Evenings", singer: "Sam Barsh"), // v
-        RadioSong(file: "song-4", title: "les rues la nuit seul", singer: "Renderings"), // v
-        RadioSong(file: "song-5", title: "Sunny Side Up", singer: "The Night Train"), // v
-        RadioSong(file: "song-6", title: "What A Gal", singer: "The Night Train"), // v
-        RadioSong(file: "song-7", title: "Secret Agent T.", singer: "T. Bless & the Professionals"), // v
-        RadioSong(file: "song-8", title: "Richard Goes Stompin", singer: "Ziv Grinberg"), // v
-        RadioSong(file: "song-9", title: "Arak Deluxe", singer: "David Gives"), // v
-        RadioSong(file: "song-10", title: "Morning in the Rain", singer: "Mark Yencheske") // v
-    ]),
-    RadioChannel(key: "Dramatic", title: "Dramatique", songs: [
-        RadioSong(file: "song-1", title: "Still Life", singer: "ANBR"), // v
-        RadioSong(file: "song-2", title: "Muted", singer: "Zoom Out"), // v
-        RadioSong(file: "song-3", title: "Zaphenath-Paneah", singer: "Quinten Coblentz"), // v
-        RadioSong(file: "song-4", title: "Illusion", singer: "Cody Martin"), // v
-        RadioSong(file: "song-5", title: "Building A Fort", singer: "Cody Martin"), // v
-        RadioSong(file: "song-6", title: "Lore", singer: "Wicked Cinema"), // v
-        RadioSong(file: "song-7", title: "With You Always", singer: "Moments"), // v
-        RadioSong(file: "song-8", title: "Penumbra", singer: "EFGR"), // v
-    ]),
-    RadioChannel(key: "ChristmasJingles", title: "Christmas Jingles", songs: [
-        RadioSong(file: "song-1", title: "Silent Night", singer: "The Dandelions"), // v
-        RadioSong(file: "song-2", title: "Winter Wonder", singer: "Cast Of Characters"), // v
-        RadioSong(file: "song-3", title: "Auld Lang Syne", singer: "Elise Solberg"), // v
-        RadioSong(file: "song-4", title: "We Wish You A Merry Christmas", singer: "Ryan Saranich"), // v
-        RadioSong(file: "song-5", title: "Christmas Shopping", singer: "Adam Saban"), // v
-        RadioSong(file: "song-6", title: "Silent Night", singer: "Ghost Beatz"), // v
-        RadioSong(file: "song-7", title: "O' Holy Night (A Lullaby)", singer: "Alternate Endings"), // v
-        RadioSong(file: "song-8", title: "Deck the Halls", singer: "Duffmusiq"), // v
-    ]),
-]
+ protocol SimpleAudioPlayerDelegate {
+     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool)
+ }
 
-final class RadioState: WorkspaceComponentViewModel {
-    
-    // MARK: Main properties
-    
-    @IndexingCollection(collectionLength: channels.count)
-    private var currentChannelIndex: Int = 0 {
-        didSet {
-            currentChannel = channels[currentChannelIndex]
-            UserDefaultsManager.main.radioChannelIndex = currentChannelIndex
-        }
-    }
-    
-    @Published var currentChannel: RadioChannel
+final class RadioState: WorkspaceComponentViewModel, SimpleAudioPlayerDelegate {
+    @Published var radioStatus = RadioStatus()
     
     private var player: RadioPlayer? = nil
     
     // MARK: Init
     
     init(workspace: WorkspaceDB) {
-        let currentChannelIndex = UserDefaultsManager.main.radioChannelIndex
-        self.currentChannelIndex = currentChannelIndex
-        self.currentChannel = channels[currentChannelIndex]
-        
-        super.init(workspace: workspace, realm: RealmManager.shared.realm, component: .radio)
+        let realm = Container.shared.realmManager.callAsFunction().realm
+        super.init(workspace: workspace, realm: realm, component: .radio)
         
         initializePlayer()
     }
     
+    // MARK: UI Properties
+
+     var channelTitle: String {
+         radioStatus.currentChannel.title
+     }
+
+     var songAndArtist: String {
+         radioStatus.currentSong.title + " - " + radioStatus.currentSong.singers.joined(separator: ", ")
+     }
+    
     // MARK: Changing channel
     
     func goToPrevChannel() {
-        currentChannelIndex -= 1
-        self.initializePlayer()
+        radioStatus.currentChannelIndex -= 1
+        radioStatus.changeSong()
+        initializePlayer()
     }
     
     func goToNextChannel() {
-        currentChannelIndex += 1
-        self.initializePlayer()
+        radioStatus.currentChannelIndex += 1
+        radioStatus.changeSong()
+        initializePlayer()
     }
     
     // MARK: Stop and start session
@@ -139,10 +58,125 @@ final class RadioState: WorkspaceComponentViewModel {
     }
     
     private func initializePlayer() {
-        self.player = RadioPlayer(channel: currentChannel, isPlaying: isActive)
+        player = RadioPlayer(song: radioStatus.currentSong, isPlaying: isActive, delegate: self)
     }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+         radioStatus.changeSong()
+         initializePlayer()
+     }
     
     deinit {
         print("WAS DEINITIALIZED")
     }
 }
+
+
+struct RadioStatus {
+     @IndexingCollection(collectionLength: channels.count)
+     var currentChannelIndex: Int = 0 {
+         didSet {
+             currentChannel = channels[currentChannelIndex]
+             UserDefaultsManager.standard.radioChannelIndex = currentChannelIndex
+         }
+     }
+
+     var currentChannel: RadioChannel
+     var currentSong: RadioSong
+
+     mutating func changeSong() {
+         currentSong = currentChannel.getNextSong()
+     }
+
+     init() {
+         let currentChannelIndex = UserDefaultsManager.standard.radioChannelIndex
+         self.currentChannelIndex = currentChannelIndex
+         self.currentChannel = channels[currentChannelIndex]
+         self.currentSong = currentChannel.getNextSong()
+     }
+ }
+
+ fileprivate let channels: [RadioChannel] = [
+     RadioChannel(key: "Lofi", title: "Lofi Beats", songs: [
+         RadioSong(file: "vaozhosgroidfettkgfigdzk", title: "Joy Ride", singer: "Aves"),
+         RadioSong(file: "blitfcxhmlbxwchsusiqnuyz", title: "Old Sneakers", singer: "Cosmonkey"),
+         RadioSong(file: "hwmifymusyozhrjduusvgfjq", title: "Passionate Choices", singer: "Mansij"),
+         RadioSong(file: "ikunvsrjlfhptmduqcsxqexv", title: "Loose Tension", singer: "Reel Life"),
+         RadioSong(file: "bmccozfrqodcqmgfthulcaxg", title: "See For Your Shelf Instrumental", singer: "Sam Barsh"),
+         RadioSong(file: "hovnasgzbqidmeozxcdeztrm", title: "Cafe Radio", singer: "Nu Alkemi$t"),
+         RadioSong(file: "rxabgfxeurihhzsyajundxcy", title: "Low Fidelity", singer: "Tide Electric"),
+         RadioSong(file: "ydrpsnsjcixxmfujnurhmczx", title: "Lavender", singer: "VAULTZ"),
+         RadioSong(file: "lhvqkhyjvancdvlxybwfkpuw", title: "Cloud Pillow", singer: "Neon Beach"),
+         RadioSong(file: "ofhlslwlodmdauingboqhvpu", title: "Wise As A Serpent", singer: "Ghost Beatz"),
+         RadioSong(file: "sidkhvwbhuvxfsapoobisnwc", title: "Will You Dance with Me", singer: "Lalinea"),
+         RadioSong(file: "gbxjfgkhmttmmpakwkcfaene", title: "By My Side", singer: "K. Solis"),
+         RadioSong(file: "uyafqvvolpdeeyymkhedrjww", title: "Marigolds in May", singer: "Jamie Bathgate"),
+         RadioSong(file: "zfagohpuifdlcrmpvgalyuxw", title: "Café de Paris", singer: "MILANO")
+     ]),
+     RadioChannel(key: "Techno", title: "Techno Bops", songs: [
+         RadioSong(file: "vccjxzbfdschuvbuqkdllcwb", title: "nuer self", singer: "Far Away"),
+         RadioSong(file: "hgyemgokctpyjyiuplfocicb", title: "Neon Affair", singer: "Notize"),
+         RadioSong(file: "cvzkmppwrcxndvotmtfsvwnt", title: "X-Lover", singer: "Thee Alchemist Oxford"),
+         RadioSong(file: "pvwuwxtpjryxchnwcxwyuwkg", title: "Focuser", singer: "Neon Beach"),
+         RadioSong(file: "qlgylxyvphvvwzcqssnhktwc", title: "How You Do", singer: "BRASKO"),
+         RadioSong(file: "agqterkpdkcfolasefqsvnvz", title: "Open Your Eyes", singer: "Basketcase"),
+         RadioSong(file: "fjlniiakiaxvxxhvdebnljxb", title: "In Your Atmosphere", singer: "Nu Alkemi$t"),
+         RadioSong(file: "riwcrppbhymzxrqdssdvlcsy", title: "Cloud City", singer: "Neon Beach"),
+         RadioSong(file: "gdufnmawxlwjjzvswollcden", title: "Stargirl", singer: "élise"),
+         RadioSong(file: "faeiotfzyuonexeuaugweawo", title: "Spacewalk", singer: "Reveille"),
+         RadioSong(file: "gadlshalkhdifxxwyxsmpaom", title: "Glasgow", singer: "Falls"),
+         RadioSong(file: "flzsnldnkrvnuoddhdnqpcga", title: "Raw Aesthetic", singer: "Falls"),
+         RadioSong(file: "znwwvnsiflywcpffvmehkdyn", title: "Outrun", singer: "Aardverk"),
+         RadioSong(file: "ixrcawmlcyorrexrgxuivgjz", title: "Status", singer: "Jamie Bathgate")
+     ]),
+     RadioChannel(key: "Classical", title: "Classical", songs: [
+         RadioSong(file: "pxewffjzvdelqfboyoxnqqlc", title: "Ballerina", singer: "Yehezkel Raz"),
+         RadioSong(file: "genlrozyotquvjpvhsujoqsm", title: "Presence", singer: "Aija Alsina"),
+         RadioSong(file: "nlaamlluhwcsbbjkrheqmzjo", title: "Belonging", singer: "Muted"),
+         RadioSong(file: "ioxbeymgmfjqsgnplynzrnkr", title: "Air on a G String (Bach)", singer: "Ian Post"),
+         RadioSong(file: "xuthpknkufjpwgognurqwzfb", title: "Gymnopédie no. 1", singer: "Romi Kopelman"),
+         RadioSong(file: "yyjupetgramxwzkcotocenzx", title: "Bachs Cello Suite - Reimagined", singer: "Ardie Son"),
+         RadioSong(file: "bevthfrztnvhaoymiryingir", title: "Moonlight Sonata - Mvt. 1 (Beethoven)", singer: "Brooklyn Classical"),
+         RadioSong(file: "ewkwzylwrghnhlidladwjhng", title: "Paris", singer: "Daniel Robinson"),
+         RadioSong(file: "gkytorfewtqbrapynafosmog", title: "Canon in D Major - (Pachelbel) - Instrumental Version", singer: "Ian Post"),
+         RadioSong(file: "swhqhddkywgtujzvfmnjemfv", title: "Gnossienne no. 1", singer: "Romi Kopelman"),
+         RadioSong(file: "zmmdjdjppktytdhzvvosesxb", title: "Für Elise (Beethoven)", singer: "Brooklyn Classical"),
+         RadioSong(file: "vdmlhkxmjkwvlwmmiaphxxqn", title: "Flower Duet (Lakmé)", singer: "Hawkins"),
+         RadioSong(file: "xbdyrffnqkjgnrfbswyjrlse", title: "Dear Frédéric", singer: "Elise Solberg"),
+         RadioSong(file: "hjulgydnoisbmgdirfnspiix", title: "Canon in D", singer: "Amanda Welch"),
+         RadioSong(file: "pqtwqdshpmdyhhzctwovhusq", title: "Dawning Sprite", singer: "Lincoln Davis"),
+         RadioSong(file: "qeqjyrqheematjffaervyccv", title: "High Class Klaus", singer: "Wild Wonder"),
+     ]),
+     RadioChannel(key: "Jazz", title: "Smooth Jazz", songs: [
+         RadioSong(file: "mybqonivmgfhzzkzuyanrjdu", title: "Lucky Me", singer: "Cast Of Characters"),
+         RadioSong(file: "segfwhssulgghtspiiblaauz", title: "What's the Big Deal", singer: "Ryan Saranich"),
+         RadioSong(file: "kbzxnhlqnvesnmbgwsxudfyl", title: "Lazy Evenings", singer: "Sam Barsh"),
+         RadioSong(file: "maplkztsgfxgifsglxflvunh", title: "les rues la nuit seul", singer: "Renderings"),
+         RadioSong(file: "leyoeeqfuhirebsxduovbujc", title: "Sunny Side Up", singer: "The Night Train"),
+         RadioSong(file: "dhfnymbhmraatuizsmfigcmj", title: "What A Gal", singer: "The Night Train"),
+         RadioSong(file: "qklpmtczclklxhjuzusugvhp", title: "Secret Agent T.", singer: "T. Bless & the Professionals"),
+         RadioSong(file: "vkggyujdxhwwnhvmwmnaginp", title: "Richard Goes Stompin", singer: "Ziv Grinberg"),
+         RadioSong(file: "uymosmyyxxfkzrrcauhfwkge", title: "Arak Deluxe", singer: "David Gives"),
+         RadioSong(file: "sruiylohotscviohogtqwvpn", title: "Morning in the Rain", singer: "Mark Yencheske")
+     ]),
+     RadioChannel(key: "Dramatic", title: "Dramatique", songs: [
+         RadioSong(file: "gnxsdpvbnujzzsnrailnzeiv", title: "Still Life", singer: "ANBR"),
+         RadioSong(file: "qlyhyberkjymrmsjpkhprkgl", title: "Muted", singer: "Zoom Out"),
+         RadioSong(file: "mescbbanuztpluhzsxknebuk", title: "Zaphenath-Paneah", singer: "Quinten Coblentz"),
+         RadioSong(file: "bpnrvlumegxmxaokftyxghio", title: "Illusion", singer: "Cody Martin"),
+         RadioSong(file: "eplgkdxmnrxmcdvcofshadfd", title: "Building A Fort", singer: "Cody Martin"),
+         RadioSong(file: "oqkymzchehblehpvcmzxmnyn", title: "Lore", singer: "Wicked Cinema"),
+         RadioSong(file: "xmgjcysrhwakhbnsucdocuud", title: "With You Always", singer: "Moments"),
+         RadioSong(file: "xafgbgbyogbraopabueaegsq", title: "Penumbra", singer: "EFGR"),
+     ]),
+     RadioChannel(key: "Christmas", title: "Christmas Jingles", songs: [
+         RadioSong(file: "vtynjfrqqheaxlnxnvdrebcq", title: "Silent Night", singer: "The Dandelions"),
+         RadioSong(file: "frzvzftzwljvkzmkkgjixvfv", title: "Winter Wonder", singer: "Cast Of Characters"),
+         RadioSong(file: "yjuerlcxopynszqqfvpxctrr", title: "Auld Lang Syne", singer: "Elise Solberg"),
+         RadioSong(file: "djxwexktgczyphjplzxwhhpg", title: "We Wish You A Merry Christmas", singer: "Ryan Saranich"),
+         RadioSong(file: "xxksvjpulzgsyacudbqliqhf", title: "Christmas Shopping", singer: "Adam Saban"),
+         RadioSong(file: "pknbspftqhykwbhpbbwfrlmq", title: "Silent Night", singer: "Ghost Beatz"),
+         RadioSong(file: "ladamqdospqgkulpohwkbqnw", title: "O' Holy Night (A Lullaby)", singer: "Alternate Endings"),
+         RadioSong(file: "kngyaajmkqrtutbsayvvzkjk", title: "Deck the Halls", singer: "Duffmusiq"),
+     ]),
+ ]

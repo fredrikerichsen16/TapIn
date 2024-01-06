@@ -33,12 +33,12 @@ struct LauncherInstanceListControlButtonsView: View {
     }
 }
 
-struct LauncherInstanceListControlButtonsView_Preview: PreviewProvider {
-    static var previews: some View {
-        let workspace = WorkspaceState.preview
-        
-        LauncherInstanceListControlButtonsView(showingPopover: true)
-            .environmentObject(workspace)
-    }
-}
+//struct LauncherInstanceListControlButtonsView_Preview: PreviewProvider {
+//    static var previews: some View {
+//        let workspace = WorkspaceState.preview
+//        
+//        LauncherInstanceListControlButtonsView(showingPopover: true)
+//            .environmentObject(workspace)
+//    }
+//}
 

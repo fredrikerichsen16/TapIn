@@ -13,12 +13,12 @@ class NotificationManager {
         notificationCenter.requestAuthorization(options: [.badge, .sound, .alert], completionHandler: { (success, error) in
             if success
             {
-                UserDefaultsManager.main.notificationsEnabled = true
+                UserDefaultsManager.standard.notificationsEnabled = true
                 print("Notifications activated")
             }
             else
             {
-                UserDefaultsManager.main.notificationsEnabled = false
+                UserDefaultsManager.standard.notificationsEnabled = false
                 
                 if let error
                 {
@@ -30,7 +30,7 @@ class NotificationManager {
     
     /// Send notification immediately with basic information
     func sendSimpleNotification(title: String, subtitle: String) {
-        guard UserDefaultsManager.main.notificationsEnabled else {
+        guard UserDefaultsManager.standard.notificationsEnabled else {
             return
         }
         
