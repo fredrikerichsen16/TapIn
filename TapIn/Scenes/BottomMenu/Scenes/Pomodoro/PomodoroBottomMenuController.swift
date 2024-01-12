@@ -6,7 +6,7 @@ struct PomodoroBottomMenuController: View {
     var body: some View {
         BottomMenuWorkspaceTabController(workspaceTab: .pomodoro) {
             HStack {
-                ForEach(workspace.pomodoro.getButtons(), id: \.rawValue) { button in
+                ForEach(workspace.pomodoro.buttons, id: \.rawValue) { button in
                     PomodoroButtonView(button: button)
                 }
             }

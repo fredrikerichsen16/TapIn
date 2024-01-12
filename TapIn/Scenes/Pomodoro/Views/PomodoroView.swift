@@ -15,7 +15,7 @@ struct PomodoroView: View {
                     .padding()
                 
                 VStack {
-                    Text(vm.stageState.getLabel())
+                    Text(vm.pomodoroStadie.getLabel())
                         .font(.body)
                     
                     Text(String(vm.remainingTimeString))

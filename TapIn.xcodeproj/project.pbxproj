@@ -104,9 +104,8 @@
 		35E000DD2911F531009D284D /* BottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000AC2911F531009D284D /* BottomMenu.swift */; };
 		35E000DE2911F531009D284D /* ActiveBottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000AD2911F531009D284D /* ActiveBottomMenu.swift */; };
 		35E000DF2911F531009D284D /* PomodoroState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B02911F531009D284D /* PomodoroState.swift */; };
-		35E000E02911F531009D284D /* PomodoroStageState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B22911F531009D284D /* PomodoroStageState.swift */; };
+		35E000E02911F531009D284D /* PomodoroStadie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B22911F531009D284D /* PomodoroStadie.swift */; };
 		35E000E12911F531009D284D /* TimerMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B32911F531009D284D /* TimerMode.swift */; };
-		35E000E22911F531009D284D /* PomodoroTimerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B42911F531009D284D /* PomodoroTimerState.swift */; };
 		35E000E32911F531009D284D /* PomodoroStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B52911F531009D284D /* PomodoroStage.swift */; };
 		35E000E42911F531009D284D /* PomodoroTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B62911F531009D284D /* PomodoroTicker.swift */; };
 		35E000E52911F531009D284D /* PomodoroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E000B82911F531009D284D /* PomodoroView.swift */; };
@@ -267,9 +266,8 @@
 		35E000AC2911F531009D284D /* BottomMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomMenu.swift; sourceTree = "<group>"; };
 		35E000AD2911F531009D284D /* ActiveBottomMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveBottomMenu.swift; sourceTree = "<group>"; };
 		35E000B02911F531009D284D /* PomodoroState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroState.swift; sourceTree = "<group>"; };
-		35E000B22911F531009D284D /* PomodoroStageState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroStageState.swift; sourceTree = "<group>"; };
+		35E000B22911F531009D284D /* PomodoroStadie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroStadie.swift; sourceTree = "<group>"; };
 		35E000B32911F531009D284D /* TimerMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerMode.swift; sourceTree = "<group>"; };
-		35E000B42911F531009D284D /* PomodoroTimerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroTimerState.swift; sourceTree = "<group>"; };
 		35E000B52911F531009D284D /* PomodoroStage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroStage.swift; sourceTree = "<group>"; };
 		35E000B62911F531009D284D /* PomodoroTicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroTicker.swift; sourceTree = "<group>"; };
 		35E000B82911F531009D284D /* PomodoroView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PomodoroView.swift; sourceTree = "<group>"; };
@@ -960,9 +958,8 @@
 		35E000B12911F531009D284D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				35E000B22911F531009D284D /* PomodoroStageState.swift */,
+				35E000B22911F531009D284D /* PomodoroStadie.swift */,
 				35E000B32911F531009D284D /* TimerMode.swift */,
-				35E000B42911F531009D284D /* PomodoroTimerState.swift */,
 				35E000B52911F531009D284D /* PomodoroStage.swift */,
 				35E000B62911F531009D284D /* PomodoroTicker.swift */,
 			);
@@ -1293,7 +1290,6 @@
 				35F3D56F291B37C40050E3A9 /* BottomBarLauncherSettings.swift in Sources */,
 				35E000022911EEF2009D284D /* TapInApp.swift in Sources */,
 				35F3D577291B64DD0050E3A9 /* PropertyWrappers.swift in Sources */,
-				35E000E22911F531009D284D /* PomodoroTimerState.swift in Sources */,
 				3542DC2F291763F700F7A9D8 /* WebInstanceNameAndUrlEditorView.swift in Sources */,
 				35E000492911F43B009D284D /* CustomPersistables.swift in Sources */,
 				35AD05FD2912EDF800837016 /* NotesView.swift in Sources */,
@@ -1313,7 +1309,7 @@
 				35E000C82911F531009D284D /* LauncherModelExtra.swift in Sources */,
 				35693E5929157D5200F1966D /* FolderDB.swift in Sources */,
 				35E9CE4329198A7B0019DDE8 /* SubscriptionSettingsState.swift in Sources */,
-				35E000E02911F531009D284D /* PomodoroStageState.swift in Sources */,
+				35E000E02911F531009D284D /* PomodoroStadie.swift in Sources */,
 				356E7F75292616CA00E81C67 /* PomodoroBottomMenuController.swift in Sources */,
 				35F3D571291B45C90050E3A9 /* NSNotification.Name+.swift in Sources */,
 				35E000C22911F531009D284D /* SettingsView.swift in Sources */,

@@ -47,4 +47,11 @@ final class WorkspaceDB: Object, ObjectKeyIdentifiable {
         
         return sessionsToday.count
     }
+    
+    func longBreakDue() -> Bool {
+        let numCompletedSessions = numSessionsCompletedToday()
+        let longBreakFrequency = Int(pomodoro.longBreakFrequency)
+        
+        return numCompletedSessions % longBreakFrequency == 0
+    }
 }

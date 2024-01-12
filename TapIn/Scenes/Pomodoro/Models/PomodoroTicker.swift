@@ -68,4 +68,14 @@ class PomodoroTicker {
         timeElapsed = 0
     }
     
+    func handleStadieChange(stage: PomodoroStage, timerMode: TimerMode) {
+        self.stageDuration = stage.getDurationInSeconds()
+        self.running = timerMode == .running
+        
+        if (timerMode == .initial) {
+            self.timeElapsed = 0
+            self.updateUI()
+        }
+    }
+    
 }
