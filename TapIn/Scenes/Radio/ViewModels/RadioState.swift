@@ -14,9 +14,9 @@ final class RadioState: WorkspaceComponentViewModel, SimpleAudioPlayerDelegate {
     
     // MARK: Init
     
-    init(workspace: WorkspaceDB) {
+    init(workspace: WorkspaceDB, componentActivityTracker: ComponentActivityTracker) {
         let realm = Container.shared.realmManager.callAsFunction().realm
-        super.init(workspace: workspace, realm: realm, component: .radio)
+        super.init(workspace: workspace, realm: realm, componentActivityTracker: componentActivityTracker, component: .radio)
         
         initializePlayer()
     }

@@ -37,7 +37,7 @@ enum BlockerStrength: Int, Comparable, PersistableEnum {
         case .normal:
             return "Blocker can be deactivated by closing the app or ending the work session prematurely."
         case .extreme:
-            return "Blocker cannot be deactivated (even by restarting computer) until session is completed (or, in the event that you close the app, that much time has elapsed)"
+            return "Blocker cannot be deactivated (even by restarting computer) until session is completed (or, in the event that you close the app, the initial time commitment has elapsed)"
         }
     }
 }

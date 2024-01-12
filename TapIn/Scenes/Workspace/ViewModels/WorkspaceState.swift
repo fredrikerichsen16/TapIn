@@ -4,14 +4,14 @@ import Factory
 
 fileprivate struct WorkspaceComponentFactory {
     let workspace: WorkspaceDB
-    let componentsStatus: ComponentsStatus
+    let componentActivityTracker: ComponentActivityTracker
     
     func createPomodoroState() -> PomodoroState {
-        return PomodoroState(workspace: workspace)
+        return PomodoroState(workspace: workspace, componentActivityTracker: componentActivityTracker)
     }
     
     func createRadioState() -> RadioState {
-        return RadioState(workspace: workspace)
+        return RadioState(workspace: workspace, componentActivityTracker: componentActivityTracker)
     }
     
     func createLauncherState() -> LauncherState {
@@ -19,7 +19,7 @@ fileprivate struct WorkspaceComponentFactory {
     }
     
     func createBlockerState() -> BlockerState {
-        return BlockerState(workspace: workspace, componentsStatus: componentsStatus)
+        return BlockerState(workspace: workspace, componentActivityTracker: componentActivityTracker)
     }
 }
 
@@ -48,15 +48,13 @@ class WorkspaceState: ObservableObject {
         self.workspace = workspace
         self.workspaceTab = UserDefaultsManager.standard.getLatestTab(for: workspace) ?? .pomodoro
         
-        let componentsStatus = ComponentsStatus()
-        let factory = WorkspaceComponentFactory(workspace: workspace, componentsStatus: componentsStatus)
+        self.componentActivityTracker = ComponentActivityTracker()
+        let factory = WorkspaceComponentFactory(workspace: workspace, componentActivityTracker: componentActivityTracker)
         
         self.pomodoro = factory.createPomodoroState()
         self.radio = factory.createRadioState()
         self.launcher = factory.createLauncherState()
         self.blocker = factory.createBlockerState()
-        
-        self.componentActivityTracker = ComponentActivityTracker(workspace: self, componentsStatus: componentsStatus)
         
         pomodoro.objectWillChange.sink { [weak self] (_) in
             self?.objectWillChange.send()
@@ -97,6 +95,9 @@ class WorkspaceState: ObservableObject {
     }
     
     @Published var bottomMenuTab: WorkspaceTab = .pomodoro
+    
+    // MARK: Activity Tracking
+    
 }
 
 

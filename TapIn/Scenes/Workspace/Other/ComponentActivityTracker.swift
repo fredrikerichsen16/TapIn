@@ -1,55 +1,73 @@
 import Foundation
 
+protocol ComponentStatus {
+    var component: WorkspaceTab { get set }
+    var status: TimerMode { get set }
+    var cascades: Bool { get set }
+}
+
+class PomodoroActivityStatus: ComponentStatus {
+    var component = WorkspaceTab.pomodoro
+    var status = TimerMode.initial
+    var cascades = false
+}
+
+class BlockerActivityStatus: ComponentStatus {
+    var component = WorkspaceTab.blocker
+    var status = TimerMode.initial
+    var cascades = false
+}
+
+class RadioActivityStatus: ComponentStatus {
+    var component = WorkspaceTab.radio
+    var status = TimerMode.initial
+    var cascades = false
+}
+
 class ComponentsStatus {
-    var componentsStatus: [WorkspaceTab: WorkspaceComponentStatus] = [
-        .pomodoro: false,
-        .blocker: false,
-        .radio: false
+    var componentsStatus: [WorkspaceTab: ComponentStatus] = [
+        .pomodoro: PomodoroActivityStatus(),
+        .blocker: BlockerActivityStatus(),
+        .radio: RadioActivityStatus()
     ]
     
-    func set(component: WorkspaceTab, status: WorkspaceComponentStatus) {
-        componentsStatus[component] = status
+    func set(component: WorkspaceTab, status: TimerMode) {
+        componentsStatus[component]?.status = status
+    }
+    
+    func set(component: WorkspaceTab, cascades: Bool) {
+        componentsStatus[component]?.cascades = cascades
     }
     
     func anyActive() -> Bool {
-        return componentsStatus.values.contains(where: { $0 == true })
+        return componentsStatus.values.contains(where: { $0.status == .running })
     }
     
     func isActive(_ component: WorkspaceTab) -> Bool {
-        return componentsStatus[component] ?? false
+        guard let component = componentsStatus[component] else {
+            return false
+        }
+        
+        return component.status == .running
     }
     
     func printStatus() {
         for (key, value) in componentsStatus
         {
-            print("\(key.label): \(value)")
+            print("\(key.label): \(value.component.rawValue)")
         }
     }
 }
 
 class ComponentActivityTracker {
     var coordinator: WorkspaceCoordinator = WorkspaceCoordinator.shared
-    let workspace: WorkspaceState
     
-    init(workspace: WorkspaceState, componentsStatus: ComponentsStatus) {
-        self.workspace = workspace
-        self.componentsStatus = componentsStatus
+    init() {
+        self.componentsStatus = ComponentsStatus()
         
-        // Observing
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(componentDidChangeStatus(_:)),
-                                               name: NSNotification.Name.ComponentDidChangeStatus,
-                                               object: workspace.pomodoro)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(componentDidChangeStatus(_:)),
-                                               name: NSNotification.Name.ComponentDidChangeStatus,
-                                               object: workspace.radio)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(componentDidChangeStatus(_:)),
-                                               name: NSNotification.Name.ComponentDidChangeStatus,
-                                               object: workspace.blocker)
+        // init
+        let cascadingComponents = UserDefaultsManager.standard.cascadingOptions
+        setCascadingWorkspaceComponents(components: cascadingComponents)
     }
     
     // MARK: Keeping Track of which workspaces are active and doing cascading launch
@@ -70,21 +88,23 @@ class ComponentActivityTracker {
         return nil
     }
     
-    @objc func componentDidChangeStatus(_ notification: Notification) {
-        guard let (component, status) = getStatusAndComponent(from: notification) else {
+    func updateStatus(component: WorkspaceTab, activityStatus: TimerMode, cascades: Bool? = nil) {
+        componentsStatus.set(component: component, status: activityStatus)
+        
+        guard let cascades = cascades else {
             return
         }
         
-        componentsStatus.set(component: component, status: status)
+        componentsStatus.set(component: component, cascades: cascades)
         
-        if componentsStatus.anyActive() {
-            coordinator.setActive(workspace: workspace)
-        } else {
-            coordinator.disactivate()
-        }
+//        if componentsStatus.anyActive() {
+//            coordinator.setActive(workspace: workspace)
+//        } else {
+//            coordinator.disactivate()
+//        }
         
         if component == .pomodoro {
-            cascade(status: status)
+            cascade()
         }
         
         printStatus()
@@ -92,8 +112,27 @@ class ComponentActivityTracker {
     
     // MARK: Cascading
     
-    func cascade(status: WorkspaceComponentStatus) {
-        let components: Set<WorkspaceTab> = UserDefaultsManager.standard.cascadingOptions
+    func cascade() {
+        guard let pomodoroStatus = componentsStatus.componentsStatus[.pomodoro] else {
+            return
+        }
+        
+        for (component, componentStatus) in componentsStatus.componentsStatus.filter({ $0.key != .pomodoro })
+        {
+            if componentStatus.cascades == false || componentStatus.status == pomodoroStatus.status {
+                continue
+            }
+            
+            switch (component, pomodoroStatus.status)
+            {
+            case (.blocker, .initial):
+                workspace.blocker.endSession()
+            case (.blocker, .running):
+                workspace.blocker.startSession()
+            case (.radio, .initial):
+                
+            }
+        }
         
         for component in components
         {
@@ -121,5 +160,21 @@ class ComponentActivityTracker {
     
     func sessionIsInProgress() -> Bool {
         return componentsStatus.isActive(.pomodoro)
+    }
+    
+    func setCascadingWorkspaceComponents(components: Set<WorkspaceTab>) {
+        let componentsWithCascading = components
+        
+        UserDefaultsManager.standard.cascadingOptions = componentsWithCascading
+        
+        for component in componentsStatus.componentsStatus.keys
+        {
+            componentsStatus.set(component: component, cascades: false)
+        }
+        
+        for component in componentsWithCascading
+        {
+            componentsStatus.set(component: component, cascades: true)
+        }
     }
 }

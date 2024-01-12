@@ -5,18 +5,16 @@ class WorkspaceComponentViewModel: ObservableObject {
     var realm: Realm
     let workspace: WorkspaceDB
     let component: WorkspaceTab
+    let componentActivityTracker: ComponentActivityTracker
     
-    init(workspace: WorkspaceDB, realm: Realm, component: WorkspaceTab) {
+    init(workspace: WorkspaceDB, realm: Realm, componentActivityTracker: ComponentActivityTracker, component: WorkspaceTab) {
         self.workspace = workspace
         self.realm = realm
+        self.componentActivityTracker = componentActivityTracker
         self.component = component
     }
     
     // MARK: Start and end session
-    
-    func sendStatusChangeNotification(status: WorkspaceComponentStatus) {
-        NotificationCenter.default.post(name: Notification.Name.ComponentDidChangeStatus, object: self, userInfo: ["status": status, "component": component])
-    }
     
     @Published var isActive = false
     
@@ -26,15 +24,16 @@ class WorkspaceComponentViewModel: ObservableObject {
         }
         
         isActive = true
-        sendStatusChangeNotification(status: true)
+        
+        componentActivityTracker.updateStatus(component: component, activityStatus: .running)
     }
     
     func endSession() {
         guard isActive else {
             return
         }
-        
         isActive = false
-        sendStatusChangeNotification(status: false)
+        
+        componentActivityTracker.updateStatus(component: component, activityStatus: .initial)
     }
 }

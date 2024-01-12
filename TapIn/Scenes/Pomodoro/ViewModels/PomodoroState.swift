@@ -21,10 +21,10 @@ final class PomodoroState: WorkspaceComponentViewModel {
     var pomodoroStadieLongBreakRunning: PomodoroStadie!
     var pomodoroStadieLongBreakPaused: PomodoroStadie!
     
-    init(workspace: WorkspaceDB) {
+    init(workspace: WorkspaceDB, componentActivityTracker: ComponentActivityTracker) {
         let realm = Container.shared.realmManager.callAsFunction().realm
         
-        super.init(workspace: workspace, realm: realm, component: .pomodoro)
+        super.init(workspace: workspace, realm: realm, componentActivityTracker: componentActivityTracker, component: .pomodoro)
         
         let pomodoroDb = workspace.pomodoro!
         self.pomodoroStadieWorkingInitial = PomodoroStadieWorkingInitial(self, duration: pomodoroDb.pomodoroDuration)

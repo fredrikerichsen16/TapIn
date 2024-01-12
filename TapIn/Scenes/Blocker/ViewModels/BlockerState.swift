@@ -18,11 +18,10 @@ class BlockerState: WorkspaceComponentViewModel {
     
     // MARK: Init
 
-    init(workspace: WorkspaceDB, componentsStatus: ComponentsStatus) {
+    init(workspace: WorkspaceDB, componentActivityTracker: ComponentActivityTracker) {
         let realm = Container.shared.realmManager.callAsFunction().realm
         self.blocker = workspace.blocker
-        self.componentsStatus = componentsStatus
-        super.init(workspace: workspace, realm: realm, component: .blocker)
+        super.init(workspace: workspace, realm: realm, componentActivityTracker: componentActivityTracker, component: .blocker)
         setToken()
     }
     

@@ -1,21 +1,17 @@
 import SwiftUI
 
 struct CascadingSettingsPopoverView: View {
-    @State private var tabs: [WorkspaceTab]
-    @State private var selectedTabs: Set<WorkspaceTab> = Set()
+    @State var tabs: [WorkspaceTab]
+    var onChangeCascadingTabs: (Set<WorkspaceTab>) -> Void
     
-    init(tabs: [WorkspaceTab]) {
-        self.tabs = tabs
-    }
+    @State private var selectedTabs: Set<WorkspaceTab> = Set()
     
     func insert(_ tab: WorkspaceTab) {
         selectedTabs.insert(tab)
-        UserDefaultsManager.standard.cascadingOptions = selectedTabs
     }
     
     func remove(_ tab: WorkspaceTab) {
         selectedTabs.remove(tab)
-        UserDefaultsManager.standard.cascadingOptions = selectedTabs
     }
     
     func contains(_ tab: WorkspaceTab) -> Bool {
@@ -42,5 +38,6 @@ struct CascadingSettingsPopoverView: View {
         .onAppear {
             selectedTabs = UserDefaultsManager.standard.cascadingOptions
         }
+        .onChange(of: selectedTabs, perform: onChangeCascadingTabs)
     }
 }
